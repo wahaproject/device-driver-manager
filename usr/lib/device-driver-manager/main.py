@@ -63,10 +63,13 @@ if len(args) > 0:
 if (not os.path.isfile(livePath) and not os.path.isfile(ubiquityPath)) or force:
     ddmPath = os.path.join(scriptDir, 'ddm.py' + args)
 
-    if os.path.exists('/usr/bin/kdesudo'):
-        launcher = 'kdesudo -i /usr/share/linuxmint/logo.png -d --comment "<b>Please enter your password</b>"'
-    elif os.path.exists('/usr/bin/gksu'):
-        launcher = 'gksu --message "<b>Please enter your password</b>"'
+    # Add launcher string, only when not root
+    launcher = ''
+    if os.geteuid() > 0:
+        if os.path.exists('/usr/bin/kdesudo'):
+            launcher = 'kdesudo -i /usr/share/linuxmint/logo.png -d --comment "<b>Please enter your password</b>"'
+        elif os.path.exists('/usr/bin/gksu'):
+            launcher = 'gksu --message "<b>Please enter your password</b>"'
 
     cmd = '%s python %s' % (launcher, ddmPath)
     log.write('Startup command: ' + cmd, 'main', 'debug')

@@ -9,8 +9,6 @@ import functions
 from dialogs import MessageDialog
 
 class Logger():
-    
-    
 
     def __init__(self, logPath='', defaultLogLevel='debug', addLogTime=True, rtObject=None):
         self.logPath = logPath
