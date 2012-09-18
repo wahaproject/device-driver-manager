@@ -1,5 +1,0 @@
-?package(device-driver-manager):needs="X11"\
-   section="Applications/System/Administration"\
-   title="Third-party hardware driver manager for Debian"\
-   icon="/usr/share/device-driver-manager/logo.png"\
-   command="/usr/bin/device-driver-manager"
