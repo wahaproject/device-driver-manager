@@ -1,0 +1,4 @@
+#!/bin/bash
+# Launch device-driver-manager with all passed arguments
+/usr/bin/python2.7 -tt /usr/lib/device-driver-manager/main.py $*
+

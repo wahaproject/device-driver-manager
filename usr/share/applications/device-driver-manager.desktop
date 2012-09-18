@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=GNOME;GTK;Settings;DesktopSettings;
+Comment=Third-party device driver manager
+Encoding=UTF-8
+Exec=device-driver-manager
+Icon=/usr/share/device-driver-manager/logo.png
+Name=Device driver manager
+StartupNotify=false
+Terminal=false
+Type=Application
