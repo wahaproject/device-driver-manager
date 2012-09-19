@@ -3,7 +3,6 @@
 # Elevate permissions
 import os
 import sys
-import functions
 import getopt
 import drivers
 import string

@@ -99,8 +99,6 @@ class DriverRemove(threading.Thread):
             elif code[0] == hwCodes[2]:
                 if code[1] == packageStatus[0]:
                     bc.removeBroadcom()
-            elif code[0] == hwCodes[3]:
-                if code[1] == packageStatus[0]:
-                    pae.removePAE()
+
 
     

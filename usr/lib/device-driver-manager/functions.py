@@ -269,6 +269,33 @@ def popMessage(statusbar, contextString='message'):
 
 # System ========================================================
 
+def getLatestLunuxHeader(includeString='', excludeString=''):
+    lhList = []
+    ec = ExecCmd(log)
+    list = ec.run('apt search linux-headers', False)
+    startIndex = 14
+    for item in list:
+        lhMatch = re.search('linux-headers-\d[a-zA-Z0-9-\.]*', item)
+        if lhMatch:
+            lh = lhMatch.group(0)
+            addLh = True
+            if includeString != '':
+                inclMatch = re.search(includeString, lh)
+                if inclMatch:
+                    if excludeString != '':
+                        exclMatch = re.search(excludeString, lh)
+                        if exclMatch:
+                            addLh = False
+                else:
+                    addLh = False
+        
+            # Append to list
+            if addLh:
+                lhList.append(lh)
+    lhList.sort(reverse=True)
+    return lhList[0]
+        
+
 # Get the system's graphic card
 def getGraphicsCard():
     global graphicsCard
