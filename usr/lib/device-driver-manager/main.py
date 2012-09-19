@@ -14,6 +14,24 @@ except Exception, detail:
     print detail
     sys.exit(1)
     
+# Help
+def usage():
+    # Show usage
+    hwOpt = ''
+    for hw in drivers.hwCodes:
+        if hwOpt != '':
+            hwOpt += ','
+        hwOpt += hw
+    hlp = """Usage: debian-driver-manager [options]
+        
+Options:
+  -c (--codes): comma separated list with pre-selected hardware
+                possible hardware codes: """ + hwOpt + """
+  -d (--debug): print debug information to a log file in user directory
+  -f (--force): force start in a live environment
+  -h (--help): show this help
+  -i (--install): install preselected hardware drivers (see codes)"""
+    print hlp
 
 # Handle arguments
 try:
@@ -30,7 +48,7 @@ for opt, arg in opts:
     if opt in ('-f', '--force'):
         force = True
     elif opt in ('-h', '--help'):
-        self.usage()
+        usage()
         sys.exit() 
         
 # Initialize logging
@@ -74,20 +92,3 @@ if (not os.path.isfile(livePath) and not os.path.isfile(ubiquityPath)) or force:
     log.write('Startup command: ' + cmd, 'main', 'debug')
     os.system(cmd)
         
-def usage(self):
-    # Show usage
-    hwOpt = ''
-    for hw in drivers.hwCodes:
-        if hwOpt != '':
-            hwOpt += ','
-        hwOpt += hw
-    hlp = """Usage: debian-driver-manager [options]
-        
-Options:
-  -c (--codes): comma separated list with pre-selected hardware
-                possible hardware codes: """ + hwOpt + """
-  -d (--debug): print debug information to a log file in user directory
-  -f (--force): force start in a live environment
-  -h (--help): show this help
-  -i (--install): install preselected hardware drivers (see codes)"""
-    print hlp

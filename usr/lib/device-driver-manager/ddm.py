@@ -230,7 +230,7 @@ class DebianDriverManager:
         self.log.write(msg, 'ddm.main', 'info')
         functions.pushMessage(self.statusbar, msg)
         functions.repaintGui()
-        
+
         # Fill hardware list
         self.fillHardware()
         self.btnInstall.set_sensitive(True)

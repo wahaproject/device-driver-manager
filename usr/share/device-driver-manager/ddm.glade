@@ -82,7 +82,7 @@
                     <property name="label" translatable="yes">Device Driver Manager</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
-                      <attribute name="scale" value="1.5"/>
+                      <attribute name="size" value="15000"/>
                     </attributes>
                   </object>
                   <packing>
@@ -98,6 +98,9 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">lblText</property>
                     <property name="wrap">True</property>
+                    <attributes>
+                      <attribute name="size" value="10000"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -128,6 +131,9 @@
                         <property name="tooltip_text" translatable="yes">The drivers for this hardware
 are available in the repositories.</property>
                         <property name="label" translatable="yes">Not installed</property>
+                        <attributes>
+                          <attribute name="size" value="10000"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -169,6 +175,9 @@ are available in the repositories.</property>
 Selecting these will reinstall 
 the selected drivers.</property>
                         <property name="label" translatable="yes">Installed</property>
+                        <attributes>
+                          <attribute name="size" value="10000"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -210,6 +219,9 @@ the selected drivers.</property>
 there are no drivers available
 in the repositories.</property>
                         <property name="label" translatable="yes">Uninstallable</property>
+                        <attributes>
+                          <attribute name="size" value="10000"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="expand">False</property>

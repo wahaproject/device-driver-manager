@@ -6,7 +6,6 @@ import pwd
 import logging
 import gtk
 import functions
-from dialogs import MessageDialog
 
 class Logger():
 
@@ -59,13 +58,13 @@ class Logger():
                 self.rtobjectWrite(message)
             elif logLevel == 'error':
                 myLogger.error(message)
-                MessageDialog('Error', message , gtk.MESSAGE_INFO).show()
+                self.rtobjectWrite(message)
             elif logLevel == 'critical':
                 myLogger.critical(message)
-                MessageDialog('Critical', message , gtk.MESSAGE_INFO).show()
+                self.rtobjectWrite(message)
             elif logLevel == 'exception':
                 myLogger.exception(message)
-                MessageDialog('Exception', message , gtk.MESSAGE_INFO).show()
+                self.rtobjectWrite(message)
                 
     # Return messge to given object
     def rtobjectWrite(self, message):
