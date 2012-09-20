@@ -344,19 +344,26 @@ def getDesktop():
     return desktop
 
 # Get valid screen resolutions
-def getResolutions(minRes, maxRes):
+def getResolutions(minRes='', maxRes='', reverseOrder=False):
     cmd = 'xrandr'
     ec = ExecCmd(log)
     cmdList = ec.run(cmd, False)
-    avlRes = [] # Available Resolutions
+    avlRes = []
+    avlResTmp = []
+    minW = 0
+    minH = 0
+    maxW = 0
+    maxH = 0
 
     # Split the minimum and maximum resolutions
-    minResList = minRes.split('x')
-    maxResList = maxRes.split('x')
-    minW = strToInt(minResList[0])
-    minH = strToInt(minResList[1])
-    maxW = strToInt(maxResList[0])
-    maxH = strToInt(maxResList[1])
+    if 'x' in minRes:
+        minResList = minRes.split('x')
+        minW = strToInt(minResList[0])
+        minH = strToInt(minResList[1])
+    if 'x' in maxRes:
+        maxResList = maxRes.split('x')
+        maxW = strToInt(maxResList[0])
+        maxH = strToInt(maxResList[1])
 
     # Fill the list with screen resolutions
     for line in cmdList:
@@ -367,9 +374,14 @@ def getResolutions(minRes, maxRes):
                 itemW = strToInt(itemList[0])
                 itemH = strToInt(itemList[1])
                 # Check if it can be added
-                if itemW >= minW and itemW <= maxW and itemH >= minH and itemH <= maxH:
+                if itemW >= minW and itemH >= minH and (maxW == 0 or itemW <= maxW) and (maxH == 0 or itemH <= maxH):
                     log.write('Resolution added: ' + item, 'functions.getResolutions', 'debug')
-                    avlRes.append(item)
+                    avlResTmp.append([itemW, itemH])
+
+    # Sort the list and return as readable resolution strings
+    avlResTmp.sort(key=operator.itemgetter(0), reverse=reverseOrder)
+    for res in avlResTmp:
+        avlRes.append(str(res[0])  + 'x' + str(res[1]))
     return avlRes
 
 # Get current Plymouth resolution
@@ -408,7 +420,7 @@ def getBoot():
 def getPackageStatus(packageName):
     try:
         cmdChk = 'apt-cache policy ' + str(packageName)
-        status = []
+        status = ''
         ec = ExecCmd(log)
         packageCheck = ec.run(cmdChk, False)
             
@@ -460,14 +472,15 @@ def getAvailableThemes():
     startmatch = '39m-'
     cmd = 'apt search ' + avlThemesSearchstr + ' | grep ^p'
     ec = ExecCmd(log)
-    availableThemes = ec.run(cmd, False)
+    availableThemes = ec.run(cmd)
     avlThemes = []
 
     for line in availableThemes:
-        if not startmatch + 'all' in line:
-            matchObj = re.search(startmatch + '([a-z]|-)*', line)
-            if matchObj:
-                avlThemes.append(matchObj.group().replace(startmatch, ''))
+        matchObj = re.search('plymouth-themes-([a-zA-Z0-9-]*)', line)
+        if matchObj:
+            theme = matchObj.group(1)
+            if not 'all' in theme:
+                avlThemes.append(theme)
 
     return avlThemes
 

@@ -22,15 +22,17 @@ class ATI():
         # Check for ATI cards
         hwList = []
         cmdGraph = 'lspci | grep VGA'
-        hwGraph = self.ec.run(cmdGraph)
+        hwGraph = self.ec.run(cmdGraph, False)
+        #hwGraph = ['00:01.0 VGA compatible controller: Advanced Micro Devices [AMD] nee ATI Wrestler [Radeon HD 6310]']
         for line in hwGraph:
             hw = line[line.find(': ') + 2:]
+            self.log.write('ATI card found: ' + hw, 'ati.getATI', 'info')
             atiChk = re.search('\\b' + hwCodes[1] + '\\b', hw.lower())
             if atiChk:
                 # Get the ATI chip set serie
-                atiSerie = re.search('\b\d{4,5}\b', line)
-                self.log.write('ATI chip serie found: ' + atiSerie, 'ati.getATI', 'info')
+                atiSerie = re.search('\s\d{4,}', hw)
                 if atiSerie:
+                    self.log.write('ATI chip serie found: ' + atiSerie.group(0), 'ati.getATI', 'info')
                     intSerie = functions.strToInt(atiSerie.group(0))
                     # Only add series from atiStartSerie
                     if intSerie >= atiStartSerie:
@@ -39,19 +41,23 @@ class ATI():
                         self.log.write('ATI ' + drv + ' status: ' + status, 'ati.getATI', 'debug')
                         hwList.append([hw, hwCodes[1], status])
                     else:
-                        self.log.write('ATI driver not installable', 'ati.getATI', 'warning')
+                        self.log.write('ATI chip serie not supported: ' + str(intSerie), 'ati.getATI', 'warning')
                         hwList.append([hw, hwCodes[1], packageStatus[2]])
+                else:
+                    self.log.write('No supported ATI chip serie found: ' + hw, 'ati.getATI', 'warning')
             else:
-                self.log.write('No ATI card found', 'ati.getATI', 'debug')
+                self.log.write('No ATI card found', 'ati.getATI', 'warning')
         
         return hwList
     
     # Check distribution and get appropriate driver
-    def getDriver():
+    def getDriver(self):
+        drv = ''
         if self.distribution == 'debian':
             drv = 'fglrx-driver'
         else:
             drv = 'fglrx'
+        return drv
             
     # Get additional packages
     # The second value in the list is a numerical value (True=1, False=0) whether the package must be removed before installation
