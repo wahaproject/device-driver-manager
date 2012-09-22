@@ -16,10 +16,10 @@ bcChips = [
 ['4301','firmware-b43legacy-installer'],
 ['4306','firmware-b43legacy-installer'],
 ['4307','firmware-b43-installer'],
-['4311','broadcom-sta-dkms'],
-['4312','firmware-b43-lpphy-installer'],
+['4311','firmware-b43-installer'],
+['4312','firmware-b43-installer'], # This is not a BCM4312 but BCM4311
 ['4313','broadcom-sta-dkms'],
-['4315','broadcom-sta-dkms'],
+['4315','firmware-b43-lpphy-installer'], # This is BCM4312
 ['4318','firmware-b43-installer'],
 ['4319','firmware-b43-installer'],
 ['4320','firmware-b43-installer'],
@@ -30,7 +30,7 @@ bcChips = [
 ['4329','broadcom-sta-dkms'],
 ['432a','broadcom-sta-dkms'],
 ['432b','broadcom-sta-dkms'],
-['432c','broadcom-sta-dkms'],
+['432c','broadcom-sta-dkms'], # Better to use firmware-b43-installer?
 ['432d','broadcom-sta-dkms'],
 ['4331','firmware-b43-installer'],
 ['4353','firmware-brcm80211'],
@@ -38,8 +38,8 @@ bcChips = [
 ['4358','broadcom-sta-dkms'],
 ['4359','broadcom-sta-dkms'],
 ['435a','broadcom-sta-dkms'],
-['4727','firmware-brcm80211'],
-['a8d6','broadcom-sta-dkms'],
+['4727','firmware-brcm80211'], # May need blacklisting b43 on some kernels (up to 3.2?)
+['a8d6','firmware-b43-installer'], # Untested, but the other drivers have no support at all
 ['a99d','broadcom-sta-dkms']
 ]
 
@@ -77,7 +77,7 @@ class Broadcom():
         self.status = ''
         
         # Get Broadcom info
-        cmdBc = 'lspci -vnn -d 14e4:'
+        cmdBc = 'lspci -n -d 14e4:'
         hwBc = self.ec.run(cmdBc)
         for line in hwBc:
             self.hw = line[line.find(': ') + 2:]
