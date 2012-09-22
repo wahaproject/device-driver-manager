@@ -1,5 +1,7 @@
 TODO
 
-1. Localize: english, french, german, spanish, dutch to start with
+1. Thoroughly test ATI cards: tested by a single user.
 
-2. Add fastest repository mirror from mint-debian-mirrors (Clem is going to adept mint-debian-mirrors)
+2. Localize: english, french, german, spanish, dutch to start with
+
+3. Add fastest repository mirror from mint-debian-mirrors (Clem is going to adept mint-debian-mirrors)

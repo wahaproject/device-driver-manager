@@ -77,14 +77,16 @@ class Broadcom():
         self.status = ''
         
         # Get Broadcom info
-        cmdBc = 'lspci -n -d 14e4:'
+        cmdBc = 'lspci | grep Broadcom' 
         hwBc = self.ec.run(cmdBc)
-        for line in hwBc:
-            self.hw = line[line.find(': ') + 2:]
+        if hwBc:
+            self.hw = hwBc[0][hwBc[0].find(': ') + 2:]
             self.log.write('Broadcom found: ' + self.hw, 'broadcom.setCurrentChipInfo', 'info')
-            if hwCodes[2] in self.hw.lower():
-                # Get the chip set number
-                chipSet = re.search('14e4:(.*)]', self.hw)
+            # Get the chip set number
+            cmdPciId = 'lspci -n -d 14e4:'
+            pciId = self.ec.run(cmdPciId)
+            if pciId:
+                chipSet = re.search('14e4:([a-zA-Z0-9]*)', pciId[0])
                 if chipSet:
                     self.currentChip = chipSet.group(1)
                     self.log.write('Broadcom chip set found: ' + self.currentChip, 'broadcom.setCurrentChipInfo', 'debug')
@@ -96,11 +98,13 @@ class Broadcom():
                             self.installableDriver = chipList[1]
                             self.status = functions.getPackageStatus(chipList[1])
                             break
-            if self.installableChip != '':
-                # Don't look further if you already found an installable chip set
-                break
+                    # Check if a supported chip set is found
+                    if self.installableChip == '':
+                        self.log.write('Broadcom chip set not supported: ' + self.hw, 'broadcom.setCurrentChipInfo', 'error')
+                else:
+                    self.log.write('Broadcom chip set not found: ' + pciId[0], 'broadcom.setCurrentChipInfo', 'warning')
             else:
-                self.log.write('Broadcom chip set not supported: ' + self.hw, 'broadcom.setCurrentChipInfo', 'error')
+                self.log.write('Broadcom pci ID not found: ' + self.hw, 'broadcom.setCurrentChipInfo', 'warning')
     
     # Install the broadcom drivers
     def installBroadcom(self):
@@ -140,9 +144,9 @@ class Broadcom():
                 # Finish up
                 if self.installableDriver == 'broadcom-sta-dkms':
                     # Blacklist b43, brcmsmac
-                    self.log.write('blacklist b43 brcmsmac bcma', 'broadcom.installBroadcom', 'debug')
+                    self.log.write('blacklist b43 brcmsmac bcma ssb', 'broadcom.installBroadcom', 'debug')
                     modFile = open(blacklistPath, 'w')
-                    modFile.write('blacklist b43 brcmsmac')
+                    modFile.write('blacklist b43 brcmsmac bcma ssb')
                     modFile.close()
                     # Start wl
                     self.log.write('modprobe wl', 'broadcom.installBroadcom', 'debug')
