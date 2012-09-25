@@ -109,25 +109,7 @@ class ATI():
     
     # Called from drivers.py: install the ATI drivers
     def installATI(self):
-        try:
-            # Check if alternative repo is necessary
-            listFile = '/etc/apt/sources.list.d/altrad.list'
-            conf = Config('ddm.conf')
-
-            # Check if we need to use an alternative repository
-            altRadeonRepo = ''
-            if self.distribution == 'debian':
-                altRadeonRepo = conf.getValue('Program', 'altRadeonRepoDebian')
-            else:
-                altRadeonRepo = conf.getValue('Program', 'altRadeonRepoUbuntu')
-                
-            if altRadeonRepo != '':
-                self.log.write('Alternative repository for ATI drivers: ' + altRadeonRepo, 'ati.installATI', 'debug')
-                modFile = open(listFile, 'w')
-                modFile.write(altRadeonRepo)
-                modFile.close()
-                self.ec.run('apt-get update')
-            
+        try:          
             # Install the driver and create xorg.conf
             drv = self.getDriver()
             if drv != '':
@@ -136,12 +118,6 @@ class ATI():
                 self.installATIDriver(packages)
                 # Configure ATI
                 self.ec.run('aticonfig --initial -f')
-                            
-            # Remove the alternative repository
-            if altRadeonRepo != '':
-                self.log.write('Remove alternative Radeon repository: ' + altRadeonRepo, 'ati.installATI', 'debug')
-                os.remove(listFile)
-                self.ec.run('apt-get update')
                 
         except Exception, detail:
             self.log.write(detail, 'ati.installATI', 'exception')
