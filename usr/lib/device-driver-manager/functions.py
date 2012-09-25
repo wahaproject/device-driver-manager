@@ -334,13 +334,14 @@ def getDistributionDescription():
     return distribution
 
 # Get the system's desktop
-def getDesktop():
+def getDesktopEnvironment():
     desktop = ''
-    kdm = '/usr/bin/kdm'
-    if os.path.isfile(kdm):
+    if 'KDE_FULL_SESSION' in os.environ:
         desktop = 'kde'
-    else:
+    elif 'GNOME_DESKTOP_SESSION_ID' in os.environ or 'XDG_CURRENT_DESKTOP' in os.environ:
         desktop = 'gnome'
+    elif 'MATE_DESKTOP_SESSION_ID' in os.environ:
+        desktop = 'mate'
     return desktop
 
 # Get valid screen resolutions

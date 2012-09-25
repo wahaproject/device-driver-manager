@@ -6,6 +6,7 @@ import sys
 import getopt
 import drivers
 import string
+import functions
 from config import Config
 from logger import Logger
 try:
@@ -68,7 +69,7 @@ livePath = conf.getValue('Paths', 'live')
 ubiquityPath = conf.getValue('Paths', 'ubiquity')
 
 # Pass arguments to ddm.py: replace - with : -> because kdesudo assumes these options are meant for him...
-# Isn't there another way?
+# TODO: Isn't there another way?
 args = ' '.join(sys.argv[1:])
 if len(args) > 0:
     args = ' ' + string.replace(args, '-', ':')
@@ -83,10 +84,9 @@ if (not os.path.isfile(livePath) and not os.path.isfile(ubiquityPath)) or force:
     # Add launcher string, only when not root
     launcher = ''
     if os.geteuid() > 0:
-        if os.path.exists('/usr/bin/kdesudo'):
-            launcher = 'kdesudo -i /usr/share/linuxmint/logo.png -d --comment "<b>Please enter your password</b>"'
-        elif os.path.exists('/usr/bin/gksu'):
-            launcher = 'gksu --message "<b>Please enter your password</b>"'
+        launcher = 'gksu --message "<b>Please enter your password</b>"'
+        if functions.getDesktopEnvironment() == 'kde':
+            launcher = 'kdesudo -i /usr/share/device-driver-manager/logo.png -d --comment "<b>Please enter your password</b>"'
 
     cmd = '%s python %s' % (launcher, ddmPath)
     log.write('Startup command: ' + cmd, 'main', 'debug')
