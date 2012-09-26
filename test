@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo rm -rf /usr/lib/device-driver-manager
+sudo cp -R usr /
+device-driver-manager
+
+
