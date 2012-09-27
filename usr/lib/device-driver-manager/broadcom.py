@@ -6,7 +6,7 @@ import functions
 from execcmd import ExecCmd
 
 packageStatus = [ 'installed', 'notinstalled', 'uninstallable' ]
-hwCodes = ['nvidia', 'ati', 'broadcom', 'pae']
+hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
 blacklistPath = '/etc/modprobe.d/blacklist-broadcom.conf'
 
 # Chipsets and corresponding packages
@@ -58,13 +58,18 @@ class Broadcom():
     def getBroadcom(self):
         hwList = []
         self.setCurrentChipInfo()
-        if self.currentChip != '':
-            if self.installableChip != '':
-                self.log.write('Broadcom chip serie found: ' + self.installableChip, 'broadcom.getBroadcom', 'info')
-                hwList.append([self.hw, hwCodes[2], self.status])
+        if self.hw != '':
+            if self.currentChip != '':
+                if self.installableChip != '':
+                    self.log.write('Broadcom chip serie found: ' + self.installableChip, 'broadcom.getBroadcom', 'info')
+                    hwList.append([self.hw, hwCodes[2], self.status])
+                else:
+                    # Broadcom was found, but no supported chip set: return uninstallable
+                    self.log.write('Broadcom chip serie not supported: ' + self.currentChip, 'broadcom.getBroadcom', 'warning')
+                    hwList.append([self.hw, hwCodes[2], packageStatus[2]])
             else:
-                # Broadcom was found, but no supported chip set: return uninstallable
-                self.log.write('Broadcom chip serie not supported: ' + self.currentChip, 'broadcom.getBroadcom', 'warning')
+                # Broadcom was found, but no chip set was found: return uninstallable
+                self.log.write('Broadcom chip serie not detected: ' + self.hw, 'broadcom.getBroadcom', 'warning')
                 hwList.append([self.hw, hwCodes[2], packageStatus[2]])
                         
         return hwList
