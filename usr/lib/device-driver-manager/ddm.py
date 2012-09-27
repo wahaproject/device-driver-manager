@@ -195,20 +195,13 @@ class DebianDriverManager:
         self.about.hide()
         
     def main(self, argv):
-        # Initialize logging
-        logFile = ''
-        if self.debug:
-            if self.logPath == '':
-                self.logPath = 'ddm.log'
-        self.log = Logger(self.logPath, 'debug', True, self.statusbar)
-        functions.log = self.log
-        
         # Handle arguments
         try:
-            opts, args = getopt.getopt(sys.argv[1:], 'hic:df', ['help', 'install', 'codes=', 'debug', 'force'])
+            opts, args = getopt.getopt(argv, 'ic:dfl:', ['install', 'codes=', 'debug', 'force', 'log='])
         except getopt.GetoptError:
-            self.log.write('Arguments cannot be parsed: ' + str(argv), 'ddm.main', 'error')
+            print 'Arguments cannot be parsed: ' + str(argv)
             sys.exit(2)
+
         for opt, arg in opts:
             if opt in ('-d', '--debug'):
                 self.debug = True
@@ -219,7 +212,13 @@ class DebianDriverManager:
             elif opt in ('-l', '--log'):
                 self.logPath = arg
         
-        
+        # Initialize logging
+        logFile = ''
+        if self.debug:
+            if self.logPath == '':
+                self.logPath = 'ddm.log'
+        self.log = Logger(self.logPath, 'debug', True, self.statusbar)
+        functions.log = self.log
         
         # Set initial values
         self.text = self.conf.getValue('About', 'comments')

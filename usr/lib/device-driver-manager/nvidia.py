@@ -38,9 +38,8 @@ class Nvidia():
             if self.distribution == 'debian':
                 # Get Debian driver for Nvidia
                 self.log.write('Get the appropriate Nvidia driver', 'nvidia.getNvidia', 'info')
-                drvList = self.ec.run("nvidia-detect | grep nvidia- | tr -d ' '")
-                if drvList:
-                    drv = drvList[0]
+                drv = self.getDriver()
+                if drv != '':
                     self.log.write('Nvidia driver to install: ' + drv, 'nvidia.getNvidia', 'info')
                     status = functions.getPackageStatus(drv)
                     self.log.write('Package status: ' + status, 'nvidia.getNvidia', 'debug')
@@ -67,6 +66,14 @@ class Nvidia():
             self.log.write('No Nvidia card found', 'nvidia.getNvidia', 'debug')
                 
         return hwList
+    
+    # Get the driver for the system's Nvidia card
+    def getDriver(self):
+        drv = ''
+        drvList = self.ec.run("nvidia-detect | grep nvidia- | tr -d ' '")
+        if drvList:
+            drv = drvList[0]
+        return drv
     
     # Install the given packages
     def installNvidiaDriver(self, packageList):

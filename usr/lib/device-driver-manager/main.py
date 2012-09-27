@@ -46,11 +46,12 @@ force = False
 for opt, arg in opts:
     if opt in ('-d', '--debug'):
         debug = True
-    if opt in ('-f', '--force'):
+    elif opt in ('-f', '--force'):
         force = True
     elif opt in ('-h', '--help'):
         usage()
         sys.exit() 
+        
         
 # Initialize logging
 logFile = ''
@@ -91,4 +92,5 @@ if (not os.path.isfile(livePath) and not os.path.isfile(ubiquityPath)) or force:
     cmd = '%s python %s' % (launcher, ddmPath)
     log.write('Startup command: ' + cmd, 'main', 'debug')
     os.system(cmd)
-        
+else:
+    log.write('Use --force to run DDM in a live environment', 'main', 'warning')
