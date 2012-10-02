@@ -175,11 +175,11 @@ class Nvidia():
                 self.log.write('Remove : ' + blacklistPath, 'nvidia.removeNvidia', 'debug')
                 os.remove(blacklistPath)
                 
-            # Remove xorg.conf
+            # Rename xorg.conf
             xorg = '/etc/X11/xorg.conf'
             if os.path.exists(xorg):
-                self.log.write('Remove : ' + xorg, 'nvidia.removeNvidia', 'debug')
-                os.remove(xorg)
+                self.log.write('Rename : ' + xorg + ' -> ' + xorg + '.ddm.bak', 'nvidia.removeNvidia', 'debug')
+                os.rename(xorg, xorg + '.ddm.bak')
                 
         except Exception, detail:
             self.log.write(detail, 'nvidia.removeNvidia', 'exception')

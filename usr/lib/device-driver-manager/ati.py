@@ -95,6 +95,9 @@ class ATI():
             self.log.write('Purge Nouveau drivers: xserver-xorg-video-nouvea', 'ati.installATIDriver', 'debug')
             self.ec.run('apt-get -y --force-yes remove xserver-xorg-video-nouveau')
             
+            # Preseed answers for some packages
+            self.preseedATIPackages('install')
+            
             # Install the packages
             self.log.write('Install drivers: ' + installPackages, 'ati.installATIDriver', 'debug')
             nvDrvInstCmd = 'apt-get -y --force-yes install' + installPackages
@@ -122,10 +125,38 @@ class ATI():
     def removeATI(self):
         try:
             self.log.write('Remove ATI drivers: fglrx', 'ati.removeATI', 'debug')
+            
+            # Preseed answers for some packages
+            self.preseedATIPackages('purge')
                 
             self.ec.run('apt-get -y --force-yes purge fglrx*')
             self.ec.run('apt-get -y --force-yes autoremove')
             self.ec.run('apt-get -y --force-yes install xserver-xorg-video-radeon xserver-xorg-video-nouveau xserver-xorg-video-ati libgl1-mesa-glx libgl1-mesa-dri libglu1-mesa')
+            
+            # Rename xorg.conf
+            xorg = '/etc/X11/xorg.conf'
+            if os.path.exists(xorg):
+                self.log.write('Rename : ' + xorg + ' -> ' + xorg + '.ddm.bak', 'nvidia.removeNvidia', 'debug')
+                os.rename(xorg, xorg + '.ddm.bak')
                 
         except Exception, detail:
             self.log.write(detail, 'ati.removeATI', 'exception')
+            
+    def preseedATIPackages(self, action):
+        if self.distribution == 'debian':
+            # Run on configured system and debconf-utils installed:
+            # debconf-get-selections | grep nvidia > debconf-nvidia.seed
+            # replace tabs with spaces and change the default answers (note=space, boolean=true or false)
+            debConfList = []
+            debConfList.append('libfglrx fglrx-driver/check-for-unsupported-gpu boolean false')
+            debConfList.append('fglrx-driver fglrx-driver/check-xorg-conf-on-removal boolean false')
+            debConfList.append('libfglrx fglrx-driver/install-even-if-unsupported-gpu-exists boolean false')
+            debConfList.append('fglrx-driver fglrx-driver/removed-but-enabled-in-xorg-conf note ')
+            debConfList.append('fglrx-driver fglrx-driver/needs-xorg-conf-to-enable note ')
+            
+            # Add each line to the debconf database
+            for line in debConfList:
+                os.system('echo "' + line + '" | debconf-set-selections')
+            
+            # Install or remove the packages
+            self.ec.run('apt-get -y --force-yes ' + action + ' libfglrx fglrx-driver')

@@ -4,7 +4,6 @@ import sys
 import os
 import pwd
 import logging
-import gtk
 import functions
 
 class Logger():

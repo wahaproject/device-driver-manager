@@ -312,9 +312,15 @@ def getGraphicsCard():
 def getDistribution():
     distribution = ''
     try:
-        cmdDist = 'cat /etc/*-release | grep DISTRIB_CODENAME'
+        # Try with os-release
+        cmdDist = 'cat /etc/*-release | grep ^ID'
         ec = ExecCmd(log)
         dist = ec.run(cmdDist, False)[0]
+        if not dist:
+            # Try with lsb-release
+            cmdDist = 'cat /etc/*-release | grep DISTRIB_CODENAME'
+            ec = ExecCmd(log)
+            dist = ec.run(cmdDist, False)[0]
         distribution = dist[dist.find('=') + 1:]
     except Exception, detail:
         log.write(detail, 'functions.getDistribution', 'error')
