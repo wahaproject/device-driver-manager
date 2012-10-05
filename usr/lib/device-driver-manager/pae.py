@@ -7,7 +7,7 @@ from nvidia import Nvidia
 from execcmd import ExecCmd
 
 packageStatus = [ 'installed', 'notinstalled', 'uninstallable' ]
-hwCodes = ['nvidia', 'ati', 'broadcom', 'pae']
+hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
 
 class PAE():
     def __init__(self, distribution, loggerObject):
@@ -68,6 +68,8 @@ class PAE():
             #if os.path.exists(xorg):
             #    shutil.move(xorg, xorg + '.ddm')
             #    self.log.write('Moved ' + xorg + ' to ' + xorg + '.ddm', 'pae.installPAE', 'info')
+            
+            self.log.write('Done installing PAE', 'pae.installPAE', 'info')
                 
         except Exception, detail:
             self.log.write(detail, 'pae.installPAE', 'error')
@@ -88,6 +90,7 @@ class PAE():
                         self.log.write('PAE package to remove: ' + pae, 'pae.removePAE', 'info')
                         self.ec.run(cmdPurge)
                 self.ec.run('apt-get -y --force-yes autoremove')
+                self.log.write('Done removing PAE', 'pae.removePAE', 'info')
             else:
                 self.log.write('Cannot remove PAE when running PAE', 'pae.removePAE', 'warning')
                 

@@ -59,15 +59,12 @@ class Logger():
                 self.rtobjectWrite(message)
             elif logLevel == 'error':
                 myLogger.error(message)
-                #self.rtobjectWrite(message)
                 MessageDialog('Error', message, gtk.MESSAGE_ERROR).show()
             elif logLevel == 'critical':
                 myLogger.critical(message)
-                #self.rtobjectWrite(message)
                 MessageDialog('Critical', message, gtk.MESSAGE_ERROR).show()
             elif logLevel == 'exception':
                 myLogger.exception(message)
-                #self.rtobjectWrite(message)
                 MessageDialog('Exception', message, gtk.MESSAGE_ERROR).show()
                 
     # Return messge to given object

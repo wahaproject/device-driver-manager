@@ -164,6 +164,8 @@ class Broadcom():
                     # Start brcmsmac
                     self.log.write('modprobe brcmsmac', 'broadcom.installBroadcom', 'debug')
                     os.system('modprobe brcmsmac')
+                    
+                self.log.write('Done installing Broadcome drivers', 'broadcom.installBroadcom', 'info')
             else:
                 self.log.write('No Broadcom chip set found', 'broadcom.installBroadcom', 'error')
                 
@@ -184,6 +186,8 @@ class Broadcom():
                 if os.path.exists(blacklistPath):
                     self.log.write('Remove : ' + blacklistPath, 'broadcom.removeBroadcom', 'debug')
                     os.remove(blacklistPath)
+                    
+                self.log.write('Done removing Broadcome drivers', 'broadcom.removeBroadcom', 'info')
                 
         except Exception, detail:
             self.log.write(detail, 'broadcom.removeBroadcom', 'exception')

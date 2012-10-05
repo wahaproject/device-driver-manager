@@ -342,7 +342,7 @@ def getDistributionDescription():
 # Get the system's desktop
 def getDesktopEnvironment():
     desktop = os.environ.get('DESKTOP_SESSION')
-    if desktop == None:
+    if desktop == None or desktop == 'default':
         # Dirty: KDE_FULL_SESSION does not always exist: also check if kdm exists
         if 'KDE_FULL_SESSION' in os.environ or os.path.isfile('/usr/bin/kdm'):
             desktop = 'kde'
@@ -457,6 +457,18 @@ def getPackageStatus(packageName):
         status = packageStatus[2]
             
     return status
+    
+# Check if a process is running
+def isProcessRunning(processName):
+    isProc = False
+    cmd = 'ps -C ' + processName
+    ec = ExecCmd(log)
+    procList = ec.run(cmd, False)
+    if procList:
+        if len(procList) > 1:
+            isProc = True
+    return isProc
+    
     
 # Plymouth =============================================
 

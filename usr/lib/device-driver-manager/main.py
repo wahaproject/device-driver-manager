@@ -14,7 +14,7 @@ try:
 except Exception, detail:
     print detail
     sys.exit(1)
-    
+
 # Help
 def usage():
     # Show usage
@@ -58,6 +58,7 @@ logFile = ''
 if debug:
     logFile = 'ddm.log'
 log = Logger(logFile)
+functions.log = log
 if debug:
     if os.path.isfile(log.logPath):
         open(log.logPath, 'w').close()
@@ -79,14 +80,14 @@ if len(args) > 0:
         args +=  ' :l ' + log.logPath
 
 # Do not run in live environment
-if (not os.path.isfile(livePath) and not os.path.isfile(ubiquityPath)) or force:
+if (not os.path.exists(livePath) and not os.path.exists(ubiquityPath)) or force:
     ddmPath = os.path.join(scriptDir, 'ddm.py' + args)
 
     # Add launcher string, only when not root
     launcher = ''
     if os.geteuid() > 0:
         launcher = 'gksu --message "<b>Please enter your password</b>"'
-        if functions.getDesktopEnvironment() == 'kde':
+        if os.path.exists('/usr/bin/kdesudo'):
             launcher = 'kdesudo -i /usr/share/device-driver-manager/logo.png -d --comment "<b>Please enter your password</b>"'
 
     cmd = '%s python %s' % (launcher, ddmPath)

@@ -262,6 +262,7 @@ in the repositories.</property>
               <object class="GtkTreeView" id="tvHardware">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="cursor-changed" handler="on_tvHardware_cursor_changed" swapped="no"/>
                 <child internal-child="selection">
                   <object class="GtkTreeSelection" id="treeview-selection1"/>
                 </child>

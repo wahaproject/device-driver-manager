@@ -118,6 +118,8 @@ class ATI():
                 # Configure ATI
                 self.ec.run('aticonfig --initial -f')
                 
+                self.log.write('Done installing ATI drivers', 'ati.installATI', 'info')
+                
         except Exception, detail:
             self.log.write(detail, 'ati.installATI', 'exception')
     
@@ -138,6 +140,8 @@ class ATI():
             if os.path.exists(xorg):
                 self.log.write('Rename : ' + xorg + ' -> ' + xorg + '.ddm.bak', 'nvidia.removeNvidia', 'debug')
                 os.rename(xorg, xorg + '.ddm.bak')
+                
+            self.log.write('Done removing ATI drivers', 'ati.removeATI', 'info')
                 
         except Exception, detail:
             self.log.write(detail, 'ati.removeATI', 'exception')

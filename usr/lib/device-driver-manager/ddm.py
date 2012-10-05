@@ -19,6 +19,7 @@ except Exception, detail:
     print detail
     sys.exit(1)
     
+    
 #class for the main window
 class DebianDriverManager:
 
@@ -30,6 +31,7 @@ class DebianDriverManager:
     debug = False
     mediaDir = '/usr/share/device-driver-manager'
     logPath = ''
+    paeChecked = False
 
     def __init__(self):
         # Load window and widgets
@@ -46,6 +48,7 @@ class DebianDriverManager:
         
         # Add events
         signals = {
+            'on_tvHardware_cursor_changed' : self.cusorChanged,
             'on_btnInstall_clicked' : self.installHardware,
             'on_btnRemove_clicked' : self.removeHardware,
             'on_btnClose_clicked' : self.destroy,
@@ -82,6 +85,10 @@ class DebianDriverManager:
                 install = True
             elif item[2] == functions.packageStatus[0] or item[2] == functions.packageStatus[2]:
                 install = False
+                
+            # PAE check
+            if item[1] == 'pae' and install:
+                self.paeChecked = True
                 
             # Add the row to the content list
             self.log.write('Add item: ' + item[0], 'ddm.fillHardware', 'info')
@@ -160,11 +167,11 @@ class DebianDriverManager:
         self.toggleGuiElements(False)
         # Show message that we're done
         if actionString == 'install':
-            msg = 'Done installing drivers'
+            msg = 'Done installing drivers.'
         else:
-            msg = 'Done removing drivers'
-        functions.pushMessage(self.statusbar, msg)
-        self.log.write(msg, 'ddm.checkThread', 'info')
+            msg = 'Done removing drivers.'
+        msg += '\n\nPlease, reboot your system.'
+        MessageDialog('Driver ' + actionString, msg , gtk.MESSAGE_INFO, self.window.get_icon()).show()
         return False
     
     def toggleGuiElements(self, startSave):
@@ -181,6 +188,38 @@ class DebianDriverManager:
             self.btnRemove.set_sensitive(True)
             self.btnClose.set_sensitive(True)
         
+    # Check if PAE is selected
+    # PAE must be installed before any other drivers are installed
+    def cusorChanged(self, treeview):
+        hwCode = functions.getSelectedValue(self.tvHardware, 4)
+        checked = functions.getSelectedValue(self.tvHardware, 0)
+        
+        if hwCode == 'pae':
+            if checked:
+                self.paeChecked = True
+                msg = 'Install PAE before installing any other drivers.\n\nOther drivers are deselected (if any).'
+                MessageDialog('PAE install check', msg , gtk.MESSAGE_INFO, self.window.get_icon()).show()
+                self.deselectNonPAE()
+            else:
+                self.paeChecked = False
+        else:
+            if checked:
+                if self.paeChecked:
+                    msg = 'Install PAE before installing any other drivers\nor deselect PAE to install drivers for the current kernel'
+                    MessageDialog('PAE install check', msg , gtk.MESSAGE_INFO, self.window.get_icon()).show()
+                    self.deselectNonPAE()
+            
+    
+    # Deselect all drivers, except PAE
+    def deselectNonPAE(self):
+        model = self.tvHardware.get_model()
+        iter = model.get_iter_first()
+        while iter != None:
+            hwCode = model.get_value(iter, 4)
+            if hwCode != 'pae':
+                model[iter][0] = False
+            iter = model.iter_next(iter)
+    
     def about(self, widget, event):
         self.about = self.builder.get_object('About')
         version = self.conf.getValue('About', 'version')

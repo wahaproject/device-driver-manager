@@ -149,6 +149,8 @@ class Nvidia():
                 modFile = open(blacklistPath, 'w')
                 modFile.write('blacklist nouveau')
                 modFile.close()
+                
+                self.log.write('Done installing Nvidia drivers', 'nvidia.installNvidia', 'info')
             else:
                 self.log.write('No apprpriate driver found', 'nvidia.installNvidia', 'error')
                 
@@ -180,6 +182,8 @@ class Nvidia():
             if os.path.exists(xorg):
                 self.log.write('Rename : ' + xorg + ' -> ' + xorg + '.ddm.bak', 'nvidia.removeNvidia', 'debug')
                 os.rename(xorg, xorg + '.ddm.bak')
+                
+            self.log.write('Done removing Nvidia drivers', 'nvidia.removeNvidia', 'info')
                 
         except Exception, detail:
             self.log.write(detail, 'nvidia.removeNvidia', 'exception')
