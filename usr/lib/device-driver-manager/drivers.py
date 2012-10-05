@@ -3,13 +3,14 @@
 import threading
 import functions
 import gtk
+from mirror import Mirror
 from nvidia import Nvidia
 from ati import ATI
 from broadcom import Broadcom
 from pae import PAE
 
 packageStatus = [ 'installed', 'notinstalled', 'uninstallable' ]
-hwCodes = ['nvidia', 'ati', 'broadcom', 'pae']
+hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
 
 # Class to check for supported drivers
 class DriverCheck():
@@ -21,27 +22,31 @@ class DriverCheck():
     def run(self):
         hwList = []
 
+        mir = Mirror(self.distribution, self.log)
         nv = Nvidia(self.distribution, self.log)
         ati = ATI(self.distribution, self.log)
         bc = Broadcom(self.distribution, self.log)
         pae = PAE(self.distribution, self.log)
         
         # Collect supported hardware
+##        mirror = mir.getFastestMirror()
         hwNvidia = nv.getNvidia()
         hwATI = ati.getATI()
         hwBroadcom = bc.getBroadcom()
         hwPae = pae.getPae()
 
         # Combine all found hardware in a single list
+##            for line in mirror:
+##                hwList.append(line)
+        for line in hwPae:
+            hwList.append(line)
         for line in hwNvidia:
             hwList.append(line)
         for line in hwATI:
             hwList.append(line)
         for line in hwBroadcom:
             hwList.append(line)
-        for line in hwPae:
-            hwList.append(line)
-
+        
         return hwList
 
 # Driver install class needs threading
@@ -55,24 +60,34 @@ class DriverInstall(threading.Thread):
     # Install hardware drivers for given hardware codes (hwCodes)
     def run(self):
         # Instantiate driver classes
+        mir = Mirror(self.distribution, self.log)
         nv = Nvidia(self.distribution, self.log)
         ati = ATI(self.distribution, self.log)
         bc = Broadcom(self.distribution, self.log)
         pae = PAE(self.distribution, self.log)
-
+        
+        # First check for mirror
         for code in self.hwCodesWithStatusList:
-            if code[0] == hwCodes[0]:
+            if code[0] == hwCodes[4]:
                 if code[1] != packageStatus[2]:
-                    nv.installNvidia()
-            elif code[0] == hwCodes[1]:
-                if code[1] != packageStatus[2]:
-                    ati.installATI()
-            elif code[0] == hwCodes[2]:
-                if code[1] != packageStatus[2]:
-                    bc.installBroadcom()
-            elif code[0] == hwCodes[3]:
-                if code[1] != packageStatus[2]:
-                    pae.installPAE()
+                    mir.installMirror()
+
+        # Now install the hardware drivers
+        for code in self.hwCodesWithStatusList:
+            # First check for mirror
+            if code[0] != hwCodes[4]:
+                if code[0] == hwCodes[0]:
+                    if code[1] != packageStatus[2]:
+                        nv.installNvidia()
+                elif code[0] == hwCodes[1]:
+                    if code[1] != packageStatus[2]:
+                        ati.installATI()
+                elif code[0] == hwCodes[2]:
+                    if code[1] != packageStatus[2]:
+                        bc.installBroadcom()
+                elif code[0] == hwCodes[3]:
+                    if code[1] != packageStatus[2]:
+                        pae.installPAE()
                 
 # Driver install class needs threading
 class DriverRemove(threading.Thread):
@@ -85,6 +100,7 @@ class DriverRemove(threading.Thread):
     # Install hardware drivers for given hardware codes (hwCodes)
     def run(self):
         # Instantiate driver classes
+        mir = Mirror(self.distribution, self.log)
         nv = Nvidia(self.distribution, self.log)
         ati = ATI(self.distribution, self.log)
         bc = Broadcom(self.distribution, self.log)
@@ -103,6 +119,9 @@ class DriverRemove(threading.Thread):
             elif code[0] == hwCodes[3]:
                 if code[1] == packageStatus[0]:
                     pae.removePAE()
+            if code[0] == hwCodes[4]:
+                if code[1] != packageStatus[2]:
+                    mir.removeMirror()
                     
                     
 
