@@ -2,13 +2,6 @@
 
 import sys
 import subprocess
-import re
-import functions
-try:
-    import gtk
-except Exception, detail:
-    print detail
-    sys.exit(1)
 
 
 # Class to execute a command and return the output in an array
@@ -23,7 +16,8 @@ class ExecCmd(object):
         p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         lstOut = []
         while True:
-            line = p.stdout.readline().strip()
+            # Strip the line, also from null spaces (strip() only strips white spaces)
+            line = p.stdout.readline().strip().strip("\0")
             if line == '' and p.poll() != None:
                 break
             

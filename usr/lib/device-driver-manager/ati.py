@@ -149,7 +149,7 @@ class ATI():
     def preseedATIPackages(self, action):
         if self.distribution == 'debian':
             # Run on configured system and debconf-utils installed:
-            # debconf-get-selections | grep nvidia > debconf-nvidia.seed
+            # debconf-get-selections | grep ati > debconf-ati.seed
             # replace tabs with spaces and change the default answers (note=space, boolean=true or false)
             debConfList = []
             debConfList.append('libfglrx fglrx-driver/check-for-unsupported-gpu boolean false')

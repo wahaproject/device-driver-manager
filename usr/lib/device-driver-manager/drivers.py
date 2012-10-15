@@ -22,22 +22,22 @@ class DriverCheck():
     def run(self):
         hwList = []
 
-        mir = Mirror(self.distribution, self.log)
+        #mir = Mirror(self.distribution, self.log)
         nv = Nvidia(self.distribution, self.log)
         ati = ATI(self.distribution, self.log)
         bc = Broadcom(self.distribution, self.log)
         pae = PAE(self.distribution, self.log)
         
         # Collect supported hardware
-##        mirror = mir.getFastestMirror()
+        #mirror = mir.getFastestMirror()
         hwNvidia = nv.getNvidia()
         hwATI = ati.getATI()
         hwBroadcom = bc.getBroadcom()
         hwPae = pae.getPae()
 
         # Combine all found hardware in a single list
-##            for line in mirror:
-##                hwList.append(line)
+        #for line in mirror:
+        #    hwList.append(line)
         for line in hwPae:
             hwList.append(line)
         for line in hwNvidia:

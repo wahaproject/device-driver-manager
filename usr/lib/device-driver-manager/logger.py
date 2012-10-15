@@ -10,7 +10,7 @@ from dialogs import MessageDialog
 
 class Logger():
 
-    def __init__(self, logPath='', defaultLogLevel='debug', addLogTime=True, rtObject=None):
+    def __init__(self, logPath='', defaultLogLevel='debug', addLogTime=True, rtObject=None, parent=None):
         self.logPath = logPath
         if self.logPath != '':
             if self.logPath[:1] != '/':
@@ -59,13 +59,13 @@ class Logger():
                 self.rtobjectWrite(message)
             elif logLevel == 'error':
                 myLogger.error(message)
-                MessageDialog('Error', message, gtk.MESSAGE_ERROR).show()
+                MessageDialog('Error', message, gtk.MESSAGE_ERROR, parent).show()
             elif logLevel == 'critical':
                 myLogger.critical(message)
-                MessageDialog('Critical', message, gtk.MESSAGE_ERROR).show()
+                MessageDialog('Critical', message, gtk.MESSAGE_ERROR, parent).show()
             elif logLevel == 'exception':
                 myLogger.exception(message)
-                MessageDialog('Exception', message, gtk.MESSAGE_ERROR).show()
+                MessageDialog('Exception', message, gtk.MESSAGE_ERROR, parent).show()
                 
     # Return messge to given object
     def rtobjectWrite(self, message):

@@ -9,12 +9,12 @@ packageStatus = [ 'installed', 'notinstalled', 'uninstallable' ]
 hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
 
 class Mirror():
-    def __init__(self, distribution, loggerObject):
+    def __init__(self, distribution, loggerObject, currentMirror='', bestMirror=''):
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
-        self.currentMirror = ''
-        self.bestMirror = ''
+        self.currentMirror = currentMirror
+        self.bestMirror = bestMirror
         
     def getFastestMirror(self):
         mirList = []
@@ -50,12 +50,28 @@ class Mirror():
                 status = packageStatus[0]
             else:
                 status = packageStatus[1]
-        mirList.append(['Fastest mirror: ' + self.bestMirror, hwCodes[4], status])
+            mirList.append(['Install the fastest repository mirror', hwCodes[4], status])
         
         return mirList
 
+    # Let mint-debian-mirrors write the fastest mirror to sources.list
     def installMirror(self):
-        pass
-        
+        cmd = 'mint-choose-debian-mirror --force-fastest'
+        self.log.write('Mirror command=' + cmd, 'mirror.installMirror', 'debug')
+        self.ec.run(cmd)
+        self.log.write('Resynchronizing the package index files from their sources', 'mirror.installMirror', 'info')
+        os.system("apt-get update")
+    
+    # Restore the sources.list backup file
     def removeMirror(self):
-        pass
+        sourcesFile = '/etc/apt/sources.list'
+        bakFile = '/etc/apt/sources.list.bk'
+        if os.path.exists(bakFile):
+            self.log.write('Restore backup file: ' + bakFile, 'mirror.removeMirror', 'info')
+            if os.path.exists(sourcesFile):
+                self.ec.run('mv -fv ' + sourcesFile + ' ' + sourcesFile + '.ddm.bk')
+            self.ec.run('mv -fv ' + bakFile + ' ' + sourcesFile)
+            self.log.write('Resynchronize the package index files from their sources', 'mirror.removeMirror', 'info')
+            self.ec.run('apt-get update')
+        else:
+            self.log.write('Cannot restore sources.list backup file: does not exist', 'mirror.removeMirror', 'warning')

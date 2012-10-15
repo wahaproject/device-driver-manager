@@ -257,6 +257,19 @@ def getColumnValues(treeView, colNr=0):
         iter = model.iter_next(iter)
     return cv
 
+# Deselect all drivers, except PAE
+def treeviewToggleAll(treeView, toggleColNr, toggleValue=False, excludeColNr=-1, excludeValue=''):
+    model = treeView.get_model()
+    iter = model.get_iter_first()
+    while iter != None:
+        if excludeColNr >= 0:
+            exclVal = model.get_value(iter, excludeColNr)
+            if exclVal != excludeValue:
+                model[iter][toggleColNr] = toggleValue
+        else:
+            model[iter][toggleColNr] = toggleValue
+        iter = model.iter_next(iter)
+
 # Statusbar =====================================================
 
 def pushMessage(statusbar, message, contextString='message'):
