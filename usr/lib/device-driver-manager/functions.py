@@ -470,7 +470,34 @@ def getPackageStatus(packageName):
         status = packageStatus[2]
             
     return status
+
+# Check if a package is installed (fuzzy=find any package that contains packageName)
+def isPackageInstalled(packageName, fuzzy=True):
+    isInstalled = False
+    cmd = 'apt search ' + packageName + ' grep ^i'
+    if fuzzy:
+        cmd = 'dpkg -l | grep ' + packageName
+    ec = ExecCmd(log)
+    packageList = ec.run(cmd, False)
+    if packageList:
+        if len(packageList) > 0:
+            isInstalled = True
+    return isInstalled
+
+# List all dependencies of a package
+def getPackageDependencies(packageName):
+    retList = []
+    cmd = 'apt-cache depends ' + packageName + ' | grep Depends'
+    ec = ExecCmd(log)
+    depList = ec.run(cmd, False)
+    if depList:
+        for line in depList:
+            matchObj = re.search(':\s(.*)', line)
+            if matchObj:
+                retList.append(matchObj.group(1))
+    return retList
     
+
 # Check if a process is running
 def isProcessRunning(processName):
     isProc = False
@@ -481,7 +508,19 @@ def isProcessRunning(processName):
         if len(procList) > 1:
             isProc = True
     return isProc
-    
+
+# Get the package version number
+def getPackageVersion(packageName):
+    version = ''
+    cmd = 'apt policy ' + packageName + ' | grep Installed'
+    ec = ExecCmd(log)
+    versionList = ec.run(cmd, False)
+        
+    for line in versionList:
+        versionObj = re.search(':\s(.*)', line.lower())
+        if versionObj:
+            version = versionObj.group(1)
+    return version
     
 # Plymouth =============================================
 

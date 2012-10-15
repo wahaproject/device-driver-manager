@@ -71,7 +71,7 @@ class Broadcom():
                 # Broadcom was found, but no chip set was found: return uninstallable
                 self.log.write('Broadcom chip serie not detected: ' + self.hw, 'broadcom.getBroadcom', 'warning')
                 hwList.append([self.hw, hwCodes[2], packageStatus[2]])
-                        
+        
         return hwList
     
     # Check for Broadcom chip set and set variables
@@ -111,6 +111,7 @@ class Broadcom():
             else:
                 self.log.write('Broadcom pci ID not found: ' + self.hw, 'broadcom.setCurrentChipInfo', 'warning')
     
+
     # Install the broadcom drivers
     def installBroadcom(self):
         try:
@@ -121,15 +122,20 @@ class Broadcom():
                 self.log.write('Linux header name to install: ' + linHeader[0], 'broadcom.installBroadcom', 'info')
                 
                 # Only install linux header if it is not installed
-                status = functions.getPackageStatus(linHeader[0])
-                if status == packageStatus[1]:
-                    self.log.write('Download package: ' + linHeader, 'broadcom.installBroadcom', 'info')
-                    self.ec.run('apt-get download ' + linHeader)
+                if not functions.isPackageInstalled(linHeader[0]):
+                    self.log.write('Download package: ' + linHeader[0], 'broadcom.installBroadcom', 'info')
+                    self.ec.run('apt-get download ' + linHeader[0])
                     
-                # Download the driver
-                cmdBc = 'apt-get download ' + self.installableDriver
+                # Download the driver and its dependencies
+                cmdBc = 'apt-get download ' + self.installableDriver 
                 self.log.write('Download package: ' + self.installableDriver, 'broadcom.installBroadcom', 'info')
                 self.ec.run(cmdBc)
+                depList = functions.getPackageDependencies(self.installableDriver)
+                for dep in depList:
+                    if not functions.isPackageInstalled(dep):
+                        cmdDep = 'apt-get download ' + dep
+                        self.log.write('Download package dependency: ' + dep, 'broadcom.installBroadcom', 'debug')
+                        self.ec.run(cmdDep)
                 
                 # Remove any module that might be in the way
                 self.log.write('modprobe b44, b43, b43legacy, ssb, brcmsmac', 'broadcom.installBroadcom', 'debug')
