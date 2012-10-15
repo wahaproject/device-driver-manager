@@ -20,7 +20,7 @@ class Mirror():
         mirList = []
         if self.distribution == 'debian':
             # Check if mint-debian-mirrors is installed
-            if functions.getPackageStatus('mint-debian-mirrors') == packageStatus[0]:
+            if functions.isPackageInstalled('mint-debian-mirrors'):
                 # Get the mirrors
                 cmd = 'mint-choose-debian-mirror --dry-run'
                 mirrors = self.ec.run(cmd)

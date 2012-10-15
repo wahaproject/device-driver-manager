@@ -79,9 +79,7 @@ class ATI():
                     # Check if package is installed
                     # If it is, it's nominated for removal
                     self.log.write('Is package installed: ' + package[0], 'ati.installATIDriver', 'debug')
-                    drvChkCmd = 'apt search ' + package[0] + ' | grep ^i | wc -l'
-                    drvChk = self.ec.run(drvChkCmd, False)
-                    if functions.strToInt(drvChk[0]) > 0:
+                    if functions.isPackageInstalled(package[0]):
                         # Build remove packages string
                         removePackages += ' ' + package[0]
             

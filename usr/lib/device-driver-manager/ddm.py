@@ -24,7 +24,7 @@ except Exception, detail:
 class DebianDriverManager:
 
     conf = Config('ddm.conf')
-    version = conf.getValue('About', 'version')
+    version = ''
     hwList = []
     hwPreSelectList = []
     install = False
@@ -48,7 +48,7 @@ class DebianDriverManager:
         
         # Add events
         signals = {
-            'on_tvHardware_cursor_changed' : self.cusorChanged,
+            'on_tvHardware_cursor_changed' : self.cursorChanged,
             'on_btnInstall_clicked' : self.installHardware,
             'on_btnRemove_clicked' : self.removeHardware,
             'on_btnClose_clicked' : self.destroy,
@@ -194,7 +194,7 @@ class DebianDriverManager:
         
     # Check if PAE is selected
     # PAE must be installed before any other drivers are installed
-    def cusorChanged(self, treeview):
+    def cursorChanged(self, treeview):
         hwCode = functions.getSelectedValue(self.tvHardware, 4)
         checked = functions.getSelectedValue(self.tvHardware, 0)
         
@@ -217,13 +217,12 @@ class DebianDriverManager:
             
     def about(self, widget, event):
         self.about = self.builder.get_object('About')
-        version = self.conf.getValue('About', 'version')
         author = 'Author: ' + self.conf.getValue('About', 'author')
         email = 'E-mail: ' + self.conf.getValue('About', 'email')
         home = self.conf.getValue('About', 'home')
         comments = self.conf.getValue('About', 'comments')
         self.about.set_comments(author + '\n' + email + '\n\n' + comments)
-        self.about.set_version(version)
+        self.about.set_version(self.version)
         self.about.set_website(home)
         self.about.run()
         self.about.hide()
@@ -272,6 +271,7 @@ class DebianDriverManager:
         self.btnRemove.set_sensitive(True)
         
         # Show version number in status bar
+        self.version = functions.getPackageVersion('device-driver-manager')
         functions.pushMessage(self.statusbar, self.version)
 
         # Start automatic install

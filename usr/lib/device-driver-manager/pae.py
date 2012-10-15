@@ -29,8 +29,7 @@ class PAE():
                 self.log.write('Multi-core system running single-core kernel found', 'pae.getHardwareList', 'info')
                 status = packageStatus[1]
                 # Check if PAE is installed next to the i486 kernel
-                paeInst = self.ec.run('apt search 686-pae | grep ^i')
-                if paeInst:
+                if functions.isPackageInstalled('686-pae', True):
                     self.log.write('PAE and i486 kernels installed', 'pae.getHardwareList', 'info')
                     status = packageStatus[0]
                 hwList.append(['Multi-core support for 32-bit systems', hwCodes[3], status])
@@ -48,8 +47,7 @@ class PAE():
         try:
             cmdPae = 'apt-get -y --force-yes install linux-headers-686-pae linux-image-686-pae'
             # Check if already installed
-            status = functions.getPackageStatus('linux-headers-686-pae')
-            if status == packageStatus[0]:
+            if functions.isPackageInstalled('linux-headers-686-pae'):
                 cmdPae += ' --reinstall'
             self.log.write('PAE kernel install command: ' + cmdPae, 'pae.installPAE', 'debug')
             self.ec.run(cmdPae)

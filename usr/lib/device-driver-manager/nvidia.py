@@ -23,7 +23,7 @@ class Nvidia():
         self.ec = ExecCmd(self.log)
         
         # Install nvidia-detect if it isn't installed already
-        if functions.getPackageStatus('nvidia-detect') == packageStatus[1]:
+        if not functions.isPackageInstalled('nvidia-detect'):
             self.log.write('Install nvidia-detect', 'nvidia.getNvidia', 'info')
             self.ec.run('apt-get -y --force-yes install nvidia-detect')
     
@@ -88,9 +88,7 @@ class Nvidia():
                     # Check if package is installed
                     # If it is, it's nominated for removal
                     self.log.write('Is package installed: ' + package[0], 'nvidia.installNvidiaDriver', 'debug')
-                    drvChkCmd = 'apt search ' + package[0] + ' | grep ^i | wc -l'
-                    drvChk = self.ec.run(drvChkCmd, False)
-                    if functions.strToInt(drvChk[0]) > 0:
+                    if functions.isPackageInstalled(package[0]):
                         # Build remove packages string
                         removePackages += ' ' + package[0]
             
