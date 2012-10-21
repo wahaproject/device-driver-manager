@@ -1,54 +1,71 @@
 #!/usr/bin/env python
 
 import functions
-import shutil
 import re
 from nvidia import Nvidia
 from execcmd import ExecCmd
 
 packageStatus = [ 'installed', 'notinstalled', 'uninstallable' ]
 hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
+debianPackages = ['linux-headers-generic-pae','linux-image-generic-pae']
+ubuntuPackages = ['linux-generic-pae','linux-headers-generic-pae','linux-image-generic-pae']
 
 class PAE():
     def __init__(self, distribution, loggerObject):
         self.distribution = distribution.lower()
+        self.distributionReleaseNumber = functions.getDistributionReleaseNumber()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
+        self.packages = ubuntuPackages
+        if self.distribution == 'debian':
+            self.packages = debianPackages
     
-    # Check if the PAE kernel for i486 can be installed
+    # Check if the PAE kernel can be installed
     def getPae(self):
         hwList = []
-        # Get the kernel release
-        kernelRelease = self.ec.run('uname -r')
-        if '486' in kernelRelease[0]:
-            self.log.write('Single-core kernel found: ' + kernelRelease[0], 'pae.getHardwareList', 'debug')
+        
+        # Ubuntu is already PAE enabled from version 12.10 (Quantal): no need to check
+        # https://help.ubuntu.com/community/EnablingPAE
+        self.log.write('Distribution: ' + self.distribution + ' ' + str(self.distributionReleaseNumber), 'pae.getPae', 'debug')
+        skipPae = False
+        if self.distribution == 'ubuntu' and self.distributionReleaseNumber >= 12.10:
+            skipPae = True
+        
+        if not skipPae:
+            # Get the kernel release
+            kernelRelease = self.ec.run('uname -r')
+            if not 'amd64' in kernelRelease[0]:
+                if not 'pae' in kernelRelease[0]:
+                    self.log.write('Single-core kernel found: ' + kernelRelease[0], 'pae.getPae', 'debug')
 
-            # Check the machine hardware
-            machine = self.ec.run('uname -m')
-            if machine[0] == 'i686':
-                self.log.write('Multi-core system running single-core kernel found', 'pae.getHardwareList', 'info')
-                status = packageStatus[1]
-                # Check if PAE is installed next to the i486 kernel
-                if functions.isPackageInstalled('686-pae', True):
-                    self.log.write('PAE and i486 kernels installed', 'pae.getHardwareList', 'info')
-                    status = packageStatus[0]
-                hwList.append(['Multi-core support for 32-bit systems', hwCodes[3], status])
-            else:
-                self.log.write('PAE kernel cannot be installed: single-core system', 'pae.getHardwareList', 'warning')
-            
-        elif '686' in kernelRelease[0]:
-            self.log.write('Multi-core already installed: ' + kernelRelease[0], 'pae.getHardwareList', 'info')
-            hwList.append(['Multi-core support for 32-bit systems', hwCodes[3], packageStatus[0]])
+                    # Check the machine hardware
+                    machine = self.ec.run('uname -m')
+                    if machine[0] == 'i686':
+                        self.log.write('Multi-core system running single-core kernel found', 'pae.getPae', 'info')
+                        # Check package status
+                        status = packageStatus[0]
+                        for package in self.packages:
+                            if not functions.isPackageInstalled(package):
+                                self.log.write('PAE not installed', 'pae.getPae', 'info')
+                                status = packageStatus[1]
+                                break
+                        hwList.append(['Multi-core support for 32-bit systems', hwCodes[3], status])
+                    else:
+                        self.log.write('PAE kernel cannot be installed: single-core system', 'pae.getPae', 'warning')
+                    
+                else:
+                    self.log.write('Multi-core already installed: ' + kernelRelease[0], 'pae.getPae', 'info')
+                    hwList.append(['Multi-core support for 32-bit systems', hwCodes[3], packageStatus[0]])
                 
         return hwList
     
     # Called from drivers.py: install PAE kernel
     def installPAE(self):
         try:
-            cmdPae = 'apt-get -y --force-yes install linux-headers-686-pae linux-image-686-pae'
-            # Check if already installed
-            if functions.isPackageInstalled('linux-headers-686-pae'):
-                cmdPae += ' --reinstall'
+            cmdPae = 'apt-get -y --force-yes install'
+            for package in self.packages:
+                cmdPae += ' ' + package
+            cmdPae += ' --reinstall'
             self.log.write('PAE kernel install command: ' + cmdPae, 'pae.installPAE', 'debug')
             self.ec.run(cmdPae)
             
@@ -61,12 +78,6 @@ class PAE():
                     self.log.write('Install Nvidia drivers', 'pae.installPAE', 'info')
                     nv.installNvidia()
             
-            # Remove xorg.conf
-            #xorg = '/etc/X11/xorg.conf'
-            #if os.path.exists(xorg):
-            #    shutil.move(xorg, xorg + '.ddm')
-            #    self.log.write('Moved ' + xorg + ' to ' + xorg + '.ddm', 'pae.installPAE', 'info')
-            
             self.log.write('Done installing PAE', 'pae.installPAE', 'info')
                 
         except Exception, detail:
@@ -77,16 +88,12 @@ class PAE():
     def removePAE(self):
         try:
             kernelRelease = self.ec.run('uname -r')
-            if not '686' in kernelRelease[0]:
+            if not 'pae' in kernelRelease[0]:
                 self.log.write('Not running pae, continue removal', 'pae.removePAE', 'debug')
-                paePackages = self.ec.run('apt search 686-pae | grep ^i', False)
-                for line in paePackages:
-                    paeMatch = re.search('linux[a-z0-9-\.]*', line)
-                    if paeMatch:
-                        pae = matchObj.group(0)
-                        cmdPurge = 'apt-get -y --force-yes purge ' + pae
-                        self.log.write('PAE package to remove: ' + pae, 'pae.removePAE', 'info')
-                        self.ec.run(cmdPurge)
+                for package in self.packages:
+                    cmdPurge = 'apt-get -y --force-yes purge ' + package
+                    self.log.write('PAE package to remove: ' + package, 'pae.removePAE', 'info')
+                    self.ec.run(cmdPurge)
                 self.ec.run('apt-get -y --force-yes autoremove')
                 self.log.write('Done removing PAE', 'pae.removePAE', 'info')
             else:

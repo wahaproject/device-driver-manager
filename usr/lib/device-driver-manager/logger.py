@@ -20,6 +20,7 @@ class Logger():
         self.logTime = addLogTime
         self.rtobject = rtObject
         self.typeString = functions.getTypeString(self.rtobject)
+        self.parent = parent
         
         if self.logPath == '':
             # Log only to console
@@ -59,13 +60,13 @@ class Logger():
                 self.rtobjectWrite(message)
             elif logLevel == 'error':
                 myLogger.error(message)
-                MessageDialog('Error', message, gtk.MESSAGE_ERROR, parent).show()
+                MessageDialog('Error', message, gtk.MESSAGE_ERROR, self.parent).show()
             elif logLevel == 'critical':
                 myLogger.critical(message)
-                MessageDialog('Critical', message, gtk.MESSAGE_ERROR, parent).show()
+                MessageDialog('Critical', message, gtk.MESSAGE_ERROR, self.parent).show()
             elif logLevel == 'exception':
                 myLogger.exception(message)
-                MessageDialog('Exception', message, gtk.MESSAGE_ERROR, parent).show()
+                MessageDialog('Exception', message, gtk.MESSAGE_ERROR, self.parent).show()
                 
     # Return messge to given object
     def rtobjectWrite(self, message):

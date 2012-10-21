@@ -195,25 +195,27 @@ class DebianDriverManager:
     # Check if PAE is selected
     # PAE must be installed before any other drivers are installed
     def cursorChanged(self, treeview):
-        hwCode = functions.getSelectedValue(self.tvHardware, 4)
-        checked = functions.getSelectedValue(self.tvHardware, 0)
-        
-        if hwCode == 'pae':
-            if checked:
-                self.paeChecked = True
-                if not self.hwPreSelectList:
-                    msg = 'Install PAE before installing any other drivers.\n\nOther drivers are deselected (if any).'
-                    MessageDialog('PAE install check', msg , gtk.MESSAGE_INFO, self.window).show()
-                functions.treeviewToggleAll(self.tvHardware, 0, False, 4, 'pae')
-            else:
-                self.paeChecked = False
-        else:
-            if checked:
-                if self.paeChecked:
+        colNr = len(self.tvHardware.get_columns())
+        if colNr >= 4:
+            hwCode = functions.getSelectedValue(self.tvHardware, 4)
+            checked = functions.getSelectedValue(self.tvHardware, 0)
+            
+            if hwCode == 'pae':
+                if checked:
+                    self.paeChecked = True
                     if not self.hwPreSelectList:
-                        msg = 'Install PAE before installing any other drivers\nor deselect PAE to install drivers for the current kernel'
+                        msg = 'Install PAE before installing any other drivers.\n\nOther drivers are deselected (if any).'
                         MessageDialog('PAE install check', msg , gtk.MESSAGE_INFO, self.window).show()
                     functions.treeviewToggleAll(self.tvHardware, 0, False, 4, 'pae')
+                else:
+                    self.paeChecked = False
+            else:
+                if checked:
+                    if self.paeChecked:
+                        if not self.hwPreSelectList:
+                            msg = 'Install PAE before installing any other drivers\nor deselect PAE to install drivers for the current kernel'
+                            MessageDialog('PAE install check', msg , gtk.MESSAGE_INFO, self.window).show()
+                        functions.treeviewToggleAll(self.tvHardware, 0, False, 4, 'pae')
             
     def about(self, widget, event):
         self.about = self.builder.get_object('About')

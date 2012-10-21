@@ -7,7 +7,6 @@ import getopt
 import drivers
 import string
 import functions
-from config import Config
 from logger import Logger
 try:
     import gtk
@@ -66,9 +65,6 @@ if debug:
 
 # Set variables
 scriptDir = os.path.dirname(os.path.realpath(__file__))
-conf = Config('ddm.conf')
-livePath = conf.getValue('Paths', 'live')
-ubiquityPath = conf.getValue('Paths', 'ubiquity')
 
 # Pass arguments to ddm.py: replace - with : -> because kdesudo assumes these options are meant for him...
 # TODO: Isn't there another way?
@@ -80,7 +76,7 @@ if len(args) > 0:
         args +=  ' :l ' + log.logPath
 
 # Do not run in live environment
-if (not os.path.exists(livePath) and not os.path.exists(ubiquityPath)) or force:
+if not functions.isRunningLive() or force:
     ddmPath = os.path.join(scriptDir, 'ddm.py' + args)
 
     # Add launcher string, only when not root

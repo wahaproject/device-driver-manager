@@ -15,19 +15,21 @@ class ATI():
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
+        self.hw = functions.getGraphicsCard()
+
+        # Test
+        #self.hw = '00:01.0 VGA compatible controller: Advanced Micro Devices [AMD] nee ATI Wrestler [Radeon HD 6310]'
     
     # Called from drivers.py: Check for ATI
     def getATI(self):
         # Check for ATI cards
         hwList = []
-        cmdGraph = 'lspci | grep VGA | grep ATI'
-        hwGraph = self.ec.run(cmdGraph, False)
-        #hwGraph = ['00:01.0 VGA compatible controller: Advanced Micro Devices [AMD] nee ATI Wrestler [Radeon HD 6310]']
-        for line in hwGraph:
-            hw = line[line.find(': ') + 2:]
-            self.log.write('ATI card found: ' + hw, 'ati.getATI', 'info')
+        # Is it ATI?
+        nvChk = re.search('\\b' + hwCodes[1] + '\\b', self.hw.lower())
+        if nvChk:
+            self.log.write('ATI card found: ' + self.hw, 'ati.getATI', 'info')
             # Get the ATI chip set serie
-            atiSerie = re.search('\s\d{4,}', hw)
+            atiSerie = re.search('\s\d{4,}', self.hw)
             if atiSerie:
                 self.log.write('ATI chip serie found: ' + atiSerie.group(0), 'ati.getATI', 'info')
                 intSerie = functions.strToInt(atiSerie.group(0))
@@ -36,13 +38,13 @@ class ATI():
                     drv = self.getDriver()
                     status = functions.getPackageStatus(drv)
                     self.log.write('ATI ' + drv + ' status: ' + status, 'ati.getATI', 'debug')
-                    hwList.append([hw, hwCodes[1], status])
+                    hwList.append([self.hw, hwCodes[1], status])
                 else:
                     self.log.write('ATI chip serie not supported: ' + str(intSerie), 'ati.getATI', 'warning')
-                    hwList.append([hw, hwCodes[1], packageStatus[2]])
+                    hwList.append([self.hw, hwCodes[1], packageStatus[2]])
             else:
-                self.log.write('No ATI chip serie found: ' + hw, 'ati.getATI', 'warning')
-                hwList.append([hw, hwCodes[1], packageStatus[2]])
+                self.log.write('No ATI chip serie found: ' + self.hw, 'ati.getATI', 'warning')
+                hwList.append([self.hw, hwCodes[1], packageStatus[2]])
 
         return hwList
     
@@ -61,9 +63,12 @@ class ATI():
         drvList = []
         # Common packages
         drvList.append([driver, 1])
-        drvList.append(['fglrx-control', 1])
-        drvList.append(['build-essential', 0])
-        drvList.append(['module-assistant', 0])
+        if self.distribution == 'debian':
+            drvList.append(['fglrx-control', 1])
+            drvList.append(['build-essential', 0])
+            drvList.append(['module-assistant', 0])
+        else:
+            drvList.append(['fglrx-amdcccle', 1])
         return drvList
     
     # Install the given packages
@@ -110,10 +115,15 @@ class ATI():
             # Install the driver and create xorg.conf
             drv = self.getDriver()
             if drv != '':
-                self.log.write('ATI driver to install: ' + drv, 'ati.installATI', 'debug')
+                self.log.write('ATI driver to install: ' + drv, 'ati.installATI', 'info')
                 packages = self.getAdditionalPackages(drv)
                 self.installATIDriver(packages)
                 # Configure ATI
+                xorg = '/etc/X11/xorg.conf'
+                if os.path.exists(xorg):
+                    self.log.write('Copy ' + xorg + ' to ' + xorg + '.ddm.bak', 'ati.installATI', 'info')
+                    self.ec.run('cp ' + xorg + ' ' + xorg + '.ddm.bak')
+                self.log.write('Configure ATI', 'ati.installATI', 'debug')
                 self.ec.run('aticonfig --initial -f')
                 
                 self.log.write('Done installing ATI drivers', 'ati.installATI', 'info')
@@ -147,7 +157,7 @@ class ATI():
     def preseedATIPackages(self, action):
         if self.distribution == 'debian':
             # Run on configured system and debconf-utils installed:
-            # debconf-get-selections | grep ati > debconf-ati.seed
+            # debconf-get-selections | grep fglrx > debconf-fglrx.seed
             # replace tabs with spaces and change the default answers (note=space, boolean=true or false)
             debConfList = []
             debConfList.append('libfglrx fglrx-driver/check-for-unsupported-gpu boolean false')

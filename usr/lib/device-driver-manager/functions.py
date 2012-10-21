@@ -49,6 +49,13 @@ def strToInt(str):
         i = 0
     return i
 
+def strToFloat(str):
+    try:
+        i = float(str)
+    except ValueError:
+        i = 0
+    return i
+
 def isList(list):
     return type(list) == types.ListType
 
@@ -285,7 +292,7 @@ def popMessage(statusbar, contextString='message'):
 def getLatestLunuxHeader(includeString='', excludeString=''):
     lhList = []
     ec = ExecCmd(log)
-    list = ec.run('apt search linux-headers', False)
+    list = ec.run('aptitude search linux-headers', False)
     startIndex = 14
     for item in list:
         lhMatch = re.search('linux-headers-\d[a-zA-Z0-9-\.]*', item)
@@ -325,16 +332,17 @@ def getGraphicsCard():
 def getDistribution():
     distribution = ''
     try:
-        # Try with os-release
-        cmdDist = 'cat /etc/*-release | grep ^ID'
-        ec = ExecCmd(log)
-        dist = ec.run(cmdDist, False)[0]
-        if not dist:
-            # Try with lsb-release
-            cmdDist = 'cat /etc/*-release | grep DISTRIB_CODENAME'
+        release = getDistributionReleaseNumber()
+        if release == 1:
+            distribution = 'debian'
+        else:
+            # Read /etc/lsb-release
+            cmdDist = 'cat /etc/*-release | grep DISTRIB_ID'
             ec = ExecCmd(log)
-            dist = ec.run(cmdDist, False)[0]
-        distribution = dist[dist.find('=') + 1:]
+            distList = ec.run(cmdDist, False)
+            if distList:
+                distribution = distList[0]
+                distribution = distribution[distribution.find('=') + 1:].lower()
     except Exception, detail:
         log.write(detail, 'functions.getDistribution', 'error')
     return distribution
@@ -351,6 +359,21 @@ def getDistributionDescription():
     except Exception, detail:
         log.write(detail, 'functions.getDistributionDescription', 'error')
     return distribution
+
+
+# Get the system's distribution
+def getDistributionReleaseNumber():
+    release = 0
+    try:
+        cmdRel = 'cat /etc/*-release | grep DISTRIB_RELEASE'
+        ec = ExecCmd(log)
+        rel = ec.run(cmdRel, False)[0]
+        release = rel[rel.find('=') + 1:]
+        release = string.replace(release, '"', '')
+        release = strToFloat(release)
+    except Exception, detail:
+        log.write(detail, 'functions.getDistributionVersion', 'error')
+    return release
 
 # Get the system's desktop
 def getDesktopEnvironment():
@@ -471,12 +494,10 @@ def getPackageStatus(packageName):
             
     return status
 
-# Check if a package is installed (fuzzy=find any package that contains packageName)
-def isPackageInstalled(packageName, fuzzy=True):
+# Check if a package is installed
+def isPackageInstalled(packageName):
     isInstalled = False
-    cmd = 'apt search ' + packageName + ' grep ^i'
-    if fuzzy:
-        cmd = 'dpkg -l | grep ' + packageName
+    cmd = 'aptitude search ' + packageName + ' | grep ^i'
     ec = ExecCmd(log)
     packageList = ec.run(cmd, False)
     if packageList:
@@ -512,7 +533,7 @@ def isProcessRunning(processName):
 # Get the package version number
 def getPackageVersion(packageName):
     version = ''
-    cmd = 'apt policy ' + packageName + ' | grep Installed'
+    cmd = 'apt-cache policy ' + packageName + ' | grep Installed'
     ec = ExecCmd(log)
     versionList = ec.run(cmd, False)
         
@@ -521,6 +542,32 @@ def getPackageVersion(packageName):
         if versionObj:
             version = versionObj.group(1)
     return version
+
+# Check if system has wireless (not necessarily a wireless connection)
+def hasWireless():
+    wl = False
+    cmd = 'iwconfig | grep IEEE'
+    ec = ExecCmd(log)
+    wlList = ec.run(cmd, False)
+    if wlList:
+        for line in wlList:
+            if 'IEEE' in line:
+                wl = True
+                break
+    return wl
+
+# Check if we're running live
+def isRunningLive():
+    live = False
+    # Debian live mount directory
+    dirLive = '/live'
+    # Ubuntu live mount directory
+    dirUbiquity = '/rofs'
+    if os.path.exists(dirLive) or os.path.exists(dirUbiquity):
+        live = True
+    return live
+        
+    
     
 # Plymouth =============================================
 
@@ -543,7 +590,7 @@ def getCurrentTheme():
 # Get a list of Plymouth themes in the repositories that can be installed
 def getAvailableThemes():
     startmatch = '39m-'
-    cmd = 'apt search ' + avlThemesSearchstr + ' | grep ^p'
+    cmd = 'aptitude search ' + avlThemesSearchstr + ' | grep ^p'
     ec = ExecCmd(log)
     availableThemes = ec.run(cmd)
     avlThemes = []

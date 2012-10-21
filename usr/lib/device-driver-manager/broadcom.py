@@ -11,36 +11,38 @@ blacklistPath = '/etc/modprobe.d/blacklist-broadcom.conf'
 
 # Chipsets and corresponding packages
 # http://linuxwireless.org/en/users/Drivers/b43
+# https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx#b43%20-%20Internet%20access
+# [ChipID, DebianPackage, UbuntuPackage]
 bcChips = [
-['576','firmware-brcm80211'],
-['4301','firmware-b43legacy-installer'],
-['4306','firmware-b43legacy-installer'],
-['4307','firmware-b43-installer'],
-['4311','firmware-b43-installer'],
-['4312','firmware-b43-installer'], # This is not a BCM4312 but BCM4311
-['4313','broadcom-sta-dkms'],
-['4315','firmware-b43-lpphy-installer'], # This is BCM4312
-['4318','firmware-b43-installer'],
-['4319','firmware-b43-installer'],
-['4320','firmware-b43-installer'],
-['4321','firmware-b43-installer'],
-['4324','firmware-b43-installer'],
-['4325','firmware-b43legacy-installer'],
-['4328','broadcom-sta-dkms'],
-['4329','broadcom-sta-dkms'],
-['432a','broadcom-sta-dkms'],
-['432b','broadcom-sta-dkms'],
-['432c','broadcom-sta-dkms'], # Better to use firmware-b43-installer?
-['432d','broadcom-sta-dkms'],
-['4331','firmware-b43-installer'],
-['4353','firmware-brcm80211'],
-['4357','firmware-brcm80211'],
-['4358','broadcom-sta-dkms'],
-['4359','broadcom-sta-dkms'],
-['435a','broadcom-sta-dkms'],
-['4727','firmware-brcm80211'], # May need blacklisting b43 on some kernels (up to 3.2?)
-['a8d6','firmware-b43-installer'], # Untested, but the other drivers have no support at all
-['a99d','broadcom-sta-dkms']
+['576','firmware-brcm80211','bcmwl-kernel-source'],
+['4301','firmware-b43legacy-installer','firmware-b43legacy-installer'],
+['4306','firmware-b43legacy-installer','firmware-b43legacy-installer'],
+['4307','firmware-b43-installer','firmware-b43-installer'],
+['4311','firmware-b43-installer','firmware-b43-installer'],
+['4312','firmware-b43-installer','firmware-b43-installer'], # This is not a BCM4312 but BCM4311
+['4313','broadcom-sta-dkms','bcmwl-kernel-source'],
+['4315','firmware-b43-lpphy-installer','firmware-b43-lpphy-installer'], # This is BCM4312
+['4318','firmware-b43-installer','firmware-b43-installer'],
+['4319','firmware-b43-installer','firmware-b43-installer'],
+['4320','firmware-b43-installer','firmware-b43-installer'],
+['4321','firmware-b43-installer','firmware-b43-installer'],
+['4324','firmware-b43-installer','firmware-b43-installer'],
+['4325','firmware-b43legacy-installer','firmware-b43legacy-installer'],
+['4328','broadcom-sta-dkms','bcmwl-kernel-source'],
+['4329','broadcom-sta-dkms','bcmwl-kernel-source'],
+['432a','broadcom-sta-dkms','bcmwl-kernel-source'],
+['432b','broadcom-sta-dkms','bcmwl-kernel-source'],
+['432c','broadcom-sta-dkms','bcmwl-kernel-source'], # Better to use firmware-b43-installer?
+['432d','broadcom-sta-dkms','bcmwl-kernel-source'],
+['4331','firmware-b43-installer','firmware-b43-installer'],
+['4353','firmware-brcm80211','bcmwl-kernel-source'],
+['4357','firmware-brcm80211','bcmwl-kernel-source'],
+['4358','broadcom-sta-dkms','bcmwl-kernel-source'],
+['4359','broadcom-sta-dkms','bcmwl-kernel-source'],
+['435a','broadcom-sta-dkms','bcmwl-kernel-source'],
+['4727','firmware-brcm80211','bcmwl-kernel-source'], # May need blacklisting b43 on some kernels (up to 3.2?)
+['a8d6','firmware-b43-installer','firmware-b43-installer'], # Untested, but the other drivers have no support at all
+['a99d','broadcom-sta-dkms','bcmwl-kernel-source']
 ]
 
 class Broadcom():
@@ -98,10 +100,23 @@ class Broadcom():
                     for chipList in bcChips:
                         if self.currentChip == chipList[0]:
                             # Supported chipset found: set variables
-                            self.log.write('Broadcom chip set driver: ' + chipList[1], 'broadcom.setCurrentChipInfo', 'debug')
                             self.installableChip = chipList[0]
-                            self.installableDriver = chipList[1]
-                            self.status = functions.getPackageStatus(chipList[1])
+                            if self.distribution == 'debian':
+                                self.installableDriver = chipList[1]
+                                # Check if you already have wireless
+                                if functions.hasWireless():
+                                    self.status = packageStatus[0]
+                                else:
+                                    self.status = functions.getPackageStatus(chipList[1])
+                            else:
+                                # Assume Ubuntu
+                                self.installableDriver = chipList[2]
+                                if functions.hasWireless():
+                                    self.status = packageStatus[0]
+                                else:
+                                    self.status = functions.getPackageStatus(chipList[2])
+                                    
+                            self.log.write('Broadcom driver: ' + self.installableDriver + ' (' + self.status + ')', 'broadcom.setCurrentChipInfo', 'debug')
                             break
                     # Check if a supported chip set is found
                     if self.installableChip == '':
@@ -118,7 +133,7 @@ class Broadcom():
             self.setCurrentChipInfo()
             if self.installableDriver != '':
                 # Get the correct linux header package
-                linHeader = self.ec.run("echo linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,')", False)
+                linHeader = self.ec.run("echo linux-headers-$(uname -r)", False)
                 self.log.write('Linux header name to install: ' + linHeader[0], 'broadcom.installBroadcom', 'info')
                 
                 # Only install linux header if it is not installed
@@ -153,7 +168,7 @@ class Broadcom():
                 os.system('rm -f *.deb')
                 
                 # Finish up
-                if self.installableDriver == 'broadcom-sta-dkms':
+                if self.installableDriver == 'broadcom-sta-dkms' or self.installableDriver == 'bcmwl-kernel-source':
                     # Blacklist b43, brcmsmac
                     self.log.write('blacklist b43 brcmsmac bcma ssb', 'broadcom.installBroadcom', 'debug')
                     modFile = open(blacklistPath, 'w')
