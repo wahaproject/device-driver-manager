@@ -32,7 +32,7 @@ class ATI():
             atiSerie = re.search('\s\d{4,}', self.hw)
             if atiSerie:
                 self.log.write('ATI chip serie found: ' + atiSerie.group(0), 'ati.getATI', 'info')
-                intSerie = functions.strToInt(atiSerie.group(0))
+                intSerie = functions.strToNumber(atiSerie.group(0))
                 # Only add series from atiStartSerie
                 if intSerie >= atiStartSerie:
                     drv = self.getDriver()
@@ -67,6 +67,7 @@ class ATI():
             drvList.append(['fglrx-control', 1])
             drvList.append(['build-essential', 0])
             drvList.append(['module-assistant', 0])
+            drvList.append(['fglrx-glx-ia32', 0])
         else:
             drvList.append(['fglrx-amdcccle', 1])
         return drvList

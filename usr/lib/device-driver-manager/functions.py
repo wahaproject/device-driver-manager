@@ -40,33 +40,29 @@ def getTypeString(object):
         tpString = matchObj.group(1)
     return tpString
 
-
-# Convert string to integer
-def strToInt(str):
+# Convert string to number
+def strToNumber(string):
     try:
-        i = int(str)
+        nr = float(string)
     except ValueError:
-        i = 0
-    return i
+        nr = 0
+    return nr
 
-def strToFloat(str):
-    try:
-        i = float(str)
-    except ValueError:
-        i = 0
-    return i
-
+# Check if parameter is a list
 def isList(list):
     return type(list) == types.ListType
 
+# Check if parameter is a list containing lists
 def isListOfLists(list):
     return len(list) == len([x for x in list if type(x) == types.ListType])
 
+# Sort list on given column
 def sortListOnColumn(list, columsList):
     for col in reversed(columsList):
         list = sorted(list, key=operator.itemgetter(col))
     return list
 
+# Return a list with images from a given path
 def getImgsFromDir(directoryPath):
     extensions = ['.png', '.jpg', '.jpeg', '.gif']
     log.write('Search for extensions: ' + str(extensions), 'functions.getImgsFromDir', 'debug')
@@ -370,7 +366,7 @@ def getDistributionReleaseNumber():
         rel = ec.run(cmdRel, False)[0]
         release = rel[rel.find('=') + 1:]
         release = string.replace(release, '"', '')
-        release = strToFloat(release)
+        release = strToNumber(release)
     except Exception, detail:
         log.write(detail, 'functions.getDistributionVersion', 'error')
     return release
@@ -403,12 +399,12 @@ def getResolutions(minRes='', maxRes='', reverseOrder=False):
     # Split the minimum and maximum resolutions
     if 'x' in minRes:
         minResList = minRes.split('x')
-        minW = strToInt(minResList[0])
-        minH = strToInt(minResList[1])
+        minW = strToNumber(minResList[0])
+        minH = strToNumber(minResList[1])
     if 'x' in maxRes:
         maxResList = maxRes.split('x')
-        maxW = strToInt(maxResList[0])
-        maxH = strToInt(maxResList[1])
+        maxW = strToNumber(maxResList[0])
+        maxH = strToNumber(maxResList[1])
 
     # Fill the list with screen resolutions
     for line in cmdList:
@@ -416,8 +412,8 @@ def getResolutions(minRes='', maxRes='', reverseOrder=False):
             if item and 'x' in item and len(item) > 2 and not '+' in item and not 'axis' in item and not 'maximum' in item:
                 log.write('Resolution found: ' + item, 'functions.getResolutions', 'debug')
                 itemList = item.split('x')
-                itemW = strToInt(itemList[0])
-                itemH = strToInt(itemList[1])
+                itemW = strToNumber(itemList[0])
+                itemH = strToNumber(itemList[1])
                 # Check if it can be added
                 if itemW >= minW and itemH >= minH and (maxW == 0 or itemW <= maxW) and (maxH == 0 or itemH <= maxH):
                     log.write('Resolution added: ' + item, 'functions.getResolutions', 'debug')

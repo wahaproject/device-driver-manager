@@ -16,6 +16,7 @@ hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
 class DriverCheck():
     def __init__(self, loggerObject):
         self.log = loggerObject
+        self.log.write('Initialize DriverCheck', 'drivers.DriverCheck', 'debug')
         self.distribution = functions.getDistribution()
         
     # This will only check for Nvidia, ATI, Broadcom and PAE
@@ -54,6 +55,7 @@ class DriverInstall(threading.Thread):
     def __init__(self, hwCodesWithStatusList, loggerObject):
         threading.Thread.__init__(self)
         self.log = loggerObject
+        self.log.write('Initialize DriverInstall', 'drivers.DriverInstall', 'debug')
         self.hwCodesWithStatusList = hwCodesWithStatusList
         self.distribution = functions.getDistribution()
 
@@ -94,6 +96,7 @@ class DriverRemove(threading.Thread):
     def __init__(self, hwCodesWithStatusList, loggerObject):
         threading.Thread.__init__(self)
         self.log = loggerObject
+        self.log.write('Initialize DriverRemove', 'drivers.DriverRemove', 'debug')
         self.hwCodesWithStatusList = hwCodesWithStatusList
         self.distribution = functions.getDistribution()
 

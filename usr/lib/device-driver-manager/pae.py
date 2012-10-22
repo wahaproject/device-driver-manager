@@ -24,11 +24,11 @@ class PAE():
     def getPae(self):
         hwList = []
         
-        # Ubuntu is already PAE enabled from version 12.10 (Quantal): no need to check
+        # Ubuntu is already PAE enabled from version 12.10 (Quantal) and LM 14 Nadia is based on Quantal: no need to check
         # https://help.ubuntu.com/community/EnablingPAE
         self.log.write('Distribution: ' + self.distribution + ' ' + str(self.distributionReleaseNumber), 'pae.getPae', 'debug')
         skipPae = False
-        if self.distribution == 'ubuntu' and self.distributionReleaseNumber >= 12.10:
+        if (self.distribution == 'linuxmint' and self.distributionReleaseNumber >= 14) or (self.distribution == 'ubuntu' and self.distributionReleaseNumber >= 12.10):
             skipPae = True
         
         if not skipPae:

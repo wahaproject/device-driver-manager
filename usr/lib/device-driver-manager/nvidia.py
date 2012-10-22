@@ -100,7 +100,7 @@ class Nvidia():
                     self.log.write('Is package installed: ' + package[0], 'nvidia.installNvidiaDriver', 'debug')
                     drvChkCmd = 'aptitude search ' + package[0] + ' | grep ^i | wc -l'
                     drvChk = self.ec.run(drvChkCmd, False)
-                    if functions.strToInt(drvChk[0]) > 0:
+                    if functions.strToNumber(drvChk[0]) > 0:
                         # Build remove packages string
                         removePackages += ' ' + package[0]
             
@@ -135,6 +135,7 @@ class Nvidia():
                 drvList.append(['nvidia-kernel-legacy-173xx-dkms', 1])
             drvList.append(['build-essential', 0])
             drvList.append(['nvidia-xconfig', 0])
+            drvList.append(['nvidia-glx-ia32', 0])
         # Common packages
         drvList.append([driver, 1])
         drvList.append(['nvidia-settings', 0])
