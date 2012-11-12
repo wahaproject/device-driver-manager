@@ -324,6 +324,19 @@ def getGraphicsCard():
             break
     return graphicsCard
 
+def getGraphicsCardManufacturerPciId():
+    pciId = []
+    cmdGraph = 'lspci -nn | grep VGA'
+    ec = ExecCmd(log)
+    hwGraph = ec.run(cmdGraph, False)
+    if hwGraph:
+        idMatch = re.search('\[(\w*):(\w*)\]', hwGraph[0])
+        if idMatch:
+            pciId.append(idMatch.group(1))
+            pciId.append(idMatch.group(2))
+    return pciId
+
+
 # Get the system's distribution
 def getDistribution():
     distribution = ''
@@ -542,12 +555,12 @@ def getPackageVersion(packageName):
 # Check if system has wireless (not necessarily a wireless connection)
 def hasWireless():
     wl = False
-    cmd = 'iwconfig | grep IEEE'
+    cmd = 'iwconfig | grep "Access Point"'
     ec = ExecCmd(log)
     wlList = ec.run(cmd, False)
     if wlList:
         for line in wlList:
-            if 'IEEE' in line:
+            if 'Access Point' in line:
                 wl = True
                 break
     return wl

@@ -3,17 +3,20 @@
 import os
 import re
 import functions
+import nvidia_gpus
 from config import Config
 from execcmd import ExecCmd
 
 packageStatus = [ 'installed', 'notinstalled', 'uninstallable' ]
 hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
 blacklistPath = '/etc/modprobe.d/blacklist-nouveau.conf'
-nvUbuntuMin = 2000
-nvUbuntu = [
-[5000, 'nvidia-96'],
-[6000, 'nvidia-173'],
-[0, 'nvidia-current']
+
+# Nvidia drivers
+# driver serial nr, debian driver, ubuntu driver
+drivers = [
+[304, 'nvidia-glx', 'nvidia-current'],
+[173, 'nvidia-glx-legacy-173xx', 'nvidia-173'],
+[96, 'nvidia-glx-legacy-96xx', 'nvidia-96']
 ]
 
 class Nvidia():
@@ -21,67 +24,46 @@ class Nvidia():
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
-        self.hw = functions.getGraphicsCard()
-        
-        # Install nvidia-detect if it isn't installed already
-        if self.distribution == 'debian':
-            if not functions.isPackageInstalled('nvidia-detect'):
-                self.log.write('Install nvidia-detect', 'nvidia.getNvidia', 'info')
-                self.ec.run('apt-get -y --force-yes install nvidia-detect')
+        # Get gpu info
+        self.gpu = []
+        manPciId = functions.getGraphicsCardManufacturerPciId()
+        if manPciId:
+            if manPciId[0].lower() == '10de': # Nividia manufacturer id
+                self.gpu = nvidia_gpus.checkNvidiaID(manPciId[1])
+                self.log.write('Nvidia driver info: ' + str(self.gpu), 'nvidia.init', 'debug')
 
     # Called from drivers.py: Check for Nvidia
     def getNvidia(self):
         hwList = []
-        # Is it Nvidia?
-        nvChk = re.search('\\b' + hwCodes[0] + '\\b', self.hw.lower())
-        if nvChk:
-            if self.distribution == 'debian':
-                # Get Debian driver for Nvidia
-                self.log.write('Get the appropriate Nvidia driver', 'nvidia.getNvidia', 'info')
-                drv = self.getDriver()
-                if drv != '':
-                    self.log.write('Nvidia driver to install: ' + drv, 'nvidia.getNvidia', 'info')
-                    status = functions.getPackageStatus(drv)
-                    self.log.write('Package status: ' + status, 'nvidia.getNvidia', 'debug')
-                    hwList.append([self.hw, hwCodes[0], status])
-                else:
-                    self.log.write('No supported driver found for: ' + self.hw, 'nvidia.getNvidia', 'warning')
-                    hwList.append([self.hw, hwCodes[0], packageStatus[2]])
+        if self.gpu:
+            # Get driver for Nvidia
+            self.log.write('Get the appropriate Nvidia driver', 'nvidia.getNvidia', 'info')
+            drv = self.getDriver()
+            if drv != '':
+                self.log.write('Nvidia driver to install: ' + drv, 'nvidia.getNvidia', 'info')
+                status = functions.getPackageStatus(drv)
+                self.log.write('Package status: ' + status, 'nvidia.getNvidia', 'debug')
+                hwList.append([self.gpu[1], hwCodes[0], status])
             else:
-                # Get Ubuntu driver for Nvidia
-                drv = self.getDriver()
-                if drv != '':
-                    self.log.write('Nvidia driver to install: ' + drv, 'nvidia.getNvidia', 'info')
-                    status = functions.getPackageStatus(drv)
-                    self.log.write('Package status: ' + status, 'nvidia.getNvidia', 'debug')
-                    hwList.append([self.hw, hwCodes[0], status])
-                else:
-                    self.log.write('No supported driver found for: ' + self.hw, 'nvidia.getNvidia', 'warning')
-                    hwList.append([self.hw, hwCodes[0], packageStatus[2]])
+                self.log.write('No supported driver found for: ' + self.gpu[1], 'nvidia.getNvidia', 'warning')
+                hwList.append([self.gpu[1], hwCodes[0], packageStatus[2]])
         else:
-            self.log.write('No Nvidia card found', 'nvidia.getNvidia', 'debug')
+            self.log.write('No supported Nvidia card found', 'nvidia.getNvidia', 'debug')
                 
         return hwList
     
     # Get the driver for the system's Nvidia card
-    # http://www.pcidatabase.com/vendor_details.php?id=606
     def getDriver(self):
         try:
-            drv = ''
-            drvList = []
-            if self.distribution == 'debian':
-                if functions.isPackageInstalled('nvidia-detect'):
-                    drvList = self.ec.run("nvidia-detect | grep nvidia- | tr -d ' '")
-            else:
-                nvChip = re.search('geforce[a-zA-Z\s]*(\d{3,})', self.hw.lower())
-                if nvChip:
-                    for chip in nvUbuntu:
-                        if (nvChip.group(1) >= nvUbuntuMin and nvChip.group(1) < chip[0]) or chip[0] == 0:
-                            drvList = [chip[1]]
-                            break
-            if drvList:
-                drv = drvList[0]
-            return drv
+            driver = ''
+            for drv in drivers:
+                if drv[0] == self.gpu[0]:
+                    if self.distribution == 'debian':
+                        driver = drv[1]
+                    else:
+                        driver = drv[2]
+                    break
+            return driver
         except Exception, detail:
             self.log.write(detail, 'nvidia.getDriver', 'exception')
     
@@ -89,18 +71,14 @@ class Nvidia():
     def installNvidiaDriver(self, packageList):
         try:
             removePackages = ''
-            installPackages = ''
             # Check if drivers are available in the repositories
             for package in packageList:
                 # Build install packages string
-                installPackages += ' ' + package[0]
                 if package[1] == 1:
                     # Check if package is installed
                     # If it is, it's nominated for removal
                     self.log.write('Is package installed: ' + package[0], 'nvidia.installNvidiaDriver', 'debug')
-                    drvChkCmd = 'aptitude search ' + package[0] + ' | grep ^i | wc -l'
-                    drvChk = self.ec.run(drvChkCmd, False)
-                    if functions.strToNumber(drvChk[0]) > 0:
+                    if functions.isPackageInstalled(package[0]):
                         # Build remove packages string
                         removePackages += ' ' + package[0]
             
@@ -114,9 +92,10 @@ class Nvidia():
             self.preseedNvidiaPackages('install')
                 
             # Install the packages
-            self.log.write('Install drivers: ' + installPackages, 'nvidia.installNvidiaDriver', 'debug')
-            nvDrvInstCmd = 'apt-get -y --force-yes install' + installPackages
-            self.ec.run(nvDrvInstCmd)
+            for package in packageList:
+                self.log.write('Install package: ' + package[0], 'nvidia.installNvidiaDriver', 'debug')
+                nvDrvInstCmd = 'apt-get -y --force-yes install ' + package[0]
+                self.ec.run(nvDrvInstCmd)
             
         except Exception, detail:
             self.log.write(detail, 'nvidia.installNvidiaDriver', 'exception')
