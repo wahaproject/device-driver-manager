@@ -285,21 +285,21 @@ def popMessage(statusbar, contextString='message'):
 
 # System ========================================================
 
-def getLatestLunuxHeader(includeString='', excludeString=''):
+def getLatestLinuxHeadersAndImage(includeRegularExpression='', excludeRegularExpression=''):
+    returnList = []
     lhList = []
     ec = ExecCmd(log)
     list = ec.run('aptitude search linux-headers', False)
-    startIndex = 14
     for item in list:
-        lhMatch = re.search('linux-headers-\d[a-zA-Z0-9-\.]*', item)
+        lhMatch = re.search('linux-headers-\d+\.[a-zA-Z0-9-\.]*', item)
         if lhMatch:
             lh = lhMatch.group(0)
             addLh = True
-            if includeString != '':
-                inclMatch = re.search(includeString, lh)
+            if includeRegularExpression != '':
+                inclMatch = re.search(includeRegularExpression, lh)
                 if inclMatch:
-                    if excludeString != '':
-                        exclMatch = re.search(excludeString, lh)
+                    if excludeRegularExpression != '':
+                        exclMatch = re.search(excludeRegularExpression, lh)
                         if exclMatch:
                             addLh = False
                 else:
@@ -308,8 +308,11 @@ def getLatestLunuxHeader(includeString='', excludeString=''):
             # Append to list
             if addLh:
                 lhList.append(lh)
-    lhList.sort(reverse=True)
-    return lhList[0]
+    if lhList:
+        lhList.sort(reverse=True)
+        returnList.append(lhList[0])
+        returnList.append('linux-image-' + lhList[0][14:])
+    return returnList
         
 
 # Get the system's graphic card
