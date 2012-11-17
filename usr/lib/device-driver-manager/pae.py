@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
+import os
 import functions
 from execcmd import ExecCmd
 
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
 hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
+
 
 class PAE():
 
@@ -30,14 +32,15 @@ class PAE():
         if not skipPae:
             # Get the kernel release
             kernelRelease = self.ec.run('uname -r')
+            # Check the machine hardware
+            machine = self.ec.run('uname -m')
+
             if not 'amd64' in kernelRelease[0]:
                 if not 'pae' in kernelRelease[0]:
                     self.log.write('Single-core kernel found: ' + kernelRelease[0], 'pae.getPae', 'debug')
 
-                    # Check the machine hardware
-                    machine = self.ec.run('uname -m')
                     # Get #CPU's: cat /proc/cpuinfo | grep processor | wc -l
-                    if machine[0] == 'i686' or machine[0] == 'x86_64':
+                    if machine[0] == 'i686':
                         self.log.write('Multi-core system running single-core kernel found', 'pae.getPae', 'info')
                         # Check package status
                         status = packageStatus[0]
@@ -47,6 +50,8 @@ class PAE():
                                 status = packageStatus[1]
                                 break
                         hwList.append(['Multi-core support for 32-bit systems', hwCodes[3], status])
+                    elif machine[0] == 'x86_64':
+                        self.log.write('PAE skipped: 64-bit system', 'pae.getPae', 'debug')
                     else:
                         self.log.write('PAE kernel cannot be installed: single-core system', 'pae.getPae', 'warning')
 
@@ -66,15 +71,11 @@ class PAE():
             self.log.write('PAE kernel install command: ' + cmdPae, 'pae.installPAE', 'debug')
             self.ec.run(cmdPae)
 
-##            # Check for Nvidia
-##            nv = Nvidia(self.distribution, self.log)
-##            nvList = nv.getNvidia()
-##            self.log.write('Nvidia info: ' + str(nvList), 'pae.installPAE', 'debug')
-##            for nvInfo in nvList:
-##                # Only reinstall drivers when already installed
-##                if nvInfo[2] == packageStatus[0]:
-##                    self.log.write('Install Nvidia drivers', 'pae.installPAE', 'info')
-##                    nv.installNvidia()
+            # Rename xorg.conf
+            xorg = '/etc/X11/xorg.conf'
+            if os.path.exists(xorg):
+                self.log.write('Rename : ' + xorg + ' -> ' + xorg + '.ddm.bak', 'pae.installPAE', 'debug')
+                os.rename(xorg, xorg + '.ddm.bak')
 
             self.log.write('Done installing PAE', 'pae.installPAE', 'info')
 
