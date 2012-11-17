@@ -5,8 +5,9 @@ import re
 import functions
 from execcmd import ExecCmd
 
-packageStatus = [ 'installed', 'notinstalled', 'uninstallable' ]
+packageStatus = ['installed', 'notinstalled', 'uninstallable']
 hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
+
 
 class Mirror():
     def __init__(self, distribution, loggerObject, currentMirror='', bestMirror=''):
@@ -15,7 +16,7 @@ class Mirror():
         self.ec = ExecCmd(self.log)
         self.currentMirror = currentMirror
         self.bestMirror = bestMirror
-        
+
     def getFastestMirror(self):
         mirList = []
         if self.distribution == 'debian':
@@ -31,7 +32,7 @@ class Mirror():
                         url = urlObj.group()
                         if 'current server' in mirror.lower():
                             self.log.write('Current server: ' + url, 'mirror.getFastestMirror', 'info')
-                            self.currentMirror = url 
+                            self.currentMirror = url
                         elif 'best server' in mirror.lower():
                             self.log.write('Best server: ' + url, 'mirror.getFastestMirror', 'info')
                             self.bestMirror = url
@@ -42,7 +43,7 @@ class Mirror():
         else:
             # TODO: do this for Ubuntu
             pass
-        
+
         # Append fastest mirror to list
         status = packageStatus[2]
         if self.bestMirror != '':
@@ -51,7 +52,7 @@ class Mirror():
             else:
                 status = packageStatus[1]
             mirList.append(['Install the fastest repository mirror', hwCodes[4], status])
-        
+
         return mirList
 
     # Let mint-debian-mirrors write the fastest mirror to sources.list
@@ -61,7 +62,7 @@ class Mirror():
         self.ec.run(cmd)
         self.log.write('Resynchronizing the package index files from their sources', 'mirror.installMirror', 'info')
         os.system("apt-get update")
-    
+
     # Restore the sources.list backup file
     def removeMirror(self):
         sourcesFile = '/etc/apt/sources.list'

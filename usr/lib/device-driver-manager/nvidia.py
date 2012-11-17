@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 
 import os
-import re
 import functions
 import nvidia_gpus
-from config import Config
 from execcmd import ExecCmd
 
-packageStatus = [ 'installed', 'notinstalled', 'uninstallable' ]
+packageStatus = ['installed', 'notinstalled', 'uninstallable']
 hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
 blacklistPath = '/etc/modprobe.d/blacklist-nouveau.conf'
 
@@ -19,6 +17,7 @@ drivers = [
 [96, 'nvidia-glx-legacy-96xx', 'nvidia-96']
 ]
 
+
 class Nvidia():
     def __init__(self, distribution, loggerObject):
         self.distribution = distribution.lower()
@@ -28,7 +27,7 @@ class Nvidia():
         self.gpu = []
         manPciId = functions.getGraphicsCardManufacturerPciId()
         if manPciId:
-            if manPciId[0].lower() == '10de': # Nividia manufacturer id
+            if manPciId[0].lower() == '10de':  # Nividia manufacturer id
                 self.gpu = nvidia_gpus.checkNvidiaID(manPciId[1])
                 self.log.write('Nvidia driver info: ' + str(self.gpu), 'nvidia.init', 'debug')
 
@@ -49,9 +48,9 @@ class Nvidia():
                 hwList.append([self.gpu[1], hwCodes[0], packageStatus[2]])
         else:
             self.log.write('No supported Nvidia card found', 'nvidia.getNvidia', 'debug')
-                
+
         return hwList
-    
+
     # Get the driver for the system's Nvidia card
     def getDriver(self):
         try:
@@ -66,7 +65,7 @@ class Nvidia():
             return driver
         except Exception, detail:
             self.log.write(detail, 'nvidia.getDriver', 'exception')
-    
+
     # Install the given packages
     def installNvidiaDriver(self, packageList):
         try:
@@ -81,25 +80,25 @@ class Nvidia():
                     if functions.isPackageInstalled(package[0]):
                         # Build remove packages string
                         removePackages += ' ' + package[0]
-            
+
             # Remove these packages before installation
             if removePackages != '':
                 self.log.write('Remove drivers before reinstallation: ' + removePackages, 'nvidia.installNvidiaDriver', 'debug')
                 nvDrvRemCmd = 'apt-get -y --force-yes remove' + removePackages
                 self.ec.run(nvDrvRemCmd)
-                
+
             # Preseed answers for some packages
             self.preseedNvidiaPackages('install')
-                
+
             # Install the packages
             for package in packageList:
                 self.log.write('Install package: ' + package[0], 'nvidia.installNvidiaDriver', 'debug')
                 nvDrvInstCmd = 'apt-get -y --force-yes install ' + package[0]
                 self.ec.run(nvDrvInstCmd)
-            
+
         except Exception, detail:
             self.log.write(detail, 'nvidia.installNvidiaDriver', 'exception')
-    
+
     # Get additional packages
     # The second value in the list is a numerical value (True=1, False=0) whether the package must be removed before installation
     def getAdditionalPackages(self, driver):
@@ -119,7 +118,7 @@ class Nvidia():
         drvList.append([driver, 1])
         drvList.append(['nvidia-settings', 0])
         return drvList
-    
+
     # Called from drivers.py: install the Nvidia drivers
     def installNvidia(self):
         try:
@@ -133,26 +132,26 @@ class Nvidia():
                     # Configure Nvidia
                     self.log.write('Configure Nvidia...', 'nvidia.installNvidia', 'debug')
                     self.ec.run('nvidia-xconfig')
-                
+
                 # Blacklist Nouveau
                 self.log.write('Blacklist Nouveau: ' + blacklistPath, 'nvidia.installNvidia', 'debug')
                 modFile = open(blacklistPath, 'w')
                 modFile.write('blacklist nouveau')
                 modFile.close()
-                
+
                 self.log.write('Done installing Nvidia drivers', 'nvidia.installNvidia', 'info')
             else:
                 self.log.write('No apprpriate driver found', 'nvidia.installNvidia', 'error')
-                
+
         except Exception, detail:
             self.log.write(detail, 'nvidia.installNvidia', 'exception')
-    
+
     # Called from drivers.py: remove the Nvidia drivers and revert to Nouveau
     def removeNvidia(self):
         try:
             # Preseed answers for some packages
             self.preseedNvidiaPackages('purge')
-            
+
             self.log.write('Removing Nvidia drivers', 'nvidia.removeNvidia', 'info')
             packages = self.getAdditionalPackages(self.getDriver())
             for package in packages:
@@ -161,23 +160,23 @@ class Nvidia():
                 self.ec.run(cmdPurge)
             self.ec.run('apt-get -y --force-yes autoremove')
             self.ec.run('apt-get -y --force-yes install xserver-xorg-video-nouveau')
-           
+
             # Remove blacklist Nouveau
             if os.path.exists(blacklistPath):
                 self.log.write('Remove : ' + blacklistPath, 'nvidia.removeNvidia', 'debug')
                 os.remove(blacklistPath)
-                
+
             # Rename xorg.conf
             xorg = '/etc/X11/xorg.conf'
             if os.path.exists(xorg):
                 self.log.write('Rename : ' + xorg + ' -> ' + xorg + '.ddm.bak', 'nvidia.removeNvidia', 'debug')
                 os.rename(xorg, xorg + '.ddm.bak')
-                
+
             self.log.write('Done removing Nvidia drivers', 'nvidia.removeNvidia', 'info')
-                
+
         except Exception, detail:
             self.log.write(detail, 'nvidia.removeNvidia', 'exception')
-            
+
     def preseedNvidiaPackages(self, action):
         if self.distribution == 'debian':
             # Run on configured system and debconf-utils installed:
@@ -195,10 +194,10 @@ class Nvidia():
             debConfList.append('nvidia-support nvidia-support/needs-xorg-conf-to-enable note ')
             debConfList.append('nvidia-support nvidia-support/create-nvidia-conf boolean true')
             debConfList.append('nvidia-installer-cleanup nvidia-installer-cleanup/uninstall-nvidia-installer boolean true')
-            
+
             # Add each line to the debconf database
             for line in debConfList:
                 os.system('echo "' + line + '" | debconf-set-selections')
-            
+
             # Install or remove the packages
             self.ec.run('apt-get -y --force-yes ' + action + ' nvidia-support nvidia-installer-cleanup')

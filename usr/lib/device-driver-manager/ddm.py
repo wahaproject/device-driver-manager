@@ -18,8 +18,8 @@ try:
 except Exception, detail:
     print detail
     sys.exit(1)
-    
-    
+
+
 #class for the main window
 class DebianDriverManager:
 
@@ -45,20 +45,20 @@ class DebianDriverManager:
         self.btnClose = self.builder.get_object('btnClose')
         self.spinner = self.builder.get_object('spinner')
         self.statusbar = self.builder.get_object('statusbar')
-        
+
         # Add events
         signals = {
-            'on_tvHardware_cursor_changed' : self.cursorChanged,
-            'on_btnInstall_clicked' : self.installHardware,
-            'on_btnRemove_clicked' : self.removeHardware,
-            'on_btnClose_clicked' : self.destroy,
-            'on_eventbox_button_release_event' : self.about,
-            'on_ManagerWindow_destroy' : self.destroy
+            'on_tvHardware_cursor_changed': self.cursorChanged,
+            'on_btnInstall_clicked': self.installHardware,
+            'on_btnRemove_clicked': self.removeHardware,
+            'on_btnClose_clicked': self.destroy,
+            'on_eventbox_button_release_event': self.about,
+            'on_ManagerWindow_destroy': self.destroy
         }
         self.builder.connect_signals(signals)
-        
+
         self.window.show()
-    
+
     # Fill the hardware tree view
     def fillHardware(self):
         hwFound = False
@@ -85,17 +85,17 @@ class DebianDriverManager:
                 install = True
             elif item[2] == functions.packageStatus[0] or item[2] == functions.packageStatus[2]:
                 install = False
-                
+
             # PAE check
             if item[1] == 'pae' and install:
                 self.paeChecked = True
-                
+
             # Add the row to the content list
             self.log.write('Add item: ' + item[0], 'ddm.fillHardware', 'info')
             self.log.write('Preselect: ' + str(install), 'ddm.fillHardware', 'debug')
             row = [install, statImg, hwImg, item[0], item[1], item[2]]
             contentList.append(row)
-        
+
         # If nothing found: show message
         if not hwFound:
             columnTypesList = ['str']
@@ -104,10 +104,10 @@ class DebianDriverManager:
             self.log.write(msg, 'ddm.fillHardware', 'warning')
             functions.fillTreeview(self.tvHardware, contentList, columnTypesList)
             self.btnInstall.set_sensitive(False)
-        else: 
+        else:
             columnTypesList = ['bool', 'gtk.gdk.Pixbuf', 'gtk.gdk.Pixbuf', 'str', 'str', 'str']
             functions.fillTreeview(self.tvHardware, contentList, columnTypesList, [4,5])
-    
+
     # Return the value of a given option
     def getValueForOption(self, searchList, option):
         val = ''
@@ -115,16 +115,14 @@ class DebianDriverManager:
             if img[0] == option:
                 val = img[1]
                 self.log.write('Value found in list: ' + val, 'ddm.getValueForOption', 'debug')
-                break;
+                break
         return val
-    
+
     # Get all the selected hardware drivers and pass this to the hardware driver install program (to be done)
     def handleHardware(self, actionString):
         hwSelected = False
         selHw = []
-        selHwString = ''
         chkList = functions.getColumnValues(self.tvHardware, 0)
-        parmList = functions.getColumnValues(self.tvHardware, 3)
         hwList = functions.getColumnValues(self.tvHardware, 4)
         statList = functions.getColumnValues(self.tvHardware, 5)
         for i in range(len(chkList)):
@@ -132,7 +130,7 @@ class DebianDriverManager:
                 self.log.write(actionString + ' hardware code: ' + hwList[i], 'ddm.handleHardware', 'info')
                 selHw.append([hwList[i], statList[i]])
                 hwSelected = True
-        
+
         if hwSelected:
             # Install selected drivers
             self.toggleGuiElements(True)
@@ -148,11 +146,11 @@ class DebianDriverManager:
             glib.timeout_add(5, self.checkThread, actionString)
         else:
             msg = 'Select a driver to install.'
-            MessageDialog('Driver install', msg , gtk.MESSAGE_INFO, self.window).show()
-            
+            MessageDialog('Driver install', msg, gtk.MESSAGE_INFO, self.window).show()
+
     def installHardware(self, widget):
         self.handleHardware('install')
-    
+
     def removeHardware(self, widget):
         self.handleHardware('remove')
 
@@ -161,8 +159,8 @@ class DebianDriverManager:
         # As long there's a thread active, keep spinning
         if threading.active_count() > 1:
             self.spinner.start()
-            return True        
-        
+            return True
+
         # Thread is done: stop spinner and make button sensitive again
         self.hwPreSelectList = []
         self.fillHardware()
@@ -173,9 +171,9 @@ class DebianDriverManager:
         else:
             msg = 'Done removing drivers.'
         msg += '\n\nPlease, reboot your system.'
-        MessageDialog('Driver ' + actionString, msg , gtk.MESSAGE_INFO, self.window).show()
+        MessageDialog('Driver ' + actionString, msg, gtk.MESSAGE_INFO, self.window).show()
         return False
-    
+
     def toggleGuiElements(self, startSave):
         if startSave:
             self.btnInstall.set_sensitive(False)
@@ -191,7 +189,7 @@ class DebianDriverManager:
             self.btnRemove.set_sensitive(True)
             self.btnClose.set_sensitive(True)
             self.tvHardware.set_sensitive(True)
-        
+
     # Check if PAE is selected
     # PAE must be installed before any other drivers are installed
     def cursorChanged(self, treeview):
@@ -199,13 +197,13 @@ class DebianDriverManager:
         if colNr >= 4:
             hwCode = functions.getSelectedValue(self.tvHardware, 4)
             checked = functions.getSelectedValue(self.tvHardware, 0)
-            
+
             if hwCode == 'pae':
                 if checked:
                     self.paeChecked = True
                     if not self.hwPreSelectList:
                         msg = 'Install PAE before installing any other drivers.\n\nOther drivers are deselected (if any).'
-                        MessageDialog('PAE install check', msg , gtk.MESSAGE_INFO, self.window).show()
+                        MessageDialog('PAE install check', msg, gtk.MESSAGE_INFO, self.window).show()
                     functions.treeviewToggleAll(self.tvHardware, 0, False, 4, 'pae')
                 else:
                     self.paeChecked = False
@@ -214,9 +212,9 @@ class DebianDriverManager:
                     if self.paeChecked:
                         if not self.hwPreSelectList:
                             msg = 'Install PAE before installing any other drivers\nor deselect PAE to install drivers for the current kernel'
-                            MessageDialog('PAE install check', msg , gtk.MESSAGE_INFO, self.window).show()
+                            MessageDialog('PAE install check', msg, gtk.MESSAGE_INFO, self.window).show()
                         functions.treeviewToggleAll(self.tvHardware, 0, False, 4, 'pae')
-            
+
     def about(self, widget, event):
         self.about = self.builder.get_object('About')
         author = 'Author: ' + self.conf.getValue('About', 'author')
@@ -228,7 +226,7 @@ class DebianDriverManager:
         self.about.set_website(home)
         self.about.run()
         self.about.hide()
-        
+
     def main(self, argv):
         # Handle arguments
         try:
@@ -246,19 +244,18 @@ class DebianDriverManager:
                 self.hwPreSelectList = arg.split(',')
             elif opt in ('-l', '--log'):
                 self.logPath = arg
-        
+
         # Initialize logging
-        logFile = ''
         if self.debug:
             if self.logPath == '':
                 self.logPath = 'ddm.log'
         self.log = Logger(self.logPath, 'debug', True, self.statusbar, self.window)
         functions.log = self.log
-        
+
         # Set initial values
         self.text = self.conf.getValue('About', 'comments')
         self.lblText.set_text(self.text)
-        
+
         # Show message that we're busy
         self.btnInstall.set_sensitive(False)
         self.btnRemove.set_sensitive(False)
@@ -271,7 +268,7 @@ class DebianDriverManager:
         self.fillHardware()
         self.btnInstall.set_sensitive(True)
         self.btnRemove.set_sensitive(True)
-        
+
         # Show version number in status bar
         self.version = functions.getPackageVersion('device-driver-manager')
         functions.pushMessage(self.statusbar, self.version)
@@ -280,22 +277,22 @@ class DebianDriverManager:
         if self.install:
             self.log.write('Start automatic driver install', 'ddm.main', 'info')
             self.installHardware(None)
-        
+
         # Show window and keep it on top of other windows
         self.window.set_keep_above(True)
         gtk.main()
-    
+
     def destroy(self, widget, data=None):
         # Close the app
         gtk.main_quit()
 
-        
+
 if __name__ == '__main__':
     # Flush print when it's called
     sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
     # Create an instance of our GTK application
     app = DebianDriverManager()
-    
+
     # Very dirty: replace the : back again with -
     # before passing the arguments
     args = sys.argv[1:]

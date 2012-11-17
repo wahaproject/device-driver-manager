@@ -3,20 +3,21 @@
 import os
 import ConfigParser
 
+
 class Config():
     def __init__(self, filePath):
         firstChr = filePath[:1]
         if firstChr == '.' or firstChr != '/':
             # Assume only file name
-            dir = os.path.dirname(os.path.realpath(__file__))
-            filePath = os.path.join(dir, filePath)
+            curdir = os.path.dirname(os.path.realpath(__file__))
+            filePath = os.path.join(curdir, filePath)
         self.filePath = filePath
-        self.parser=ConfigParser.SafeConfigParser()
+        self.parser = ConfigParser.SafeConfigParser()
         self.parser.read([self.filePath])
-        
+
     def getSections(self):
         return self.parser.sections()
-    
+
     def doesSectionExist(self, section):
         found = False
         for s in self.getSections():

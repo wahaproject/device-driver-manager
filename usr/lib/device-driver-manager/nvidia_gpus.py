@@ -9,6 +9,7 @@
 # 96 = nvidai-96
 # 71 = not supported
 
+
 def checkNvidiaID(pciId):
     foundGpu = []
     pciId = pciId.upper()
@@ -44,6 +45,7 @@ def checkNvidiaID(pciId):
                 foundGpu.append(pciId)
                 break
     return foundGpu
+
 
 def getNvidia_304():
     lst = [
@@ -588,7 +590,8 @@ def getNvidia_304():
     ['VGX K2', '11BF']
     ]
     return lst
-    
+
+
 def getNvidia_173():
     lst = [
     ['GeForce PCX 5750', '00FA'],
@@ -636,7 +639,8 @@ def getNvidia_173():
     ['Quadro FX 1100', '034E']
     ]
     return lst
-    
+
+
 def getNvidia_96():
     lst = [
     ['GeForce2 MX/MX 400', '0110'],
@@ -685,7 +689,8 @@ def getNvidia_96():
     ['Quadro4 700 GoGL', '028C']
     ]
     return lst
-    
+
+
 def getNvidia_71():
     lst = [
     ['RIVA TNT', '0020'],
@@ -703,4 +708,3 @@ def getNvidia_71():
     ['Quadro2 Pro', '0153']
     ]
     return lst
-    

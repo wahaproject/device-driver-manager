@@ -2,14 +2,13 @@
 
 import threading
 import functions
-import gtk
 from mirror import Mirror
 from nvidia import Nvidia
 from ati import ATI
 from broadcom import Broadcom
 from pae import PAE
 
-packageStatus = [ 'installed', 'notinstalled', 'uninstallable' ]
+packageStatus = ['installed', 'notinstalled', 'uninstallable']
 hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
 
 # Class to check for supported drivers
@@ -18,7 +17,7 @@ class DriverCheck():
         self.log = loggerObject
         self.log.write('Initialize DriverCheck', 'drivers.DriverCheck', 'debug')
         self.distribution = functions.getDistribution()
-        
+
     # This will only check for Nvidia, ATI, Broadcom and PAE
     def run(self):
         hwList = []
@@ -28,7 +27,7 @@ class DriverCheck():
         ati = ATI(self.distribution, self.log)
         bc = Broadcom(self.distribution, self.log)
         pae = PAE(self.distribution, self.log)
-        
+
         # Collect supported hardware
         #mirror = mir.getFastestMirror()
         hwNvidia = nv.getNvidia()
@@ -47,8 +46,9 @@ class DriverCheck():
             hwList.append(line)
         for line in hwBroadcom:
             hwList.append(line)
-        
+
         return hwList
+
 
 # Driver install class needs threading
 class DriverInstall(threading.Thread):
@@ -67,7 +67,7 @@ class DriverInstall(threading.Thread):
         ati = ATI(self.distribution, self.log)
         bc = Broadcom(self.distribution, self.log)
         pae = PAE(self.distribution, self.log)
-        
+
         # First check for mirror
         for code in self.hwCodesWithStatusList:
             if code[0] == hwCodes[4]:
@@ -90,7 +90,8 @@ class DriverInstall(threading.Thread):
                 elif code[0] == hwCodes[3]:
                     if code[1] != packageStatus[2]:
                         pae.installPAE()
-                
+
+
 # Driver install class needs threading
 class DriverRemove(threading.Thread):
     def __init__(self, hwCodesWithStatusList, loggerObject):
@@ -125,8 +126,3 @@ class DriverRemove(threading.Thread):
             if code[0] == hwCodes[4]:
                 if code[1] != packageStatus[2]:
                     mir.removeMirror()
-                    
-                    
-
-
-    

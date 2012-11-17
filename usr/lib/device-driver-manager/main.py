@@ -8,11 +8,7 @@ import drivers
 import string
 import functions
 from logger import Logger
-try:
-    import gtk
-except Exception, detail:
-    print detail
-    sys.exit(1)
+
 
 # Help
 def usage():
@@ -20,18 +16,18 @@ def usage():
     hwOpt = ''
     for hw in drivers.hwCodes:
         if hwOpt != '':
-            hwOpt += ','
+            hwOpt += ', '
         hwOpt += hw
     hlp = """Usage: debian-driver-manager [options]
-        
+
 Options:
   -c (--codes): comma separated list with pre-selected hardware
-                possible hardware codes: """ + hwOpt + """
+                possible hardware codes: %s
   -d (--debug): print debug information to a log file in user directory
   -f (--force): force start in a live environment
   -h (--help): show this help
   -i (--install): install preselected hardware drivers (see codes)"""
-    print hlp
+    print hlp % (hwOpt)
 
 # Handle arguments
 try:
@@ -49,9 +45,9 @@ for opt, arg in opts:
         force = True
     elif opt in ('-h', '--help'):
         usage()
-        sys.exit() 
-        
-        
+        sys.exit()
+
+
 # Initialize logging
 logFile = ''
 if debug:
