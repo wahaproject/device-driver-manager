@@ -15,8 +15,7 @@ class PAE():
         self.distributionReleaseNumber = functions.getDistributionReleaseNumber()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
-        self.packages = functions.getLatestLinuxHeadersAndImage('pae$', '-rt')
-        print str(self.packages)
+        self.packages = functions.getLinuxHeadersAndImage(True, 'pae$', '-rt')
 
     # Check if the PAE kernel can be installed
     def getPae(self):

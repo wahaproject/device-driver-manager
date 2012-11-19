@@ -19,9 +19,9 @@ bcChips = [
 ['4306', 'firmware-b43legacy-installer', 'firmware-b43legacy-installer'],
 ['4307', 'firmware-b43-installer', 'firmware-b43-installer'],
 ['4311', 'firmware-b43-installer', 'firmware-b43-installer'],
-['4312', 'firmware-b43-installer', 'firmware-b43-installer'], # This is not a BCM4312 but BCM4311
+['4312', 'firmware-b43-installer', 'firmware-b43-installer'],    # This is not a BCM4312 but BCM4311
 ['4313', 'broadcom-sta-dkms', 'bcmwl-kernel-source'],
-['4315', 'firmware-b43-lpphy-installer', 'firmware-b43-lpphy-installer'], # This is BCM4312
+['4315', 'firmware-b43-lpphy-installer', 'firmware-b43-lpphy-installer'],    # This is BCM4312
 ['4318', 'firmware-b43-installer', 'firmware-b43-installer'],
 ['4319', 'firmware-b43-installer', 'firmware-b43-installer'],
 ['4320', 'firmware-b43-installer', 'firmware-b43-installer'],
@@ -32,7 +32,7 @@ bcChips = [
 ['4329', 'broadcom-sta-dkms', 'bcmwl-kernel-source'],
 ['432a', 'broadcom-sta-dkms', 'bcmwl-kernel-source'],
 ['432b', 'broadcom-sta-dkms', 'bcmwl-kernel-source'],
-['432c', 'broadcom-sta-dkms', 'bcmwl-kernel-source'], # Better to use firmware-b43-installer?
+['432c', 'broadcom-sta-dkms', 'bcmwl-kernel-source'],    # Better to use firmware-b43-installer?
 ['432d', 'broadcom-sta-dkms', 'bcmwl-kernel-source'],
 ['4331', 'firmware-b43-installer', 'firmware-b43-installer'],
 ['4353', 'firmware-brcm80211', 'bcmwl-kernel-source'],
@@ -40,8 +40,8 @@ bcChips = [
 ['4358', 'broadcom-sta-dkms', 'bcmwl-kernel-source'],
 ['4359', 'broadcom-sta-dkms', 'bcmwl-kernel-source'],
 ['435a', 'broadcom-sta-dkms', 'bcmwl-kernel-source'],
-['4727', 'firmware-brcm80211', 'bcmwl-kernel-source'], # May need blacklisting b43 on some kernels (up to 3.2?)
-['a8d6', 'firmware-b43-installer', 'firmware-b43-installer'], # Untested, but the other drivers have no support at all
+['4727', 'firmware-brcm80211', 'bcmwl-kernel-source'],    # May need blacklisting b43 on some kernels (up to 3.2?)
+['a8d6', 'firmware-b43-installer', 'firmware-b43-installer'],    # Untested, but the other drivers have no support at all
 ['a99d', 'broadcom-sta-dkms', 'bcmwl-kernel-source']
 ]
 
@@ -131,7 +131,7 @@ class Broadcom():
             self.setCurrentChipInfo()
             if self.installableDriver != '':
                 # Get the correct linux header package
-                linHeader = self.ec.run("echo linux-headers-$(uname -r)", False)
+                linHeader = functions.getLinuxHeadersAndImage()
                 self.log.write('Linux header name to install: ' + linHeader[0], 'broadcom.installBroadcom', 'info')
 
                 # Only install linux header if it is not installed

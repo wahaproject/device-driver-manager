@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkAboutDialog" id="About">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="resizable">False</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="icon">logo.png</property>
-    <property name="type_hint">dialog</property>
-    <property name="program_name">Device Driver Manager</property>
-    <property name="logo">logo.png</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="aboutdialog-vbox1">
-        <property name="can_focus">False</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="aboutdialog-action_area1">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-      </object>
-    </child>
-  </object>
   <object class="GtkWindow" id="ManagerWindow">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -56,7 +24,6 @@
                 <property name="height_request">100</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <signal name="button-release-event" handler="on_eventbox_button_release_event" swapped="no"/>
                 <child>
                   <object class="GtkImage" id="imgLogo">
                     <property name="visible">True</property>
@@ -113,10 +80,10 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="imgNotInstalled">
+                      <object class="GtkImage" id="imgInstalled">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">notinstalled.png</property>
+                        <property name="pixbuf">installed.png</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -125,12 +92,11 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="lblNotInstalled">
+                      <object class="GtkLabel" id="lblInstalled">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="tooltip_text" translatable="yes">The drivers for this hardware
-are available in the repositories.</property>
-                        <property name="label" translatable="yes">Not installed</property>
+                        <property name="tooltip_text" translatable="yes">The drivers are already installed.</property>
+                        <property name="label" translatable="yes">Installed</property>
                         <attributes>
                           <attribute name="size" value="10000"/>
                         </attributes>
@@ -156,10 +122,10 @@ are available in the repositories.</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="imgInstalled">
+                      <object class="GtkImage" id="imgNotInstalled">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">installed.png</property>
+                        <property name="pixbuf">notinstalled.png</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -168,13 +134,12 @@ are available in the repositories.</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="lblInstalled">
+                      <object class="GtkLabel" id="lblNotInstalled">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="tooltip_text" translatable="yes">The drivers are already installed.
-Selecting these will reinstall 
-the selected drivers.</property>
-                        <property name="label" translatable="yes">Installed</property>
+                        <property name="tooltip_text" translatable="yes">The drivers for this hardware
+are available in the repositories.</property>
+                        <property name="label" translatable="yes">Not installed</property>
                         <attributes>
                           <attribute name="size" value="10000"/>
                         </attributes>

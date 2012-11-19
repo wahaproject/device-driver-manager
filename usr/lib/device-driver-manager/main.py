@@ -54,6 +54,10 @@ if debug:
     logFile = 'ddm.log'
 log = Logger(logFile)
 functions.log = log
+
+version = functions.getPackageVersion('device-driver-manager')
+log.write('DDM version: ' + version, 'main', 'info')
+
 if debug:
     if os.path.isfile(log.logPath):
         open(log.logPath, 'w').close()
@@ -69,21 +73,24 @@ if len(args) > 0:
     args = ' ' + string.replace(args, '-', ':')
     # Pass the log path to ddm.py
     if debug:
-        args +=  ' :l ' + log.logPath
+        args += ' :l ' + log.logPath
 
-# Do not run in live environment
-if not functions.isRunningLive() or force:
-    ddmPath = os.path.join(scriptDir, 'ddm.py' + args)
+if not functions.getDistribution() == '':
+    # Do not run in live environment
+    if not functions.isRunningLive() or force:
+        ddmPath = os.path.join(scriptDir, 'ddm.py' + args)
 
-    # Add launcher string, only when not root
-    launcher = ''
-    if os.geteuid() > 0:
-        launcher = 'gksu --message "<b>Please enter your password</b>"'
-        if os.path.exists('/usr/bin/kdesudo'):
-            launcher = 'kdesudo -i /usr/share/device-driver-manager/logo.png -d --comment "<b>Please enter your password</b>"'
+        # Add launcher string, only when not root
+        launcher = ''
+        if os.geteuid() > 0:
+            launcher = 'gksu --message "<b>Please enter your password</b>"'
+            if os.path.exists('/usr/bin/kdesudo'):
+                launcher = 'kdesudo -i /usr/share/device-driver-manager/logo.png -d --comment "<b>Please enter your password</b>"'
 
-    cmd = '%s python %s' % (launcher, ddmPath)
-    log.write('Startup command: ' + cmd, 'main', 'debug')
-    os.system(cmd)
+        cmd = '%s python %s' % (launcher, ddmPath)
+        log.write('Startup command: ' + cmd, 'main', 'debug')
+        os.system(cmd)
+    else:
+        log.write('Use --force to run DDM in a live environment', 'main', 'warning')
 else:
-    log.write('Use --force to run DDM in a live environment', 'main', 'warning')
+    log.write('DDM can only run in Debian or Ubuntu based distributions', 'main', 'warning')

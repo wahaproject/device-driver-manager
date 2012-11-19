@@ -11,6 +11,7 @@ from pae import PAE
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
 hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'mirror']
 
+
 # Class to check for supported drivers
 class DriverCheck():
     def __init__(self, loggerObject):

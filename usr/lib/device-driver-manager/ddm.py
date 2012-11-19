@@ -13,7 +13,6 @@ try:
     import getopt
     from drivers import DriverCheck, DriverInstall, DriverRemove
     from dialogs import MessageDialog
-    from config import Config
     from logger import Logger
 except Exception, detail:
     print detail
@@ -23,7 +22,6 @@ except Exception, detail:
 #class for the main window
 class DebianDriverManager:
 
-    conf = Config('ddm.conf')
     version = ''
     hwList = []
     hwPreSelectList = []
@@ -52,7 +50,6 @@ class DebianDriverManager:
             'on_btnInstall_clicked': self.installHardware,
             'on_btnRemove_clicked': self.removeHardware,
             'on_btnClose_clicked': self.destroy,
-            'on_eventbox_button_release_event': self.about,
             'on_ManagerWindow_destroy': self.destroy
         }
         self.builder.connect_signals(signals)
@@ -106,7 +103,7 @@ class DebianDriverManager:
             self.btnInstall.set_sensitive(False)
         else:
             columnTypesList = ['bool', 'gtk.gdk.Pixbuf', 'gtk.gdk.Pixbuf', 'str', 'str', 'str']
-            functions.fillTreeview(self.tvHardware, contentList, columnTypesList, [4,5])
+            functions.fillTreeview(self.tvHardware, contentList, columnTypesList, [4, 5])
 
     # Return the value of a given option
     def getValueForOption(self, searchList, option):
@@ -215,18 +212,6 @@ class DebianDriverManager:
                             MessageDialog('PAE install check', msg, gtk.MESSAGE_INFO, self.window).show()
                         functions.treeviewToggleAll(self.tvHardware, 0, False, 4, 'pae')
 
-    def about(self, widget, event):
-        self.about = self.builder.get_object('About')
-        author = 'Author: ' + self.conf.getValue('About', 'author')
-        email = 'E-mail: ' + self.conf.getValue('About', 'email')
-        home = self.conf.getValue('About', 'home')
-        comments = self.conf.getValue('About', 'comments')
-        self.about.set_comments(author + '\n' + email + '\n\n' + comments)
-        self.about.set_version(self.version)
-        self.about.set_website(home)
-        self.about.run()
-        self.about.hide()
-
     def main(self, argv):
         # Handle arguments
         try:
@@ -253,8 +238,7 @@ class DebianDriverManager:
         functions.log = self.log
 
         # Set initial values
-        self.text = self.conf.getValue('About', 'comments')
-        self.lblText.set_text(self.text)
+        self.lblText.set_text('Currently Nvidia, ATI and Broadcom drivers are supported and it detects multi-core 32-bit systems so that the PAE kernel can be installed.')
 
         # Show message that we're busy
         self.btnInstall.set_sensitive(False)
