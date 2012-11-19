@@ -6,14 +6,12 @@ import re
 import operator
 import string
 from execcmd import ExecCmd
-from config import Config
 try:
     import gtk
 except Exception, detail:
     print detail
     sys.exit(1)
 
-conf = Config('ddb.conf')
 avlThemesSearchstr = 'plymouth-themes'
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
 graphicsCard = None
@@ -302,29 +300,39 @@ def popMessage(statusbar, contextString='message'):
 
 # System ========================================================
 
-def getLatestLinuxHeadersAndImage(includeRegularExpression='', excludeRegularExpression=''):
+# Get linux-headers and linux-image package names
+# If getLatest is set to True, the latest version of the packages is returned rather than the packages for the currently booted kernel.
+# includeLatestRegExp is a regular expression that must be part of the package name (in conjuction with getLatest=True).
+# excludeLatestRegExp is a regular expression that must NOT be part of the package name (in conjuction with getLatest=True).
+def getLinuxHeadersAndImage(getLatest=False, includeLatestRegExp='', excludeLatestRegExp=''):
     returnList = []
     lhList = []
     ec = ExecCmd(log)
-    lst = ec.run('aptitude search linux-headers', False)
-    for item in lst:
-        lhMatch = re.search('linux-headers-\d+\.[a-zA-Z0-9-\.]*', item)
-        if lhMatch:
-            lh = lhMatch.group(0)
-            addLh = True
-            if includeRegularExpression != '':
-                inclMatch = re.search(includeRegularExpression, lh)
-                if inclMatch:
-                    if excludeRegularExpression != '':
-                        exclMatch = re.search(excludeRegularExpression, lh)
-                        if exclMatch:
-                            addLh = False
-                else:
-                    addLh = False
+    if getLatest:
+        lst = ec.run('aptitude search linux-headers', False)
+        for item in lst:
+            lhMatch = re.search('linux-headers-\d+\.[a-zA-Z0-9-\.]*', item)
+            if lhMatch:
+                lh = lhMatch.group(0)
+                addLh = True
+                if includeLatestRegExp != '':
+                    inclMatch = re.search(includeLatestRegExp, lh)
+                    if not inclMatch:
+                        addLh = False
+                if excludeLatestRegExp != '':
+                    exclMatch = re.search(excludeLatestRegExp, lh)
+                    if exclMatch:
+                        addLh = False
 
-            # Append to list
-            if addLh:
-                lhList.append(lh)
+                # Append to list
+                if addLh:
+                    lhList.append(lh)
+    else:
+        # Get the current linux header package
+        linHeader = ec.run("echo linux-headers-$(uname -r)", False)
+        lhList.append(linHeader[0])
+
+    # Sort the list
     if lhList:
         lhList.sort(reverse=True)
         returnList.append(lhList[0])
@@ -362,17 +370,13 @@ def getGraphicsCardManufacturerPciId():
 def getDistribution():
     distribution = ''
     try:
-        release = getDistributionReleaseNumber()
-        if release == 1:
-            distribution = 'debian'
-        else:
-            # Read /etc/lsb-release
-            cmdDist = 'cat /etc/*-release | grep DISTRIB_ID'
-            ec = ExecCmd(log)
-            distList = ec.run(cmdDist, False)
-            if distList:
-                distribution = distList[0]
-                distribution = distribution[distribution.find('=') + 1:].lower()
+        ec = ExecCmd(log)
+        distList = ec.run('cat /proc/version', False)
+        if distList:
+            if 'debian' in distList[0].lower():
+                distribution = 'debian'
+            elif 'ubuntu' in distList[0].lower():
+                distribution = 'ubuntu'
     except Exception, detail:
         log.write(detail, 'functions.getDistribution', 'error')
     return distribution

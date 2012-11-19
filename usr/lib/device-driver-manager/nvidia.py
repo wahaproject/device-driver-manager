@@ -69,32 +69,21 @@ class Nvidia():
     # Install the given packages
     def installNvidiaDriver(self, packageList):
         try:
-            removePackages = ''
-            # Check if drivers are available in the repositories
+            # Remove certain packages before installing the drivers
             for package in packageList:
-                # Build install packages string
                 if package[1] == 1:
-                    # Check if package is installed
-                    # If it is, it's nominated for removal
-                    self.log.write('Is package installed: ' + package[0], 'nvidia.installNvidiaDriver', 'debug')
                     if functions.isPackageInstalled(package[0]):
-                        # Build remove packages string
-                        removePackages += ' ' + package[0]
-
-            # Remove these packages before installation
-            if removePackages != '':
-                self.log.write('Remove drivers before reinstallation: ' + removePackages, 'nvidia.installNvidiaDriver', 'debug')
-                nvDrvRemCmd = 'apt-get -y --force-yes remove' + removePackages
-                self.ec.run(nvDrvRemCmd)
+                        self.log.write('Remove package: ' + package[0], 'nvidia.installNvidiaDriver', 'debug')
+                        self.ec.run('apt-get -y --force-yes remove ' + package[0])
 
             # Preseed answers for some packages
             self.preseedNvidiaPackages('install')
 
             # Install the packages
             for package in packageList:
-                self.log.write('Install package: ' + package[0], 'nvidia.installNvidiaDriver', 'debug')
-                nvDrvInstCmd = 'apt-get -y --force-yes install ' + package[0]
-                self.ec.run(nvDrvInstCmd)
+                if not functions.isPackageInstalled(package[0]):
+                    self.log.write('Install package: ' + package[0], 'nvidia.installNvidiaDriver', 'debug')
+                    self.ec.run('apt-get -y --force-yes install ' + package[0])
 
         except Exception, detail:
             self.log.write(detail, 'nvidia.installNvidiaDriver', 'exception')
@@ -103,19 +92,25 @@ class Nvidia():
     # The second value in the list is a numerical value (True=1, False=0) whether the package must be removed before installation
     def getAdditionalPackages(self, driver):
         drvList = []
+        # Get the correct linux header package
+        linHeader = functions.getLinuxHeadersAndImage()
+        drvList.append([linHeader[0], 0])
         # Distribution specific packages
         if self.distribution == 'debian':
+            drvList.append(['build-essential', 0])
+            drvList.append([driver, 1])
             if driver == 'nvidia-glx':
                 drvList.append(['nvidia-kernel-dkms', 1])
             elif driver == 'nvidia-glx-legacy-96xx':
                 drvList.append(['nvidia-kernel-legacy-96xx-dkms', 1])
             elif driver == 'nvidia-glx-legacy-173xx':
                 drvList.append(['nvidia-kernel-legacy-173xx-dkms', 1])
-            drvList.append(['build-essential', 0])
             drvList.append(['nvidia-xconfig', 0])
             drvList.append(['nvidia-glx-ia32', 0])
+        else:
+            drvList.append([driver, 1])
+
         # Common packages
-        drvList.append([driver, 1])
         drvList.append(['nvidia-settings', 0])
         return drvList
 
@@ -156,8 +151,7 @@ class Nvidia():
             packages = self.getAdditionalPackages(self.getDriver())
             for package in packages:
                 self.log.write('Remove package: ' + package[0], 'nvidia.removeNvidia', 'debug')
-                cmdPurge = 'apt-get -y --force-yes purge ' + package[0]
-                self.ec.run(cmdPurge)
+                self.ec.run('apt-get -y --force-yes purge ' + package[0])
             self.ec.run('apt-get -y --force-yes autoremove')
             self.ec.run('apt-get -y --force-yes install xserver-xorg-video-nouveau')
 

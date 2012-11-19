@@ -19,7 +19,7 @@ class ATI():
         self.hw = functions.getGraphicsCard()
 
         # Test
-        #self.hw = '00:01.0 VGA compatible controller: Advanced Micro Devices [AMD] nee ATI Wrestler [Radeon HD 6310]'
+        #self.hw = '01:00.0 VGA compatible controller [0300]: Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series] [1002:68e0]'
 
     # Called from drivers.py: Check for ATI
     def getATI(self):
@@ -62,52 +62,42 @@ class ATI():
     # The second value in the list is a numerical value (True=1, False=0) whether the package must be removed before installation
     def getAdditionalPackages(self, driver):
         drvList = []
+        # Get the correct linux header package
+        linHeader = functions.getLinuxHeadersAndImage()
+        drvList.append([linHeader[0], 0])
         # Common packages
-        drvList.append([driver, 1])
         if self.distribution == 'debian':
-            drvList.append(['fglrx-control', 1])
             drvList.append(['build-essential', 0])
             drvList.append(['module-assistant', 0])
+            drvList.append([driver, 1])
+            drvList.append(['fglrx-modules-dkms', 1])
+            drvList.append(['libgl1-fglrx-glx', 1])
+            drvList.append(['glx-alternative-fglrx', 0])
+            drvList.append(['fglrx-control', 1])
             drvList.append(['fglrx-glx-ia32', 0])
         else:
+            drvList.append([driver, 1])
             drvList.append(['fglrx-amdcccle', 1])
         return drvList
 
     # Install the given packages
     def installATIDriver(self, packageList):
         try:
-            removePackages = ''
-            installPackages = ''
-            # Check if drivers are available in the repositories
+            # Remove certain packages before installing the drivers
             for package in packageList:
-                # Build install packages string
-                installPackages += ' ' + package[0]
                 if package[1] == 1:
-                    # Check if package is installed
-                    # If it is, it's nominated for removal
-                    self.log.write('Is package installed: ' + package[0], 'ati.installATIDriver', 'debug')
                     if functions.isPackageInstalled(package[0]):
-                        # Build remove packages string
-                        removePackages += ' ' + package[0]
-
-            # Remove these packages before installation
-            if removePackages != '':
-                self.log.write('Remove drivers before reinstallation: ' + removePackages, 'ati.installATIDriver', 'debug')
-                nvDrvRemCmd = 'apt-get -y --force-yes remove' + removePackages
-                self.ec.run(nvDrvRemCmd)
-
-            # Purge Nouveau (TODO: is this really necessary?)
-            self.log.write('Purge Nouveau drivers: xserver-xorg-video-nouvea', 'ati.installATIDriver', 'debug')
-            self.ec.run('apt-get -y --force-yes remove xserver-xorg-video-nouveau')
+                        self.log.write('Remove package: ' + package[0], 'ati.installATIDriver', 'debug')
+                        self.ec.run('apt-get -y --force-yes remove ' + package[0])
 
             # Preseed answers for some packages
             self.preseedATIPackages('install')
 
             # Install the packages
             for package in packageList:
-                self.log.write('Install drivers: ' + package[0], 'ati.installATIDriver', 'debug')
-                nvDrvInstCmd = 'apt-get -y --force-yes install ' + package[0]
-                self.ec.run(nvDrvInstCmd)
+                if not functions.isPackageInstalled(package[0]):
+                    self.log.write('Install drivers: ' + package[0], 'ati.installATIDriver', 'debug')
+                    self.ec.run('apt-get -y --force-yes install ' + package[0])
 
         except Exception, detail:
             self.log.write(detail, 'ati.installATIDriver', 'exception')
