@@ -332,7 +332,7 @@ def getLinuxHeadersAndImage(getLatest=False, includeLatestRegExp='', excludeLate
         linHeader = ec.run("echo linux-headers-$(uname -r)", False)
         lhList.append(linHeader[0])
 
-    # Sort the list
+    # Sort the list and add the linux-image package name
     if lhList:
         lhList.sort(reverse=True)
         returnList.append(lhList[0])
@@ -366,19 +366,27 @@ def getGraphicsCardManufacturerPciId():
     return pciId
 
 
+# Get system version information
+def getSystemVersionInfo():
+    info = ''
+    try:
+        ec = ExecCmd(log)
+        infoList = ec.run('cat /proc/version', False)
+        if infoList:
+            info = infoList[0]
+    except Exception, detail:
+        log.write(detail, 'functions.getSystemVersionInfo', 'error')
+    return info
+
+
 # Get the system's distribution
 def getDistribution():
     distribution = ''
-    try:
-        ec = ExecCmd(log)
-        distList = ec.run('cat /proc/version', False)
-        if distList:
-            if 'debian' in distList[0].lower():
-                distribution = 'debian'
-            elif 'ubuntu' in distList[0].lower():
-                distribution = 'ubuntu'
-    except Exception, detail:
-        log.write(detail, 'functions.getDistribution', 'error')
+    sysInfo = getSystemVersionInfo().lower()
+    if 'debian' in sysInfo:
+        distribution = 'debian'
+    elif 'ubuntu' in sysInfo:
+        distribution = 'ubuntu'
     return distribution
 
 
@@ -402,12 +410,14 @@ def getDistributionReleaseNumber():
     try:
         cmdRel = 'cat /etc/*-release | grep DISTRIB_RELEASE'
         ec = ExecCmd(log)
-        rel = ec.run(cmdRel, False)[0]
-        release = rel[rel.find('=') + 1:]
-        release = string.replace(release, '"', '')
-        release = strToNumber(release)
+        relLst = ec.run(cmdRel, False)
+        if relLst:
+            rel = relLst[0]
+            release = rel[rel.find('=') + 1:]
+            release = string.replace(release, '"', '')
+            release = strToNumber(release)
     except Exception, detail:
-        log.write(detail, 'functions.getDistributionVersion', 'error')
+        log.write(detail, 'functions.getDistributionReleaseNumber', 'error')
     return release
 
 
@@ -503,9 +513,9 @@ def getBoot():
 
 # Check the status of a package
 def getPackageStatus(packageName):
+    status = ''
     try:
         cmdChk = 'apt-cache policy ' + str(packageName)
-        status = ''
         ec = ExecCmd(log)
         packageCheck = ec.run(cmdChk, False)
 

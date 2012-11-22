@@ -59,7 +59,10 @@ class ATI():
         return drv
 
     # Get additional packages
-    # The second value in the list is a numerical value (True=1, False=0) whether the package must be removed before installation
+    # The second value in the list is a numerical value:
+    # 0 = Need to install, but removal before reinstallation is not needed
+    # 1 = Need to install and removal is needed before reinstallation
+    # 2 = Optional install
     def getAdditionalPackages(self, driver):
         drvList = []
         # Get the correct linux header package
@@ -74,7 +77,7 @@ class ATI():
             drvList.append(['libgl1-fglrx-glx', 1])
             drvList.append(['glx-alternative-fglrx', 0])
             drvList.append(['fglrx-control', 1])
-            drvList.append(['fglrx-glx-ia32', 0])
+            drvList.append(['fglrx-glx-ia32', 2])
         else:
             drvList.append([driver, 1])
             drvList.append(['fglrx-amdcccle', 1])
@@ -94,10 +97,19 @@ class ATI():
             self.preseedATIPackages('install')
 
             # Install the packages
+            installString = ''
+            notInRepo = ''
             for package in packageList:
-                if not functions.isPackageInstalled(package[0]):
-                    self.log.write('Install drivers: ' + package[0], 'ati.installATIDriver', 'debug')
-                    self.ec.run('apt-get -y --force-yes install ' + package[0])
+                chkStatus = functions.getPackageStatus(package[0])
+                if chkStatus != packageStatus[2]:
+                    installString += ' ' + package[0]
+                elif package[1] != 2:
+                    notInRepo += ', ' + package[0]
+
+            if notInRepo == '':
+                self.ec.run('apt-get -y --force-yes install' + installString)
+            else:
+                self.log.write('Install aborted: not in repository: ' + notInRepo[2:], 'ati.installATIDriver', 'error')
 
         except Exception, detail:
             self.log.write(detail, 'ati.installATIDriver', 'exception')

@@ -80,16 +80,28 @@ class Nvidia():
             self.preseedNvidiaPackages('install')
 
             # Install the packages
+            installString = ''
+            notInRepo = ''
             for package in packageList:
-                if not functions.isPackageInstalled(package[0]):
-                    self.log.write('Install package: ' + package[0], 'nvidia.installNvidiaDriver', 'debug')
-                    self.ec.run('apt-get -y --force-yes install ' + package[0])
+                chkStatus = functions.getPackageStatus(package[0])
+                if chkStatus != packageStatus[2]:
+                    installString += ' ' + package[0]
+                elif package[1] != 2:
+                    notInRepo += ', ' + package[0]
+
+            if notInRepo == '':
+                self.ec.run('apt-get -y --force-yes install' + installString)
+            else:
+                self.log.write('Install aborted: not in repository: ' + notInRepo[2:], 'nvidia.installNvidiaDriver', 'error')
 
         except Exception, detail:
             self.log.write(detail, 'nvidia.installNvidiaDriver', 'exception')
 
     # Get additional packages
-    # The second value in the list is a numerical value (True=1, False=0) whether the package must be removed before installation
+    # The second value in the list is a numerical value:
+    # 0 = Need to install, but removal before reinstallation is not needed
+    # 1 = Need to install and removal is needed before reinstallation
+    # 2 = Optional install
     def getAdditionalPackages(self, driver):
         drvList = []
         # Get the correct linux header package
@@ -106,7 +118,7 @@ class Nvidia():
             elif driver == 'nvidia-glx-legacy-173xx':
                 drvList.append(['nvidia-kernel-legacy-173xx-dkms', 1])
             drvList.append(['nvidia-xconfig', 0])
-            drvList.append(['nvidia-glx-ia32', 0])
+            drvList.append(['nvidia-glx-ia32', 2])
         else:
             drvList.append([driver, 1])
 

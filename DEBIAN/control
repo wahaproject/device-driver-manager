@@ -1,9 +1,9 @@
 Package: device-driver-manager
-Version: 0.1.0
+Version: 0.2.4
 Architecture: all
 Maintainer: Schoelje <schoelje@hotmail.nl>
 Installed-Size: 216
-Depends: python (>= 2.4), python (<< 3), python-gtk2, python-glade2
+Depends: python (>= 2.7), python-gtk2, python-glade2, aptitude, wireless-tools, apt, dpkg, pciutils, debconf
 Section: admin
 Priority: optional
 Description: Device driver manager

@@ -66,7 +66,6 @@ class PAE():
             cmdPae = 'apt-get -y --force-yes install'
             for package in self.packages:
                 cmdPae += ' ' + package
-            cmdPae += ' --reinstall'
             self.log.write('PAE kernel install command: ' + cmdPae, 'pae.installPAE', 'debug')
             self.ec.run(cmdPae)
 
