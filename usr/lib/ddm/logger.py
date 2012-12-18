@@ -79,7 +79,7 @@ class Logger():
                 functions.pushMessage(self.rtobject, message)
             else:
                 # For obvious reasons: do not log this...
-                print 'Return object type not implemented: ' + self.typeString
+                print 'Return object type not implemented: %s' % self.typeString
 
 
 # Test

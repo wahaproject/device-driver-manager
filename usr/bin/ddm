@@ -1,0 +1,4 @@
+#!/bin/bash
+# Launch ddm with all passed arguments
+/usr/bin/python2.7 -tt /usr/lib/ddm/main.py $*
+

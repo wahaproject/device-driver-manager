@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=GNOME;GTK;Settings;DesktopSettings;
+Comment=Device Driver Manager
+Encoding=UTF-8
+Exec=ddm
+Icon=/usr/share/ddm/logo.png
+Name=Device Driver Manager
+StartupNotify=false
+Terminal=false
+Type=Application

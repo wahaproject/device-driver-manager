@@ -57,13 +57,13 @@ functions.log = log
 if debug:
     if os.path.isfile(log.logPath):
         open(log.logPath, 'w').close()
-    log.write('Write debug information to file: ' + log.logPath, 'main', 'info')
+    log.write('Write debug information to file: %s' % log.logPath, 'main', 'info')
 
 # Log some basic environmental information
 machineInfo = functions.getSystemVersionInfo()
-log.write('Machine info: ' + machineInfo, 'main', 'info')
-version = functions.getPackageVersion('device-driver-manager')
-log.write('DDM version: ' + version, 'main', 'info')
+log.write('Machine info: %s' % machineInfo, 'main', 'info')
+version = functions.getPackageVersion('ddm')
+log.write('DDM version: %s' % version, 'main', 'info')
 
 # There were issues with apt-listbugs
 # Warn the user for any errors that might accur when apt-listbugs is installed
@@ -92,10 +92,10 @@ if not functions.getDistribution() == '':
         if os.geteuid() > 0:
             launcher = 'gksu --message "<b>Please enter your password</b>"'
             if os.path.exists('/usr/bin/kdesudo'):
-                launcher = 'kdesudo -i /usr/share/device-driver-manager/logo.png -d --comment "<b>Please enter your password</b>"'
+                launcher = 'kdesudo -i /usr/share/ddm/logo.png -d --comment "<b>Please enter your password</b>"'
 
         cmd = '%s python %s' % (launcher, ddmPath)
-        log.write('Startup command: ' + cmd, 'main', 'debug')
+        log.write('Startup command: %s' % cmd, 'main', 'debug')
         os.system(cmd)
     else:
         log.write('Use --force to run DDM in a live environment', 'main', 'warning')
