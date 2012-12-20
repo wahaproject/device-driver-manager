@@ -38,7 +38,7 @@ class TreeViewHandler(gobject.GObject):
 
     # General function to fill a treeview
     # Set setCursorWeight to 400 if you don't want bold font
-    def fillTreeview(self, contentList, columnTypesList, columnHideList=[-1], setCursor=0, setCursorWeight=400, firstItemIsColName=False, appendToExisting=False, appendToTop=False):
+    def fillTreeview(self, contentList, columnTypesList, columnHideList=[-1], setCursor=0, setCursorWeight=400, firstItemIsColName=False, appendToExisting=False, appendToTop=False, fontSize=10000):
         # Check if this is a multi-dimensional array
         multiCols = self.isListOfLists(contentList)
         colNameList = []
@@ -50,14 +50,16 @@ class TreeViewHandler(gobject.GObject):
                 dynListStore = 'gtk.ListStore('
                 for i in range(len(columnTypesList)):
                     dynListStore += str(columnTypesList[i]) + ', '
-                dynListStore += 'int)'
+                dynListStore += 'int, int)'
                 self.log.write('Create list store eval string: %s' % dynListStore, 'self.treeview.fillTreeview', 'debug')
                 liststore = eval(dynListStore)
             else:
                 if not appendToExisting:
-                    # Existing list store: clear all rows
+                    # Existing list store: clear all rows and columns
                     self.log.write('Clear existing list store', 'self.treeview.fillTreeview', 'debug')
                     liststore.clear()
+                    for col in self.treeview.get_columns():
+                        self.treeview.remove_column(col)
 
             # Create list with column names
             if multiCols:
@@ -85,36 +87,36 @@ class TreeViewHandler(gobject.GObject):
                     skip = True
 
                 if not skip:
-                    w = 400
+                    weight = 400
                     weightRow = setCursor
                     if firstItemIsColName:
                         weightRow += 1
                     if i == weightRow:
-                        w = setCursorWeight
+                        weight = setCursorWeight
                     if multiCols:
                         # Dynamically add data for multi-column list store
                         if appendToTop:
                             dynListStoreAppend = 'liststore.insert(0, ['
                         else:
-                            dynListStoreAppend = 'liststore.append( ['
+                            dynListStoreAppend = 'liststore.append(['
                         for j in range(len(contentList[i])):
                             val = str(contentList[i][j])
                             if str(columnTypesList[j]) == 'str':
                                 val = '"' + val + '"'
                             if str(columnTypesList[j]) == 'gtk.gdk.Pixbuf':
-                                val = 'gtk.gdk.pixbuf_new_from_file("' + val + '")'
-                            dynListStoreAppend += val + ', '
-                        dynListStoreAppend += str(w) + '] )'
+                                val = 'gtk.gdk.pixbuf_new_from_file("%s")' % val
+                            dynListStoreAppend += '%s, ' % val
+                        dynListStoreAppend += '%s, %s])' % (str(weight), fontSize)
 
                         self.log.write('Add data to list store: %s' % dynListStoreAppend, 'self.treeview.fillTreeview', 'debug')
                         eval(dynListStoreAppend)
                     else:
                         if appendToTop:
                             self.log.write('Add data to top of list store: %s' % str(contentList[i]), 'self.treeview.fillTreeview', 'debug')
-                            liststore.insert(0, [contentList[i], w])
+                            liststore.insert(0, [contentList[i], weight, fontSize])
                         else:
                             self.log.write('Add data to bottom of list store: %s' % str(contentList[i]), 'self.treeview.fillTreeview', 'debug')
-                            liststore.append([contentList[i], w])
+                            liststore.append([contentList[i], weight, fontSize])
 
             # Check last visible column
             lastVisCol = -1
@@ -145,7 +147,7 @@ class TreeViewHandler(gobject.GObject):
                     if colFound == '':
                         # Build renderer and attributes to define the column
                         # Possible attributes for text: text, foreground, background, weight
-                        attr = ', text=' + str(i) + ', weight=' + str(len(colNameList))
+                        attr = ', text=' + str(i) + ', weight=' + str(len(colNameList)) + ', size=' + str(len(colNameList) + 1)
                         renderer = 'gtk.CellRendererText()'  # an object that renders text into a gtk.TreeView cell
                         if str(columnTypesList[i]) == 'bool':
                             renderer = 'gtk.CellRendererToggle()'  # an object that renders a toggle button into a TreeView cell

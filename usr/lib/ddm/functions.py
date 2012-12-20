@@ -364,38 +364,6 @@ def getResolutions(minRes='', maxRes='', reverseOrder=False, getUvesafbResolutio
     return avlRes
 
 
-# Get the bootloader
-def getBoot():
-    grubPath = '/etc/default/grub'
-    burgPath = '/etc/default/burg'
-    if os.path.isfile(grubPath):  # Grub
-        return grubPath
-    elif os.path.isfile(burgPath):  # Burg
-        return burgPath
-    else:
-        return None
-
-
-# Get current Plymouth resolution
-def getCurrentGrubResolution():
-    res = None
-    boot = getBoot()
-    if boot:
-        f = open(boot, 'r')
-        grubLines = f.read().splitlines()
-        f.close()
-        for line in grubLines:
-            # Search text for resolution
-            matchObj = re.search('^GRUB_GFXMODE=(.*)', line)
-            if matchObj:
-                res = matchObj.group(1)
-                log.write('Current grub resolution: %s' % res, 'functions.getCurrentGrubResolution', 'debug')
-                break
-    else:
-        log.write('Neither grub nor burg found in /etc/default', 'functions.getCurrentGrubResolution', 'error')
-    return res
-
-
 # Check the status of a package
 def getPackageStatus(packageName):
     status = ''

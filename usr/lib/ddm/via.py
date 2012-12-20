@@ -10,7 +10,7 @@ hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
 
 class Via():
 
-    def __init__(self, distribution, loggerObject):
+    def __init__(self, distribution, loggerObject, additionalDrivers=True):
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
@@ -23,7 +23,8 @@ class Via():
 
         if self.hw:
             self.drivers.append('xserver-xorg-video-openchrome')
-            self.drivers.append('xserver-xorg-video-vesa')
+            if additionalDrivers:
+                self.drivers.append('xserver-xorg-video-vesa')
 
     # Called from drivers.py: Check for Via
     def getVia(self):

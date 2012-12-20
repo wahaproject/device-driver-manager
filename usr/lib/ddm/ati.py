@@ -13,7 +13,7 @@ atiStartSerie = 5000
 
 class ATI():
 
-    def __init__(self, distribution, loggerObject):
+    def __init__(self, distribution, loggerObject, additionalDrivers=True):
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
@@ -31,10 +31,12 @@ class ATI():
             else:
                 # Ubuntu
                 self.drivers.append('fglrx')
+
             # Additional drivers
-            self.drivers.append('xserver-xorg-video-radeon')
-            self.drivers.append('xserver-xorg-video-fbdev')
-            self.drivers.append('xserver-xorg-video-vesa')
+            if additionalDrivers:
+                self.drivers.append('xserver-xorg-video-radeon')
+                self.drivers.append('xserver-xorg-video-fbdev')
+                self.drivers.append('xserver-xorg-video-vesa')
 
     # Called from drivers.py: Check for ATI
     def getATI(self):

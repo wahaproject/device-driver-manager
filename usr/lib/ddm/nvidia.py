@@ -12,7 +12,7 @@ blacklistPath = '/etc/modprobe.d/blacklist-nouveau.conf'
 
 
 class Nvidia():
-    def __init__(self, distribution, loggerObject):
+    def __init__(self, distribution, loggerObject, additionalDrivers=True):
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
@@ -38,9 +38,10 @@ class Nvidia():
                     exit()
 
                 # Add additional drivers
-                self.drivers.append('xserver-xorg-video-nouveau')
-                self.drivers.append('xserver-xorg-video-fbdev')
-                self.drivers.append('xserver-xorg-video-vesa')
+                if additionalDrivers:
+                    self.drivers.append('xserver-xorg-video-nouveau')
+                    self.drivers.append('xserver-xorg-video-fbdev')
+                    self.drivers.append('xserver-xorg-video-vesa')
             else:
                 # Ubuntu - use jockey code
                 nd = NvidiaDetection()
@@ -49,9 +50,10 @@ class Nvidia():
                     self.drivers.append(driver)
 
                 # Add additional drivers
-                self.drivers.append('xserver-xorg-video-nouveau')
-                self.drivers.append('xserver-xorg-video-fbdev')
-                self.drivers.append('xserver-xorg-video-vesa')
+                if additionalDrivers:
+                    self.drivers.append('xserver-xorg-video-nouveau')
+                    self.drivers.append('xserver-xorg-video-fbdev')
+                    self.drivers.append('xserver-xorg-video-vesa')
 
     # Called from drivers.py: Check for Nvidia
     def getNvidia(self):

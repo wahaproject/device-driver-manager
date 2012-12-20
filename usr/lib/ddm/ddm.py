@@ -141,44 +141,47 @@ class DDM:
                     eb[1].modify_bg(gtk.STATE_NORMAL, self.clrMenuBg)
 
     def showMenuGraphics(self, widget=None, event=None):
-        self.changeMenuBackground(menuItems[0], True)
-        self.lblTitle.set_text(self.lblMenuGraphics.get_text())
-        self.clearDriverSection('No supported graphics card found')
-        if self.nvidiaDrivers:
-            self.currentHwCode = hwCodes[0]
-            self.manufacturerModules = self.xc.getModules(hwCodes[0])
-            self.loadDriverSection(self.nvidiaDrivers)
-        elif self.atiDrivers:
-            self.currentHwCode = hwCodes[1]
-            self.manufacturerModules = self.xc.getModules(hwCodes[1])
-            self.loadDriverSection(self.atiDrivers)
-        elif self.intelDrivers:
-            self.currentHwCode = hwCodes[2]
-            self.manufacturerModules = self.xc.getModules(hwCodes[2])
-            self.loadDriverSection(self.intelDrivers)
-        elif self.viaDrivers:
-            self.currentHwCode = hwCodes[3]
-            self.manufacturerModules = self.xc.getModules(hwCodes[3])
-            self.loadDriverSection(self.viaDrivers)
+        if self.selectedMenuItem != menuItems[0]:
+            self.changeMenuBackground(menuItems[0], True)
+            self.lblTitle.set_text(self.lblMenuGraphics.get_text())
+            self.clearDriverSection('No supported graphics card found')
+            if self.nvidiaDrivers:
+                self.currentHwCode = hwCodes[0]
+                self.manufacturerModules = self.xc.getModules(hwCodes[0])
+                self.loadDriverSection(self.nvidiaDrivers)
+            elif self.atiDrivers:
+                self.currentHwCode = hwCodes[1]
+                self.manufacturerModules = self.xc.getModules(hwCodes[1])
+                self.loadDriverSection(self.atiDrivers)
+            elif self.intelDrivers:
+                self.currentHwCode = hwCodes[2]
+                self.manufacturerModules = self.xc.getModules(hwCodes[2])
+                self.loadDriverSection(self.intelDrivers)
+            elif self.viaDrivers:
+                self.currentHwCode = hwCodes[3]
+                self.manufacturerModules = self.xc.getModules(hwCodes[3])
+                self.loadDriverSection(self.viaDrivers)
 
     def showMenuWireless(self, widget=None, event=None):
-        self.changeMenuBackground(menuItems[1], True)
-        self.lblTitle.set_text(self.lblMenuWireless.get_text())
-        self.clearDriverSection('No supported wireless chipset found')
-        if self.broadcomDrivers:
-            self.currentHwCode = hwCodes[4]
-            self.loadDriverSection(self.broadcomDrivers)
+        if self.selectedMenuItem != menuItems[1]:
+            self.changeMenuBackground(menuItems[1], True)
+            self.lblTitle.set_text(self.lblMenuWireless.get_text())
+            self.clearDriverSection('No supported wireless chipset found')
+            if self.broadcomDrivers:
+                self.currentHwCode = hwCodes[4]
+                self.loadDriverSection(self.broadcomDrivers)
 
     def showMenuKernel(self, widget=None, event=None):
-        self.changeMenuBackground(menuItems[2], True)
-        self.lblTitle.set_text(self.lblMenuKernel.get_text())
-        msg = 'PAE already installed'
-        if 'amd64' in self.kernelRelease:
-            msg = 'PAE support only for 32-bit systems'
-        self.clearDriverSection(msg)
-        if self.paePackage:
-            self.currentHwCode = hwCodes[5]
-            self.loadDriverSection(self.paePackage)
+        if self.selectedMenuItem != menuItems[2]:
+            self.changeMenuBackground(menuItems[2], True)
+            self.lblTitle.set_text(self.lblMenuKernel.get_text())
+            msg = 'PAE already installed'
+            if 'amd64' in self.kernelRelease:
+                msg = 'PAE support only for 32-bit systems'
+            self.clearDriverSection(msg)
+            if self.paePackage:
+                self.currentHwCode = hwCodes[5]
+                self.loadDriverSection(self.paePackage)
 
     # ===============================================
     # Driver section functions
@@ -470,6 +473,10 @@ class DDM:
         self.getHardwareInfo(hwCodes[4])
         # PAE
         self.getHardwareInfo(hwCodes[5])
+
+        # Select the first menu if nothing has been found
+        if self.currentHwCode is None:
+            self.showMenuKernel()
 
         # Start automatic install
         if self.install:
