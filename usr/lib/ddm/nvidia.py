@@ -22,6 +22,7 @@ class Nvidia():
 
         # Test (01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GT218 [GeForce G210M] [10de:0a74] (rev ff))
         # self.hw = ['NVIDIA Corporation GT218 [GeForce G210M]']
+        # self.hw = []
 
         if self.hw:
             # Install nvidia-detect if it isn't installed already
@@ -71,8 +72,6 @@ class Nvidia():
                         self.log.write('Driver not installable: %s' % drv, 'nvidia.getNvidia', 'warning')
             else:
                 self.log.write('No driver found for: %s' % card, 'nvidia.getNvidia', 'warning')
-        else:
-            self.log.write('No Nvidia card found', 'nvidia.getNvidia', 'debug')
 
         return hwList
 
@@ -92,6 +91,7 @@ class Nvidia():
                 if self.distribution == 'debian' and module == 'nvidia':
                     self.log.write('Configure Nvidia...', 'nvidia.installNvidia', 'debug')
                     self.ec.run('nvidia-xconfig')
+                    self.xc.blacklistModule('nouveau')
                     isConfigured = True
 
             if not isConfigured:
@@ -237,14 +237,14 @@ class Nvidia():
             # debconf-get-selections | grep nvidia > debconf-nvidia.seed
             # replace tabs with spaces and change the default answers (note=space, boolean=true or false)
             debConfList = []
-            debConfList.append('nvidia-support nvidia-support/warn-nouveau-module-loaded note ')
+            #debConfList.append('nvidia-support nvidia-support/warn-nouveau-module-loaded error ')
             debConfList.append('nvidia-support nvidia-support/check-xorg-conf-on-removal boolean false')
             debConfList.append('nvidia-support nvidia-support/check-running-module-version boolean true')
             debConfList.append('nvidia-installer-cleanup nvidia-installer-cleanup/delete-nvidia-installer boolean true')
             debConfList.append('nvidia-installer-cleanup nvidia-installer-cleanup/remove-conflicting-libraries boolean true')
-            debConfList.append('nvidia-support nvidia-support/removed-but-enabled-in-xorg-conf note ')
-            debConfList.append('nvidia-support nvidia-support/warn-mismatching-module-version note ')
-            debConfList.append('nvidia-support nvidia-support/last-mismatching-module-version string 302.17')
+            #debConfList.append('nvidia-support nvidia-support/removed-but-enabled-in-xorg-conf error ')
+            #debConfList.append('nvidia-support nvidia-support/warn-mismatching-module-version error ')
+            debConfList.append('nvidia-support nvidia-support/last-mismatching-module-version string 304.48')
             debConfList.append('nvidia-support nvidia-support/needs-xorg-conf-to-enable note ')
             debConfList.append('nvidia-support nvidia-support/create-nvidia-conf boolean true')
             debConfList.append('nvidia-installer-cleanup nvidia-installer-cleanup/uninstall-nvidia-installer boolean true')

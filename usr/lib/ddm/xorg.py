@@ -50,6 +50,7 @@ class XorgConf():
         return foundModule
 
     # Return graphics module used by X.org
+    # TODO: is lsmod an alternative
     def getUsedDriver(self):
         # find the most recent X.org log
         module = None
@@ -61,32 +62,24 @@ class XorgConf():
             if mtime > maxTime:
                 maxTime = mtime
                 logPath = f
-
-        # Open the log file
-        lines = []
-        with open(logPath) as f:
-            lines = list(f.read().splitlines())
-
-        # Search for "randr" in each line and check the previous line for the used module
-        lineCnt = -1
-        for line in lines:
-            lineCnt += 1
-            matchObj = re.search('\)\srandr\s', line, flags=re.IGNORECASE)
-            if matchObj:
-                prevLine = lines[lineCnt - 1].lower()
-                module = self.matchModuleInString(prevLine)
-                break
+        # Search for "depth" in each line and check the used module
+        f = open(logPath, 'r')
+        log = f.read()
+        f.close()
+        matchObj = re.search('([a-zA-Z]*)\(\d+\):\s+depth', log, flags=re.IGNORECASE)
+        if matchObj:
+            module = matchObj.group(1).lower()
 
         self.log.write('Used graphics driver: %s' % module, 'XorgConf.getUsedModule', 'info')
         return module
 
-    # Return the module found in a string (used by getUsedModule)
-    def matchModuleInString(self, text):
+    # Check if a module is supported by DDM
+    def isModuleSupported(self, module):
         for manDrv in manufacturerDrivers:
             for mod in manDrv[1]:
-                if mod in text:
-                    return mod
-        return None
+                if mod == module:
+                    return True
+        return False
 
     # Set the given module in xorg.conf
     # e.g.: Set the driver of the 1st Device section: a.setModule('Device', 0, 'fbdev')

@@ -145,8 +145,10 @@ def isFileLocked(path):
     cmd = 'lsof %s' % path
     ec = ExecCmd(log)
     lsofList = ec.run(cmd, False)
-    if len(lsofList) > 0:
-        locked = True
+    for line in lsofList:
+        if path in line:
+            locked = True
+            break
     return locked
 
 
@@ -347,15 +349,15 @@ def getResolutions(minRes='', maxRes='', reverseOrder=False, getUvesafbResolutio
     # Fill the list with screen resolutions
     for line in resList:
         for item in line.split():
-            #if item and 'x' in item and len(item) > 2 and not '+' in item and not 'axis' in item and not 'maximum' in item:
-                ##log.write('Resolution found: %s' % item, 'functions.getResolutions', 'debug')
-            itemList = item.split('x')
-            itemW = strToNumber(itemList[0], True)
-            itemH = strToNumber(itemList[1], True)
-            # Check if it can be added
-            if itemW >= minW and itemH >= minH and (maxW == 0 or itemW <= maxW) and (maxH == 0 or itemH <= maxH):
-                log.write('Resolution added: %s' % item, 'functions.getResolutions', 'debug')
-                avlResTmp.append([itemW, itemH])
+            itemChk = re.search('\d+x\d+', line)
+            if itemChk:
+                itemList = item.split('x')
+                itemW = strToNumber(itemList[0], True)
+                itemH = strToNumber(itemList[1], True)
+                # Check if it can be added
+                if itemW >= minW and itemH >= minH and (maxW == 0 or itemW <= maxW) and (maxH == 0 or itemH <= maxH):
+                    log.write('Resolution added: %s' % item, 'functions.getResolutions', 'debug')
+                    avlResTmp.append([itemW, itemH])
 
     # Sort the list and return as readable resolution strings
     avlResTmp.sort(key=operator.itemgetter(0), reverse=reverseOrder)
@@ -419,10 +421,11 @@ def getPackageDependencies(packageName, reverseDepends=False):
     depList = ec.run(cmd, False)
     if depList:
         for line in depList:
-            matchObj = re.search('([a-z0-9\-]+)', line)
-            if matchObj:
-                if matchObj.group(1) != '':
-                    retList.append(matchObj.group(1))
+            if line[0:2] != 'E:':
+                matchObj = re.search('([a-z0-9\-]+)', line)
+                if matchObj:
+                    if matchObj.group(1) != '':
+                        retList.append(matchObj.group(1))
 
     return retList
 
@@ -435,7 +438,8 @@ def getPackagesWithFile(fileName):
         ec = ExecCmd(log)
         packageList = ec.run(cmd, False)
         for package in packageList:
-            packages.append(package[:package.find(':')])
+            if '*' not in package:
+                packages.append(package[:package.find(':')])
     return packages
 
 

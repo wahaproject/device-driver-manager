@@ -7,7 +7,9 @@ import getopt
 import drivers
 import string
 import functions
+import gtk
 from logger import Logger
+from dialogs import MessageDialogSave
 
 
 # Help
@@ -82,7 +84,7 @@ if len(args) > 0:
     if debug:
         args += ' :l ' + log.logPath
 
-if not functions.getDistribution() == '':
+if not functions.getDistribution() == '' or force:
     # Do not run in live environment
     if not functions.isRunningLive() or force:
         ddmPath = os.path.join(scriptDir, 'ddm.py' + args)
@@ -98,6 +100,12 @@ if not functions.getDistribution() == '':
         log.write('Startup command: %s' % cmd, 'main', 'debug')
         os.system(cmd)
     else:
-        log.write('Use --force to run DDM in a live environment', 'main', 'warning')
+        title = 'DDM - Live environment'
+        msg = 'DDM cannot run in a live environment\n\nTo force start, use the --force argument'
+        MessageDialogSave(title, msg, gtk.MESSAGE_INFO).show()
+        log.write(msg, 'main', 'warning')
 else:
-    log.write('DDM can only run in Debian or Ubuntu based distributions', 'main', 'warning')
+    title = 'DDM - Debian based'
+    msg = 'Cannot determine the base distribution (debian or ubuntu)\n\nTo force start, use the --force argument'
+    MessageDialogSave(title, msg, gtk.MESSAGE_INFO).show()
+    log.write(msg, 'main', 'warning')

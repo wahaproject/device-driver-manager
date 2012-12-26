@@ -254,20 +254,23 @@ class Broadcom():
                     # Start wl
                     self.log.write('modprobe wl', 'broadcom.installBroadcom', 'debug')
                     os.system('modprobe wl')
-                elif 'b43legacy' in driver:
-                    # Start b43legacy
-                    self.log.write('modprobe b43legacy', 'broadcom.installBroadcom', 'debug')
-                    os.system('modprobe b43legacy')
-                elif 'b43' in driver:
-                    # Start b43
-                    self.log.write('modprobe b43', 'broadcom.installBroadcom', 'debug')
-                    os.system('modprobe b43')
                 else:
-                    # Start brcmsmac
-                    self.log.write('modprobe brcmsmac', 'broadcom.installBroadcom', 'debug')
-                    os.system('modprobe brcmsmac')
+                    if os.path.isfile(blacklistPath):
+                        os.remove(blacklistPath)
+                    if 'b43legacy' in driver:
+                        # Start b43legacy
+                        self.log.write('modprobe b43legacy', 'broadcom.installBroadcom', 'debug')
+                        os.system('modprobe b43legacy')
+                    elif 'b43' in driver:
+                        # Start b43
+                        self.log.write('modprobe b43', 'broadcom.installBroadcom', 'debug')
+                        os.system('modprobe b43')
+                    else:
+                        # Start brcmsmac
+                        self.log.write('modprobe brcmsmac', 'broadcom.installBroadcom', 'debug')
+                        os.system('modprobe brcmsmac')
 
-                self.log.write('Done installing Broadcome drivers', 'broadcom.installBroadcom', 'info')
+                self.log.write('Done installing Broadcom drivers', 'broadcom.installBroadcom', 'info')
             else:
                 self.log.write('No Broadcom chip set found', 'broadcom.installBroadcom', 'error')
 
@@ -288,7 +291,7 @@ class Broadcom():
                     self.log.write('Remove : %s' % blacklistPath, 'broadcom.removeBroadcom', 'debug')
                     os.remove(blacklistPath)
 
-                self.log.write('Done removing Broadcome drivers', 'broadcom.removeBroadcom', 'info')
+                self.log.write('Done removing Broadcom drivers', 'broadcom.removeBroadcom', 'info')
 
         except Exception, detail:
             self.log.write(detail, 'broadcom.removeBroadcom', 'exception')

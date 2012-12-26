@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-import sys
 try:
+    import sys
+    import os
     import gtk
     import gobject
 except Exception, detail:
@@ -104,7 +105,10 @@ class TreeViewHandler(gobject.GObject):
                             if str(columnTypesList[j]) == 'str':
                                 val = '"' + val + '"'
                             if str(columnTypesList[j]) == 'gtk.gdk.Pixbuf':
-                                val = 'gtk.gdk.pixbuf_new_from_file("%s")' % val
+                                if os.path.isfile(val):
+                                    val = 'gtk.gdk.pixbuf_new_from_file("%s")' % val
+                                else:
+                                    val = None
                             dynListStoreAppend += '%s, ' % val
                         dynListStoreAppend += '%s, %s])' % (str(weight), fontSize)
 
