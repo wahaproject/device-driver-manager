@@ -15,7 +15,6 @@ manufacturerDrivers = [
 ]
 
 minimalXorg = 'Section "%s"\n  Identifier   "Device%s"\n  Driver       "%s"\nEndSection\n'
-blDdmFileName = 'blacklist-ddm.conf'
 regExpCommented = '#[\s]*blacklist[\s]*%s'
 regExpUncommented = '[^#][\s]*blacklist[\s]*%s'
 
@@ -128,26 +127,27 @@ class XorgConf():
         blacklistFiles = self.getBlacklistFiles(module, True)
         if on:
             # Blacklist module
-            for fle in blacklistFiles:
-                blFile = None
-                blCommFile = None
-                if fle[1]:
-                    blFile = fle[0]
-                else:
-                    blCommFile = fle[0]
-
-                if blFile is None:
-                    if blCommFile:
-                        # Uncomment blacklist in found file
-                        self.log.write('Uncomment blacklist %s in: %s' % (module, blCommFile), 'XorgConf.blacklistModule', 'debug')
-                        functions.replaceStringInFile(regExpCommented % module, 'blacklist %s' % module, blCommFile)
+            if not blacklistFiles:
+                # Create new blacklist file
+                modPath = os.path.join(self.modprobeDir, 'blacklist-%s.conf' % module)
+                self.log.write('Blacklist %s in: %s' % (module, modPath), 'XorgConf.blacklistModule', 'debug')
+                modFile = open(modPath, 'w')
+                modFile.write('blacklist %s' % module)
+                modFile.close()
+            else:
+                for fle in blacklistFiles:
+                    blFile = None
+                    blCommFile = None
+                    if fle[1]:
+                        blFile = fle[0]
                     else:
-                        # Create new blacklist file
-                        modPath = os.path.join(self.modprobeDir, blDdmFileName)
-                        self.log.write('Blacklist %s in: %s' % (module, modPath), 'XorgConf.blacklistModule', 'debug')
-                        modFile = open(modPath, 'w')
-                        modFile.write('\nblacklist %s' % module)
-                        modFile.close()
+                        blCommFile = fle[0]
+
+                    if blFile is None:
+                        if blCommFile:
+                            # Uncomment blacklist in found file
+                            self.log.write('Uncomment blacklist %s in: %s' % (module, blCommFile), 'XorgConf.blacklistModule', 'debug')
+                            functions.replaceStringInFile(regExpCommented % module, 'blacklist %s' % module, blCommFile)
         else:
             # Remove module blacklist = comment blacklist line
             for fle in blacklistFiles:

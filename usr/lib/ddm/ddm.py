@@ -378,7 +378,11 @@ class DDM:
 
         # Thread is done
         self.toggleGuiElements(False)
-        MessageDialogSave('Driver installed', 'Driver installed: %s' % driver, gtk.MESSAGE_INFO, self.window).show()
+        qd = QuestionDialog('Driver installed', 'Driver installed: %s\n\nDrivers will be used on next boot.\nDo you want to reboot now?' % driver, self.window)
+        answer = qd.show()
+        if answer:
+            # Reboot
+            os.system('reboot')
         return False
 
     def toggleGuiElements(self, startThread):

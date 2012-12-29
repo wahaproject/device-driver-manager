@@ -190,7 +190,7 @@ class TreeViewHandler(gobject.GObject):
             if setCursor >= 0:
                 self.treeview.set_cursor(setCursor)
             self.treeview.set_headers_visible(firstItemIsColName)
-            self.log.write('Add Liststrore to Treeview', 'self.treeview.fillTreeview', 'debug')
+            self.log.write('Add Liststore to Treeview', 'self.treeview.fillTreeview', 'debug')
 
             # Scroll to selected cursor
             selection = self.treeview.get_selection()
@@ -214,6 +214,11 @@ class TreeViewHandler(gobject.GObject):
         # Assume single row selection
         (model, pathlist) = self.treeview.get_selection().get_selected_rows()
         return model.get_value(model.get_iter(pathlist[0]), colNr)
+
+    # Get the value for a specific path (= row number)
+    def getValue(self, path, colNr=0):
+        model = self.treeview.get_model()
+        return model.get_value(model.get_iter(path), colNr)
 
     # Return all the values in a given column
     def getColumnValues(self, colNr=0):
