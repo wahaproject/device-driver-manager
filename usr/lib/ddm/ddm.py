@@ -39,6 +39,9 @@ class DDM:
         self.window = self.builder.get_object('ddmWindow')
         self.lblTitle = self.builder.get_object('lblTitle')
         self.lblCardName = self.builder.get_object('lblCardName')
+        self.lblTitleActivatedDriver = self.builder.get_object('lblTitleActivatedDriver')
+        self.lblAlternativeDriversTitle = self.builder.get_object('lblAlternativeDriversTitle')
+        self.swDrivers = self.builder.get_object('swDrivers')
         self.tvDrivers = self.builder.get_object('tvDrivers')
         self.statusbar = self.builder.get_object('statusbar')
         self.ebTitle = self.builder.get_object('ebTitle')
@@ -145,7 +148,7 @@ class DDM:
         if self.selectedMenuItem != menuItems[0]:
             self.changeMenuBackground(menuItems[0], True)
             self.lblTitle.set_text(self.lblMenuGraphics.get_text())
-            self.clearDriverSection('No supported graphics card found')
+
             if self.nvidiaDrivers:
                 self.currentHwCode = hwCodes[0]
                 self.manufacturerModules = self.xc.getModules(hwCodes[0])
@@ -162,15 +165,19 @@ class DDM:
                 self.currentHwCode = hwCodes[3]
                 self.manufacturerModules = self.xc.getModules(hwCodes[3])
                 self.loadDriverSection(self.viaDrivers)
+            else:
+                self.clearDriverSection('No supported graphics card found')
 
     def showMenuWireless(self, widget=None, event=None):
         if self.selectedMenuItem != menuItems[1]:
             self.changeMenuBackground(menuItems[1], True)
             self.lblTitle.set_text(self.lblMenuWireless.get_text())
-            self.clearDriverSection('No supported wireless chipset found')
+
             if self.broadcomDrivers:
                 self.currentHwCode = hwCodes[4]
                 self.loadDriverSection(self.broadcomDrivers)
+            else:
+                self.clearDriverSection('No supported wireless chipset found')
 
     def showMenuKernel(self, widget=None, event=None):
         if self.selectedMenuItem != menuItems[2]:
@@ -179,20 +186,28 @@ class DDM:
             msg = 'PAE already installed'
             if 'amd64' in self.kernelRelease:
                 msg = 'PAE support only for 32-bit systems'
-            self.clearDriverSection(msg)
+
             if self.paePackage:
                 self.currentHwCode = hwCodes[5]
                 self.loadDriverSection(self.paePackage)
+            else:
+                self.clearDriverSection(msg)
 
     # ===============================================
     # Driver section functions
     # ===============================================
 
     # Clear the driver section
-    def clearDriverSection(self, notFoundMessage=''):
+    def clearDriverSection(self, notFoundMessage=None):
         self.currentHwCode = None
-        self.lblTitle.set_text(self.lblMenuGraphics.get_text())
-        self.lblCardName.set_text(notFoundMessage)
+        if notFoundMessage:
+            self.lblCardName.set_text(notFoundMessage)
+
+        # Hide driver section items
+        self.lblTitleActivatedDriver.hide()
+        self.lblAlternativeDriversTitle.hide()
+        self.swDrivers.hide()
+
         imgPath = os.path.join(self.mediaDir, 'empty.png')
         if os.path.exists(imgPath):
             self.imgManufacturer.set_from_file(imgPath)
@@ -204,6 +219,12 @@ class DDM:
         # self.hw, hwCode, status, drv, version, description
         contentList = []
         rowCnt = -1
+
+        # Show driver section items
+        self.lblTitleActivatedDriver.show()
+        self.lblAlternativeDriversTitle.show()
+        self.swDrivers.show()
+
         # Add column names for driver treeview
         row = ['Activate', 'Driver', 'Version', 'Description', 'hwCode']
         contentList.append(row)
@@ -491,10 +512,13 @@ class DDM:
             self.usedDrivers.append([menuItems[2], usedPaeHeader])
         self.log.write('Used drivers: %s' % self.usedDrivers, 'ddm.main', 'debug')
 
+        # Show initial window while getting hardware info
         msg = 'Checking your hardware...'
         self.log.write(msg, 'ddm.main', 'info')
         functions.pushMessage(self.statusbar, msg)
+        self.showMenuGraphics()
         self.clearDriverSection()
+        self.lblCardName.set_text('')
         functions.repaintGui()
 
         # Get the appropriate driver info
