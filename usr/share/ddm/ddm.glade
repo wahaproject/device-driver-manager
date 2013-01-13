@@ -152,7 +152,7 @@
                                     <property name="label" translatable="yes">Graphics</property>
                                     <attributes>
                                       <attribute name="weight" value="bold"/>
-                                      <attribute name="size" value="16000"/>
+                                      <attribute name="size" value="14000"/>
                                     </attributes>
                                   </object>
                                   <packing>
@@ -216,7 +216,7 @@
                                     <property name="label" translatable="yes">Wireless</property>
                                     <attributes>
                                       <attribute name="weight" value="bold"/>
-                                      <attribute name="size" value="16000"/>
+                                      <attribute name="size" value="14000"/>
                                     </attributes>
                                   </object>
                                   <packing>
@@ -280,7 +280,7 @@
                                     <property name="label" translatable="yes">Kernel</property>
                                     <attributes>
                                       <attribute name="weight" value="bold"/>
-                                      <attribute name="size" value="16000"/>
+                                      <attribute name="size" value="14000"/>
                                     </attributes>
                                   </object>
                                   <packing>

@@ -111,12 +111,20 @@ class Broadcom():
         with open(logPath) as f:
             lines = list(f.read().splitlines())
 
-        # Search for wlan0 in each line and get the listed driver
         for line in reversed(lines):
+            # First check for Network Manager entry
+            # Search for wlan0 in each line and get the listed driver
             matchObj = re.search('\(wlan\d\):.*driver:\s\'([a-z]*)', line, flags=re.IGNORECASE)
             if matchObj:
                 driver = matchObj.group(1)
                 break
+            else:
+                # Wicd
+                # Search for ieee in each line and get the listed driver
+                matchObj = re.search('ieee.*implement', line, flags=re.IGNORECASE)
+                if matchObj:
+                    driver = matchObj.group(0)
+                    break
 
         if driver:
             if 'brcm' in driver:

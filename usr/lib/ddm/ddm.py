@@ -148,6 +148,7 @@ class DDM:
         if self.selectedMenuItem != menuItems[0]:
             self.changeMenuBackground(menuItems[0], True)
             self.lblTitle.set_text(self.lblMenuGraphics.get_text())
+            self.clearDriverSection('No supported graphics card found')
 
             if self.nvidiaDrivers:
                 self.currentHwCode = hwCodes[0]
@@ -165,19 +166,16 @@ class DDM:
                 self.currentHwCode = hwCodes[3]
                 self.manufacturerModules = self.xc.getModules(hwCodes[3])
                 self.loadDriverSection(self.viaDrivers)
-            else:
-                self.clearDriverSection('No supported graphics card found')
 
     def showMenuWireless(self, widget=None, event=None):
         if self.selectedMenuItem != menuItems[1]:
             self.changeMenuBackground(menuItems[1], True)
             self.lblTitle.set_text(self.lblMenuWireless.get_text())
+            self.clearDriverSection('No supported wireless chipset found')
 
             if self.broadcomDrivers:
                 self.currentHwCode = hwCodes[4]
                 self.loadDriverSection(self.broadcomDrivers)
-            else:
-                self.clearDriverSection('No supported wireless chipset found')
 
     def showMenuKernel(self, widget=None, event=None):
         if self.selectedMenuItem != menuItems[2]:
@@ -186,12 +184,11 @@ class DDM:
             msg = 'PAE already installed'
             if 'amd64' in self.kernelRelease:
                 msg = 'PAE support only for 32-bit systems'
+            self.clearDriverSection(msg)
 
             if self.paePackage:
                 self.currentHwCode = hwCodes[5]
                 self.loadDriverSection(self.paePackage)
-            else:
-                self.clearDriverSection(msg)
 
     # ===============================================
     # Driver section functions
@@ -249,8 +246,9 @@ class DDM:
                             if dep == item[3]:
                                 drv[1] = dep
                                 break
+
                     self.log.write('Check loaded driver / available driver: %s / %s' % (drv[1], item[3]), 'ddm.loadDriverSection', 'debug')
-                    if drv[1] == item[3]:
+                    if drv[1] == item[3] and drv[0] == self.selectedMenuItem:
                         self.log.write('Select current driver in list: %s' % drv[1], 'ddm.loadDriverSection', 'debug')
                         self.lblActivatedDriver.set_text('%s %s%s' % (item[3], item[4], recommended))
                         activate = True

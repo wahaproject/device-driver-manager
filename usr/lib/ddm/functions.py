@@ -506,6 +506,20 @@ def hasWireless():
     return wl
 
 
+# Get the wireless interface (usually wlan0)
+def getWirelessInterface():
+    wi = None
+    cmd = 'iwconfig'
+    ec = ExecCmd(log)
+    wiList = ec.run(cmd, False)
+    for line in wiList:
+        reObj = re.search('([a-z0-9]*).*ESSID', line)
+        if reObj:
+            wi = reObj.group(1)
+            break
+    return wi
+
+
 # Check if we're running live
 def isRunningLive():
     live = False
