@@ -1,3 +1,10 @@
+Source: device-driver-manager
+Section: admin
+Priority: optional
+Maintainer: Schoelje <schoelje@hotmail.nl>
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.2
+
 Package: device-driver-manager
 Version: 0.2.4
 Architecture: all
