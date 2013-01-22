@@ -18,7 +18,7 @@ def usage():
         if hwOpt != '':
             hwOpt += ', '
         hwOpt += hw
-    hlp = """Usage: debian-driver-manager [options]
+    hlp = """Usage: device-driver-manager [options]
 
 Options:
   -c (--codes): comma separated list with pre-selected hardware
