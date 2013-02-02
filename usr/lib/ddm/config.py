@@ -17,6 +17,9 @@ class Config():
             curdir = os.path.dirname(os.path.realpath(__file__))
             filePath = os.path.join(curdir, filePath)
         self.filePath = filePath
+        if not os.path.exists(self.filePath):
+            f = open(self.filePath, "w").write("")
+            f.close()
         self.parser = ConfigParser.SafeConfigParser()
         self.parser.read([self.filePath])
 
@@ -50,3 +53,16 @@ class Config():
             else:
                 value = val
         return value
+
+    def setValue(self, section, option, value):
+        success = True
+        value = str(value)
+        try:
+            if not self.doesSectionExist(section):
+                # Create section first
+                self.parser.add_section(section)
+            self.parser.set(section, option, value)
+            self.parser.write(self.filePath)
+        except Exception:
+            success = False
+        return success

@@ -50,11 +50,12 @@ class DriverGet(threading.Thread):
 
 # Driver install class needs threading
 class DriverInstall(threading.Thread):
-    def __init__(self, distribution, loggerObject, hwCode, driver=''):
+    def __init__(self, distribution, loggerObject, hwCode, driver='', isHybrid=False):
         threading.Thread.__init__(self)
         self.log = loggerObject
         self.hwCode = hwCode
         self.driver = driver
+        self.isHybrid = isHybrid
         self.log.write('Initialize DriverInstall', 'drivers.DriverInstall', 'debug')
         self.distribution = distribution
 
@@ -65,7 +66,7 @@ class DriverInstall(threading.Thread):
             nv.installNvidia(self.driver)
         elif self.hwCode == hwCodes[1]:
             ati = ATI(self.distribution, self.log)
-            ati.installATI(self.driver)
+            ati.installATI(self.driver, self.isHybrid)
         elif self.hwCode == hwCodes[2]:
             intel = Intel(self.distribution, self.log)
             intel.installIntel(self.driver)

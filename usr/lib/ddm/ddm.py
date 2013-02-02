@@ -77,6 +77,7 @@ class DDM:
         self.lockFile = '/var/lib/dpkg/lock'
         self.debug = False
         self.install = False
+        self.isHybrid = False
         self.logPath = ''
         self.kernelRelease = None
         self.queue = Queue.Queue()
@@ -158,6 +159,8 @@ class DDM:
                 self.currentHwCode = hwCodes[1]
                 self.manufacturerModules = self.xc.getModules(hwCodes[1])
                 self.loadDriverSection(self.atiDrivers)
+                if self.intelDrivers:
+                    self.isHybrid = True
             elif self.intelDrivers:
                 self.currentHwCode = hwCodes[2]
                 self.manufacturerModules = self.xc.getModules(hwCodes[2])
@@ -333,11 +336,11 @@ class DDM:
                     # Install in separate thread
                     self.prevDriverPath = path
                     self.toggleGuiElements(True)
-                    t = DriverInstall(self.distribution, self.log, hwCode, driver)
+                    t = DriverInstall(self.distribution, self.log, hwCode, driver, self.isHybrid)
                     t.daemon = True
                     t.start()
                     # Run spinner as long as the thread is alive
-                    self.log.write('Check every 5 miliseconds if thread is still active', 'ddm.driverCheckBoxToggled', 'debug')
+                    #self.log.write('Check every 5 miliseconds if thread is still active', 'ddm.driverCheckBoxToggled', 'debug')
                     glib.timeout_add(5, self.checkInstallThread, driver)
             else:
                 # Toggle previous row as well when rows has changed
@@ -426,7 +429,7 @@ class DDM:
         t.start()
         self.queue.join()
         # Run spinner as long as the thread is alive
-        self.log.write('Check every 5 miliseconds if thread is still active', 'ddm.getHardwareInfo', 'debug')
+        #self.log.write('Check every 5 miliseconds if thread is still active', 'ddm.getHardwareInfo', 'debug')
         glib.timeout_add(5, self.checkGetInfoThread)
 
     # ===============================================

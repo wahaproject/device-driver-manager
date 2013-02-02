@@ -43,11 +43,11 @@ clean:
 install: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k 
+	dh_prep 
 	dh_installdirs
 
-	mkdir -p $(CURDIR)/debian/device-driver-manager
-	cp -r $(CURDIR)/usr $(CURDIR)/debian/device-driver-manager/
+	mkdir -p $(CURDIR)/debian/ddm
+	cp -r $(CURDIR)/usr $(CURDIR)/debian/ddm/
 
 # Build architecture-independent files here.
 binary-indep: build install

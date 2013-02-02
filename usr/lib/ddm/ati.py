@@ -68,7 +68,7 @@ class ATI():
         return hwList
 
     # Called from drivers.py: install the ATI drivers
-    def installATI(self, driver):
+    def installATI(self, driver, isHybrid=False):
         try:
             isConfigured = False
             module = self.xc.getModuleForDriver(hwCodes[1], driver)
@@ -82,7 +82,10 @@ class ATI():
                 # Configure ATI
                 if module == 'fglrx':
                     self.log.write('Configure ATI...', 'ati.installATI', 'debug')
-                    self.ec.run('aticonfig --initial -f')
+                    if isHybrid:
+                        self.ec.run('aticonfig --adapter=all --initial -f')
+                    else:
+                        self.ec.run('aticonfig --initial -f')
                     isConfigured = True
 
             if not isConfigured:

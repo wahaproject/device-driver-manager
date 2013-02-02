@@ -6,6 +6,7 @@ import re
 import operator
 import string
 import shutil
+import apt
 from datetime import datetime
 from execcmd import ExecCmd
 try:
@@ -402,10 +403,7 @@ def getPackageStatus(packageName):
 # Check if a package is installed
 def isPackageInstalled(packageName):
     isInstalled = False
-    cmd = 'dpkg -s %s | grep Status' % packageName
-    ec = ExecCmd(log)
-    packageList = ec.run(cmd, False)
-    if len(packageList) == 1:
+    if getPackageVersion(packageName) != '':
         isInstalled = True
     return isInstalled
 
@@ -413,19 +411,27 @@ def isPackageInstalled(packageName):
 # List all dependencies of a package
 def getPackageDependencies(packageName, reverseDepends=False):
     retList = []
-    cmd = 'apt-cache depends %s | grep " Depends:" | sed -e "s/ Depends: //"' % packageName
-    if reverseDepends:
-        cmd = 'apt-cache rdepends %s | grep "^ "' % packageName
-    ec = ExecCmd(log)
-    depList = ec.run(cmd, False)
-    if depList:
-        for line in depList:
-            if line[0:2] != 'E:':
-                matchObj = re.search('([a-z0-9\-]+)', line)
-                if matchObj:
-                    if matchObj.group(1) != '':
-                        retList.append(matchObj.group(1))
-
+    try:
+        if reverseDepends:
+            cmd = 'apt-cache rdepends %s | grep "^ "' % packageName
+            ec = ExecCmd(log)
+            depList = ec.run(cmd, False)
+            if depList:
+                for line in depList:
+                    if line[0:2] != 'E:':
+                        matchObj = re.search('([a-z0-9\-]+)', line)
+                        if matchObj:
+                            if matchObj.group(1) != '':
+                                retList.append(matchObj.group(1))
+        else:
+            cache = apt.Cache()
+            pkg = cache[packageName]
+            for basedeps in pkg.installed.dependencies:
+                for dep in basedeps:
+                    if dep.version != '':
+                        retList.append(dep.name)
+    except:
+        pass
     return retList
 
 
@@ -467,29 +473,32 @@ def killProcessByName(processName):
 # Get the package version number
 def getPackageVersion(packageName, candidate=False):
     version = ''
-    cmd = 'apt-cache policy %s | grep Installed' % packageName
-    if candidate:
-        cmd = 'apt-cache policy %s | grep Candidate' % packageName
-    ec = ExecCmd(log)
-    versionList = ec.run(cmd, False)
-    for line in versionList:
-        versionObj = re.search(':\s([\d\.:]*)', line.lower())
-        if versionObj:
-            version = versionObj.group(1)
+    try:
+        cache = apt.Cache()
+        pkg = cache[packageName]
+        if candidate:
+            version = pkg.candidate.version
+        elif pkg.installed is not None:
+            version = pkg.installed.version
+    except:
+        pass
     return version
 
 
-# Get the package description (first line)
-def getPackageDescription(packageName):
-    name = ''
-    cmd = 'apt-cache show %s | grep Description[\-a-z]*:' % packageName
-    ec = ExecCmd(log)
-    nameList = ec.run(cmd, False)
-    for line in nameList:
-        nameObj = re.search(':\s(.*)', line)
-        if nameObj:
-            name = nameObj.group(1)
-    return name
+# Get the package description
+def getPackageDescription(packageName, firstLineOnly=True):
+    descr = ''
+    try:
+        cache = apt.Cache()
+        pkg = cache[packageName]
+        descr = pkg.installed.description
+        if firstLineOnly:
+            lines = descr.split('\n')
+            if lines:
+                descr = lines[0]
+    except:
+        pass
+    return descr
 
 
 # Check if system has wireless (not necessarily a wireless connection)

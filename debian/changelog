@@ -1,5 +1,20 @@
-device-driver-manager (0.2.4) debian; urgency=low
+ddm (0.5.4) debian; urgency=low
+
+  * Better support for localized systems version 0.5.4
+
+ -- Schoelje <schoelje@schoelje.nl>  Fri, 01 Feb 2013 10:18:05 +0100
+
+ 
+ddm (0.5.3) debian; urgency=low
+
+  * Driver switching version 0.5.3
+
+ -- Schoelje <schoelje@schoelje.nl>  Tue, 23 Jan 2013 08:38:00 +0100
+
+
+ddm (0.2.4) debian; urgency=low
 
   * Sync to git version 0.2.4
 
- -- Frederic Gaudet <fred@linuxmint.com>  Tue, 22 Jan 2012 11:07:00 +0200
+ -- Frederic Gaudet <fred@linuxmint.com>  Tue, 22 Jan 2013 11:07:00 +0100
+ 
