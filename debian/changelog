@@ -1,0 +1,5 @@
+device-driver-manager (0.2.4) debian; urgency=low
+
+  * Sync to git version 0.2.4
+
+ -- Frederic Gaudet <fred@linuxmint.com>  Tue, 22 Jan 2012 11:07:00 +0200
