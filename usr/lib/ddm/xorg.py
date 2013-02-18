@@ -65,7 +65,7 @@ class XorgConf():
         f = open(logPath, 'r')
         log = f.read()
         f.close()
-        matchObj = re.search('([a-zA-Z]*)\(\d+\):\s+depth', log, flags=re.IGNORECASE)
+        matchObj = re.search('([a-zA-Z]*)\(\d+\):\s+depth.*framebuffer', log, flags=re.IGNORECASE)
         if matchObj:
             module = matchObj.group(1).lower()
 

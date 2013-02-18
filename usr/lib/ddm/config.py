@@ -18,7 +18,8 @@ class Config():
             filePath = os.path.join(curdir, filePath)
         self.filePath = filePath
         if not os.path.exists(self.filePath):
-            f = open(self.filePath, "w").write("")
+            f = open(self.filePath, "w")
+            f.write("")
             f.close()
         self.parser = ConfigParser.SafeConfigParser()
         self.parser.read([self.filePath])

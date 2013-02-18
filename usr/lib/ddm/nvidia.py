@@ -244,7 +244,7 @@ class Nvidia():
             debConfList.append('nvidia-installer-cleanup nvidia-installer-cleanup/remove-conflicting-libraries boolean true')
             #debConfList.append('nvidia-support nvidia-support/removed-but-enabled-in-xorg-conf error ')
             #debConfList.append('nvidia-support nvidia-support/warn-mismatching-module-version error ')
-            debConfList.append('nvidia-support nvidia-support/last-mismatching-module-version string 304.48')
+            debConfList.append('nvidia-support nvidia-support/last-mismatching-module-version string 304.64')
             debConfList.append('nvidia-support nvidia-support/needs-xorg-conf-to-enable note ')
             debConfList.append('nvidia-support nvidia-support/create-nvidia-conf boolean true')
             debConfList.append('nvidia-installer-cleanup nvidia-installer-cleanup/uninstall-nvidia-installer boolean true')
