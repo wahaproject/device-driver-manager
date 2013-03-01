@@ -162,7 +162,10 @@ class ATI():
                 drvList.append(['libgl1-fglrx-glx', 1])
                 drvList.append(['glx-alternative-fglrx', 0])
                 drvList.append(['fglrx-control', 1])
-                drvList.append(['fglrx-glx-ia32', 2])
+
+                # 64-bit only?
+                if functions.getPackageVersion('fglrx-glx-ia32') != '':
+                    drvList.append(['fglrx-glx-ia32', 2])
             else:
                 # Radeon, fbdev, vesa
                 drvList.append([driver, 1])
