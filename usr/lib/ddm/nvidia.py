@@ -80,13 +80,14 @@ class Nvidia():
         try:
             isConfigured = False
             module = self.xc.getModuleForDriver(hwCodes[0], driver)
+            version = functions.getPackageVersion(driver, True).split('-')[0]
 
             # Install driver if not already installed
             if not functions.isPackageInstalled(driver):
                 # Install the appropriate drivers
                 self.log.write('Install driver: %s' % driver, 'nvidia.installNvidia', 'info')
                 packages = self.getAdditionalPackages(driver)
-                self.installNvidiaPackages(packages)
+                self.installNvidiaPackages(packages, version)
                 # Configure nvidia for Debian
                 if self.distribution == 'debian' and module == 'nvidia':
                     self.log.write('Configure Nvidia...', 'nvidia.installNvidia', 'debug')
@@ -110,14 +111,15 @@ class Nvidia():
 
             self.log.write('Driver installed: %s' % driver, 'nvidia.installNvidia', 'info')
 
-        except Exception, detail:
+        except Exception as detail:
             self.log.write(detail, 'nvidia.installNvidia', 'exception')
 
     # Called from drivers.py: remove the Nvidia drivers and revert to Nouveau
     def removeNvidia(self, driver):
         try:
             # Preseed answers for some packages
-            self.preseedNvidiaPackages('purge')
+            version = functions.getPackageVersion(driver, True).split('-')[0]
+            self.preseedNvidiaPackages('purge', version)
 
             self.log.write('Removing Nvidia drivers', 'nvidia.removeNvidia', 'info')
             packages = self.getAdditionalPackages(driver)
@@ -138,7 +140,7 @@ class Nvidia():
 
             self.log.write('Driver removed: %s' % driver, 'nvidia.removeNvidia', 'info')
 
-        except Exception, detail:
+        except Exception as detail:
             self.log.write(detail, 'nvidia.removeNvidia', 'exception')
 
     def getDriverDescription(self, driver):
@@ -156,7 +158,7 @@ class Nvidia():
         return description
 
     # Install the given packages
-    def installNvidiaPackages(self, packageList):
+    def installNvidiaPackages(self, packageList, version):
         try:
             removePackages = ''
             installPackages = ''
@@ -181,14 +183,14 @@ class Nvidia():
                 self.ec.run(nvDrvRemCmd)
 
             # Preseed answers for some packages
-            self.preseedNvidiaPackages('install')
+            self.preseedNvidiaPackages('install', version)
 
             # Install the packages
             self.log.write('Install drivers: %s' % installPackages, 'nvidia.installNvidiaPackages', 'debug')
             nvDrvInstCmd = 'apt-get -y --force-yes install%s' % installPackages
             self.ec.run(nvDrvInstCmd)
 
-        except Exception, detail:
+        except Exception as detail:
             self.log.write(detail, 'nvidia.installNvidiaPackages', 'exception')
 
     # Get additional packages
@@ -231,7 +233,7 @@ class Nvidia():
 
         return drvList
 
-    def preseedNvidiaPackages(self, action):
+    def preseedNvidiaPackages(self, action, version):
         if self.distribution == 'debian':
             # Run on configured system and debconf-utils installed:
             # debconf-get-selections | grep nvidia > debconf-nvidia.seed
@@ -244,7 +246,7 @@ class Nvidia():
             debConfList.append('nvidia-installer-cleanup nvidia-installer-cleanup/remove-conflicting-libraries boolean true')
             #debConfList.append('nvidia-support nvidia-support/removed-but-enabled-in-xorg-conf error ')
             #debConfList.append('nvidia-support nvidia-support/warn-mismatching-module-version error ')
-            debConfList.append('nvidia-support nvidia-support/last-mismatching-module-version string 304.64')
+            debConfList.append('nvidia-support nvidia-support/last-mismatching-module-version string ' + version)
             debConfList.append('nvidia-support nvidia-support/needs-xorg-conf-to-enable note ')
             debConfList.append('nvidia-support nvidia-support/create-nvidia-conf boolean true')
             debConfList.append('nvidia-installer-cleanup nvidia-installer-cleanup/uninstall-nvidia-installer boolean true')
