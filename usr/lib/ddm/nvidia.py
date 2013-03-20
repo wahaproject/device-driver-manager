@@ -12,19 +12,19 @@ blacklistPath = '/etc/modprobe.d/blacklist-nouveau.conf'
 
 
 class Nvidia():
-    def __init__(self, distribution, loggerObject, additionalDrivers=True):
+    def __init__(self, distribution, loggerObject, graphicsCard, additionalDrivers=True):
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
         self.xc = XorgConf(self.log)
-        self.hw = functions.getGraphicsCards('10de')
+        # Intel manufacturerID = 10de
+        self.graphicsCard = graphicsCard
         self.drivers = []
 
         # Test (01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GT218 [GeForce G210M] [10de:0a74] (rev ff))
-        # self.hw = ['NVIDIA Corporation GT218 [GeForce G210M]']
-        # self.hw = []
+        # self.graphicsCard = [['NVIDIA Corporation GT218 [GeForce G210M]', '10de', '0a74']]
 
-        if self.hw:
+        if self.graphicsCard:
             # Install nvidia-detect if it isn't installed already
             if self.distribution == 'debian':
                 if functions.getPackageVersion('nvidia-detect') == '':
@@ -59,19 +59,18 @@ class Nvidia():
     # Called from drivers.py: Check for Nvidia
     def getNvidia(self):
         hwList = []
-        for card in self.hw:
-            if self.drivers:
-                for drv in self.drivers:
-                    status = functions.getPackageStatus(drv)
-                    version = functions.getPackageVersion(drv, True)
-                    description = self.getDriverDescription(drv)
-                    if status != packageStatus[2]:
-                        self.log.write('Nvidia driver found: %s (%s)' % (drv, status), 'nvidia.getNvidia', 'info')
-                        hwList.append([card, hwCodes[0], status, drv, version, description])
-                    else:
-                        self.log.write('Driver not installable: %s' % drv, 'nvidia.getNvidia', 'warning')
-            else:
-                self.log.write('No driver found for: %s' % card, 'nvidia.getNvidia', 'warning')
+        if self.drivers and self.graphicsCard:
+            for drv in self.drivers:
+                status = functions.getPackageStatus(drv)
+                version = functions.getPackageVersion(drv, True)
+                description = self.getDriverDescription(drv)
+                if status != packageStatus[2]:
+                    self.log.write('Nvidia driver found: %s (%s)' % (drv, status), 'nvidia.getNvidia', 'info')
+                    hwList.append([self.graphicsCard[0], hwCodes[0], status, drv, version, description])
+                else:
+                    self.log.write('Driver not installable: %s' % drv, 'nvidia.getNvidia', 'warning')
+        else:
+            self.log.write('No driver found for: %s (%s:%s)' % (self.graphicsCard[0], self.graphicsCard[1], self.graphicsCard[2]), 'nvidia.getNvidia', 'warning')
 
         return hwList
 
@@ -111,7 +110,7 @@ class Nvidia():
 
             self.log.write('Driver installed: %s' % driver, 'nvidia.installNvidia', 'info')
 
-        except Exception as detail:
+        except Exception, detail:
             self.log.write(detail, 'nvidia.installNvidia', 'exception')
 
     # Called from drivers.py: remove the Nvidia drivers and revert to Nouveau
@@ -140,7 +139,7 @@ class Nvidia():
 
             self.log.write('Driver removed: %s' % driver, 'nvidia.removeNvidia', 'info')
 
-        except Exception as detail:
+        except Exception, detail:
             self.log.write(detail, 'nvidia.removeNvidia', 'exception')
 
     def getDriverDescription(self, driver):
@@ -190,7 +189,7 @@ class Nvidia():
             nvDrvInstCmd = 'apt-get -y --force-yes install%s' % installPackages
             self.ec.run(nvDrvInstCmd)
 
-        except Exception as detail:
+        except Exception, detail:
             self.log.write(detail, 'nvidia.installNvidiaPackages', 'exception')
 
     # Get additional packages

@@ -13,29 +13,30 @@ hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
 
 # Class to check for supported drivers
 class DriverGet(threading.Thread):
-    def __init__(self, distribution, loggerObject, hwCode, queue):
+    def __init__(self, distribution, loggerObject, hwCode, queue, graphicsCard):
         threading.Thread.__init__(self)
         self.log = loggerObject
         self.log.write('Initialize DriverGet', 'drivers.DriverGet', 'debug')
         self.distribution = distribution
         self.hwCode = hwCode
         self.queue = queue
+        self.graphicsCard = graphicsCard
 
     # This will only check for Nvidia, ATI, Broadcom and PAE
     def run(self):
         hwList = []
 
         if self.hwCode == hwCodes[0]:
-            nv = Nvidia(self.distribution, self.log)
+            nv = Nvidia(self.distribution, self.log, self.graphicsCard)
             hwList = nv.getNvidia()
         elif self.hwCode == hwCodes[1]:
-            ati = ATI(self.distribution, self.log)
+            ati = ATI(self.distribution, self.log, self.graphicsCard)
             hwList = ati.getATI()
         elif self.hwCode == hwCodes[2]:
-            intel = Intel(self.distribution, self.log)
+            intel = Intel(self.distribution, self.log, self.graphicsCard)
             hwList = intel.getIntel()
         elif self.hwCode == hwCodes[3]:
-            via = Via(self.distribution, self.log)
+            via = Via(self.distribution, self.log, self.graphicsCard)
             hwList = via.getVia()
         elif self.hwCode == hwCodes[4]:
             bc = Broadcom(self.distribution, self.log)

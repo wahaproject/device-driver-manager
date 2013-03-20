@@ -10,18 +10,19 @@ hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
 
 class Intel():
 
-    def __init__(self, distribution, loggerObject, additionalDrivers=True):
+    def __init__(self, distribution, loggerObject, graphicsCard, additionalDrivers=True):
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
         self.xc = XorgConf(self.log)
-        self.hw = functions.getGraphicsCards('8086')
+        # Intel manufacturerID = 8086
+        self.graphicsCard = graphicsCard
         self.drivers = []
 
         # Test (00:02.0 VGA compatible controller [0300]: Intel Corporation Atom Processor D4xx/D5xx/N4xx/N5xx Integrated Graphics Controller [8086:a011])
-        #self.hw = ['Intel Corporation Atom Processor D4xx/D5xx/N4xx/N5xx Integrated Graphics Controller']
+        #self.graphicsCard = [['Intel Corporation Atom Processor D4xx/D5xx/N4xx/N5xx Integrated Graphics Controller', '8086', 'a011']]
 
-        if self.hw:
+        if self.graphicsCard:
             self.drivers.append('xserver-xorg-video-intel')
             if additionalDrivers:
                 self.drivers.append('xserver-xorg-video-fbdev')
@@ -31,17 +32,16 @@ class Intel():
     def getIntel(self):
         # Check for Intel cards
         hwList = []
-        for card in self.hw:
-            self.log.write('Intel card found: %s' % card, 'ati.getATI', 'info')
-            for drv in self.drivers:
-                status = functions.getPackageStatus(drv)
-                version = functions.getPackageVersion(drv, True)
-                description = self.getDriverDescription(drv)
-                if status != packageStatus[2]:
-                    self.log.write('Intel driver found: %s (%s)' % (drv, status), 'intel.getIntel', 'info')
-                    hwList.append([card, hwCodes[2], status, drv, version, description])
-                else:
-                    self.log.write('Driver not installable: %s' % drv, 'intel.getIntel', 'warning')
+        self.log.write('Intel card found: %s' % self.graphicsCard[0], 'ati.getATI', 'info')
+        for drv in self.drivers:
+            status = functions.getPackageStatus(drv)
+            version = functions.getPackageVersion(drv, True)
+            description = self.getDriverDescription(drv)
+            if status != packageStatus[2]:
+                self.log.write('Intel driver found: %s (%s)' % (drv, status), 'intel.getIntel', 'info')
+                hwList.append([self.graphicsCard[0], hwCodes[2], status, drv, version, description])
+            else:
+                self.log.write('Driver not installable: %s' % drv, 'intel.getIntel', 'warning')
 
         return hwList
 

@@ -232,22 +232,10 @@ def getGraphicsCards(pciId=None):
     ec = ExecCmd(log)
     hwGraph = ec.run(cmdGraph, False)
     for line in hwGraph:
-        graphMatch = re.search(':\s(.*)\[', line)
+        graphMatch = re.search(':\s(.*)\[(\w*):(\w*)\]', line)
         if graphMatch and (pciId is None or pciId.lower() + ':' in line.lower()):
-            graphicsCard.append(graphMatch.group(1))
+            graphicsCard.append([graphMatch.group(1), graphMatch.group(2), graphMatch.group(3)])
     return graphicsCard
-
-
-def getGraphicsCardsManufacturerPciId():
-    pciId = []
-    cmdGraph = 'lspci -nn | grep VGA'
-    ec = ExecCmd(log)
-    hwGraph = ec.run(cmdGraph, False)
-    for line in hwGraph:
-        idMatch = re.search('\[(\w*):(\w*)\]', line)
-        if idMatch:
-            pciId.append([idMatch.group(1), idMatch.group(2)])
-    return pciId
 
 
 # Get system version information

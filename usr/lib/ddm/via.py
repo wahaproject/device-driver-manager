@@ -10,18 +10,19 @@ hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
 
 class Via():
 
-    def __init__(self, distribution, loggerObject, additionalDrivers=True):
+    def __init__(self, distribution, loggerObject, graphicsCard, additionalDrivers=True):
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
         self.xc = XorgConf(self.log)
-        self.hw = functions.getGraphicsCards('1106')
+        # Intel manufacturerID = 1106
+        self.graphicsCard = graphicsCard
         self.drivers = []
 
         # Test (01:00.0 VGA compatible controller [0300]: VIA Technologies, Inc KM400/KN400/P4P800 [S3 Unichrome][1106:7205] (rev 01))
-        #self.hw = ['VIA Technologies, Inc KM400/KN400/P4P800 [S3 Unichrome]']
+        #self.graphicsCard = [['VIA Technologies, Inc KM400/KN400/P4P800 [S3 Unichrome]', '1106', '7205']]
 
-        if self.hw:
+        if self.graphicsCard:
             self.drivers.append('xserver-xorg-video-openchrome')
             if additionalDrivers:
                 self.drivers.append('xserver-xorg-video-vesa')
@@ -30,17 +31,16 @@ class Via():
     def getVia(self):
         # Check for Via cards
         hwList = []
-        for card in self.hw:
-            self.log.write('Via card found: %s' % card, 'via.getATI', 'info')
-            for drv in self.drivers:
-                status = functions.getPackageStatus(drv)
-                version = functions.getPackageVersion(drv, True)
-                description = self.getDriverDescription(drv)
-                if status != packageStatus[2]:
-                    self.log.write('Via driver found: %s (%s)' % (drv, status), 'via.getVia', 'info')
-                    hwList.append([card, hwCodes[3], status, drv, version, description])
-                else:
-                    self.log.write('Driver not installable: %s' % drv, 'via.getVia', 'warning')
+        self.log.write('Via card found: %s' % self.graphicsCard[0], 'via.getATI', 'info')
+        for drv in self.drivers:
+            status = functions.getPackageStatus(drv)
+            version = functions.getPackageVersion(drv, True)
+            description = self.getDriverDescription(drv)
+            if status != packageStatus[2]:
+                self.log.write('Via driver found: %s (%s)' % (drv, status), 'via.getVia', 'info')
+                hwList.append([self.graphicsCard[0], hwCodes[3], status, drv, version, description])
+            else:
+                self.log.write('Driver not installable: %s' % drv, 'via.getVia', 'warning')
 
         return hwList
 

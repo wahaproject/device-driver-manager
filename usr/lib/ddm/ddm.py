@@ -420,11 +420,11 @@ class DDM:
             functions.pushMessage(self.statusbar, self.version)
 
     # Make thread safe by queue
-    def getHardwareInfo(self, hwCode, lastItem=False):
+    def getHardwareInfo(self, hwCode, graphicsCard=None):
         self.toggleGuiElements(True)
 
         # Start the thread
-        t = DriverGet(self.distribution, self.log, hwCode, self.queue)
+        t = DriverGet(self.distribution, self.log, hwCode, self.queue, graphicsCard)
         t.daemon = True
         t.start()
         self.queue.join()
@@ -527,14 +527,29 @@ class DDM:
 
         # Get hardware info
         # Graphics
-        self.getHardwareInfo(hwCodes[0])
-        self.getHardwareInfo(hwCodes[1])
-        self.getHardwareInfo(hwCodes[2])
-        self.getHardwareInfo(hwCodes[3])
+        cards = functions.getGraphicsCards()
+        cardsDone = []
+        for card in cards:
+            if card[1] == '10de' and hwCodes[0] not in cardsDone:
+                # Nvidia
+                self.getHardwareInfo(hwCodes[0], card)
+                cardsDone.append(hwCodes[0])
+            if card[1] == '1002' and hwCodes[1] not in cardsDone:
+                # ATI
+                self.getHardwareInfo(hwCodes[1], card)
+                cardsDone.append(hwCodes[1])
+            if card[1] == '8086' and hwCodes[2] not in cardsDone:
+                # Intel
+                self.getHardwareInfo(hwCodes[2], card)
+                cardsDone.append(hwCodes[2])
+            if card[1] == '1106' and hwCodes[3] not in cardsDone:
+                # Via
+                self.getHardwareInfo(hwCodes[3], card)
+                cardsDone.append(hwCodes[3])
         # Wireless
         self.getHardwareInfo(hwCodes[4])
         # PAE
-        self.getHardwareInfo(hwCodes[5], True)
+        self.getHardwareInfo(hwCodes[5])
 
         # Start automatic install
         if self.install:

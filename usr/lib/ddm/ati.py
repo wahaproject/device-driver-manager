@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import os
-import re
 import functions
 from execcmd import ExecCmd
 from xorg import XorgConf
@@ -13,18 +12,19 @@ atiStartSerie = 5000
 
 class ATI():
 
-    def __init__(self, distribution, loggerObject, additionalDrivers=True):
+    def __init__(self, distribution, loggerObject, graphicsCard, additionalDrivers=True):
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
         self.xc = XorgConf(self.log)
-        self.hw = functions.getGraphicsCards('1002')
+        # Intel manufacturerID = 1002
+        self.graphicsCard = graphicsCard
         self.drivers = []
 
         # Test (01:00.0 VGA compatible controller [0300]: Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series] [1002:68e0])
-        #self.hw = ['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]']
+        #self.graphicsCard = [['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]', '1002', '68e0']]
 
-        if self.hw:
+        if self.graphicsCard:
             if self.distribution == 'debian':
                 # Add Debian driver
                 self.drivers.append('fglrx-driver')
@@ -42,28 +42,27 @@ class ATI():
     def getATI(self):
         # Check for ATI cards
         hwList = []
-        for card in self.hw:
-            self.log.write('ATI card found: %s' % card, 'ati.getATI', 'info')
-            # Get the ATI chip set serie
-            atiSerie = re.search('\s\d{4,}', card)
-            if atiSerie:
-                self.log.write('ATI chip serie found: %s' % atiSerie.group(0), 'ati.getATI', 'info')
-                intSerie = functions.strToNumber(atiSerie.group(0))
-                # Only add series from atiStartSerie
-                if intSerie >= atiStartSerie:
-                    for drv in self.drivers:
-                        status = functions.getPackageStatus(drv)
-                        version = functions.getPackageVersion(drv, True)
-                        description = self.getDriverDescription(drv)
-                        if status != packageStatus[2]:
-                            self.log.write('ATI driver found: %s (%s)' % (drv, status), 'ati.getATI', 'info')
-                            hwList.append([card, hwCodes[1], status, drv, version, description])
-                        else:
-                            self.log.write('Driver not installable: %s' % drv, 'ati.getATI', 'warning')
-                else:
-                    self.log.write('ATI chip serie not supported: %s' % str(intSerie), 'ati.getATI', 'warning')
+        self.log.write('ATI card found: %s' % self.graphicsCard[0], 'ati.getATI', 'info')
+        # Get the ATI chip set serie
+        atiSerie = self.graphicsCard[2]
+        if atiSerie:
+            self.log.write('ATI chip serie found: %s' % atiSerie, 'ati.getATI', 'info')
+            intSerie = functions.strToNumber(atiSerie)
+            # Only add series from atiStartSerie
+            if intSerie >= atiStartSerie:
+                for drv in self.drivers:
+                    status = functions.getPackageStatus(drv)
+                    version = functions.getPackageVersion(drv, True)
+                    description = self.getDriverDescription(drv)
+                    if status != packageStatus[2]:
+                        self.log.write('ATI driver found: %s (%s)' % (drv, status), 'ati.getATI', 'info')
+                        hwList.append([self.graphicsCard[0], hwCodes[1], status, drv, version, description])
+                    else:
+                        self.log.write('Driver not installable: %s' % drv, 'ati.getATI', 'warning')
             else:
-                self.log.write('No ATI chip serie found: %s' % card, 'ati.getATI', 'warning')
+                self.log.write('ATI chip serie not supported: %s' % str(intSerie), 'ati.getATI', 'warning')
+        else:
+            self.log.write('No ATI chip serie found: %s (%s:%s)' % (self.graphicsCard[0], self.graphicsCard[1], self.graphicsCard[2]), 'ati.getATI', 'warning')
 
         return hwList
 
@@ -164,8 +163,8 @@ class ATI():
                 drvList.append(['fglrx-control', 1])
 
                 # 64-bit only?
-                if functions.getPackageVersion('fglrx-glx-ia32') != '':
-                    drvList.append(['fglrx-glx-ia32', 2])
+                #if functions.getPackageVersion('fglrx-glx-ia32') != '':
+                #    drvList.append(['fglrx-glx-ia32', 2])
             else:
                 # Radeon, fbdev, vesa
                 drvList.append([driver, 1])
