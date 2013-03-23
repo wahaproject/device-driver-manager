@@ -1,14 +1,13 @@
 Source: ddm
 Section: admin
 Priority: optional
-Maintainer: Schoelje <schoelje@schoelje.nl>
+Maintainer: Schoelje <schoelje@solydxk.com>
 Build-Depends: debhelper (>= 5)
 Standards-Version: 3.7.2
 
 Package: ddm
-Version: 0.5.4
 Architecture: all
-Maintainer: Schoelje <schoelje@schoelje.nl>
+Maintainer: Schoelje <schoelje@solydxk.com>
 Installed-Size: 216
 Depends: python (>= 2.7), python-gtk2, python-glade2, aptitude, wireless-tools, apt, dpkg, pciutils, debconf, lsof
 Section: admin

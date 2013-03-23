@@ -33,9 +33,10 @@ menuItems = ['graphics', 'wireless', 'kernel']
 class DDM:
 
     def __init__(self):
+        self.scriptDir = os.path.dirname(os.path.realpath(__file__))
         # Load window and widgets
         self.builder = gtk.Builder()
-        self.builder.add_from_file('/usr/share/ddm/ddm.glade')
+        self.builder.add_from_file(os.path.join(self.scriptDir, '../../share/ddm/ddm.glade'))
         self.window = self.builder.get_object('ddmWindow')
         self.lblTitle = self.builder.get_object('lblTitle')
         self.lblCardName = self.builder.get_object('lblCardName')
@@ -332,16 +333,20 @@ class DDM:
                 if functions.isFileLocked(self.lockFile):
                     MessageDialogSave('Locked', 'Could not get lock on %s.\n\nClose any programs locking the file and try again.' % self.lockFile, gtk.MESSAGE_WARNING, self.window).show()
                 else:
-                    self.log.write('Driver to install: %s' % driver, 'ddm.driverCheckBoxToggled', 'debug')
-                    # Install in separate thread
-                    self.prevDriverPath = path
-                    self.toggleGuiElements(True)
-                    t = DriverInstall(self.distribution, self.log, hwCode, driver, self.isHybrid)
-                    t.daemon = True
-                    t.start()
-                    # Run spinner as long as the thread is alive
-                    #self.log.write('Check every 5 miliseconds if thread is still active', 'ddm.driverCheckBoxToggled', 'debug')
-                    glib.timeout_add(5, self.checkInstallThread, driver)
+                    cardsDone = []
+                    for card in self.cards:
+                        if hwCode not in cardsDone:
+                            self.log.write('Driver to install: %s' % driver, 'ddm.driverCheckBoxToggled', 'debug')
+                            # Install in separate thread
+                            self.prevDriverPath = path
+                            self.toggleGuiElements(True)
+                            t = DriverInstall(self.distribution, self.log, hwCode, driver, card, self.isHybrid)
+                            t.daemon = True
+                            t.start()
+                            # Run spinner as long as the thread is alive
+                            #self.log.write('Check every 5 miliseconds if thread is still active', 'ddm.driverCheckBoxToggled', 'debug')
+                            glib.timeout_add(5, self.checkInstallThread, driver)
+                            cardsDone.append(hwCode)
             else:
                 # Toggle previous row as well when rows has changed
                 #if self.prevDriverPath != path:
@@ -527,9 +532,13 @@ class DDM:
 
         # Get hardware info
         # Graphics
-        cards = functions.getGraphicsCards()
+        self.cards = functions.getGraphicsCards()
+        # ATI test: must not show
+        # self.cards = [['Advanced Micro Devices [AMD] nee ATI Device', '1002', '9992']]
+        # ATI test: show
+        # self.cards = [['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]', '1002', '68e0']]
         cardsDone = []
-        for card in cards:
+        for card in self.cards:
             if card[1] == '10de' and hwCodes[0] not in cardsDone:
                 # Nvidia
                 self.getHardwareInfo(hwCodes[0], card)

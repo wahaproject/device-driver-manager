@@ -6,6 +6,7 @@ import logging
 import functions
 import gtk
 from dialogs import MessageDialog
+from treeview import TreeViewHandler
 
 
 class Logger():
@@ -45,7 +46,7 @@ class Logger():
             logging.getLogger('').addHandler(console)
 
     # Write message
-    def write(self, message, loggerName='log', logLevel='debug'):
+    def write(self, message, loggerName='log', logLevel='debug', showErrorDialog=True):
         message = str(message).strip()
         if message != '':
             logLevel = logLevel.lower()
@@ -60,13 +61,19 @@ class Logger():
                 self.rtobjectWrite(message)
             elif logLevel == 'error':
                 myLogger.error(message)
-                MessageDialog('Error', message, gtk.MESSAGE_ERROR, self.parent).show()
+                self.rtobjectWrite(message)
+                if showErrorDialog:
+                    MessageDialog('Error', message, gtk.MESSAGE_ERROR, self.parent).show()
             elif logLevel == 'critical':
                 myLogger.critical(message)
-                MessageDialog('Critical', message, gtk.MESSAGE_ERROR, self.parent).show()
+                self.rtobjectWrite(message)
+                if showErrorDialog:
+                    MessageDialog('Critical', message, gtk.MESSAGE_ERROR, self.parent).show()
             elif logLevel == 'exception':
                 myLogger.exception(message)
-                MessageDialog('Exception', message, gtk.MESSAGE_ERROR, self.parent).show()
+                self.rtobjectWrite(message)
+                if showErrorDialog:
+                    MessageDialog('Exception', message, gtk.MESSAGE_ERROR, self.parent).show()
 
     # Return messge to given object
     def rtobjectWrite(self, message):
@@ -74,7 +81,8 @@ class Logger():
             if self.typeString == 'gtk.Label':
                 self.rtobject.set_text(message)
             elif self.typeString == 'gtk.TreeView':
-                functions.appendRowToTreeView(self.rtobject, message, True)
+                tvHandler = TreeViewHandler(None, self.rtobject)
+                tvHandler.fillTreeview([message], ['str'], [-1], 0, 400, False, True, True, fontSize=10000)
             elif self.typeString == 'gtk.Statusbar':
                 functions.pushMessage(self.rtobject, message)
             else:

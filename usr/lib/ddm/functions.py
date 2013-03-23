@@ -221,7 +221,7 @@ def getLinuxHeadersAndImage(getLatest=False, includeLatestRegExp='', excludeLate
 # Get the current kernel release
 def getKernelRelease():
     ec = ExecCmd(log)
-    kernelRelease = ec.run('uname -r')[0]
+    kernelRelease = ec.run('uname -r', False)[0]
     return kernelRelease
 
 
@@ -376,11 +376,11 @@ def getPackageStatus(packageName):
             status = packageStatus[1]
         else:
             # Package is not found: uninstallable
-            log.write('Package not found: %s' % str(packageName), 'drivers.getPackageStatus', 'warning')
+            log.write('Package not found: %s' % str(packageName), 'drivers.getPackageStatus', 'debug')
             status = packageStatus[2]
     except:
         # If something went wrong: assume that package is uninstallable
-        log.write('Could not get status info for package: %s' % str(packageName), 'drivers.getPackageStatus', 'error')
+        log.write('Could not get status info for package: %s' % str(packageName), 'drivers.getPackageStatus', 'debug')
         status = packageStatus[2]
 
     return status
@@ -389,8 +389,15 @@ def getPackageStatus(packageName):
 # Check if a package is installed
 def isPackageInstalled(packageName):
     isInstalled = False
-    if getPackageVersion(packageName) != '':
-        isInstalled = True
+    cmd = 'dpkg-query -l %s | grep ^i' % packageName
+    if '*' in packageName:
+        cmd = 'aptitude search %s | grep ^i' % packageName
+    ec = ExecCmd(log)
+    pckList = ec.run(cmd, False)
+    for line in pckList:
+        if line[:1] == 'i':
+            isInstalled = True
+            break
     return isInstalled
 
 

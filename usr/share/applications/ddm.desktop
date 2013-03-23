@@ -1,5 +1,5 @@
 [Desktop Entry]
-Categories=GNOME;GTK;Settings;DesktopSettings;
+Categories=System;Settings;
 Comment=Device Driver Manager
 Encoding=UTF-8
 Exec=ddm
