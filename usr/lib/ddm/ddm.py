@@ -233,7 +233,11 @@ class DDM:
         i = 0
         cardSet = False
         actDrvFound = False
+        showAlternatives = True
         for item in driverList:
+            if len(driverList) == 1 and item[2] == 'uninstallable':
+                showAlternatives = False
+                self.lblActivatedDriver.set_text(item[5])
             activate = False
 
             recommended = ''
@@ -289,11 +293,12 @@ class DDM:
                     msg = 'Unknown driver found.\n\nPlease remove before installing drivers with DDM.'
                     MessageDialogSave(title, msg, gtk.MESSAGE_WARNING, self.window).show()
 
-        # Fill treeview with drivers
-        #fillTreeview(contentList, columnTypesList, columnHideList=[-1], setCursor=0, setCursorWeight=400, firstItemIsColName=False, appendToExisting=False, appendToTop=False)
-        columnTypesList = ['bool', 'str', 'str', 'str', 'str']
-        self.tvHandler.fillTreeview(contentList, columnTypesList, [4], rowCnt, 600, True, False, False)
-        self.prevDriverPath = rowCnt
+        if showAlternatives:
+            # Fill treeview with drivers
+            #fillTreeview(contentList, columnTypesList, columnHideList=[-1], setCursor=0, setCursorWeight=400, firstItemIsColName=False, appendToExisting=False, appendToTop=False)
+            columnTypesList = ['bool', 'str', 'str', 'str', 'str']
+            self.tvHandler.fillTreeview(contentList, columnTypesList, [4], rowCnt, 600, True, False, False)
+            self.prevDriverPath = rowCnt
 
     # Open the manufacturer site in the default browser
     def showManufacturerSite(self, widget, event):

@@ -35,11 +35,23 @@ class Config():
                 break
         return found
 
+    def removeSection(self, section):
+        self.parser.remove_section(section)
+        f = open(self.filePath, "w")
+        self.parser.write(f)
+        f.close()
+
     def getOptions(self, section):
         options = []
         if self.doesSectionExist(section):
             options = self.parser.items(section)
         return options
+
+    def removeOption(self, section, option):
+        self.parser.remove_option(section, option)
+        f = open(self.filePath, "w")
+        self.parser.write(f)
+        f.close()
 
     def getValue(self, section, option):
         value = ''

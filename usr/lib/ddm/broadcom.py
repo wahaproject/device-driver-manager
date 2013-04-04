@@ -155,38 +155,45 @@ class Broadcom():
         self.status = ''
 
         # Get Broadcom info
-        cmdBc = 'lspci | grep Broadcom'
+        cmdBc = 'lspci | grep -i Broadcom'
         hwBc = self.ec.run(cmdBc)
+
+        # Test: not show
+        #hwBc.append('03:00.0 Ethernet controller: Broadcom Corporation NetLink BCM57788 Gigabit Ethernet PCIe (rev 01)')
+
         if hwBc:
-            self.hw = hwBc[0][hwBc[0].find(': ') + 2:]
-            self.log.write('Broadcom found: %s' % self.hw, 'broadcom.setCurrentChipInfo', 'info')
-            # Get the chip set number
-            cmdPciId = 'lspci -n -d 14e4:'
-            pciId = self.ec.run(cmdPciId)
-            if pciId:
-                chipSet = re.search('14e4:([a-zA-Z0-9]*)', pciId[0])
-                if chipSet:
-                    self.currentChip = chipSet.group(1)
-                    self.log.write('Broadcom chip set found: %s' % self.currentChip, 'broadcom.setCurrentChipInfo', 'debug')
-                    for chipList in bcChips:
-                        if self.currentChip == chipList[0]:
-                            # Supported chipset found: set variables
-                            self.installableChip = chipList[0]
-                            if self.distribution == 'debian':
-                                for drv in chipList[1]:
-                                    self.installableDrivers.append(drv)
-                            else:
-                                # Assume Ubuntu
-                                for drv in chipList[2]:
-                                    self.installableDrivers.append(drv)
-                            break
-                    # Check if a supported chip set is found
-                    if self.installableChip == '':
-                        self.log.write('Broadcom chipset not supported or ethernet controller: %s' % self.hw, 'broadcom.setCurrentChipInfo', 'warning')
-                else:
-                    self.log.write('Broadcom chipset not found: %s' % pciId[0], 'broadcom.setCurrentChipInfo', 'warning')
-            else:
-                self.log.write('Broadcom pci ID not found: %s' % self.hw, 'broadcom.setCurrentChipInfo', 'warning')
+            for bc in hwBc:
+                # Check if this a wired chipset
+                if not 'ethernet controller' in bc.lower():
+                    self.hw = bc[bc.find(': ') + 2:]
+                    self.log.write('Broadcom found: %s' % self.hw, 'broadcom.setCurrentChipInfo', 'info')
+                    # Get the chip set number
+                    cmdPciId = 'lspci -n -d 14e4:'
+                    pciId = self.ec.run(cmdPciId)
+                    if pciId:
+                        chipSet = re.search('14e4:([a-zA-Z0-9]*)', pciId[0])
+                        if chipSet:
+                            self.currentChip = chipSet.group(1)
+                            self.log.write('Broadcom chip set found: %s' % self.currentChip, 'broadcom.setCurrentChipInfo', 'debug')
+                            for chipList in bcChips:
+                                if self.currentChip == chipList[0]:
+                                    # Supported chipset found: set variables
+                                    self.installableChip = chipList[0]
+                                    if self.distribution == 'debian':
+                                        for drv in chipList[1]:
+                                            self.installableDrivers.append(drv)
+                                    else:
+                                        # Assume Ubuntu
+                                        for drv in chipList[2]:
+                                            self.installableDrivers.append(drv)
+                                    break
+                            # Check if a supported chip set is found
+                            if self.installableChip == '':
+                                self.log.write('Broadcom chipset not supported or ethernet controller: %s' % self.hw, 'broadcom.setCurrentChipInfo', 'warning')
+                        else:
+                            self.log.write('Broadcom chipset not found: %s' % pciId[0], 'broadcom.setCurrentChipInfo', 'warning')
+                    else:
+                        self.log.write('Broadcom pci ID not found: %s' % self.hw, 'broadcom.setCurrentChipInfo', 'warning')
 
     # Install the broadcom drivers
     def installBroadcom(self, driver):

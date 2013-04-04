@@ -1,5 +1,5 @@
 [Desktop Entry]
-Categories=System;Settings;
+Categories=Settings;
 Comment=Device Driver Manager
 Encoding=UTF-8
 Exec=ddm
