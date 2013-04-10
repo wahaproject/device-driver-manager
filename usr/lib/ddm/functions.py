@@ -427,17 +427,31 @@ def getPackageStatus(packageName):
 
 
 # Check if a package is installed
-def isPackageInstalled(packageName):
+def isPackageInstalled(packageName, alsoCheckVersion=True):
     isInstalled = False
-    cmd = 'dpkg-query -l %s | grep ^i' % packageName
-    if '*' in packageName:
-        cmd = 'aptitude search %s | grep ^i' % packageName
-    ec = ExecCmd(log)
-    pckList = ec.run(cmd, False)
-    for line in pckList:
-        if line[:1] == 'i':
-            isInstalled = True
-            break
+    try:
+        cmd = 'dpkg-query -l %s | grep ^i' % packageName
+        if '*' in packageName:
+            cmd = 'aptitude search %s | grep ^i' % packageName
+        ec = ExecCmd(log)
+        pckList = ec.run(cmd, False)
+        for line in pckList:
+            matchObj = re.search('([a-z]+)\s+([a-z\-_]*)', line)
+            if matchObj:
+                if matchObj.group(1)[:1] == 'i':
+                    if alsoCheckVersion:
+                        cache = apt.Cache()
+                        pkg = cache[matchObj.group(2)]
+                        if pkg.installed.version == pkg.candidate.version:
+                            isInstalled = True
+                            break
+                    else:
+                        isInstalled = True
+                        break
+            if isInstalled:
+                break
+    except:
+        pass
     return isInstalled
 
 

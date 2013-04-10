@@ -1,3 +1,21 @@
+ddm (0.6.7) debian; urgency=low
+
+  * Drivers were reported installed, even if the versions did not match
+
+ -- Schoelje <schoelje@solydxk.com>  Wed, 10 Apr 2013 23:30:00 +0100
+
+ddm (0.6.6) debian; urgency=low
+
+  * Some minor bugs resolved
+
+ -- Schoelje <schoelje@solydxk.com>  Thu, 03 Apr 2013 11:00:00 +0100
+ 
+ddm (0.6.5) debian; urgency=low
+
+  * Broadcom ethernet was mistaken for a wireless chipset
+
+ -- Schoelje <schoelje@solydxk.com>  Sat, 23 Mar 2013 15:00:00 +0100
+
 ddm (0.6.2) debian; urgency=low
 
   * Speed improvement detecting graphics cards and fix wrong detection of ATI cards

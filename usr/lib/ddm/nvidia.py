@@ -213,7 +213,7 @@ class Nvidia():
                 drvList.append(['nvidia-settings', 0])
 
                 # 64-bit only?
-                if functions.getPackageStatus('fglrx-glx-ia32') == 'notinstalled':
+                if functions.getPackageStatus('nvidia-glx-ia32') == 'notinstalled':
                     drvList.append(['nvidia-glx-ia32', 2])
             else:
                 # Nouveau, fbdev, vesa
