@@ -72,13 +72,14 @@ def getTypeString(object):
 
 
 # Convert string to number
-def strToNumber(string, toInt=False):
+def strToNumber(stringnr, toInt=False):
     nr = 0
+    stringnr = stringnr.strip()
     try:
         if toInt:
-            nr = int(string)
+            nr = int(stringnr)
         else:
-            nr = float(string)
+            nr = float(stringnr)
     except ValueError:
         nr = 0
     return nr
@@ -436,7 +437,7 @@ def isPackageInstalled(packageName, alsoCheckVersion=True):
         ec = ExecCmd(log)
         pckList = ec.run(cmd, False)
         for line in pckList:
-            matchObj = re.search('([a-z]+)\s+([a-z\-_]*)', line)
+            matchObj = re.search('([a-z]+)\s+([a-z0-9\-_\.]*)', line)
             if matchObj:
                 if matchObj.group(1)[:1] == 'i':
                     if alsoCheckVersion:
