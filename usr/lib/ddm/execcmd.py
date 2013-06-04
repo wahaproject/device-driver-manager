@@ -2,6 +2,10 @@
 
 import sys
 import subprocess
+import gettext
+
+# i18n
+gettext.install("ddm", "/usr/share/ddm/locale")
 
 
 # Class to execute a command and return the output in an array
@@ -11,7 +15,7 @@ class ExecCmd(object):
         self.log = loggerObject
 
     def run(self, cmd, realTime=True, defaultMessage=''):
-        self.log.write('Command to execute: %s' % cmd, 'execcmd.run', 'debug')
+        self.log.write(_("Command to execute: %(cmd)s") % { "cmd": cmd }, 'execcmd.run', 'debug')
 
         p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         lstOut = []

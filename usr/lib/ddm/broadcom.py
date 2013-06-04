@@ -3,7 +3,12 @@
 import os
 import re
 import functions
+import gettext
 from execcmd import ExecCmd
+from glob import glob
+
+# i18n
+gettext.install("ddm", "/usr/share/ddm/locale")
 
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
 hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
@@ -30,7 +35,7 @@ bcChips = [
 ['4311', [b43, wlDebian], [b43, wlUbuntu]],
 ['4312', [b43, wlDebian], [b43, wlUbuntu]],    # This is not a BCM4312 but BCM4311
 ['4313', [wlDebian], [wlUbuntu]],
-['4315', [lpphy, wlDebian], [lpphy, wlUbuntu]],    # This is BCM4312
+['4315', [b43, wlDebian], [b43, wlUbuntu]],    # This is BCM4312
 ['4318', [b43], [b43]],
 ['4319', [b43], [b43]],
 ['4320', [b43, b43legacy], [b43, b43legacy]],
@@ -45,15 +50,18 @@ bcChips = [
 ['432c', [b43, wlDebian], [b43, wlUbuntu]],    # Better to use firmware-b43-installer?
 ['432d', [wlDebian], [wlUbuntu]],
 ['4331', [b43], [b43]],
+['4350', [b43], [b43]],
 ['4353', [b43, brcmDebian, wlDebian], [b43, brcmUbuntu, wlUbuntu]],
 ['4357', [b43, brcmDebian, wlDebian], [b43, brcmUbuntu, wlUbuntu]],
 ['4358', [wlDebian], [wlUbuntu]],
 ['4359', [wlDebian], [wlUbuntu]],
 ['435a', [wlDebian], [wlUbuntu]],
+['4360', [], []],
 ['4365', [], []],
+['43b1', [], []],
 ['4727', [brcmDebian, wlDebian], [brcmUbuntu, wlUbuntu]],    # May need blacklisting b43 on some kernels (up to 3.2?)
 ['a8d6', [b43], [b43]],    # Untested, but the other drivers have no support at all
-['a8d8', [b43, brcmDebian, wlDebian], [b43, brcmUbuntu, wlUbuntu]],
+['a8d8', [b43, brcmDebian], [b43, brcmUbuntu]],
 ['a99d', [wlDebian], [wlUbuntu]]
 ]
 
@@ -77,7 +85,7 @@ class Broadcom():
         if self.hw != '':
             if self.currentChip != '':
                 if self.installableChip != '':
-                    self.log.write('Broadcom chip serie found: %s' % self.installableChip, 'broadcom.getBroadcom', 'info')
+                    self.log.write(_("Broadcom chip serie found: %(chip)s") % { "chip": self.installableChip }, 'broadcom.getBroadcom', 'info')
                     if self.installableDrivers:
                         for drv in self.installableDrivers:
                             # Check if you already have wireless
@@ -104,27 +112,28 @@ class Broadcom():
     # Return used wireless driver
     def getUsedDriver(self):
         driver = None
-        logPath = '/var/log/syslog'
+        logDir = '/var/log/'
+        for logPath in glob(os.path.join(logDir, 'syslog*')):
+            if driver is None and not 'gz' in logPath:
+                # Open the log file
+                lines = []
+                with open(logPath) as f:
+                    lines = list(f.read().splitlines())
 
-        # Open the log file
-        lines = []
-        with open(logPath) as f:
-            lines = list(f.read().splitlines())
-
-        for line in reversed(lines):
-            # First check for Network Manager entry
-            # Search for wlan0 in each line and get the listed driver
-            matchObj = re.search('\(wlan\d\):.*driver:\s\'([a-z]*)', line, flags=re.IGNORECASE)
-            if matchObj:
-                driver = matchObj.group(1)
-                break
-            else:
-                # Wicd
-                # Search for ieee in each line and get the listed driver
-                matchObj = re.search('ieee.*implement', line, flags=re.IGNORECASE)
-                if matchObj:
-                    driver = matchObj.group(0)
-                    break
+                for line in reversed(lines):
+                    # First check for Network Manager entry
+                    # Search for wlan0 in each line and get the listed driver
+                    matchObj = re.search('\(wlan\d\):.*driver:\s\'([a-z]*)', line, flags=re.IGNORECASE)
+                    if matchObj:
+                        driver = matchObj.group(1)
+                        break
+                    else:
+                        # Wicd
+                        # Search for ieee in each line and get the listed driver
+                        matchObj = re.search('ieee.*implement', line, flags=re.IGNORECASE)
+                        if matchObj:
+                            driver = matchObj.group(0)
+                            break
 
         if driver:
             if 'brcm' in driver:
@@ -145,7 +154,7 @@ class Broadcom():
                 # TODO: check this out!
                 driver = lpphy
 
-        self.log.write('Used wireless driver: %s' % driver, 'broadcom.getUsedDriver', 'info')
+        self.log.write(_("Used wireless driver: %(drv)s") % { "drv": driver }, 'broadcom.getUsedDriver', 'info')
         return driver
 
     # Check for Broadcom chip set and set variables
@@ -166,15 +175,15 @@ class Broadcom():
                 # Check if this a wired chipset
                 if not 'ethernet controller' in bc.lower():
                     self.hw = bc[bc.find(': ') + 2:]
-                    self.log.write('Broadcom found: %s' % self.hw, 'broadcom.setCurrentChipInfo', 'info')
+                    self.log.write(_("Broadcom found: %(broadcom)s") % { "broadcom": self.hw }, 'broadcom.setCurrentChipInfo', 'info')
                     # Get the chip set number
                     cmdPciId = 'lspci -n -d 14e4:'
                     pciId = self.ec.run(cmdPciId)
-                    if pciId:
-                        chipSet = re.search('14e4:([a-zA-Z0-9]*)', pciId[0])
+                    for pid in pciId:
+                        chipSet = re.search('14e4:([a-zA-Z0-9]*)', pid)
                         if chipSet:
                             self.currentChip = chipSet.group(1)
-                            self.log.write('Broadcom chip set found: %s' % self.currentChip, 'broadcom.setCurrentChipInfo', 'debug')
+                            self.log.write(_("Broadcom chip set found: %(chip)s") % { "chip": self.currentChip }, 'broadcom.setCurrentChipInfo', 'debug')
                             for chipList in bcChips:
                                 if self.currentChip == chipList[0]:
                                     # Supported chipset found: set variables
@@ -189,11 +198,11 @@ class Broadcom():
                                     break
                             # Check if a supported chip set is found
                             if self.installableChip == '':
-                                self.log.write('Broadcom chipset not supported or ethernet controller: %s' % self.hw, 'broadcom.setCurrentChipInfo', 'warning')
+                                self.log.write(_("Broadcom chipset not supported or ethernet controller: %(broadcom)s") % { "broadcom": self.hw }, 'broadcom.setCurrentChipInfo', 'warning')
                         else:
-                            self.log.write('Broadcom chipset not found: %s' % pciId[0], 'broadcom.setCurrentChipInfo', 'warning')
+                            self.log.write(_("Broadcom chipset not found: %(chip)s") % { "chip": pciId[0] }, 'broadcom.setCurrentChipInfo', 'warning')
                     else:
-                        self.log.write('Broadcom pci ID not found: %s' % self.hw, 'broadcom.setCurrentChipInfo', 'warning')
+                        self.log.write(_("Broadcom pci ID not found: %(id)s") % { "id": self.hw }, 'broadcom.setCurrentChipInfo', 'warning')
 
     # Install the broadcom drivers
     def installBroadcom(self, driver):
@@ -202,11 +211,11 @@ class Broadcom():
                 debDownloaded = False
                 # Get the correct linux header package
                 linHeader = functions.getLinuxHeadersAndImage()
-                self.log.write('Linux header name to install: %s' % linHeader[0], 'broadcom.installBroadcom', 'info')
+                self.log.write(_("Linux header name to install: %(header)s") % { "header": linHeader[0] }, 'broadcom.installBroadcom', 'info')
 
                 # Only install linux header if it is not installed
                 if not functions.isPackageInstalled(linHeader[0]):
-                    self.log.write('Download package: %s' % linHeader[0], 'broadcom.installBroadcom', 'info')
+                    self.log.write(_("Download package: %(package)s") % { "package": linHeader[0] }, 'broadcom.installBroadcom', 'info')
                     self.ec.run('apt-get download %s' % linHeader[0])
                     debDownloaded = True
 
@@ -214,7 +223,7 @@ class Broadcom():
                 reconfPackages = []
                 if driver != brcmUbuntu:
                     if not functions.isPackageInstalled(driver):
-                        self.log.write('Download package: %s' % driver, 'broadcom.installBroadcom', 'info')
+                        self.log.write(_("Download package: %(drv)s") % { "drv": driver }, 'broadcom.installBroadcom', 'info')
                         self.ec.run('apt-get download %s' % driver)
                         debDownloaded = True
                     else:
@@ -222,14 +231,14 @@ class Broadcom():
                     depList = functions.getPackageDependencies(driver)
                     for dep in depList:
                         if not functions.isPackageInstalled(dep):
-                            self.log.write('Download package dependency: %s' % dep, 'broadcom.installBroadcom', 'debug')
+                            self.log.write(_("Download package dependency: %(dep)s") % { "dep": dep }, 'broadcom.installBroadcom', 'debug')
                             self.ec.run('apt-get download %s' % dep)
                             debDownloaded = True
                         else:
                             reconfPackages.append(dep)
 
                 # Remove any module that might be in the way
-                self.log.write('modprobe b44, b43, b43legacy, ssb, brcmsmac', 'broadcom.installBroadcom', 'debug')
+                self.log.write(_("Modprobe b44, b43, b43legacy, ssb, brcmsmac"), 'broadcom.installBroadcom', 'debug')
                 os.system('modprobe -rf b44')
                 os.system('modprobe -rf b43')
                 os.system('modprobe -rf b43legacy')
@@ -248,46 +257,46 @@ class Broadcom():
 
                 # Install the dowloaded packages
                 if debDownloaded:
-                    self.log.write('Install downloaded packages', 'broadcom.installBroadcom', 'info')
+                    self.log.write(_("Install downloaded packages"), 'broadcom.installBroadcom', 'info')
                     self.ec.run('dpkg -i *.deb')
                     # Delete the downloaded packages
-                    self.log.write('Remove downloaded debs', 'broadcom.installBroadcom', 'debug')
+                    self.log.write(_("Remove downloaded debs"), 'broadcom.installBroadcom', 'debug')
                     os.system('rm -f *.deb')
 
                 # Reconfigure packages when needed
                 for reconfPackage in reconfPackages:
-                    self.log.write('Reconfigure package: %s' % reconfPackage, 'broadcom.installBroadcom', 'info')
+                    self.log.write(_("Reconfigure package: %(package)s") % { "package": reconfPackage }, 'broadcom.installBroadcom', 'info')
                     self.ec.run('dpkg-reconfigure -u %s' % reconfPackage)
 
                 # Finish up
                 if driver == wlDebian or driver == wlUbuntu:
                     # Blacklist b43, brcmsmac
-                    self.log.write('blacklist b43 brcmsmac bcma ssb', 'broadcom.installBroadcom', 'debug')
+                    self.log.write(_("Blacklist b43, brcmsmac, bcma, ssb"), 'broadcom.installBroadcom', 'debug')
                     modFile = open(blacklistPath, 'w')
                     modFile.write('blacklist b43 brcmsmac bcma ssb')
                     modFile.close()
                     # Start wl
-                    self.log.write('modprobe wl', 'broadcom.installBroadcom', 'debug')
+                    self.log.write(_("Modprobe wl"), 'broadcom.installBroadcom', 'debug')
                     os.system('modprobe wl')
                 else:
                     if os.path.isfile(blacklistPath):
                         os.remove(blacklistPath)
                     if 'b43legacy' in driver:
                         # Start b43legacy
-                        self.log.write('modprobe b43legacy', 'broadcom.installBroadcom', 'debug')
+                        self.log.write(_("Modprobe b43legacy"), 'broadcom.installBroadcom', 'debug')
                         os.system('modprobe b43legacy')
                     elif 'b43' in driver:
                         # Start b43
-                        self.log.write('modprobe b43', 'broadcom.installBroadcom', 'debug')
+                        self.log.write(_("Modprobe b43"), 'broadcom.installBroadcom', 'debug')
                         os.system('modprobe b43')
                     else:
                         # Start brcmsmac
-                        self.log.write('modprobe brcmsmac', 'broadcom.installBroadcom', 'debug')
+                        self.log.write(_("Modprobe brcmsmac"), 'broadcom.installBroadcom', 'debug')
                         os.system('modprobe brcmsmac')
 
-                self.log.write('Done installing Broadcom drivers', 'broadcom.installBroadcom', 'info')
+                self.log.write(_("Done installing Broadcom drivers"), 'broadcom.installBroadcom', 'info')
             else:
-                self.log.write('No Broadcom chip set found', 'broadcom.installBroadcom', 'error')
+                self.log.write(_("No Broadcom chip set found"), 'broadcom.installBroadcom', 'error')
 
         except Exception, detail:
             self.log.write(detail, 'broadcom.installBroadcom', 'exception')
@@ -296,17 +305,17 @@ class Broadcom():
     def removeBroadcom(self, driver):
         try:
             if driver != '':
-                self.log.write('Purge driver: %s' % driver, 'broadcom.removeBroadcom', 'info')
+                self.log.write(_("Purge driver: %(drv)s") % { "drv": driver }, 'broadcom.removeBroadcom', 'info')
                 cmdPurge = 'apt-get -y --force-yes purge %s' % driver
                 self.ec.run(cmdPurge)
                 self.ec.run('apt-get -y --force-yes autoremove')
 
                 # Remove blacklist file
                 if os.path.exists(blacklistPath):
-                    self.log.write('Remove : %s' % blacklistPath, 'broadcom.removeBroadcom', 'debug')
+                    self.log.write(_("Remove : %(file)s") % { "file": blacklistPath }, 'broadcom.removeBroadcom', 'debug')
                     os.remove(blacklistPath)
 
-                self.log.write('Done removing Broadcom drivers', 'broadcom.removeBroadcom', 'info')
+                self.log.write(_("Done removing Broadcom drivers"), 'broadcom.removeBroadcom', 'info')
 
         except Exception, detail:
             self.log.write(detail, 'broadcom.removeBroadcom', 'exception')

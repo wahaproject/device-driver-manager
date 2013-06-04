@@ -3,6 +3,7 @@
 import os
 import re
 import functions
+import gettext
 from execcmd import ExecCmd
 from xorg import XorgConf
 
@@ -11,6 +12,9 @@ hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
 # fglrx and fglrx-driver only supports the HD series from 5000 and up
 # http://support.amd.com/us/kbarticles/Pages/RN_LN_CAT13-2_Beta.aspx
 atiStartSerie = 5000
+
+# i18n
+gettext.install("ddm", "/usr/share/ddm/locale")
 
 
 class ATI():
@@ -48,12 +52,12 @@ class ATI():
     def getATI(self):
         # Check for ATI cards
         hwList = []
-        self.log.write('ATI card found: %s' % self.graphicsCard[0], 'ati.getATI', 'info')
+        self.log.write(_("ATI card found: %(card)s") % { "card": self.graphicsCard[0] }, 'ati.getATI', 'info')
         # Get the ATI chip set serie
         atiSerieMatch = re.search('HD\W(\d*)', self.graphicsCard[0])
         if atiSerieMatch:
             atiSerie = atiSerieMatch.group(1)
-            self.log.write('ATI chip serie found: %s' % atiSerie, 'ati.getATI', 'info')
+            self.log.write(_("ATI chip serie found: %(serie)s") % { "serie": atiSerie }, 'ati.getATI', 'info')
             intSerie = functions.strToNumber(atiSerie)
             # Only add series from atiStartSerie
             if intSerie >= atiStartSerie:
@@ -62,14 +66,14 @@ class ATI():
                     version = functions.getPackageVersion(drv, True)
                     description = self.getDriverDescription(drv)
                     if status != packageStatus[2]:
-                        self.log.write('ATI driver found: %s (%s)' % (drv, status), 'ati.getATI', 'info')
+                        self.log.write(_("ATI driver found: %(drv)s (%(status)s)") % ({ "drv": drv, "status": status }), 'ati.getATI', 'info')
                         hwList.append([self.graphicsCard[0], hwCodes[1], status, drv, version, description])
                     else:
-                        self.log.write('Driver not installable: %s' % drv, 'ati.getATI', 'warning')
+                        self.log.write(_("Driver not installable: %(drv)s") % { "drv": drv }, 'ati.getATI', 'warning')
             else:
-                self.log.write('ATI chip serie not supported: %s' % str(intSerie), 'ati.getATI', 'warning')
+                self.log.write(_("ATI chip serie not supported: %(serie)d") % { "serie": intSerie }, 'ati.getATI', 'warning')
         else:
-            self.log.write('No ATI Radeon HD serie found: %s (%s:%s)' % (self.graphicsCard[0], self.graphicsCard[1], self.graphicsCard[2]), 'ati.getATI', 'warning')
+            self.log.write(_("No driver found for: %(card)s (%(man)s:%(serie)s)") % { "card": self.graphicsCard[0], "man": self.graphicsCard[1], "serie": self.graphicsCard[2] }, 'ati.getATI', 'warning')
 
         return hwList
 
@@ -82,12 +86,12 @@ class ATI():
             # Install driver if not already installed
             if not functions.isPackageInstalled(driver):
                 # Install the appropriate drivers
-                self.log.write('Install driver: %s' % driver, 'ati.installATI', 'info')
+                self.log.write(_("Install driver: %(drv)s") % { "drv": driver }, 'ati.installATI', 'info')
                 packages = self.getAdditionalPackages(driver)
                 self.installATIDriver(packages)
                 # Configure ATI
                 if module == 'fglrx':
-                    self.log.write('Configure ATI...', 'ati.installATI', 'debug')
+                    self.log.write(_("Configure ATI..."), 'ati.installATI', 'debug')
                     if isHybrid:
                         self.ec.run('aticonfig --adapter=all --initial -f')
                     else:
@@ -96,15 +100,15 @@ class ATI():
 
             if not isConfigured:
                 # Configure xorg.conf
-                self.log.write('Found module for driver %s: %s' % (driver, module), 'ati.installATI', 'debug')
+                self.log.write(_("Found module for driver %(drv)s: %(module)s") % { "drv": driver, "module": module }, 'ati.installATI', 'debug')
                 if module != '':
-                    self.log.write('Switch to module: %s' % module, 'ati.installATI', 'info')
+                    self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'ati.installATI', 'info')
                     if module == 'fglrx':
                         self.ec.run('aticonfig --initial -f')
                     else:
                         self.xc.setModule('Device', 0, module)
 
-            self.log.write('Driver installed: %s' % driver, 'ati.installATI', 'info')
+            self.log.write(_("Driver installed: %(drv)s") % { "drv": driver }, 'ati.installATI', 'info')
 
         except Exception, detail:
             self.log.write(detail, 'ati.installATI', 'exception')
@@ -115,11 +119,11 @@ class ATI():
             # Preseed answers for some packages
             self.preseedATIPackages('purge')
 
-            self.log.write('Removing ATI drivers', 'ati.removeATI', 'info')
+            self.log.write(_("Removing ATI drivers"), 'ati.removeATI', 'info')
             packages = self.getAdditionalPackages(driver)
             for package in packages:
-                self.log.write('Remove package: %s' % package[0], 'ati.removeATI', 'debug')
-                cmdPurge = 'apt-get -y --force-yes purge %s' % package[0]
+                self.log.write(_("Remove package: %(package)s") % { "package": package[0] }, 'ati.removeATI', 'debug')
+                cmdPurge = "apt-get -y --force-yes purge %s" % package[0]
                 self.ec.run(cmdPurge)
             self.ec.run('apt-get -y --force-yes autoremove')
 
@@ -129,7 +133,7 @@ class ATI():
             # Backup and remove xorg.conf
             functions.backupFile('/etc/X11/xorg.conf', True)
 
-            self.log.write('Driver removed: %s' % driver, 'ati.removeATI', 'info')
+            self.log.write(_("Driver removed: %(drv)s") % { "drv": driver }, 'ati.removeATI', 'info')
 
         except Exception, detail:
             self.log.write(detail, 'ati.removeATI', 'exception')
@@ -137,13 +141,13 @@ class ATI():
     def getDriverDescription(self, driver):
         description = ''
         if 'fglrx' in driver:
-            description = 'ATI display driver'
+            description = _("ATI display driver")
         elif 'radeon' in driver:
-            description = 'Radeon display driver'
+            description = _("Radeon display driver")
         elif 'fbdev' in driver:
-            description = 'Framebuffer display driver'
+            description = _("Framebuffer display driver")
         elif 'vesa' in driver:
-            description = 'Vesa display driver'
+            description = _("Vesa display driver")
         else:
             description = functions.getPackageDescription(driver)
         return description
@@ -188,8 +192,8 @@ class ATI():
             for package in packageList:
                 if package[1] == 1:
                     if functions.isPackageInstalled(package[0]):
-                        self.log.write('Remove package: %s' % package[0], 'ati.installATIDriver', 'debug')
-                        self.ec.run('apt-get -y --force-yes remove %s' % package[0])
+                        self.log.write(_("Remove package: %(package)s") % { "package": package[0] }, 'ati.installATIDriver', 'debug')
+                        self.ec.run("apt-get -y --force-yes remove %s" % package[0])
 
             # Preseed answers for some packages
             self.preseedATIPackages('install')
@@ -207,7 +211,7 @@ class ATI():
             if notInRepo == '':
                 self.ec.run('apt-get -y --force-yes install' + installString)
             else:
-                self.log.write('Install aborted: not in repository: %s' % notInRepo[2:], 'ati.installATIDriver', 'error')
+                self.log.write(_("Install aborted: not in repository: %(repo)s") % { "repo": notInRepo[2:] }, 'ati.installATIDriver', 'error')
 
         except Exception, detail:
             self.log.write(detail, 'ati.installATIDriver', 'exception')
@@ -226,7 +230,7 @@ class ATI():
 
             # Add each line to the debconf database
             for line in debConfList:
-                os.system('echo "%s" | debconf-set-selections' % line)
+                os.system("echo \"%s\" | debconf-set-selections" % line)
 
             # Install or remove the packages
-            self.ec.run('apt-get -y --force-yes %s libfglrx fglrx-driver' % action)
+            self.ec.run("apt-get -y --force-yes %s libfglrx fglrx-driver" % action)

@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 
 import functions
+import gettext
 from execcmd import ExecCmd
 from xorg import XorgConf
 
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
 hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
+
+# i18n
+gettext.install("ddm", "/usr/share/ddm/locale")
 
 
 class Intel():
@@ -32,16 +36,16 @@ class Intel():
     def getIntel(self):
         # Check for Intel cards
         hwList = []
-        self.log.write('Intel card found: %s' % self.graphicsCard[0], 'ati.getATI', 'info')
+        self.log.write(_("Intel card found: %(card)s") % { "card": self.graphicsCard[0] }, 'ati.getATI', 'info')
         for drv in self.drivers:
             status = functions.getPackageStatus(drv)
             version = functions.getPackageVersion(drv, True)
             description = self.getDriverDescription(drv)
             if status != packageStatus[2]:
-                self.log.write('Intel driver found: %s (%s)' % (drv, status), 'intel.getIntel', 'info')
+                self.log.write(_("Intel driver found: %(drv)s (%(status)s)") % { "drv": drv, "status": status }, 'intel.getIntel', 'info')
                 hwList.append([self.graphicsCard[0], hwCodes[2], status, drv, version, description])
             else:
-                self.log.write('Driver not installable: %s' % drv, 'intel.getIntel', 'warning')
+                self.log.write(_("Driver not installable: %(drv)s") % { "drv": drv }, 'intel.getIntel', 'warning')
 
         return hwList
 
@@ -53,16 +57,16 @@ class Intel():
             # Install driver if not already installed
             if not functions.isPackageInstalled(driver):
                 # Install the appropriate drivers
-                self.log.write('Install driver: %s' % driver, 'intel.installIntel', 'info')
+                self.log.write(_("Install driver: %(drv)s") % { "drv": driver }, 'intel.installIntel', 'info')
                 self.ec.run('apt-get -y --force-yes install %s' % driver)
 
             # Configure xorg.conf
-            self.log.write('Found module for driver %s: %s' % (driver, module), 'intel.installIntel', 'debug')
+            self.log.write(_("Found module for driver %(drv)s: %(module)s") % { "drv": driver, "module": module }, 'intel.installIntel', 'debug')
             if module != '':
-                self.log.write('Switch to module: %s' % module, 'intel.installIntel', 'info')
+                self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'intel.installIntel', 'info')
                 self.xc.setModule('Device', 0, module)
 
-            self.log.write('Driver installed: %s' % driver, 'intel.installIntel', 'info')
+            self.log.write(_("Driver installed: %(drv)s") % { "drv": driver }, 'intel.installIntel', 'info')
 
         except Exception, detail:
             self.log.write(detail, 'intel.installIntel', 'exception')
@@ -70,7 +74,7 @@ class Intel():
     # Called from drivers.py: remove the Intel drivers and revert to radeon
     def removeIntel(self, driver):
         try:
-            self.log.write('Remove package: %s' % driver, 'intel.removeIntel', 'debug')
+            self.log.write(_("Remove package: %(drv)s") % { "drv": driver }, 'intel.removeIntel', 'debug')
             cmdPurge = 'apt-get -y --force-yes purge ' + driver
             self.ec.run(cmdPurge)
             self.ec.run('apt-get -y --force-yes autoremove')
@@ -81,7 +85,7 @@ class Intel():
             # Backup and remove xorg.conf
             functions.backupFile('/etc/X11/xorg.conf', True)
 
-            self.log.write('Driver removed: %s' % driver, 'intel.removeIntel', 'info')
+            self.log.write(_("Driver removed: %(drv)s") % { "drv": driver }, 'intel.removeIntel', 'info')
 
         except Exception, detail:
             self.log.write(detail, 'intel.removeIntel', 'exception')
@@ -89,11 +93,11 @@ class Intel():
     def getDriverDescription(self, driver):
         description = ''
         if 'intel' in driver:
-            description = 'Intel display driver'
+            description = _("Intel display driver")
         elif 'fbdev' in driver:
-            description = 'Framebuffer display driver'
+            description = _("Framebuffer display driver")
         elif 'vesa' in driver:
-            description = 'Vesa display driver'
+            description = _("Vesa display driver")
         else:
             description = functions.getPackageDescription(driver)
         return description

@@ -13,6 +13,7 @@ try:
     import string
     import getopt
     import webbrowser
+    import gettext
     from config import Config
     from treeview import TreeViewHandler
     from xorg import XorgConf
@@ -28,6 +29,11 @@ except Exception, detail:
 hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
 menuItems = ['graphics', 'wireless', 'kernel']
 
+# i18n
+gettext.install("ddm", "/usr/share/ddm/locale")
+
+# TODO: Prepare translations for ddm.glade
+
 
 #class for the main window
 class DDM:
@@ -40,6 +46,7 @@ class DDM:
         self.window = self.builder.get_object('ddmWindow')
         self.lblTitle = self.builder.get_object('lblTitle')
         self.lblCardName = self.builder.get_object('lblCardName')
+        self.lblTitleHardware = self.builder.get_object('lblTitleHardware')
         self.lblTitleActivatedDriver = self.builder.get_object('lblTitleActivatedDriver')
         self.lblAlternativeDriversTitle = self.builder.get_object('lblAlternativeDriversTitle')
         self.swDrivers = self.builder.get_object('swDrivers')
@@ -72,6 +79,14 @@ class DDM:
         self.urlPae = self.cfg.getValue('MANUFACTURERS_SITES', 'pae')
         self.urlIntel = self.cfg.getValue('MANUFACTURERS_SITES', 'intel')
         self.urlVia = self.cfg.getValue('MANUFACTURERS_SITES', 'via')
+
+        # Translations
+        self.lblMenuGraphics.set_text(_("Graphics"))
+        self.lblMenuWireless.set_text(_("Wireless"))
+        self.lblMenuKernel.set_text(_("Kernel"))
+        self.lblTitleHardware.set_text(_("Hardware"))
+        self.lblTitleActivatedDriver.set_text(_("Activated driver"))
+        self.lblAlternativeDriversTitle.set_text(_("Alternative drivers"))
 
         self.selectedMenuItem = None
         self.mediaDir = '/usr/share/ddm'
@@ -150,7 +165,7 @@ class DDM:
         if self.selectedMenuItem != menuItems[0]:
             self.changeMenuBackground(menuItems[0], True)
             self.lblTitle.set_text(self.lblMenuGraphics.get_text())
-            self.clearDriverSection('No supported graphics card found')
+            self.clearDriverSection(_("Current drivers are correct"))
 
             if self.nvidiaDrivers:
                 self.currentHwCode = hwCodes[0]
@@ -175,7 +190,7 @@ class DDM:
         if self.selectedMenuItem != menuItems[1]:
             self.changeMenuBackground(menuItems[1], True)
             self.lblTitle.set_text(self.lblMenuWireless.get_text())
-            self.clearDriverSection('No supported wireless chipset found')
+            self.clearDriverSection(_("Current drivers are correct"))
 
             if self.broadcomDrivers:
                 self.currentHwCode = hwCodes[4]
@@ -185,9 +200,9 @@ class DDM:
         if self.selectedMenuItem != menuItems[2]:
             self.changeMenuBackground(menuItems[2], True)
             self.lblTitle.set_text(self.lblMenuKernel.get_text())
-            msg = 'PAE already installed'
+            msg = _("PAE already installed")
             if 'amd64' in self.kernelRelease:
-                msg = 'PAE support only for 32-bit systems'
+                msg = _("PAE support only for 32-bit systems")
             self.clearDriverSection(msg)
 
             if self.paePackage:
@@ -227,7 +242,7 @@ class DDM:
         self.swDrivers.show()
 
         # Add column names for driver treeview
-        row = ['Activate', 'Driver', 'Version', 'Description', 'hwCode']
+        row = [_("Activate"), _("Driver"), _("Version"), _("Description"), "hwCode"]
         contentList.append(row)
 
         i = 0
@@ -242,7 +257,7 @@ class DDM:
 
             recommended = ''
             if self.manufacturerModules and i == 0:
-                recommended = ' (recommended)'
+                recommended = _(" (recommended)")
             i += 1
 
             # Check drivers with currently loaded drivers
@@ -255,9 +270,9 @@ class DDM:
                                 drv[1] = dep
                                 break
 
-                    self.log.write('Check loaded driver / available driver: %s / %s' % (drv[1], item[3]), 'ddm.loadDriverSection', 'debug')
+                    self.log.write(_("Check loaded driver / available driver: %(ldrv)s / %(adrv)s") % { "ldrv": drv[1], "adrv": item[3] }, 'ddm.loadDriverSection', 'debug')
                     if drv[1] == item[3] and drv[0] == self.selectedMenuItem:
-                        self.log.write('Select current driver in list: %s' % drv[1], 'ddm.loadDriverSection', 'debug')
+                        self.log.write(_("Select current driver in list: %(drv)s") % { "drv": drv[1] }, 'ddm.loadDriverSection', 'debug')
                         self.lblActivatedDriver.set_text('%s %s%s' % (item[3], item[4], recommended))
                         activate = True
                         actDrvFound = True
@@ -270,7 +285,7 @@ class DDM:
                 self.lblCardName.set_text(item[0])
                 imgPath = os.path.join(self.mediaDir, self.currentHwCode + '.png')
                 if os.path.exists(imgPath):
-                    self.log.write('Manufacturer image path: %s' % imgPath, 'ddm.loadDriverSection', 'debug')
+                    self.log.write(_("Manufacturer image path: %(path)s") % { "path": imgPath }, 'ddm.loadDriverSection', 'debug')
                     self.imgManufacturer.show()
                     self.imgManufacturer.set_from_file(imgPath)
                 else:
@@ -287,10 +302,10 @@ class DDM:
             for drv in self.usedDrivers:
                 if drv[0] == self.selectedMenuItem:
                     self.tvDrivers.set_sensitive(False)
-                    title = 'Unknown driver'
-                    self.log.write('%s: %s' % (title, drv[1]), 'ddm.loadDriverSection', 'warning')
+                    title = _("Unknown driver")
+                    self.log.write("%s: %s" % (title, drv[1]), 'ddm.loadDriverSection', 'warning')
                     self.lblActivatedDriver.set_text(drv[1])
-                    msg = 'Unknown driver found.\n\nPlease remove before installing drivers with DDM.'
+                    msg = _("Unknown driver found.\n\nPlease remove before installing drivers with DDM.")
                     MessageDialogSave(title, msg, gtk.MESSAGE_WARNING, self.window).show()
 
         if showAlternatives:
@@ -331,17 +346,17 @@ class DDM:
             self.tvHandler.treeviewToggleAll([0], False, 1, driver)
 
             # Ask user for activation and install/switch
-            qd = QuestionDialog('Driver activation', 'Are you sure you want to install the following driver:\n\n%s' % driver, self.window)
+            qd = QuestionDialog(_("Driver activation"), _("Are you sure you want to install the following driver:\n\n%(drv)s") % { "drv": driver }, self.window)
             answer = qd.show()
             if answer:
                 # Check if /var/dpkg/lock has been locked by another process
                 if functions.isFileLocked(self.lockFile):
-                    MessageDialogSave('Locked', 'Could not get lock on %s.\n\nClose any programs locking the file and try again.' % self.lockFile, gtk.MESSAGE_WARNING, self.window).show()
+                    MessageDialogSave(_("Locked"), _("Could not get lock on %(file)s.\n\nClose any programs locking the file and try again.") % { "file": self.lockFile }, gtk.MESSAGE_WARNING, self.window).show()
                 else:
                     cardsDone = []
                     for card in self.cards:
                         if hwCode not in cardsDone:
-                            self.log.write('Driver to install: %s' % driver, 'ddm.driverCheckBoxToggled', 'debug')
+                            self.log.write(_("Driver to install: %(drv)s") % { "drv": driver }, 'ddm.driverCheckBoxToggled', 'debug')
                             # Install in separate thread
                             self.prevDriverPath = path
                             self.toggleGuiElements(True)
@@ -349,7 +364,7 @@ class DDM:
                             t.daemon = True
                             t.start()
                             # Run spinner as long as the thread is alive
-                            #self.log.write('Check every 5 miliseconds if thread is still active', 'ddm.driverCheckBoxToggled', 'debug')
+                            #self.log.write(_("Check every 5 miliseconds if thread is still active', 'ddm.driverCheckBoxToggled', 'debug')
                             glib.timeout_add(5, self.checkInstallThread, driver)
                             cardsDone.append(hwCode)
             else:
@@ -410,7 +425,7 @@ class DDM:
 
         # Thread is done
         self.toggleGuiElements(False)
-        qd = QuestionDialog('Driver installed', 'Driver installed: %s\n\nDrivers will be used on next boot.\nDo you want to reboot now?' % driver, self.window)
+        qd = QuestionDialog(_("Driver installed"), _("Driver installed: %(drv)s\n\nDrivers will be used on next boot.\nDo you want to reboot now?") % { "drv": driver }, self.window)
         answer = qd.show()
         if answer:
             # Reboot
@@ -439,7 +454,7 @@ class DDM:
         t.start()
         self.queue.join()
         # Run spinner as long as the thread is alive
-        #self.log.write('Check every 5 miliseconds if thread is still active', 'ddm.getHardwareInfo', 'debug')
+        #self.log.write(_("Check every 5 miliseconds if thread is still active', 'ddm.getHardwareInfo', 'debug')
         glib.timeout_add(5, self.checkGetInfoThread)
 
     # ===============================================
@@ -473,7 +488,7 @@ class DDM:
 
         # Check if self.lockFile is locked by another process
         if functions.isFileLocked(self.lockFile):
-            MessageDialogSave('Locked', 'Could not get lock on %s.\n\nClose any programs locking the file and restart DDM.' % self.lockFile, gtk.MESSAGE_WARNING, self.window).show()
+            MessageDialogSave(_("Locked"), _("Could not get lock on %(file)s.\n\nClose any programs locking the file and restart DDM.") % { "file": self.lockFile }, gtk.MESSAGE_WARNING, self.window).show()
             sys.exit(2)
 
         # Initiate the treeview handler and connect the custom toggle event with driverCheckBoxToggled
@@ -521,10 +536,10 @@ class DDM:
             self.usedDrivers.append([menuItems[1], usedWirelessDrivers])
         if usedPaeHeader:
             self.usedDrivers.append([menuItems[2], usedPaeHeader])
-        self.log.write('Used drivers: %s' % self.usedDrivers, 'ddm.main', 'debug')
+        self.log.write(_("Used drivers: %(drv)s") % { "drv": self.usedDrivers }, 'ddm.main', 'debug')
 
         # Show initial window while getting hardware info
-        msg = 'Checking your hardware...'
+        msg = _("Checking your hardware...")
         self.log.write(msg, 'ddm.main', 'info')
         functions.pushMessage(self.statusbar, msg)
         self.showMenuGraphics()
@@ -567,7 +582,7 @@ class DDM:
 
         # Start automatic install
         if self.install:
-            self.log.write('Start automatic driver install', 'ddm.main', 'info')
+            self.log.write(_("Start automatic driver install"), 'ddm.main', 'info')
             # TODO - automatic (recommended) driver install
 
         # Show window and keep it on top of other windows

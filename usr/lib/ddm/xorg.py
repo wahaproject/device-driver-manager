@@ -4,6 +4,7 @@
 import os
 import re
 import functions
+import gettext
 from glob import glob
 from execcmd import ExecCmd
 
@@ -17,6 +18,9 @@ manufacturerDrivers = [
 minimalXorg = 'Section "%s"\n  Identifier   "Device%s"\n  Driver       "%s"\nEndSection\n'
 regExpCommented = '#[\s]*blacklist[\s]*%s'
 regExpUncommented = '[^#][\s]*blacklist[\s]*%s'
+
+# i18n
+gettext.install("ddm", "/usr/share/ddm/locale")
 
 
 class XorgConf():
@@ -35,7 +39,7 @@ class XorgConf():
             if manDrv[0] == man:
                 modules = manDrv[1]
                 break
-        self.log.write('Modules for %s: %s' % (manufacturer, str(modules)), 'XorgConf.getManufacturerModules', 'debug')
+        self.log.write(_("Modules for %(manufacturer)s: %(modules)s") % { "manufacturer": manufacturer, "modules": str(modules) }, 'XorgConf.getManufacturerModules', 'debug')
         return modules
 
     # Return the module belonging to a given driver
@@ -69,7 +73,7 @@ class XorgConf():
         if matchObj:
             module = matchObj.group(1).lower()
 
-        self.log.write('Used graphics driver: %s' % module, 'XorgConf.getUsedModule', 'info')
+        self.log.write(_("Used graphics driver: %(module)s") % { "module": module }, 'XorgConf.getUsedModule', 'info')
         return module
 
     # Check if a module is supported by DDM
@@ -91,7 +95,7 @@ class XorgConf():
                 functions.backupFile(self.xorg)
             else:
                 # No xorg.conf - create minimal xorg.conf
-                self.log.write('No xorg.conf - create minimal xorg.conf', 'XorgConf.setModule', 'info')
+                self.log.write(_("No xorg.conf - create minimal xorg.conf"), 'XorgConf.setModule', 'info')
                 f = open(self.xorg, 'w')
                 f.write(minimalXorg % ('Device', '0', 'vesa'))
                 f.close()
@@ -111,13 +115,13 @@ class XorgConf():
                 f = open(self.xorg, 'w')
                 f.write(replTuple[0])
                 f.close()
-                self.log.write('New xorg.conf written', 'XorgConf.setModule', 'info')
+                self.log.write(_("New xorg.conf written"), 'XorgConf.setModule', 'info')
             else:
                 # No match was found: append newSection
                 f = open(self.xorg, 'a')
                 f.write(newSection)
                 f.close()
-                self.log.write('New section appended to xorg.conf', 'XorgConf.setModule', 'info')
+                self.log.write(_("New section appended to xorg.conf"), 'XorgConf.setModule', 'info')
 
         except Exception, detail:
             self.log.write(detail, 'XorgConf.setModule', 'exception')
@@ -130,7 +134,7 @@ class XorgConf():
             if not blacklistFiles:
                 # Create new blacklist file
                 modPath = os.path.join(self.modprobeDir, 'blacklist-%s.conf' % module)
-                self.log.write('Blacklist %s in: %s' % (module, modPath), 'XorgConf.blacklistModule', 'debug')
+                self.log.write(_("Blacklist %(module)s in: %(path)s") % { "module": module, "path": modPath }, 'XorgConf.blacklistModule', 'debug')
                 modFile = open(modPath, 'w')
                 modFile.write('blacklist %s' % module)
                 modFile.close()
@@ -146,13 +150,13 @@ class XorgConf():
                     if blFile is None:
                         if blCommFile:
                             # Uncomment blacklist in found file
-                            self.log.write('Uncomment blacklist %s in: %s' % (module, blCommFile), 'XorgConf.blacklistModule', 'debug')
+                            self.log.write(_("Uncomment blacklist %(module)s in: %(path)s") % { "module": module, "path": blCommFile }, 'XorgConf.blacklistModule', 'debug')
                             functions.replaceStringInFile(regExpCommented % module, 'blacklist %s' % module, blCommFile)
         else:
             # Remove module blacklist = comment blacklist line
             for fle in blacklistFiles:
                 if fle[1]:
-                    self.log.write('Remove blacklist %s from: %s' % (module, fle[0]), 'XorgConf.blacklistModule', 'debug')
+                    self.log.write(_("Remove blacklist %(module)s from: %(path)s") % { "module": module, "path": fle[0] }, 'XorgConf.blacklistModule', 'debug')
                     functions.replaceStringInFile(regExpUncommented % module, '\n#blacklist %s' % module, fle[0])
 
     # Get all files where the given module is blacklisted
@@ -172,7 +176,7 @@ class XorgConf():
                 regExp = regExpUncommented % module
                 matchObj = re.search(regExp, fcont, flags=re.IGNORECASE)
                 if matchObj:
-                    self.log.write('Blacklist %s found in: %s' % (module, fle), 'XorgConf.getBlacklistFile', 'debug')
+                    self.log.write(_("Blacklist %(module)s found in: %(path)s") % { "module": module, "path": fle }, 'XorgConf.getBlacklistFile', 'debug')
                     blFiles.append([fle, True])
 
                 # Get commented lines
@@ -180,7 +184,7 @@ class XorgConf():
                     regExp = regExpCommented % module
                     matchObj = re.search(regExp, fcont, flags=re.IGNORECASE)
                     if matchObj:
-                        self.log.write('Commented blacklist %s found in: %s' % (module, fle), 'XorgConf.getBlacklistFile', 'debug')
+                        self.log.write(_("Commented blacklist %(module)s found in: %(path)s") % { "module": module, "path": fle }, 'XorgConf.getBlacklistFile', 'debug')
                         blFiles.append([fle, False])
 
         return blFiles

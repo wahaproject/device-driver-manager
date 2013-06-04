@@ -2,6 +2,7 @@
 
 import os
 import functions
+import gettext
 from nvidiadetector import NvidiaDetection
 from execcmd import ExecCmd
 from xorg import XorgConf
@@ -9,6 +10,9 @@ from xorg import XorgConf
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
 hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'intel', 'via']
 blacklistPath = '/etc/modprobe.d/blacklist-nouveau.conf'
+
+# i18n
+gettext.install("ddm", "/usr/share/ddm/locale")
 
 
 class Nvidia():
@@ -28,14 +32,14 @@ class Nvidia():
             # Install nvidia-detect if it isn't installed already
             if self.distribution == 'debian':
                 if functions.getPackageVersion('nvidia-detect') == '':
-                    self.log.write('Update apt', 'nvidia.init', 'info')
+                    self.log.write(_("Update apt"), 'nvidia.init', 'info')
                     self.ec.run('apt-get update')
                 if not functions.isPackageInstalled('nvidia-detect'):
-                    self.log.write('Install nvidia-detect', 'nvidia.init', 'info')
+                    self.log.write(_("Install nvidia-detect"), 'nvidia.init', 'info')
                     self.ec.run('apt-get -y --force-yes install nvidia-detect')
                 self.drivers = self.ec.run("nvidia-detect | grep nvidia- | tr -d ' '")
                 if 'not found' in self.drivers:
-                    self.log.write('Cannot install nvidia-detect: abort', 'nvidia.init', 'critical')
+                    self.log.write(_("Cannot install nvidia-detect: abort"), 'nvidia.init', 'critical')
                     exit()
 
                 # Add additional drivers
@@ -65,12 +69,12 @@ class Nvidia():
                 version = functions.getPackageVersion(drv, True)
                 description = self.getDriverDescription(drv)
                 if status != packageStatus[2]:
-                    self.log.write('Nvidia driver found: %s (%s)' % (drv, status), 'nvidia.getNvidia', 'info')
+                    self.log.write(_("Nvidia driver found: %(drv)s (%(status)s)") % { "drv": drv, "status": status }, 'nvidia.getNvidia', 'info')
                     hwList.append([self.graphicsCard[0], hwCodes[0], status, drv, version, description])
                 else:
-                    self.log.write('Driver not installable: %s' % drv, 'nvidia.getNvidia', 'warning')
+                    self.log.write(_("Driver not installable: %(drv)s") % { "drv": drv }, 'nvidia.getNvidia', 'warning')
         else:
-            self.log.write('No driver found for: %s (%s:%s)' % (self.graphicsCard[0], self.graphicsCard[1], self.graphicsCard[2]), 'nvidia.getNvidia', 'warning')
+            self.log.write(_("No driver found for: %(card)s (%(man)s:%(serie)s)") % { "card": self.graphicsCard[0], "man": self.graphicsCard[1], "serie": self.graphicsCard[2] }, 'nvidia.getNvidia', 'warning')
 
         return hwList
 
@@ -84,21 +88,21 @@ class Nvidia():
             # Install driver if not already installed
             if not functions.isPackageInstalled(driver):
                 # Install the appropriate drivers
-                self.log.write('Install driver: %s' % driver, 'nvidia.installNvidia', 'info')
+                self.log.write(_("Install driver: %(drv)s") % { "drv": driver }, 'nvidia.installNvidia', 'info')
                 packages = self.getAdditionalPackages(driver)
                 self.installNvidiaPackages(packages, version)
                 # Configure nvidia for Debian
                 if self.distribution == 'debian' and module == 'nvidia':
-                    self.log.write('Configure Nvidia...', 'nvidia.installNvidia', 'debug')
+                    self.log.write(_("Configure Nvidia..."), 'nvidia.installNvidia', 'debug')
                     self.ec.run('nvidia-xconfig')
                     self.xc.blacklistModule('nouveau')
                     isConfigured = True
 
             if not isConfigured:
                 # Configure xorg.conf
-                self.log.write('Found module for driver %s: %s' % (driver, module), 'nvidia.installNvidia', 'debug')
+                self.log.write(_("Found module for driver %(drv)s: %(module)s") % { "drv": driver, "module": module }, 'nvidia.installNvidia', 'debug')
                 if module != '':
-                    self.log.write('Switch to module: %s' % module, 'nvidia.installNvidia', 'info')
+                    self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'nvidia.installNvidia', 'info')
                     if module == 'nvidia':
                         if self.distribution == 'debian':
                             self.ec.run('nvidia-xconfig')
@@ -108,7 +112,7 @@ class Nvidia():
                         # Remove blacklist from nouveau
                         self.xc.blacklistModule('nouveau', False)
 
-            self.log.write('Driver installed: %s' % driver, 'nvidia.installNvidia', 'info')
+            self.log.write(_("Driver installed: %(drv)s") % { "drv": driver }, 'nvidia.installNvidia', 'info')
 
         except Exception, detail:
             self.log.write(detail, 'nvidia.installNvidia', 'exception')
@@ -120,10 +124,10 @@ class Nvidia():
             version = functions.getPackageVersion(driver, True).split('-')[0]
             self.preseedNvidiaPackages('purge', version)
 
-            self.log.write('Removing Nvidia drivers', 'nvidia.removeNvidia', 'info')
+            self.log.write(_("Removing Nvidia drivers"), 'nvidia.removeNvidia', 'info')
             packages = self.getAdditionalPackages(driver)
             for package in packages:
-                self.log.write('Remove package: %s' % package[0], 'nvidia.removeNvidia', 'debug')
+                self.log.write(_("Remove package: %(package)s") % { "package": package[0] }, 'nvidia.removeNvidia', 'debug')
                 cmdPurge = 'apt-get -y --force-yes purge ' + package[0]
                 self.ec.run(cmdPurge)
             self.ec.run('apt-get -y --force-yes autoremove')
@@ -137,7 +141,7 @@ class Nvidia():
             # Backup and remove xorg.conf
             functions.backupFile('/etc/X11/xorg.conf', True)
 
-            self.log.write('Driver removed: %s' % driver, 'nvidia.removeNvidia', 'info')
+            self.log.write(_("Driver removed: %(drv)s") % { "drv": driver }, 'nvidia.removeNvidia', 'info')
 
         except Exception, detail:
             self.log.write(detail, 'nvidia.removeNvidia', 'exception')
@@ -145,13 +149,13 @@ class Nvidia():
     def getDriverDescription(self, driver):
         description = ''
         if 'nvidia' in driver:
-            description = 'Nvidia display driver'
+            description = _("Nvidia display driver")
         elif 'nouveau' in driver:
-            description = 'Nouveau display driver'
+            description = _("Nouveau display driver")
         elif 'fbdev' in driver:
-            description = 'Framebuffer display driver'
+            description = _("Framebuffer display driver")
         elif 'vesa' in driver:
-            description = 'Vesa display driver'
+            description = _("Vesa display driver")
         else:
             description = functions.getPackageDescription(driver)
         return description
@@ -168,7 +172,7 @@ class Nvidia():
                 if package[1] == 1:
                     # Check if package is installed
                     # If it is, it's nominated for removal
-                    self.log.write('Is package installed: %s' % package[0], 'nvidia.installNvidiaPackages', 'debug')
+                    self.log.write(_("Is package installed: %(package)s") % { "package": package[0] }, 'nvidia.installNvidiaPackages', 'debug')
                     drvChkCmd = 'aptitude search %s | grep ^i | wc -l' % package[0]
                     drvChk = self.ec.run(drvChkCmd, False)
                     if functions.strToNumber(drvChk[0]) > 0:
@@ -177,7 +181,7 @@ class Nvidia():
 
             # Remove these packages before installation
             if removePackages != '':
-                self.log.write('Remove drivers before reinstallation: %s' % removePackages, 'nvidia.installNvidiaPackages', 'debug')
+                self.log.write(_("Remove drivers before reinstallation: %(drv)s") % { "drv": removePackages }, 'nvidia.installNvidiaPackages', 'debug')
                 nvDrvRemCmd = 'apt-get -y --force-yes remove%s' % removePackages
                 self.ec.run(nvDrvRemCmd)
 
@@ -185,7 +189,7 @@ class Nvidia():
             self.preseedNvidiaPackages('install', version)
 
             # Install the packages
-            self.log.write('Install drivers: %s' % installPackages, 'nvidia.installNvidiaPackages', 'debug')
+            self.log.write(_("Install drivers: %(drv)s") % { "drv": installPackages }, 'nvidia.installNvidiaPackages', 'debug')
             nvDrvInstCmd = 'apt-get -y --force-yes install%s' % installPackages
             self.ec.run(nvDrvInstCmd)
 
@@ -203,12 +207,15 @@ class Nvidia():
             if 'nvidia-' in driver:
                 drvList.append(['build-essential', 0])
                 drvList.append([driver, 1])
-                if driver == 'nvidia-glx':
+                # This needs to change when 304 goes legacy
+                if driver == 'nvidia-glx' or driver == 'nvidia-glx-legacy-304xx':
                     drvList.append(['nvidia-kernel-dkms', 1])
                 elif driver == 'nvidia-glx-legacy-96xx':
                     drvList.append(['nvidia-kernel-legacy-96xx-dkms', 1])
                 elif driver == 'nvidia-glx-legacy-173xx':
                     drvList.append(['nvidia-kernel-legacy-173xx-dkms', 1])
+                #elif driver == 'nvidia-glx-legacy-304xx':
+                #    drvList.append(['nvidia-kernel-legacy-304xx-dkms', 1])
                 drvList.append(['nvidia-xconfig', 0])
                 drvList.append(['nvidia-settings', 0])
 

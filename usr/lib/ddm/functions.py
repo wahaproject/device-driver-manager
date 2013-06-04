@@ -11,6 +11,8 @@ import pwd
 import grp
 import commands
 import fnmatch
+import urllib2
+import gettext
 from datetime import datetime
 from execcmd import ExecCmd
 try:
@@ -23,6 +25,9 @@ packageStatus = ['installed', 'notinstalled', 'uninstallable']
 
 # Logging object set from parent
 log = object
+
+# i18n
+gettext.install("ddm", "/usr/share/ddm/locale")
 
 
 # General ================================================
@@ -105,7 +110,7 @@ def sortListOnColumn(lst, columsList):
 # Return a list with images from a given path
 def getImgsFromDir(directoryPath):
     extensions = ['.png', '.jpg', '.jpeg', '.gif']
-    log.write('Search for extensions: %s' % str(extensions), 'functions.getImgsFromDir', 'debug')
+    log.write(_("Search for extensions: %(ext)s") % { "ext": str(extensions) }, 'functions.getImgsFromDir', 'debug')
     imgs = getFilesFromDir(directoryPath, False, extensions)
     return imgs
 
@@ -123,12 +128,12 @@ def getFilesFromDir(directoryPath, recursive=False, extensionList=None):
                 if os.path.splitext(fle)[1] == ext:
                     path = os.path.join(directoryPath, fle)
                     files.append(path)
-                    log.write('File with extension found: %s' % path, 'functions.getFilesFromDir', 'debug')
+                    log.write(_("File with extension found: %(path)s") % { "path": path }, 'functions.getFilesFromDir', 'debug')
                     break
         else:
             path = os.path.join(directoryPath, fle)
             files.append(path)
-            log.write('File found: %s' % path, 'functions.getFilesFromDir', 'debug')
+            log.write(_("File found: %(path)s") % { "path": path }, 'functions.getFilesFromDir', 'debug')
     return files
 
 
@@ -354,7 +359,7 @@ def getResolutions(minRes='', maxRes='', reverseOrder=False, getVesaResolutions=
         if os.path.exists(vbeModes):
             cmd = "cat %s | cut -d'-' -f1" % vbeModes
         elif isPackageInstalled('v86d') and isPackageInstalled('hwinfo'):
-            cmd = 'sudo hwinfo --framebuffer | grep "Mode " | cut -d' ' -f5'
+            cmd = "sudo hwinfo --framebuffer | grep '0x0' | cut -d' ' -f5"
     else:
         cmd = "xrandr | grep '^\s' | cut -d' ' -f4"
 
@@ -391,7 +396,7 @@ def getResolutions(minRes='', maxRes='', reverseOrder=False, getVesaResolutions=
                 itemH = strToNumber(itemList[1], True)
                 # Check if it can be added
                 if itemW >= minW and itemH >= minH and (maxW == 0 or itemW <= maxW) and (maxH == 0 or itemH <= maxH):
-                    log.write('Resolution added: %s' % item, 'functions.getResolutions', 'debug')
+                    log.write(_("Resolution added: %(res)s") % { "res": item }, 'functions.getResolutions', 'debug')
                     avlResTmp.append([itemW, itemH])
 
     # Sort the list and return as readable resolution strings
@@ -409,19 +414,19 @@ def getPackageStatus(packageName):
         pkg = cache[packageName]
         if pkg.installed is not None:
             # Package is installed
-            log.write('Package is installed: %s' % str(packageName), 'drivers.getPackageStatus', 'debug')
+            log.write(_("Package is installed: %(package)s") % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
             status = packageStatus[0]
         elif pkg.candidate is not None:
             # Package is not installed
-            log.write('Package not installed: %s' % str(packageName), 'drivers.getPackageStatus', 'debug')
+            log.write(_("Package not installed: %(package)s") % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
             status = packageStatus[1]
         else:
             # Package is not found: uninstallable
-            log.write('Package not found: %s' % str(packageName), 'drivers.getPackageStatus', 'debug')
+            log.write(_("Package not found: %(package)s") % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
             status = packageStatus[2]
     except:
         # If something went wrong: assume that package is uninstallable
-        log.write('Could not get status info for package: %s' % str(packageName), 'drivers.getPackageStatus', 'debug')
+        log.write(_("Could not get status info for package: %(package)s") % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
         status = packageStatus[2]
 
     return status
@@ -599,3 +604,12 @@ def getDivertedFiles(mustContain=None):
     ec = ExecCmd(log)
     divertedFiles = ec.run(cmd, False)
     return divertedFiles
+
+# Check for internet connection
+def hasInternetConnection(testUrl='http://google.com'):
+    try:
+        urllib2.urlopen(testUrl, timeout=1)
+        return True
+    except urllib2.URLError:
+        pass
+    return False
