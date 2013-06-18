@@ -5,10 +5,10 @@ import gettext
 from execcmd import ExecCmd
 
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
-hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
+hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'intel', 'via', 'nvidia_intel', 'ati_intel']
 
 # i18n
-gettext.install("ddm", "/usr/share/ddm/locale")
+gettext.install("ddm", "/usr/share/locale")
 
 
 class PAE():
@@ -56,7 +56,7 @@ class PAE():
             if installedPackage:
                 version = functions.getPackageVersion(installedPackage)
                 self.log.write(_("Multi-core already installed: %(package)s") % { "package": installedPackage }, 'pae.getPae', 'info')
-                hwList.append([_("PAE capable system"), hwCodes[5], packageStatus[0], installedPackage, version, description])
+                hwList.append([_("PAE capable system"), hwCodes[3], packageStatus[0], installedPackage, version, description])
             else:
                 self.log.write(_("Single-core kernel found: %(kernel)s") % { "kernel": self.kernelRelease }, 'pae.getPae', 'debug')
 
@@ -70,7 +70,7 @@ class PAE():
                             self.log.write(_("PAE not installed"), 'pae.getPae', 'info')
                             status = packageStatus[1]
                             version = functions.getPackageVersion(package, True)
-                            hwList.append([_("PAE capable system"), hwCodes[5], status, package, version, description])
+                            hwList.append([_("PAE capable system"), hwCodes[3], status, package, version, description])
                             break
 
                 elif machine[0] == 'x86_64':

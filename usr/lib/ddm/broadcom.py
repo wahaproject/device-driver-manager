@@ -8,10 +8,10 @@ from execcmd import ExecCmd
 from glob import glob
 
 # i18n
-gettext.install("ddm", "/usr/share/ddm/locale")
+gettext.install("ddm", "/usr/share/locale")
 
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
-hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
+hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'intel', 'via', 'nvidia_intel', 'ati_intel']
 blacklistPath = '/etc/modprobe.d/blacklist-broadcom.conf'
 # Driver package names
 wlDebian = 'broadcom-sta-dkms'
@@ -96,16 +96,16 @@ class Broadcom():
                             # Get the driver version
                             drvVersion = functions.getPackageVersion(drv, True)
 
-                            hwList.append([self.hw, hwCodes[4], status, drv, drvVersion, 'Broadcom wireless'])
+                            hwList.append([self.hw, hwCodes[2], status, drv, drvVersion, 'Broadcom wireless'])
                     else:
                         # Broadcom chipset was found, but no drivers are available: return uninstallable
-                        hwList.append([self.hw, hwCodes[4], packageStatus[2], '', '', 'Chipset not supported'])
+                        hwList.append([self.hw, hwCodes[2], packageStatus[2], '', '', 'Chipset not supported'])
                 else:
                     # Broadcom was found, but no supported chip set: return uninstallable
-                    hwList.append([self.hw, hwCodes[4], packageStatus[2], '', '', 'Chipset not supported'])
+                    hwList.append([self.hw, hwCodes[2], packageStatus[2], '', '', 'Chipset not supported'])
             else:
                 # Broadcom was found, but no chip set was found: return uninstallable
-                hwList.append([self.hw, hwCodes[4], packageStatus[2], '', '', 'Chipset not found'])
+                hwList.append([self.hw, hwCodes[2], packageStatus[2], '', '', 'Chipset not found'])
 
         return hwList
 

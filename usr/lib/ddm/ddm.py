@@ -26,14 +26,11 @@ except Exception, detail:
     print detail
     sys.exit(1)
 
-hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
+hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'intel', 'via', 'nvidia_intel', 'ati_intel']
 menuItems = ['graphics', 'wireless', 'kernel']
 
 # i18n
-gettext.install("ddm", "/usr/share/ddm/locale")
-
-# TODO: Prepare translations for ddm.glade
-
+gettext.install("ddm", "/usr/share/locale")
 
 #class for the main window
 class DDM:
@@ -93,7 +90,6 @@ class DDM:
         self.lockFile = '/var/lib/dpkg/lock'
         self.debug = False
         self.install = False
-        self.isHybrid = False
         self.logPath = ''
         self.kernelRelease = None
         self.queue = Queue.Queue()
@@ -104,6 +100,9 @@ class DDM:
         self.viaDrivers = []
         self.broadcomDrivers = []
         self.paePackage = []
+        self.nvidiaIntelDrivers = []
+        self.atiIntelDrivers = []
+
         self.usedDrivers = []
         self.graphDependencies = []
         self.manufacturerModules = []
@@ -175,16 +174,22 @@ class DDM:
                 self.currentHwCode = hwCodes[1]
                 self.manufacturerModules = self.xc.getModules(hwCodes[1])
                 self.loadDriverSection(self.atiDrivers)
-                if self.intelDrivers:
-                    self.isHybrid = True
             elif self.intelDrivers:
-                self.currentHwCode = hwCodes[2]
-                self.manufacturerModules = self.xc.getModules(hwCodes[2])
+                self.currentHwCode = hwCodes[4]
+                self.manufacturerModules = self.xc.getModules(hwCodes[4])
                 self.loadDriverSection(self.intelDrivers)
             elif self.viaDrivers:
-                self.currentHwCode = hwCodes[3]
-                self.manufacturerModules = self.xc.getModules(hwCodes[3])
+                self.currentHwCode = hwCodes[5]
+                self.manufacturerModules = self.xc.getModules(hwCodes[5])
                 self.loadDriverSection(self.viaDrivers)
+            elif self.nvidiaIntelDrivers:
+                self.currentHwCode = hwCodes[6]
+                self.manufacturerModules = self.xc.getModules(hwCodes[6])
+                self.loadDriverSection(self.nvidiaIntelDrivers)
+            elif self.atiIntelDrivers:
+                self.currentHwCode = hwCodes[7]
+                self.manufacturerModules = self.xc.getModules(hwCodes[7])
+                self.loadDriverSection(self.atiIntelDrivers)
 
     def showMenuWireless(self, widget=None, event=None):
         if self.selectedMenuItem != menuItems[1]:
@@ -193,7 +198,7 @@ class DDM:
             self.clearDriverSection(_("Current drivers are correct"))
 
             if self.broadcomDrivers:
-                self.currentHwCode = hwCodes[4]
+                self.currentHwCode = hwCodes[2]
                 self.loadDriverSection(self.broadcomDrivers)
 
     def showMenuKernel(self, widget=None, event=None):
@@ -206,7 +211,7 @@ class DDM:
             self.clearDriverSection(msg)
 
             if self.paePackage:
-                self.currentHwCode = hwCodes[5]
+                self.currentHwCode = hwCodes[3]
                 self.loadDriverSection(self.paePackage)
 
     # ===============================================
@@ -271,7 +276,7 @@ class DDM:
                                 break
 
                     self.log.write(_("Check loaded driver / available driver: %(ldrv)s / %(adrv)s") % { "ldrv": drv[1], "adrv": item[3] }, 'ddm.loadDriverSection', 'debug')
-                    if drv[1] == item[3] and drv[0] == self.selectedMenuItem:
+                    if (drv[1] == item[3] or ('bumblebee' in item[3] and item[2] == 'installed')) and drv[0] == self.selectedMenuItem:
                         self.log.write(_("Select current driver in list: %(drv)s") % { "drv": drv[1] }, 'ddm.loadDriverSection', 'debug')
                         self.lblActivatedDriver.set_text('%s %s%s' % (item[3], item[4], recommended))
                         activate = True
@@ -312,24 +317,28 @@ class DDM:
             # Fill treeview with drivers
             #fillTreeview(contentList, columnTypesList, columnHideList=[-1], setCursor=0, setCursorWeight=400, firstItemIsColName=False, appendToExisting=False, appendToTop=False)
             columnTypesList = ['bool', 'str', 'str', 'str', 'str']
-            self.tvHandler.fillTreeview(contentList, columnTypesList, [4], rowCnt, 600, True, False, False)
+            self.tvHandler.fillTreeview(contentList, columnTypesList, rowCnt, 600, True, False, False)
             self.prevDriverPath = rowCnt
+            # Hide the last column
+            cols = self.tvDrivers.get_columns()
+            cols[4].set_visible(False)
 
     # Open the manufacturer site in the default browser
     def showManufacturerSite(self, widget, event):
         url = ''
-        if self.currentHwCode == hwCodes[0]:
+        if self.currentHwCode == hwCodes[0] or self.currentHwCode == hwCodes[6]:
             url = self.urlNvidia
-        elif self.currentHwCode == hwCodes[1]:
+        elif self.currentHwCode == hwCodes[1] or self.currentHwCode == hwCodes[7]:
             url = self.urlAmd
         elif self.currentHwCode == hwCodes[2]:
-            url = self.urlIntel
-        elif self.currentHwCode == hwCodes[3]:
-            url = self.urlVia
-        elif self.currentHwCode == hwCodes[4]:
             url = self.urlBroadcom
-        elif self.currentHwCode == hwCodes[5]:
+        elif self.currentHwCode == hwCodes[3]:
             url = self.urlPae
+        elif self.currentHwCode == hwCodes[4]:
+            url = self.urlIntel
+        elif self.currentHwCode == hwCodes[5]:
+            url = self.urlVia
+
         if url != '':
             webbrowser.open(url)
 
@@ -360,7 +369,7 @@ class DDM:
                             # Install in separate thread
                             self.prevDriverPath = path
                             self.toggleGuiElements(True)
-                            t = DriverInstall(self.distribution, self.log, hwCode, driver, card, self.isHybrid)
+                            t = DriverInstall(self.distribution, self.log, hwCode, driver, card)
                             t.daemon = True
                             t.start()
                             # Run spinner as long as the thread is alive
@@ -393,18 +402,22 @@ class DDM:
             elif hwList[0][1] == hwCodes[1]:
                 self.atiDrivers = hwList
             elif hwList[0][1] == hwCodes[2]:
-                self.intelDrivers = hwList
-            elif hwList[0][1] == hwCodes[3]:
-                self.viaDrivers = hwList
-            elif hwList[0][1] == hwCodes[4]:
                 self.broadcomDrivers = hwList
-            elif hwList[0][1] == hwCodes[5]:
+            elif hwList[0][1] == hwCodes[3]:
                 self.paePackage = hwList
+            elif hwList[0][1] == hwCodes[4]:
+                self.intelDrivers = hwList
+            elif hwList[0][1] == hwCodes[5]:
+                self.viaDrivers = hwList
+            elif hwList[0][1] == hwCodes[6]:
+                self.nvidiaIntelDrivers = hwList
+            elif hwList[0][1] == hwCodes[7]:
+                self.atiIntelDrivers = hwList
 
         # Select the appropriate menu when all threads are done
         if threading.active_count() == 1:
             self.selectedMenuItem = None
-            if self.nvidiaDrivers or self.atiDrivers or self.intelDrivers or self.viaDrivers:
+            if self.nvidiaDrivers or self.atiDrivers or self.intelDrivers or self.viaDrivers or self.nvidiaIntelDrivers or self.atiIntelDrivers:
                 self.showMenuGraphics()
             elif self.broadcomDrivers:
                 self.showMenuWireless()
@@ -445,11 +458,10 @@ class DDM:
             functions.pushMessage(self.statusbar, self.version)
 
     # Make thread safe by queue
-    def getHardwareInfo(self, hwCode, graphicsCard=None):
+    def getHardwareInfo(self, hwCode, videoCards=None):
         self.toggleGuiElements(True)
-
         # Start the thread
-        t = DriverGet(self.distribution, self.log, hwCode, self.queue, graphicsCard)
+        t = DriverGet(self.distribution, self.log, hwCode, self.queue, videoCards)
         t.daemon = True
         t.start()
         self.queue.join()
@@ -552,33 +564,55 @@ class DDM:
 
         # Get hardware info
         # Graphics
-        self.cards = functions.getGraphicsCards()
+        self.cards = functions.getVideoCards()
+
         # ATI test: must not show
         # self.cards = [['Advanced Micro Devices [AMD] nee ATI Device', '1002', '9992']]
         # ATI test: show
         # self.cards = [['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]', '1002', '68e0']]
+
+        # Nvidia/Intel test
+        #self.cards = []
+        #self.cards.append(['Intel Corporation 2nd Generation Core Processor Family Integrated Graphics Controller', '8086', '0126'])
+        #self.cards.append(['NVIDIA Corporation GF108M [GeForce GT 540M]', '10de', '0df4'])
+
+        # ATI/Intel test
+        #self.cards = []
+        #self.cards.append(['Intel Corporation 3rd Gen Core processor Graphics Controller', '8086', '0166'])
+        #self.cards.append(['Advanced Micro Devices, Inc. [AMD/ATI] Mars [Radeon HD 8730M]', '1002', '6601'])
+
         cardsDone = []
         for card in self.cards:
             if card[1] == '10de' and hwCodes[0] not in cardsDone:
                 # Nvidia
-                self.getHardwareInfo(hwCodes[0], card)
                 cardsDone.append(hwCodes[0])
             if card[1] == '1002' and hwCodes[1] not in cardsDone:
                 # ATI
-                self.getHardwareInfo(hwCodes[1], card)
                 cardsDone.append(hwCodes[1])
-            if card[1] == '8086' and hwCodes[2] not in cardsDone:
+            if card[1] == '8086' and hwCodes[4] not in cardsDone:
                 # Intel
-                self.getHardwareInfo(hwCodes[2], card)
-                cardsDone.append(hwCodes[2])
-            if card[1] == '1106' and hwCodes[3] not in cardsDone:
+                cardsDone.append(hwCodes[4])
+            if card[1] == '1106' and hwCodes[5] not in cardsDone:
                 # Via
-                self.getHardwareInfo(hwCodes[3], card)
-                cardsDone.append(hwCodes[3])
+                cardsDone.append(hwCodes[5])
+
+        if cardsDone:
+            if len(cardsDone) > 1:
+                # Hybrid cards
+                if hwCodes[4] in cardsDone:
+                    if hwCodes[0] in cardsDone:
+                        # Nividia/Intel
+                        self.getHardwareInfo(hwCodes[6], self.cards)
+                    elif hwCodes[1] in cardsDone:
+                        # ATI/Intel
+                        self.getHardwareInfo(hwCodes[7], self.cards)
+            else:
+                self.getHardwareInfo(cardsDone[0], self.cards)
+
         # Wireless
-        self.getHardwareInfo(hwCodes[4])
+        self.getHardwareInfo(hwCodes[2])
         # PAE
-        self.getHardwareInfo(hwCodes[5])
+        self.getHardwareInfo(hwCodes[3])
 
         # Start automatic install
         if self.install:

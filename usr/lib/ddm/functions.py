@@ -27,7 +27,7 @@ packageStatus = ['installed', 'notinstalled', 'uninstallable']
 log = object
 
 # i18n
-gettext.install("ddm", "/usr/share/ddm/locale")
+gettext.install("ddm", "/usr/share/locale")
 
 
 # General ================================================
@@ -59,6 +59,13 @@ def getUsers(homeUsers=True):
         else:
             users.append([p.pw_name, p.pw_dir, userGroups])
     return users
+
+# Get the login name of the current user
+def getUserLoginName():
+    p = os.popen('logname','r')
+    userName = string.strip(p.readline())
+    p.close()
+    return userName
 
 def repaintGui():
     # Force repaint: ugly, but gui gets repainted so fast that gtk objects don't show it
@@ -262,17 +269,17 @@ def getKernelRelease():
     return kernelRelease
 
 
-# Get the system's graphic card
-def getGraphicsCards(pciId=None):
-    graphicsCard = []
-    cmdGraph = 'lspci -nn | grep VGA'
+# Get the system's video cards
+def getVideoCards(pciId=None):
+    videoCard = []
+    cmdVideo = 'lspci -nn | grep VGA'
     ec = ExecCmd(log)
-    hwGraph = ec.run(cmdGraph, False)
-    for line in hwGraph:
-        graphMatch = re.search(':\s(.*)\[(\w*):(\w*)\]', line)
-        if graphMatch and (pciId is None or pciId.lower() + ':' in line.lower()):
-            graphicsCard.append([graphMatch.group(1), graphMatch.group(2), graphMatch.group(3)])
-    return graphicsCard
+    hwVideo = ec.run(cmdVideo, False)
+    for line in hwVideo:
+        videoMatch = re.search(':\s(.*)\[(\w*):(\w*)\]', line)
+        if videoMatch and (pciId is None or pciId.lower() + ':' in line.lower()):
+            videoCard.append([videoMatch.group(1), videoMatch.group(2), videoMatch.group(3)])
+    return videoCard
 
 
 # Get system version information

@@ -5,7 +5,7 @@ import subprocess
 import gettext
 
 # i18n
-gettext.install("ddm", "/usr/share/ddm/locale")
+gettext.install("ddm", "/usr/share/locale")
 
 
 # Class to execute a command and return the output in an array

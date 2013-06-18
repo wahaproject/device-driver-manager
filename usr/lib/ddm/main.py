@@ -13,7 +13,7 @@ from logger import Logger
 from dialogs import MessageDialogSave
 
 # i18n
-gettext.install("ddm", "/usr/share/ddm/locale")
+gettext.install("ddm", "/usr/share/locale")
 
 
 # Help

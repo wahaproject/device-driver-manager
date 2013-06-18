@@ -6,27 +6,34 @@ from execcmd import ExecCmd
 from xorg import XorgConf
 
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
-hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
+hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'intel', 'via', 'nvidia_intel', 'ati_intel']
 
 # i18n
-gettext.install("ddm", "/usr/share/ddm/locale")
+gettext.install("ddm", "/usr/share/locale")
 
 
 class Via():
 
-    def __init__(self, distribution, loggerObject, graphicsCard, additionalDrivers=True):
+    def __init__(self, distribution, loggerObject, videoCards, additionalDrivers=True):
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
         self.xc = XorgConf(self.log)
         # Intel manufacturerID = 1106
-        self.graphicsCard = graphicsCard
+        self.videoCards = videoCards
         self.drivers = []
+        self.viaCard = []
 
         # Test (01:00.0 VGA compatible controller [0300]: VIA Technologies, Inc KM400/KN400/P4P800 [S3 Unichrome][1106:7205] (rev 01))
-        #self.graphicsCard = [['VIA Technologies, Inc KM400/KN400/P4P800 [S3 Unichrome]', '1106', '7205']]
+        #self.videoCards = [['VIA Technologies, Inc KM400/KN400/P4P800 [S3 Unichrome]', '1106', '7205']]
 
-        if self.graphicsCard:
+        if self.videoCards:
+            # Save Via card information
+            for card in self.videoCards:
+                if card[1] == '1106':
+                    self.viaCard = card
+                    break
+
             self.drivers.append('xserver-xorg-video-openchrome')
             if additionalDrivers:
                 self.drivers.append('xserver-xorg-video-vesa')
@@ -35,23 +42,24 @@ class Via():
     def getVia(self):
         # Check for Via cards
         hwList = []
-        self.log.write(_("Via card found: %(card)s") % { "card": self.graphicsCard[0] }, 'via.getATI', 'info')
-        for drv in self.drivers:
-            status = functions.getPackageStatus(drv)
-            version = functions.getPackageVersion(drv, True)
-            description = self.getDriverDescription(drv)
-            if status != packageStatus[2]:
-                self.log.write(_("Via driver found: %(drv)s (%(status)s)") % { "drv": drv, "status": status }, 'via.getVia', 'info')
-                hwList.append([self.graphicsCard[0], hwCodes[3], status, drv, version, description])
-            else:
-                self.log.write(_("Driver not installable: %(drv)s") % { "drv": drv }, 'via.getVia', 'warning')
+        if self.viaCard:
+            self.log.write(_("Via card found: %(card)s") % { "card": self.viaCard[0] }, 'via.getATI', 'info')
+            for drv in self.drivers:
+                status = functions.getPackageStatus(drv)
+                version = functions.getPackageVersion(drv, True)
+                description = self.getDriverDescription(drv)
+                if status != packageStatus[2]:
+                    self.log.write(_("Via driver found: %(drv)s (%(status)s)") % { "drv": drv, "status": status }, 'via.getVia', 'info')
+                    hwList.append([self.viaCard[0], hwCodes[5], status, drv, version, description])
+                else:
+                    self.log.write(_("Driver not installable: %(drv)s") % { "drv": drv }, 'via.getVia', 'warning')
 
         return hwList
 
     # Called from drivers.py: install the Via drivers
     def installVia(self, driver):
         try:
-            module = self.xc.getModuleForDriver(hwCodes[3], driver)
+            module = self.xc.getModuleForDriver(hwCodes[5], driver)
 
             # Install driver if not already installed
             if not functions.isPackageInstalled(driver):

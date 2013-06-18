@@ -12,7 +12,9 @@ manufacturerDrivers = [
 ['ATI', ['fglrx', 'radeonhd', 'radeon', 'fbdev', 'vesa']],
 ['NVIDIA', ['nvidia', 'nouveau', 'fbdev', 'vesa']],
 ['VIA', ['chrome9', 'openchrome', 'unichrome']],
-['INTEL', ['intel', 'fbdev', 'vesa']]
+['INTEL', ['intel', 'fbdev', 'vesa']],
+['ATI_INTEL', ['fglrx', 'intel', 'radeonhd', 'radeon', 'fbdev', 'vesa']],
+['NVIDIA_INTEL', ['nvidia', 'intel', 'nouveau', 'fbdev', 'vesa']]
 ]
 
 minimalXorg = 'Section "%s"\n  Identifier   "Device%s"\n  Driver       "%s"\nEndSection\n'
@@ -20,7 +22,7 @@ regExpCommented = '#[\s]*blacklist[\s]*%s'
 regExpUncommented = '[^#][\s]*blacklist[\s]*%s'
 
 # i18n
-gettext.install("ddm", "/usr/share/ddm/locale")
+gettext.install("ddm", "/usr/share/locale")
 
 
 class XorgConf():
@@ -53,7 +55,7 @@ class XorgConf():
         return foundModule
 
     # Return graphics module used by X.org
-    # TODO: is lsmod an alternative
+    # TODO: is lsmod an alternative?
     def getUsedDriver(self):
         # find the most recent X.org log
         module = None

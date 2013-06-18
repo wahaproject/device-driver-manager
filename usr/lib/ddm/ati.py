@@ -8,33 +8,46 @@ from execcmd import ExecCmd
 from xorg import XorgConf
 
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
-hwCodes = ['nvidia', 'ati', 'intel', 'via', 'broadcom', 'pae']
+hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'intel', 'via', 'nvidia_intel', 'ati_intel']
 # fglrx and fglrx-driver only supports the HD series from 5000 and up
 # http://support.amd.com/us/kbarticles/Pages/RN_LN_CAT13-2_Beta.aspx
 atiStartSerie = 5000
 
 # i18n
-gettext.install("ddm", "/usr/share/ddm/locale")
+gettext.install("ddm", "/usr/share/locale")
 
 
 class ATI():
 
-    def __init__(self, distribution, loggerObject, graphicsCard, additionalDrivers=True):
+    def __init__(self, distribution, loggerObject, videoCards, additionalDrivers=True):
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
         self.xc = XorgConf(self.log)
         # ATI manufacturerID = 1002
-        self.graphicsCard = graphicsCard
+        self.videoCards = videoCards
         self.drivers = []
+        self.atiCard = []
+        self.isHybrid = False
 
         # This should not be listed: 00:01.0 VGA compatible controller [0300]: Advanced Micro Devices [AMD] nee ATI Device [1002:9992]
-        #self.graphicsCard = [['Advanced Micro Devices [AMD] nee ATI Device', '1002', '9992']]
+        #self.videoCards = [['Advanced Micro Devices [AMD] nee ATI Device', '1002', '9992']]
 
         # This should be listed: 01:00.0 VGA compatible controller [0300]: Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series] [1002:68e0]
-        #self.graphicsCard = [['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]', '1002', '68e0']]
+        #self.videoCards = [['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]', '1002', '68e0']]
 
-        if self.graphicsCard:
+        #Hybrid card
+        #00:02.0 VGA compatible controller [0300]: Intel Corporation 3rd Gen Core processor Graphics Controller [8086:0166] (rev 09)
+        #01:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Mars [Radeon HD 8730M] [1002:6601]
+
+        if self.videoCards:
+            # Save ATI card information
+            for card in self.videoCards:
+                if card[1] == '1002':
+                    self.atiCard = card
+                elif card[1] == '8086':
+                    self.isHybrid = True
+
             if self.distribution == 'debian':
                 # Add Debian driver
                 self.drivers.append('fglrx-driver')
@@ -44,44 +57,47 @@ class ATI():
 
             # Additional drivers
             if additionalDrivers:
+                if self.isHybrid:
+                    self.drivers.append('xserver-xorg-video-intel')
                 self.drivers.append('xserver-xorg-video-radeon')
                 self.drivers.append('xserver-xorg-video-fbdev')
                 self.drivers.append('xserver-xorg-video-vesa')
 
     # Called from drivers.py: Check for ATI
-    def getATI(self):
+    def getATI(self, hwCode):
         # Check for ATI cards
         hwList = []
-        self.log.write(_("ATI card found: %(card)s") % { "card": self.graphicsCard[0] }, 'ati.getATI', 'info')
-        # Get the ATI chip set serie
-        atiSerieMatch = re.search('HD\W(\d*)', self.graphicsCard[0])
-        if atiSerieMatch:
-            atiSerie = atiSerieMatch.group(1)
-            self.log.write(_("ATI chip serie found: %(serie)s") % { "serie": atiSerie }, 'ati.getATI', 'info')
-            intSerie = functions.strToNumber(atiSerie)
-            # Only add series from atiStartSerie
-            if intSerie >= atiStartSerie:
-                for drv in self.drivers:
-                    status = functions.getPackageStatus(drv)
-                    version = functions.getPackageVersion(drv, True)
-                    description = self.getDriverDescription(drv)
-                    if status != packageStatus[2]:
-                        self.log.write(_("ATI driver found: %(drv)s (%(status)s)") % ({ "drv": drv, "status": status }), 'ati.getATI', 'info')
-                        hwList.append([self.graphicsCard[0], hwCodes[1], status, drv, version, description])
-                    else:
-                        self.log.write(_("Driver not installable: %(drv)s") % { "drv": drv }, 'ati.getATI', 'warning')
+        if self.atiCard:
+            self.log.write(_("ATI card found: %(card)s") % { "card": self.atiCard[0] }, 'ati.getATI', 'info')
+            # Get the ATI chip set serie
+            atiSerieMatch = re.search('HD\W(\d*)', self.atiCard[0])
+            if atiSerieMatch:
+                atiSerie = atiSerieMatch.group(1)
+                self.log.write(_("ATI chip serie found: %(serie)s") % { "serie": atiSerie }, 'ati.getATI', 'info')
+                intSerie = functions.strToNumber(atiSerie)
+                # Only add series from atiStartSerie
+                if intSerie >= atiStartSerie:
+                    for drv in self.drivers:
+                        status = functions.getPackageStatus(drv)
+                        version = functions.getPackageVersion(drv, True)
+                        description = self.getDriverDescription(drv)
+                        if status != packageStatus[2]:
+                            self.log.write(_("ATI driver found: %(drv)s (%(status)s)") % ({ "drv": drv, "status": status }), 'ati.getATI', 'info')
+                            hwList.append([self.atiCard[0], hwCode, status, drv, version, description])
+                        else:
+                            self.log.write(_("Driver not installable: %(drv)s") % { "drv": drv }, 'ati.getATI', 'warning')
+                else:
+                    self.log.write(_("ATI chip serie not supported: %(serie)d") % { "serie": intSerie }, 'ati.getATI', 'warning')
             else:
-                self.log.write(_("ATI chip serie not supported: %(serie)d") % { "serie": intSerie }, 'ati.getATI', 'warning')
-        else:
-            self.log.write(_("No driver found for: %(card)s (%(man)s:%(serie)s)") % { "card": self.graphicsCard[0], "man": self.graphicsCard[1], "serie": self.graphicsCard[2] }, 'ati.getATI', 'warning')
+                self.log.write(_("No driver found for: %(card)s (%(man)s:%(serie)s)") % { "card": self.atiCard[0], "man": self.atiCard[1], "serie": self.atiCard[2] }, 'ati.getATI', 'warning')
 
         return hwList
 
     # Called from drivers.py: install the ATI drivers
-    def installATI(self, driver, isHybrid=False):
+    def installATI(self, driver, hwCode):
         try:
             isConfigured = False
-            module = self.xc.getModuleForDriver(hwCodes[1], driver)
+            module = self.xc.getModuleForDriver(hwCode, driver)
 
             # Install driver if not already installed
             if not functions.isPackageInstalled(driver):
@@ -92,10 +108,8 @@ class ATI():
                 # Configure ATI
                 if module == 'fglrx':
                     self.log.write(_("Configure ATI..."), 'ati.installATI', 'debug')
-                    if isHybrid:
-                        self.ec.run('aticonfig --adapter=all --initial -f')
-                    else:
-                        self.ec.run('aticonfig --initial -f')
+                    #self.ec.run('aticonfig --adapter=all --initial -f')
+                    self.ec.run('aticonfig --initial -f')
                     isConfigured = True
 
             if not isConfigured:
@@ -114,7 +128,7 @@ class ATI():
             self.log.write(detail, 'ati.installATI', 'exception')
 
     # Called from drivers.py: remove the ATI drivers and revert to radeon
-    def removeATI(self, driver):
+    def removeATI(self, driver, hwCode):
         try:
             # Preseed answers for some packages
             self.preseedATIPackages('purge')
@@ -142,6 +156,8 @@ class ATI():
         description = ''
         if 'fglrx' in driver:
             description = _("ATI display driver")
+        elif 'intel' in driver:
+            description = _("Intel display driver")
         elif 'radeon' in driver:
             description = _("Radeon display driver")
         elif 'fbdev' in driver:

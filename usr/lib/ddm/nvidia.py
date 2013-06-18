@@ -8,45 +8,68 @@ from execcmd import ExecCmd
 from xorg import XorgConf
 
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
-hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'intel', 'via']
+hwCodes = ['nvidia', 'ati', 'broadcom', 'pae', 'intel', 'via', 'nvidia_intel', 'ati_intel']
 blacklistPath = '/etc/modprobe.d/blacklist-nouveau.conf'
 
 # i18n
-gettext.install("ddm", "/usr/share/ddm/locale")
+gettext.install("ddm", "/usr/share/locale")
 
 
 class Nvidia():
-    def __init__(self, distribution, loggerObject, graphicsCard, additionalDrivers=True):
+    def __init__(self, distribution, loggerObject, videoCards, additionalDrivers=True):
         self.distribution = distribution.lower()
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
         self.xc = XorgConf(self.log)
         # Intel manufacturerID = 10de
-        self.graphicsCard = graphicsCard
+        self.videoCards = videoCards
         self.drivers = []
+        self.nvidiaCard = []
+        self.isBumblebee = False
 
         # Test (01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GT218 [GeForce G210M] [10de:0a74] (rev ff))
-        # self.graphicsCard = [['NVIDIA Corporation GT218 [GeForce G210M]', '10de', '0a74']]
+        # self.videoCards = [['NVIDIA Corporation GT218 [GeForce G210M]', '10de', '0a74']]
 
-        if self.graphicsCard:
+        #Hybrid
+        #00:02.0 VGA compatible controller [0300]: Intel Corporation 2nd Generation Core Processor Family Integrated Graphics Controller [8086:0126] (rev 09)
+        #01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GF108M [GeForce GT 540M] [10de:0df4] (rev ff)
+        #sudo apt-get install -y bumblebee bumblebee-nvidia primus
+        #sudo adduser bumblebee christopher
+
+        if self.videoCards:
+            # Save Nvidia card information
+            for card in self.videoCards:
+                if card[1] == '10de':
+                    self.nvidiaCard = card
+                elif card[1] == '8086':
+                    self.isBumblebee = True
+
             # Install nvidia-detect if it isn't installed already
             if self.distribution == 'debian':
+                if self.isBumblebee:
+                    self.drivers = ['bumblebee-nvidia']
+                    if additionalDrivers:
+                        self.drivers.append('xserver-xorg-video-intel')
+
                 if functions.getPackageVersion('nvidia-detect') == '':
                     self.log.write(_("Update apt"), 'nvidia.init', 'info')
                     self.ec.run('apt-get update')
                 if not functions.isPackageInstalled('nvidia-detect'):
                     self.log.write(_("Install nvidia-detect"), 'nvidia.init', 'info')
                     self.ec.run('apt-get -y --force-yes install nvidia-detect')
-                self.drivers = self.ec.run("nvidia-detect | grep nvidia- | tr -d ' '")
+
+                nvDrv = self.ec.run("nvidia-detect | grep nvidia- | tr -d ' '")
+                if nvDrv:
+                    self.drivers.append(nvDrv[0])
+
                 if 'not found' in self.drivers:
                     self.log.write(_("Cannot install nvidia-detect: abort"), 'nvidia.init', 'critical')
                     exit()
 
                 # Add additional drivers
-                if additionalDrivers:
-                    self.drivers.append('xserver-xorg-video-nouveau')
-                    self.drivers.append('xserver-xorg-video-fbdev')
-                    self.drivers.append('xserver-xorg-video-vesa')
+                self.drivers.append('xserver-xorg-video-nouveau')
+                self.drivers.append('xserver-xorg-video-fbdev')
+                self.drivers.append('xserver-xorg-video-vesa')
             else:
                 # Ubuntu - use jockey code
                 nd = NvidiaDetection()
@@ -61,28 +84,31 @@ class Nvidia():
                     self.drivers.append('xserver-xorg-video-vesa')
 
     # Called from drivers.py: Check for Nvidia
-    def getNvidia(self):
+    def getNvidia(self, hwCode):
         hwList = []
-        if self.drivers and self.graphicsCard:
+        if self.nvidiaCard:
+            self.log.write(_("Nvidia card found: %(card)s") % { "card": self.nvidiaCard[0] }, 'nvidia.getNvidia', 'info')
             for drv in self.drivers:
+                # This is a temporary hack, needed for the experimental nvidia-detect
+                # Remove the following if statement when nvidia-glx-legacy-304xx hits testing
+                if drv == "nvidia-glx-legacy-304xx":
+                    drv = "nvidia-glx"
                 status = functions.getPackageStatus(drv)
                 version = functions.getPackageVersion(drv, True)
                 description = self.getDriverDescription(drv)
                 if status != packageStatus[2]:
                     self.log.write(_("Nvidia driver found: %(drv)s (%(status)s)") % { "drv": drv, "status": status }, 'nvidia.getNvidia', 'info')
-                    hwList.append([self.graphicsCard[0], hwCodes[0], status, drv, version, description])
+                    hwList.append([self.nvidiaCard[0], hwCode, status, drv, version, description])
                 else:
                     self.log.write(_("Driver not installable: %(drv)s") % { "drv": drv }, 'nvidia.getNvidia', 'warning')
-        else:
-            self.log.write(_("No driver found for: %(card)s (%(man)s:%(serie)s)") % { "card": self.graphicsCard[0], "man": self.graphicsCard[1], "serie": self.graphicsCard[2] }, 'nvidia.getNvidia', 'warning')
 
         return hwList
 
     # Called from drivers.py: install the Nvidia drivers
-    def installNvidia(self, driver):
+    def installNvidia(self, driver, hwCode):
         try:
             isConfigured = False
-            module = self.xc.getModuleForDriver(hwCodes[0], driver)
+            module = self.xc.getModuleForDriver(hwCode, driver)
             version = functions.getPackageVersion(driver, True).split('-')[0]
 
             # Install driver if not already installed
@@ -93,9 +119,14 @@ class Nvidia():
                 self.installNvidiaPackages(packages, version)
                 # Configure nvidia for Debian
                 if self.distribution == 'debian' and module == 'nvidia':
-                    self.log.write(_("Configure Nvidia..."), 'nvidia.installNvidia', 'debug')
-                    self.ec.run('nvidia-xconfig')
-                    self.xc.blacklistModule('nouveau')
+                    if self.isBumblebee:
+                        userName = functions.getUserLoginName()
+                        self.ec.run("adduser bumblebee %s" % userName)
+                    else:
+                        self.log.write(_("Configure Nvidia..."), 'nvidia.installNvidia', 'debug')
+                        self.ec.run('nvidia-xconfig')
+                        self.xc.blacklistModule('nouveau')
+
                     isConfigured = True
 
             if not isConfigured:
@@ -118,7 +149,7 @@ class Nvidia():
             self.log.write(detail, 'nvidia.installNvidia', 'exception')
 
     # Called from drivers.py: remove the Nvidia drivers and revert to Nouveau
-    def removeNvidia(self, driver):
+    def removeNvidia(self, driver, hwCode):
         try:
             # Preseed answers for some packages
             version = functions.getPackageVersion(driver, True).split('-')[0]
@@ -150,6 +181,8 @@ class Nvidia():
         description = ''
         if 'nvidia' in driver:
             description = _("Nvidia display driver")
+        elif 'intel' in driver:
+            description = _("Intel display driver")
         elif 'nouveau' in driver:
             description = _("Nouveau display driver")
         elif 'fbdev' in driver:
@@ -208,12 +241,17 @@ class Nvidia():
                 drvList.append(['build-essential', 0])
                 drvList.append([driver, 1])
                 # This needs to change when 304 goes legacy
-                if driver == 'nvidia-glx' or driver == 'nvidia-glx-legacy-304xx':
+                if driver == 'nvidia-glx':
                     drvList.append(['nvidia-kernel-dkms', 1])
+                elif driver == 'bumblebee-nvidia':
+                    drvList.append(['nvidia-kernel-dkms', 1])
+                    drvList.append(['bumblebee', 1])
+                    drvList.append(['primus', 1])
                 elif driver == 'nvidia-glx-legacy-96xx':
                     drvList.append(['nvidia-kernel-legacy-96xx-dkms', 1])
                 elif driver == 'nvidia-glx-legacy-173xx':
                     drvList.append(['nvidia-kernel-legacy-173xx-dkms', 1])
+                # Uncomment the following if statement when nvidia-glx-legacy-304xx hits testing
                 #elif driver == 'nvidia-glx-legacy-304xx':
                 #    drvList.append(['nvidia-kernel-legacy-304xx-dkms', 1])
                 drvList.append(['nvidia-xconfig', 0])
