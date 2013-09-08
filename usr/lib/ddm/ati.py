@@ -29,6 +29,7 @@ class ATI():
         self.drivers = []
         self.atiCard = []
         self.isHybrid = False
+        self.kernelRelease = functions.getKernelRelease()
 
         # This should not be listed: 00:01.0 VGA compatible controller [0300]: Advanced Micro Devices [AMD] nee ATI Device [1002:9992]
         #self.videoCards = [['Advanced Micro Devices [AMD] nee ATI Device', '1002', '9992']]
@@ -176,8 +177,8 @@ class ATI():
     def getAdditionalPackages(self, driver):
         drvList = []
         # Get the correct linux header package
-        linHeader = functions.getLinuxHeadersAndImage()
-        drvList.append([linHeader[0], 0])
+        linHeader = functions.getKernelPackages()
+        drvList.append([linHeader[1], 0])
         # Common packages
         if self.distribution == 'debian':
             if 'fglrx' in driver:
@@ -188,10 +189,9 @@ class ATI():
                 drvList.append(['libgl1-fglrx-glx', 1])
                 drvList.append(['glx-alternative-fglrx', 0])
                 drvList.append(['fglrx-control', 1])
-
-                # 64-bit only?
-                if functions.getPackageStatus('fglrx-glx-ia32') == 'notinstalled':
-                    drvList.append(['fglrx-glx-ia32', 2])
+                drvList.append(['ia32-libs', 2])
+                if 'amd64' in self.kernelRelease:
+                    drvList.append(['libgl1-fglrx-glx:i386', 2])
             else:
                 # Radeon, fbdev, vesa
                 drvList.append([driver, 1])

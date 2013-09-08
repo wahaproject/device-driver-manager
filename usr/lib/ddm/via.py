@@ -59,7 +59,7 @@ class Via():
     # Called from drivers.py: install the Via drivers
     def installVia(self, driver):
         try:
-            module = self.xc.getModuleForDriver(hwCodes[5], driver)
+            #module = self.xc.getModuleForDriver(hwCodes[5], driver)
 
             # Install driver if not already installed
             if not functions.isPackageInstalled(driver):
@@ -68,10 +68,10 @@ class Via():
                 self.ec.run('apt-get -y --force-yes install %s' % driver)
 
             # Configure xorg.conf
-            self.log.write(_("Found module for driver %(drv)s: %(module)s") % { "drv": driver, "module": module }, 'via.installVia', 'debug')
-            if module != '':
-                self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'via.installVia', 'info')
-                self.xc.setModule('Device', 0, module)
+            #self.log.write(_("Found module for driver %(drv)s: %(module)s") % { "drv": driver, "module": module }, 'via.installVia', 'debug')
+            #if module != '':
+                #self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'via.installVia', 'info')
+                #self.xc.setModule('Device', 0, module)
 
             self.log.write(_("Driver installed: %(drv)s") % { "drv": driver }, 'via.installVia', 'info')
 

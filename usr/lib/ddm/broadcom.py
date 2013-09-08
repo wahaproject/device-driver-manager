@@ -123,7 +123,7 @@ class Broadcom():
                 for line in reversed(lines):
                     # First check for Network Manager entry
                     # Search for wlan0 in each line and get the listed driver
-                    matchObj = re.search('\(wlan\d\):.*driver:\s\'([a-z]*)', line, flags=re.IGNORECASE)
+                    matchObj = re.search('\(wlan\d\):.*driver:\s*\'([a-zA-Z0-9\-]*)', line, flags=re.IGNORECASE)
                     if matchObj:
                         driver = matchObj.group(1)
                         break
@@ -135,7 +135,7 @@ class Broadcom():
                             driver = matchObj.group(0)
                             break
 
-        if driver:
+        if driver is not None:
             if 'brcm' in driver:
                 if self.distribution == 'debian':
                     driver = brcmDebian
@@ -173,7 +173,7 @@ class Broadcom():
         if hwBc:
             for bc in hwBc:
                 # Check if this a wired chipset
-                if not 'ethernet controller' in bc.lower():
+                if not 'ethernet' in bc.lower():
                     self.hw = bc[bc.find(': ') + 2:]
                     self.log.write(_("Broadcom found: %(broadcom)s") % { "broadcom": self.hw }, 'broadcom.setCurrentChipInfo', 'info')
                     # Get the chip set number
@@ -201,8 +201,9 @@ class Broadcom():
                                 self.log.write(_("Broadcom chipset not supported or ethernet controller: %(broadcom)s") % { "broadcom": self.hw }, 'broadcom.setCurrentChipInfo', 'warning')
                         else:
                             self.log.write(_("Broadcom chipset not found: %(chip)s") % { "chip": pciId[0] }, 'broadcom.setCurrentChipInfo', 'warning')
-                    else:
-                        self.log.write(_("Broadcom pci ID not found: %(id)s") % { "id": self.hw }, 'broadcom.setCurrentChipInfo', 'warning')
+
+                    if not self.installableDrivers:
+                        self.log.write(_("Broadcom pci ID not found: %(id)s") % { "id": str(pciId) }, 'broadcom.setCurrentChipInfo', 'warning')
 
     # Install the broadcom drivers
     def installBroadcom(self, driver):
@@ -210,13 +211,13 @@ class Broadcom():
             if driver != '':
                 debDownloaded = False
                 # Get the correct linux header package
-                linHeader = functions.getLinuxHeadersAndImage()
-                self.log.write(_("Linux header name to install: %(header)s") % { "header": linHeader[0] }, 'broadcom.installBroadcom', 'info')
+                linHeader = functions.getKernelPackages()
+                self.log.write(_("Linux header name to install: %(header)s") % { "header": linHeader[1] }, 'broadcom.installBroadcom', 'info')
 
                 # Only install linux header if it is not installed
-                if not functions.isPackageInstalled(linHeader[0]):
-                    self.log.write(_("Download package: %(package)s") % { "package": linHeader[0] }, 'broadcom.installBroadcom', 'info')
-                    self.ec.run('apt-get download %s' % linHeader[0])
+                if not functions.isPackageInstalled(linHeader[1]):
+                    self.log.write(_("Download package: %(package)s") % { "package": linHeader[1] }, 'broadcom.installBroadcom', 'info')
+                    self.ec.run('apt-get download %s' % linHeader[1])
                     debDownloaded = True
 
                 # Download the driver and its dependencies
@@ -254,6 +255,9 @@ class Broadcom():
                     if driver != wlUbuntu:
                         if functions.isPackageInstalled(wlUbuntu):
                             self.ec.run('apt-get -y --force-yes purge %s' % wlUbuntu)
+
+                # Preseed answers for some packages
+                self.preseedBroadcomPackages()
 
                 # Install the dowloaded packages
                 if debDownloaded:
@@ -305,6 +309,9 @@ class Broadcom():
     def removeBroadcom(self, driver):
         try:
             if driver != '':
+                # Preseed answers for some packages
+                self.preseedBroadcomPackages()
+
                 self.log.write(_("Purge driver: %(drv)s") % { "drv": driver }, 'broadcom.removeBroadcom', 'info')
                 cmdPurge = 'apt-get -y --force-yes purge %s' % driver
                 self.ec.run(cmdPurge)
@@ -319,3 +326,15 @@ class Broadcom():
 
         except Exception, detail:
             self.log.write(detail, 'broadcom.removeBroadcom', 'exception')
+
+    def preseedBroadcomPackages(self):
+        if self.distribution == 'debian':
+            # Run on configured system and debconf-utils installed:
+            # debconf-get-selections | grep b43 > b43.seed
+            # replace tabs with spaces and change the default answers (note=space, boolean=true or false)
+            debConfList = []
+            debConfList.append('b43-fwcutter b43-fwcutter/install-unconditional boolean true')
+
+            # Add each line to the debconf database
+            for line in debConfList:
+                os.system("echo \"%s\" | debconf-set-selections" % line)

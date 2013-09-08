@@ -26,6 +26,7 @@ class Nvidia():
         self.drivers = []
         self.nvidiaCard = []
         self.isBumblebee = False
+        self.kernelRelease = functions.getKernelRelease()
 
         # Test (01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GT218 [GeForce G210M] [10de:0a74] (rev ff))
         # self.videoCards = [['NVIDIA Corporation GT218 [GeForce G210M]', '10de', '0a74']]
@@ -233,8 +234,8 @@ class Nvidia():
     def getAdditionalPackages(self, driver):
         drvList = []
         # Get the correct linux header package
-        linHeader = functions.getLinuxHeadersAndImage()
-        drvList.append([linHeader[0], 0])
+        linHeader = functions.getKernelPackages()
+        drvList.append([linHeader[1], 0])
         # Distribution specific packages
         if self.distribution == 'debian':
             if 'nvidia-' in driver:
@@ -243,23 +244,27 @@ class Nvidia():
                 # This needs to change when 304 goes legacy
                 if driver == 'nvidia-glx':
                     drvList.append(['nvidia-kernel-dkms', 1])
+                    drvList.append(['ia32-libs', 2])
                 elif driver == 'bumblebee-nvidia':
                     drvList.append(['nvidia-kernel-dkms', 1])
                     drvList.append(['bumblebee', 1])
                     drvList.append(['primus', 1])
+                    drvList.append(['primus-libs-ia32', 2])
                 elif driver == 'nvidia-glx-legacy-96xx':
                     drvList.append(['nvidia-kernel-legacy-96xx-dkms', 1])
+                    drvList.append(['ia32-libs', 2])
                 elif driver == 'nvidia-glx-legacy-173xx':
                     drvList.append(['nvidia-kernel-legacy-173xx-dkms', 1])
+                    drvList.append(['ia32-libs', 2])
                 # Uncomment the following if statement when nvidia-glx-legacy-304xx hits testing
                 #elif driver == 'nvidia-glx-legacy-304xx':
                 #    drvList.append(['nvidia-kernel-legacy-304xx-dkms', 1])
+                #    drvList.append(['ia32-libs', 2])
+                if 'amd64' in self.kernelRelease:
+                    drvList.append(['libgl1-nvidia-glx:i386', 2])
                 drvList.append(['nvidia-xconfig', 0])
                 drvList.append(['nvidia-settings', 0])
 
-                # 64-bit only?
-                if functions.getPackageStatus('nvidia-glx-ia32') == 'notinstalled':
-                    drvList.append(['nvidia-glx-ia32', 2])
             else:
                 # Nouveau, fbdev, vesa
                 drvList.append([driver, 1])

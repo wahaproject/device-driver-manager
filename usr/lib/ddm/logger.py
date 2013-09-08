@@ -11,7 +11,7 @@ from treeview import TreeViewHandler
 
 class Logger():
 
-    def __init__(self, logPath='', defaultLogLevel='debug', addLogTime=True, rtObject=None, parent=None):
+    def __init__(self, logPath='', defaultLogLevel='debug', addLogTime=True, rtObject=None, parent=None, maxSizeKB=None):
         self.logPath = logPath
         if self.logPath != '':
             if self.logPath[:1] != '/':
@@ -22,11 +22,16 @@ class Logger():
         self.rtobject = rtObject
         self.typeString = functions.getTypeString(self.rtobject)
         self.parent = parent
+        self.maxSizeKB = maxSizeKB
 
         if self.logPath == '':
             # Log only to console
             logging.basicConfig(level=self.defaultLevel, format='%(levelname)-10s%(message)s')
         else:
+            if os.path.exists(self.logPath) and self.maxSizeKB is not None:
+                b = os.path.getsize(self.logPath)
+                if b > self.maxSizeKB * 1024:
+                    os.remove(self.logPath)
             # Set basic configuration
             formatStr = '%(name)-30s%(levelname)-10s%(message)s'
             dateFmtStr = None

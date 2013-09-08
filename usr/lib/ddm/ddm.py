@@ -276,7 +276,7 @@ class DDM:
                                 break
 
                     self.log.write(_("Check loaded driver / available driver: %(ldrv)s / %(adrv)s") % { "ldrv": drv[1], "adrv": item[3] }, 'ddm.loadDriverSection', 'debug')
-                    if (drv[1] == item[3] or ('bumblebee' in item[3] and item[2] == 'installed')) and drv[0] == self.selectedMenuItem:
+                    if (drv[1] in item[3] or ('bumblebee' in item[3] and item[2] == 'installed')) and drv[0] == self.selectedMenuItem:
                         self.log.write(_("Select current driver in list: %(drv)s") % { "drv": drv[1] }, 'ddm.loadDriverSection', 'debug')
                         self.lblActivatedDriver.set_text('%s %s%s' % (item[3], item[4], recommended))
                         activate = True

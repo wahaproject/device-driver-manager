@@ -92,18 +92,30 @@ if functions.hasInternetConnection() or force:
     if not functions.getDistribution() == '' or force:
         # Do not run in live environment
         if not functions.isRunningLive() or force:
-            ddmPath = os.path.join(scriptDir, 'ddm.py' + args)
+            # Check for latest kernel
+            blnLatestKernel = False
+            latestKernelInfo = functions.getKernelPackages(True)
+            if functions.isPackageInstalled(latestKernelInfo[0]):
+                blnLatestKernel = True
 
-            # Add launcher string, only when not root
-            launcher = ''
-            if os.geteuid() > 0:
-                launcher = "gksu --message \"<b>%s</b>\"" % _("Please enter your password")
-                if os.path.exists('/usr/bin/kdesudo'):
-                    launcher = "kdesudo -i /usr/share/ddm/logo.png -d --comment \"<b>%s</b>\"" % _("Please enter your password")
+            if blnLatestKernel:
+                ddmPath = os.path.join(scriptDir, 'ddm.py' + args)
 
-            cmd = '%s python %s' % (launcher, ddmPath)
-            log.write(_("Startup command: %(cmd)s") % { "cmd": cmd }, 'main', 'debug')
-            os.system(cmd)
+                # Add launcher string, only when not root
+                launcher = ''
+                if os.geteuid() > 0:
+                    launcher = "gksu --message \"<b>%s</b>\"" % _("Please enter your password")
+                    if os.path.exists('/usr/bin/kdesudo'):
+                        launcher = "kdesudo -i /usr/share/ddm/logo.png -d --comment \"<b>%s</b>\"" % _("Please enter your password")
+
+                cmd = '%s python %s' % (launcher, ddmPath)
+                log.write(_("Startup command: %(cmd)s") % { "cmd": cmd }, 'main', 'debug')
+                os.system(cmd)
+            else:
+                title = _("DDM - Kernel")
+                msg = _("You do not have the latest kernel installed.\n\nUse the Update Manager to update your system.")
+                MessageDialogSave(title, msg, gtk.MESSAGE_INFO).show()
+                log.write(msg, 'main', 'warning')
         else:
             title = _("DDM - Live environment")
             msg = _("DDM cannot run in a live environment\n\nTo force start, use the --force argument")

@@ -60,7 +60,7 @@ class Intel():
     # Called from drivers.py: install the Intel drivers
     def installIntel(self, driver):
         try:
-            module = self.xc.getModuleForDriver(hwCodes[4], driver)
+            #module = self.xc.getModuleForDriver(hwCodes[4], driver)
 
             # Install driver if not already installed
             if not functions.isPackageInstalled(driver):
@@ -69,10 +69,10 @@ class Intel():
                 self.ec.run('apt-get -y --force-yes install %s' % driver)
 
             # Configure xorg.conf
-            self.log.write(_("Found module for driver %(drv)s: %(module)s") % { "drv": driver, "module": module }, 'intel.installIntel', 'debug')
-            if module != '':
-                self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'intel.installIntel', 'info')
-                self.xc.setModule('Device', 0, module)
+            #self.log.write(_("Found module for driver %(drv)s: %(module)s") % { "drv": driver, "module": module }, 'intel.installIntel', 'debug')
+            #if module != '':
+                #self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'intel.installIntel', 'info')
+                #self.xc.setModule('Device', 0, module)
 
             self.log.write(_("Driver installed: %(drv)s") % { "drv": driver }, 'intel.installIntel', 'info')
 

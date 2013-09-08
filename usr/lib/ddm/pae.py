@@ -19,7 +19,7 @@ class PAE():
         self.log = loggerObject
         self.ec = ExecCmd(self.log)
         self.kernelRelease = functions.getKernelRelease()
-        self.packages = functions.getLinuxHeadersAndImage(True, 'pae$', '-rt')
+        self.packages = functions.getKernelPackages(True, 'pae$', '-rt')
         self.installedPackage = None
 
     # Check the distribution if a PAE check is needed
@@ -65,13 +65,11 @@ class PAE():
                     self.log.write(_("Multi-core system running single-core kernel found"), 'pae.getPae', 'info')
                     # Check package status
                     status = packageStatus[0]
-                    for package in self.packages:
-                        if not functions.isPackageInstalled(package):
-                            self.log.write(_("PAE not installed"), 'pae.getPae', 'info')
-                            status = packageStatus[1]
-                            version = functions.getPackageVersion(package, True)
-                            hwList.append([_("PAE capable system"), hwCodes[3], status, package, version, description])
-                            break
+                    if not functions.isPackageInstalled(self.packages[0]):
+                        self.log.write(_("PAE not installed"), 'pae.getPae', 'info')
+                        status = packageStatus[1]
+                        version = functions.getPackageVersion(self.packages[0], True)
+                        hwList.append([_("PAE capable system"), hwCodes[3], status, self.packages[0], version, description])
 
                 elif machine[0] == 'x86_64':
                     # You shouldn't get here

@@ -1,3 +1,92 @@
+ddm (0.8.8) debian; urgency=low
+
+  * Improved ia32 support for Nvidia and ATI
+  * Added French translation
+
+ -- Schoelje <schoelje@solydxk.com>  Sat, 07 Sep 2013 15:00:00 +0100
+
+ddm (0.8.6) debian; urgency=low
+
+  * Removed xorg.conf settings for Intel and Via
+
+ -- Schoelje <schoelje@solydxk.com>  Tue, 20 Aug 2013 07:30:00 +0100
+
+ddm (0.8.5) debian; urgency=low
+
+  * Solved PAE detection bug
+
+ -- Schoelje <schoelje@solydxk.com>  Mon, 19 Aug 2013 21:00:00 +0100
+
+ddm (0.8.4) debian; urgency=low
+
+  * Solved Nvidia detection bug
+  * Better kernel detection
+
+ -- Schoelje <schoelje@solydxk.com>  Sat, 10 Aug 2013 21:30:00 +0100
+
+ddm (0.8.3) debian; urgency=low
+
+  * Added pre-seeding for b43-fwcutter
+
+ -- Schoelje <schoelje@solydxk.com>  Sun, 28 Jul 2013 22:30:00 +0100
+
+ddm (0.8.2) debian; urgency=low
+
+  * Loaded Broadcom driver not detected correctly
+  * Added Italian and Polish translations
+
+ -- Schoelje <schoelje@solydxk.com>  Di, 23 Jul 2013 19:30:00 +0100
+
+ddm (0.8.1) debian; urgency=low
+
+  * Support for hybrid Nvidia/Intel and ATI/Intel cards
+  * Make GUI objects size with textual contents
+  * Added German translation
+
+ -- Schoelje <schoelje@solydxk.com>  Wed, 12 Jun 2013 14:00:00 +0100
+
+ddm (0.7.5) debian; urgency=low
+
+  * Moved translations to standard directory /usr/share/locale
+
+ -- Schoelje <schoelje@solydxk.com>  Wed, 06 Jun 2013 10:00:00 +0100
+
+ddm (0.7.4) debian; urgency=low
+
+  * Added Catalan translation
+
+ -- Schoelje <schoelje@solydxk.com>  Wed, 05 Jun 2013 03:00:00 +0100
+
+ddm (0.7.3) debian; urgency=low
+
+  * Handle future nvidia-glx-legacy-304xx
+
+ -- Schoelje <schoelje@solydxk.com>  Mon, 03 Jun 2013 23:30:00 +0100
+
+ddm (0.7.2) debian; urgency=low
+
+  * Included Spanish and Dutch translations
+
+ -- Schoelje <schoelje@solydxk.com>  Tue, 28 May 2013 10:00:00 +0100
+
+ddm (0.7.0) debian; urgency=low
+
+  * Check for internet connection on startup
+
+ -- Schoelje <schoelje@solydxk.com>  Sun, 19 May 2013 10:00:00 +0100
+
+ddm (0.6.9) debian; urgency=low
+
+  * Broadcom: multiple chipsets not handled correctly
+
+ -- Schoelje <schoelje@solydxk.com>  Sat, 18 May 2013 10:00:00 +0100
+
+ddm (0.6.8) debian; urgency=low
+
+  * Check installed driver not recognized resolved
+
+ -- Schoelje <schoelje@solydxk.com>  Thu, 18 Apr 2013 21:00:00 +0100
+
 ddm (0.6.7) debian; urgency=low
 
   * Drivers were reported installed, even if the versions did not match
@@ -75,4 +164,3 @@ ddm (0.2.4) debian; urgency=low
   * Sync to git version 0.2.4
 
  -- Frederic Gaudet <fred@linuxmint.com>  Tue, 22 Jan 2013 11:07:00 +0100
- 
