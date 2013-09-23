@@ -244,7 +244,8 @@ class Nvidia():
                 # This needs to change when 304 goes legacy
                 if driver == 'nvidia-glx':
                     drvList.append(['nvidia-kernel-dkms', 1])
-                    drvList.append(['ia32-libs', 2])
+                    if 'amd64' in self.kernelRelease:
+                        drvList.append(['ia32-libs', 2])
                 elif driver == 'bumblebee-nvidia':
                     drvList.append(['nvidia-kernel-dkms', 1])
                     drvList.append(['bumblebee', 1])
@@ -252,10 +253,12 @@ class Nvidia():
                     drvList.append(['primus-libs-ia32', 2])
                 elif driver == 'nvidia-glx-legacy-96xx':
                     drvList.append(['nvidia-kernel-legacy-96xx-dkms', 1])
-                    drvList.append(['ia32-libs', 2])
+                    if 'amd64' in self.kernelRelease:
+                        drvList.append(['ia32-libs', 2])
                 elif driver == 'nvidia-glx-legacy-173xx':
                     drvList.append(['nvidia-kernel-legacy-173xx-dkms', 1])
-                    drvList.append(['ia32-libs', 2])
+                    if 'amd64' in self.kernelRelease:
+                        drvList.append(['ia32-libs', 2])
                 # Uncomment the following if statement when nvidia-glx-legacy-304xx hits testing
                 #elif driver == 'nvidia-glx-legacy-304xx':
                 #    drvList.append(['nvidia-kernel-legacy-304xx-dkms', 1])

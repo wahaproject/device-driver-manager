@@ -344,9 +344,9 @@ def getDistribution(returnBaseDistribution=True):
         elif 'arm' in sysInfo:
             distribution = 'arm'
     else:
-        if os.path.exists('/etc/issue.net'):
+        if os.path.exists('/etc/solydxk/info'):
             ec = ExecCmd(log)
-            lst = ec.run('cat /etc/issue.net', False)
+            lst = ec.run("cat /etc/solydxk/info | grep EDITION | cut -d'=' -f 2", False)
             if lst:
                 distribution = lst[0]
     return distribution

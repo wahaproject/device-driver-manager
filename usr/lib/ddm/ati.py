@@ -189,8 +189,8 @@ class ATI():
                 drvList.append(['libgl1-fglrx-glx', 1])
                 drvList.append(['glx-alternative-fglrx', 0])
                 drvList.append(['fglrx-control', 1])
-                drvList.append(['ia32-libs', 2])
                 if 'amd64' in self.kernelRelease:
+                    drvList.append(['ia32-libs', 2])
                     drvList.append(['libgl1-fglrx-glx:i386', 2])
             else:
                 # Radeon, fbdev, vesa
