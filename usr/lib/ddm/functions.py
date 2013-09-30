@@ -252,14 +252,14 @@ def getKernelPackages(getLatest=False, includeLatestRegExp='', excludeLatestRegE
             # Already the latest kernel: get all linux-image packages of the current version
             kernelRelease = getKernelRelease()
             if 'amd64' in kernelRelease:
-                cmd = "aptitude search linux-image-%s" % kernelRelease
+                cmd = "aptitude search -w 150 linux-image-%s" % kernelRelease
             else:
                 pos = kernelRelease.find('486')
                 if pos == 0:
                     pos = kernelRelease.find('686')
                 if pos > 0:
                     kernelRelease = kernelRelease[0:pos - 1]
-                cmd = "aptitude search linux-image-%s" % kernelRelease
+                cmd = "aptitude search -w 150 linux-image-%s" % kernelRelease
 
             cmdList = ec.run(cmd, False)
 
@@ -491,7 +491,7 @@ def isPackageInstalled(packageName, alsoCheckVersion=True):
     try:
         cmd = 'dpkg-query -l %s | grep ^i' % packageName
         if '*' in packageName:
-            cmd = 'aptitude search %s | grep ^i' % packageName
+            cmd = 'aptitude search -w 150 %s | grep ^i' % packageName
         ec = ExecCmd(log)
         pckList = ec.run(cmd, False)
         for line in pckList:

@@ -207,7 +207,7 @@ class Nvidia():
                     # Check if package is installed
                     # If it is, it's nominated for removal
                     self.log.write(_("Is package installed: %(package)s") % { "package": package[0] }, 'nvidia.installNvidiaPackages', 'debug')
-                    drvChkCmd = 'aptitude search %s | grep ^i | wc -l' % package[0]
+                    drvChkCmd = 'aptitude search -w 150 %s | grep ^i | wc -l' % package[0]
                     drvChk = self.ec.run(drvChkCmd, False)
                     if functions.strToNumber(drvChk[0]) > 0:
                         # Build remove packages string

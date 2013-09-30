@@ -113,7 +113,7 @@ class TreeViewHandler(gobject.GObject):
                         for j in range(len(contentList[i])):
                             val = str(contentList[i][j])
                             if str(columnTypesList[j]) == 'str':
-                                val = '"' + val.replace('"', '\"') + '"'
+                                val = '"' + val.replace('"', '') + '"'
                             if str(columnTypesList[j]) == 'gtk.gdk.Pixbuf':
                                 if os.path.isfile(val):
                                     val = 'gtk.gdk.pixbuf_new_from_file("%s")' % val
