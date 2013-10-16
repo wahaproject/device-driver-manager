@@ -109,7 +109,7 @@ if functions.hasInternetConnection() or force:
                         launcher = "kdesudo -i /usr/share/ddm/logo.png -d --comment \"<b>%s</b>\"" % _("Please enter your password")
 
                 cmd = '%s python %s' % (launcher, ddmPath)
-                log.write(_("Startup command: %(cmd)s") % { "cmd": cmd }, 'main', 'debug')
+                log.write("Startup command: %(cmd)s" % { "cmd": cmd }, 'main', 'debug')
                 os.system(cmd)
             else:
                 title = _("DDM - Kernel")

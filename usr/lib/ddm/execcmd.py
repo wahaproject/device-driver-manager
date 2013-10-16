@@ -15,7 +15,7 @@ class ExecCmd(object):
         self.log = loggerObject
 
     def run(self, cmd, realTime=True, defaultMessage=''):
-        self.log.write(_("Command to execute: %(cmd)s") % { "cmd": cmd }, 'execcmd.run', 'debug')
+        self.log.write("Command to execute: %(cmd)s" % { "cmd": cmd }, 'execcmd.run', 'debug')
 
         p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         lstOut = []

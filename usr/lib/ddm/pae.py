@@ -28,7 +28,7 @@ class PAE():
         # Ubuntu is already PAE enabled from version 12.10 (Quantal) and LM 14 Nadia is based on Quantal: no need to check
         # https://help.ubuntu.com/community/EnablingPAE
         if (self.distribution == 'linuxmint' and self.distributionReleaseNumber >= 14) or (self.distribution == 'ubuntu' and self.distributionReleaseNumber >= 12.10) or 'amd64' in self.kernelRelease:
-            self.log.write(_("Already a PAE system or AMD64"), 'pae.needCheckForPae', 'debug')
+            self.log.write("Already a PAE system or AMD64", 'pae.needCheckForPae', 'debug')
             skipPae = True
         return skipPae
 
@@ -46,7 +46,7 @@ class PAE():
     def getPae(self):
         hwList = []
         description = _("Multi-core support for 32-bit systems")
-        self.log.write(_("Distribution: %(dist)s") % { "dist": self.distribution + ' ' + str(self.distributionReleaseNumber) }, 'pae.getPae', 'debug')
+        self.log.write("Distribution: %(dist)s" % { "dist": self.distribution + ' ' + str(self.distributionReleaseNumber) }, 'pae.getPae', 'debug')
 
         if not self.needCheckForPae():
             # Check the machine hardware
@@ -58,7 +58,7 @@ class PAE():
                 self.log.write(_("Multi-core already installed: %(package)s") % { "package": installedPackage }, 'pae.getPae', 'info')
                 hwList.append([_("PAE capable system"), hwCodes[3], packageStatus[0], installedPackage, version, description])
             else:
-                self.log.write(_("Single-core kernel found: %(kernel)s") % { "kernel": self.kernelRelease }, 'pae.getPae', 'debug')
+                self.log.write("Single-core kernel found: %(kernel)s" % { "kernel": self.kernelRelease }, 'pae.getPae', 'debug')
 
                 # Get #CPU's: cat /proc/cpuinfo | grep processor | wc -l
                 if machine[0] == 'i686':
@@ -73,7 +73,7 @@ class PAE():
 
                 elif machine[0] == 'x86_64':
                     # You shouldn't get here
-                    self.log.write(_("PAE skipped: 64-bit system"), 'pae.getPae', 'debug')
+                    self.log.write("PAE skipped: 64-bit system", 'pae.getPae', 'debug')
                 else:
                     self.log.write(_("PAE kernel cannot be installed: single-core system"), 'pae.getPae', 'warning')
 
@@ -85,7 +85,7 @@ class PAE():
             cmdPae = 'apt-get -y --force-yes install'
             for package in self.packages:
                 cmdPae += ' ' + package
-            self.log.write(_("PAE kernel install command: %(cmd)s") % { "cmd": cmdPae }, 'pae.installPAE', 'debug')
+            self.log.write("PAE kernel install command: %(cmd)s" % { "cmd": cmdPae }, 'pae.installPAE', 'debug')
             self.ec.run(cmdPae)
 
             # Backup and remove xorg.conf
@@ -102,7 +102,7 @@ class PAE():
         try:
             kernelRelease = self.ec.run('uname -r')
             if not 'pae' in kernelRelease[0]:
-                self.log.write(_("Not running pae, continue removal"), 'pae.removePAE', 'debug')
+                self.log.write("Not running pae, continue removal", 'pae.removePAE', 'debug')
                 for package in self.packages:
                     cmdPurge = 'apt-get -y --force-yes purge %s' % package
                     self.log.write(_("PAE package to remove: %(package)s") % { "package": package }, 'pae.removePAE', 'info')

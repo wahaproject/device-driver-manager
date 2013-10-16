@@ -275,9 +275,9 @@ class DDM:
                                 drv[1] = dep
                                 break
 
-                    self.log.write(_("Check loaded driver / available driver: %(ldrv)s / %(adrv)s") % { "ldrv": drv[1], "adrv": item[3] }, 'ddm.loadDriverSection', 'debug')
+                    self.log.write("Check loaded driver / available driver: %(ldrv)s / %(adrv)s" % { "ldrv": drv[1], "adrv": item[3] }, 'ddm.loadDriverSection', 'debug')
                     if (drv[1] in item[3] or ('bumblebee' in item[3] and item[2] == 'installed')) and drv[0] == self.selectedMenuItem:
-                        self.log.write(_("Select current driver in list: %(drv)s") % { "drv": drv[1] }, 'ddm.loadDriverSection', 'debug')
+                        self.log.write("Select current driver in list: %(drv)s" % { "drv": drv[1] }, 'ddm.loadDriverSection', 'debug')
                         self.lblActivatedDriver.set_text('%s %s%s' % (item[3], item[4], recommended))
                         activate = True
                         actDrvFound = True
@@ -290,7 +290,7 @@ class DDM:
                 self.lblCardName.set_text(item[0])
                 imgPath = os.path.join(self.mediaDir, self.currentHwCode + '.png')
                 if os.path.exists(imgPath):
-                    self.log.write(_("Manufacturer image path: %(path)s") % { "path": imgPath }, 'ddm.loadDriverSection', 'debug')
+                    self.log.write("Manufacturer image path: %(path)s" % { "path": imgPath }, 'ddm.loadDriverSection', 'debug')
                     self.imgManufacturer.show()
                     self.imgManufacturer.set_from_file(imgPath)
                 else:
@@ -365,7 +365,7 @@ class DDM:
                     cardsDone = []
                     for card in self.cards:
                         if hwCode not in cardsDone:
-                            self.log.write(_("Driver to install: %(drv)s") % { "drv": driver }, 'ddm.driverCheckBoxToggled', 'debug')
+                            self.log.write("Driver to install: %(drv)s" % { "drv": driver }, 'ddm.driverCheckBoxToggled', 'debug')
                             # Install in separate thread
                             self.prevDriverPath = path
                             self.toggleGuiElements(True)
@@ -373,7 +373,7 @@ class DDM:
                             t.daemon = True
                             t.start()
                             # Run spinner as long as the thread is alive
-                            #self.log.write(_("Check every 5 miliseconds if thread is still active', 'ddm.driverCheckBoxToggled', 'debug')
+                            #self.log.write("Check every 5 miliseconds if thread is still active", 'ddm.driverCheckBoxToggled', 'debug')
                             glib.timeout_add(5, self.checkInstallThread, driver)
                             cardsDone.append(hwCode)
             else:
@@ -466,7 +466,7 @@ class DDM:
         t.start()
         self.queue.join()
         # Run spinner as long as the thread is alive
-        #self.log.write(_("Check every 5 miliseconds if thread is still active', 'ddm.getHardwareInfo', 'debug')
+        #self.log.write("Check every 5 miliseconds if thread is still active", ''ddm.getHardwareInfo', 'debug')
         glib.timeout_add(5, self.checkGetInfoThread)
 
     # ===============================================
@@ -504,7 +504,7 @@ class DDM:
             sys.exit(2)
 
         # Initiate the treeview handler and connect the custom toggle event with driverCheckBoxToggled
-        self.tvHandler = TreeViewHandler(self.log, self.tvDrivers)
+        self.tvHandler = TreeViewHandler(self.tvDrivers, self.log)
         self.tvHandler.connect('checkbox-toggled', self.driverCheckBoxToggled)
 
         # Set background and forground colors
@@ -548,7 +548,7 @@ class DDM:
             self.usedDrivers.append([menuItems[1], usedWirelessDrivers])
         if usedPaeHeader:
             self.usedDrivers.append([menuItems[2], usedPaeHeader])
-        self.log.write(_("Used drivers: %(drv)s") % { "drv": self.usedDrivers }, 'ddm.main', 'debug')
+        self.log.write("Used drivers: %(drv)s" % { "drv": self.usedDrivers }, 'ddm.main', 'debug')
 
         # Show initial window while getting hardware info
         msg = _("Checking your hardware...")

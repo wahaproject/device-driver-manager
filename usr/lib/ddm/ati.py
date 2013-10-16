@@ -108,14 +108,14 @@ class ATI():
                 self.installATIDriver(packages)
                 # Configure ATI
                 if module == 'fglrx':
-                    self.log.write(_("Configure ATI..."), 'ati.installATI', 'debug')
+                    self.log.write("Configure ATI...", 'ati.installATI', 'debug')
                     #self.ec.run('aticonfig --adapter=all --initial -f')
                     self.ec.run('aticonfig --initial -f')
                     isConfigured = True
 
             if not isConfigured:
                 # Configure xorg.conf
-                self.log.write(_("Found module for driver %(drv)s: %(module)s") % { "drv": driver, "module": module }, 'ati.installATI', 'debug')
+                self.log.write("Found module for driver %(drv)s: %(module)s" % { "drv": driver, "module": module }, 'ati.installATI', 'debug')
                 if module != '':
                     self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'ati.installATI', 'info')
                     if module == 'fglrx':
@@ -137,7 +137,7 @@ class ATI():
             self.log.write(_("Removing ATI drivers"), 'ati.removeATI', 'info')
             packages = self.getAdditionalPackages(driver)
             for package in packages:
-                self.log.write(_("Remove package: %(package)s") % { "package": package[0] }, 'ati.removeATI', 'debug')
+                self.log.write("Remove package: %(package)s" % { "package": package[0] }, 'ati.removeATI', 'debug')
                 cmdPurge = "apt-get -y --force-yes purge %s" % package[0]
                 self.ec.run(cmdPurge)
             self.ec.run('apt-get -y --force-yes autoremove')
@@ -208,7 +208,7 @@ class ATI():
             for package in packageList:
                 if package[1] == 1:
                     if functions.isPackageInstalled(package[0]):
-                        self.log.write(_("Remove package: %(package)s") % { "package": package[0] }, 'ati.installATIDriver', 'debug')
+                        self.log.write("Remove package: %(package)s" % { "package": package[0] }, 'ati.installATIDriver', 'debug')
                         self.ec.run("apt-get -y --force-yes remove %s" % package[0])
 
             # Preseed answers for some packages

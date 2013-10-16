@@ -29,7 +29,7 @@ class TreeViewHandler(gobject.GObject):
                             (gobject.TYPE_STRING, gobject.TYPE_INT, gobject.TYPE_BOOLEAN,))
         }
 
-    def __init__(self, loggerObject, treeView):
+    def __init__(self, treeView, loggerObject=None):
         gobject.GObject.__init__(self)
         self.log = loggerObject
         self.treeview = treeView
@@ -57,13 +57,13 @@ class TreeViewHandler(gobject.GObject):
                     dynListStore += str(columnTypesList[i]) + ', '
                 dynListStore += 'int, int)'
                 if self.log:
-                    self.log.write(_("Create list store eval string: %(eval)s") % { "eval": dynListStore }, 'self.treeview.fillTreeview', 'debug')
+                    self.log.write("Create list store eval string: %(eval)s" % { "eval": dynListStore }, 'self.treeview.fillTreeview', 'debug')
                 liststore = eval(dynListStore)
             else:
                 if not appendToExisting:
                     # Existing list store: clear all rows and columns
                     if self.log:
-                        self.log.write(_("Clear existing list store"), 'self.treeview.fillTreeview', 'debug')
+                        self.log.write("Clear existing list store", 'self.treeview.fillTreeview', 'debug')
                     liststore.clear()
                     for col in self.treeview.get_columns():
                         self.treeview.remove_column(col)
@@ -73,20 +73,20 @@ class TreeViewHandler(gobject.GObject):
                 for i in range(len(contentList[0])):
                     if firstItemIsColName:
                         if self.log:
-                            self.log.write(_("First item is column name (multi-column list): %(iscolname)s") % { "iscolname": contentList[0][i] }, 'self.treeview.fillTreeview', 'debug')
+                            self.log.write("First item is column name (multi-column list): %(iscolname)s" % { "iscolname": contentList[0][i] }, 'self.treeview.fillTreeview', 'debug')
                         colNameList.append(contentList[0][i])
                     else:
                         colNameList.append('Column ' + str(i))
             else:
                 if firstItemIsColName:
                     if self.log:
-                        self.log.write(_("First item is column name (single-column list): %(iscolname)s") % { "iscolname": contentList[0][i] }, 'self.treeview.fillTreeview', 'debug')
+                        self.log.write("First item is column name (single-column list): %(iscolname)s" % { "iscolname": contentList[0][i] }, 'self.treeview.fillTreeview', 'debug')
                     colNameList.append(contentList[0])
                 else:
                     colNameList.append('Column 0')
 
             if self.log:
-                self.log.write(_("Create column names: %(cols)s") % { "cols": str(colNameList) }, 'self.treeview.fillTreeview', 'debug')
+                self.log.write("Create column names: %(cols)s" % { "cols": str(colNameList) }, 'self.treeview.fillTreeview', 'debug')
 
             # Add data to the list store
             for i in range(len(contentList)):
@@ -94,7 +94,7 @@ class TreeViewHandler(gobject.GObject):
                 skip = False
                 if firstItemIsColName and i == 0:
                     if self.log:
-                        self.log.write(_("First item is column name: skip first item"), 'self.treeview.fillTreeview', 'debug')
+                        self.log.write("First item is column name: skip first item", 'self.treeview.fillTreeview', 'debug')
                     skip = True
 
                 if not skip:
@@ -123,16 +123,16 @@ class TreeViewHandler(gobject.GObject):
                         dynListStoreAppend += '%s, %s])' % (str(weight), fontSize)
 
                         if self.log:
-                            self.log.write(_("Add data to list store: %(data)s") % { "data": dynListStoreAppend }, 'self.treeview.fillTreeview', 'debug')
+                            self.log.write("Add data to list store: %(data)s" % { "data": dynListStoreAppend }, 'self.treeview.fillTreeview', 'debug')
                         eval(dynListStoreAppend)
                     else:
                         if appendToTop:
                             if self.log:
-                                self.log.write(_("Add data to top of list store: %(totop)s") % { "totop": str(contentList[i]) }, 'self.treeview.fillTreeview', 'debug')
+                                self.log.write("Add data to top of list store: %(totop)s" % { "totop": str(contentList[i]) }, 'self.treeview.fillTreeview', 'debug')
                             liststore.insert(0, [contentList[i], weight, fontSize])
                         else:
                             if self.log:
-                                self.log.write(_("Add data to bottom of list store: %(tobottom)s") % { "tobottom": str(contentList[i]) }, 'self.treeview.fillTreeview', 'debug')
+                                self.log.write("Add data to bottom of list store: %(tobottom)s" % { "tobottom": str(contentList[i]) }, 'self.treeview.fillTreeview', 'debug')
                             liststore.append([contentList[i], weight, fontSize])
 
             # Create columns
@@ -159,7 +159,7 @@ class TreeViewHandler(gobject.GObject):
                     dynCol = 'gtk.TreeViewColumn("' + str(colNameList[i]) + '", ' + renderer + attr + ')'
 
                     if self.log:
-                        self.log.write(_("Create column: %(col)s") % { "col": dynCol }, 'self.treeview.fillTreeview', 'debug')
+                        self.log.write("Create column: %(col)s" % { "col": dynCol }, 'self.treeview.fillTreeview', 'debug')
                     col = eval(dynCol)
 
                     # Get the renderer of the column and add type specific properties
@@ -170,22 +170,22 @@ class TreeViewHandler(gobject.GObject):
                     if str(columnTypesList[i]) == 'bool':
                         # If checkbox column, add toggle function
                         if self.log:
-                            self.log.write(_("Check box found: add toggle function"), 'self.treeview.fillTreeview', 'debug')
+                            self.log.write("Check box found: add toggle function", 'self.treeview.fillTreeview', 'debug')
                         rend.connect('toggled', self.tvchk_on_toggle, liststore, i)
 
                     # Let the last colum fill the treeview
                     if i == len(colNameList):
                         if self.log:
-                            self.log.write(_("Last column fills treeview: %(colnr)d") % { "colnr": i }, 'self.treeview.fillTreeview', 'debug')
+                            self.log.write("Last column fills treeview: %(colnr)d" % { "colnr": i }, 'self.treeview.fillTreeview', 'debug')
                         col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
 
                     # Finally add the column
                     self.treeview.append_column(col)
                     if self.log:
-                        self.log.write(_("Column added: %(col)s") % { "col": col.get_title() }, 'self.treeview.fillTreeview', 'debug')
+                        self.log.write("Column added: %(col)s" % { "col": col.get_title() }, 'self.treeview.fillTreeview', 'debug')
                 else:
                     if self.log:
-                        self.log.write(_("Column already exists: %(col)s") % { "col": colFound }, 'self.treeview.fillTreeview', 'debug')
+                        self.log.write("Column already exists: %(col)s" % { "col": colFound }, 'self.treeview.fillTreeview', 'debug')
 
             # Add liststore, set cursor and set the headers
             self.treeview.set_model(liststore)
@@ -193,7 +193,7 @@ class TreeViewHandler(gobject.GObject):
                 self.treeview.set_cursor(setCursor)
             self.treeview.set_headers_visible(firstItemIsColName)
             if self.log:
-                self.log.write(_("Add Liststore to Treeview"), 'self.treeview.fillTreeview', 'debug')
+                self.log.write("Add Liststore to Treeview", 'self.treeview.fillTreeview', 'debug')
 
             # Scroll to selected cursor
             selection = self.treeview.get_selection()
@@ -202,7 +202,7 @@ class TreeViewHandler(gobject.GObject):
                 path = tm.get_path(treeIter)
                 self.treeview.scroll_to_cell(path)
                 if self.log:
-                    self.log.write(_("Scrolled to selected row: %(row)d") % { "row": setCursor }, 'self.treeview.fillTreeview', 'debug')
+                    self.log.write("Scrolled to selected row: %(row)d" % { "row": setCursor }, 'self.treeview.fillTreeview', 'debug')
 
     def tvchk_on_toggle(self, cell, path, liststore, colNr, *ignore):
         if path is not None:
@@ -249,10 +249,11 @@ class TreeViewHandler(gobject.GObject):
         # Toggle the check boxes in the given column in the selected rows (=pathList)
         for path in pathList:
             for colNr in toggleColNrList:
-                it = model.get_iter(path)
-                model[it][colNr] = not model[it][colNr]
+                itr = model.get_iter(path)
+                model[itr][colNr] = not model[itr][colNr]
 
-    # Deselect all drivers, except PAE
+    # (De)select all toggle boxes, but exclude a row with a given value in a given column
+    # This assumes a unique value in the excludeColNr, and only one toggle box can be selected
     def treeviewToggleAll(self, toggleColNrList, toggleValue=False, excludeColNr=-1, excludeValue=''):
         model = self.treeview.get_model()
         itr = model.get_iter_first()

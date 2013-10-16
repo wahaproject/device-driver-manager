@@ -69,7 +69,7 @@ class Intel():
                 self.ec.run('apt-get -y --force-yes install %s' % driver)
 
             # Configure xorg.conf
-            #self.log.write(_("Found module for driver %(drv)s: %(module)s") % { "drv": driver, "module": module }, 'intel.installIntel', 'debug')
+            #self.log.write("Found module for driver %(drv)s: %(module)s" % { "drv": driver, "module": module }, 'intel.installIntel', 'debug')
             #if module != '':
                 #self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'intel.installIntel', 'info')
                 #self.xc.setModule('Device', 0, module)
@@ -82,7 +82,7 @@ class Intel():
     # Called from drivers.py: remove the Intel drivers and revert to radeon
     def removeIntel(self, driver):
         try:
-            self.log.write(_("Remove package: %(drv)s") % { "drv": driver }, 'intel.removeIntel', 'debug')
+            self.log.write("Remove package: %(drv)s" % { "drv": driver }, 'intel.removeIntel', 'debug')
             cmdPurge = 'apt-get -y --force-yes purge ' + driver
             self.ec.run(cmdPurge)
             self.ec.run('apt-get -y --force-yes autoremove')

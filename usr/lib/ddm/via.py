@@ -68,7 +68,7 @@ class Via():
                 self.ec.run('apt-get -y --force-yes install %s' % driver)
 
             # Configure xorg.conf
-            #self.log.write(_("Found module for driver %(drv)s: %(module)s") % { "drv": driver, "module": module }, 'via.installVia', 'debug')
+            #self.log.write("Found module for driver %(drv)s: %(module)s" % { "drv": driver, "module": module }, 'via.installVia', 'debug')
             #if module != '':
                 #self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'via.installVia', 'info')
                 #self.xc.setModule('Device', 0, module)
@@ -81,7 +81,7 @@ class Via():
     # Called from drivers.py: remove the Via drivers and revert to radeon
     def removeVia(self, driver):
         try:
-            self.log.write(_("Remove package: %(drv)s") % { "drv": driver }, 'via.removeVia', 'debug')
+            self.log.write("Remove package: %(drv)s" % { "drv": driver }, 'via.removeVia', 'debug')
             cmdPurge = 'apt-get -y --force-yes purge %s' % driver
             self.ec.run(cmdPurge)
             self.ec.run('apt-get -y --force-yes autoremove')

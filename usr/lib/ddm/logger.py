@@ -86,7 +86,7 @@ class Logger():
             if self.typeString == 'gtk.Label':
                 self.rtobject.set_text(message)
             elif self.typeString == 'gtk.TreeView':
-                tvHandler = TreeViewHandler(None, self.rtobject)
+                tvHandler = TreeViewHandler(self.rtobject)
                 tvHandler.fillTreeview([message], ['str'], [-1], 0, 400, False, True, True, fontSize=10000)
             elif self.typeString == 'gtk.Statusbar':
                 functions.pushMessage(self.rtobject, message)

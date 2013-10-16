@@ -7,6 +7,7 @@ import operator
 import string
 import shutil
 import apt
+import apt_pkg
 import pwd
 import grp
 import commands
@@ -23,8 +24,9 @@ except Exception, detail:
 
 packageStatus = ['installed', 'notinstalled', 'uninstallable']
 
-# Logging object set from parent
+# Init
 log = object
+cache = apt.Cache()
 
 # i18n
 gettext.install("ddm", "/usr/share/locale")
@@ -134,7 +136,7 @@ def sortListOnColumn(lst, columsList):
 # Return a list with images from a given path
 def getImgsFromDir(directoryPath):
     extensions = ['.png', '.jpg', '.jpeg', '.gif']
-    log.write(_("Search for extensions: %(ext)s") % { "ext": str(extensions) }, 'functions.getImgsFromDir', 'debug')
+    log.write("Search for extensions: %(ext)s" % { "ext": str(extensions) }, 'functions.getImgsFromDir', 'debug')
     imgs = getFilesFromDir(directoryPath, False, extensions)
     return imgs
 
@@ -152,12 +154,12 @@ def getFilesFromDir(directoryPath, recursive=False, extensionList=None):
                 if os.path.splitext(fle)[1] == ext:
                     path = os.path.join(directoryPath, fle)
                     files.append(path)
-                    log.write(_("File with extension found: %(path)s") % { "path": path }, 'functions.getFilesFromDir', 'debug')
+                    log.write("File with extension found: %(path)s" % { "path": path }, 'functions.getFilesFromDir', 'debug')
                     break
         else:
             path = os.path.join(directoryPath, fle)
             files.append(path)
-            log.write(_("File found: %(path)s") % { "path": path }, 'functions.getFilesFromDir', 'debug')
+            log.write("File found: %(path)s" % { "path": path }, 'functions.getFilesFromDir', 'debug')
     return files
 
 
@@ -449,7 +451,7 @@ def getResolutions(minRes='', maxRes='', reverseOrder=False, getVesaResolutions=
                 itemH = strToNumber(itemList[1], True)
                 # Check if it can be added
                 if itemW >= minW and itemH >= minH and (maxW == 0 or itemW <= maxW) and (maxH == 0 or itemH <= maxH):
-                    log.write(_("Resolution added: %(res)s") % { "res": item }, 'functions.getResolutions', 'debug')
+                    log.write("Resolution added: %(res)s" % { "res": item }, 'functions.getResolutions', 'debug')
                     avlResTmp.append([itemW, itemH])
 
     # Sort the list and return as readable resolution strings
@@ -463,23 +465,22 @@ def getResolutions(minRes='', maxRes='', reverseOrder=False, getVesaResolutions=
 def getPackageStatus(packageName):
     status = ''
     try:
-        cache = apt.Cache()
         pkg = cache[packageName]
-        if pkg.installed is not None:
+        if pkg.is_installed and pkg._pkg.current_state == apt_pkg.CURSTATE_INSTALLED:
             # Package is installed
-            log.write(_("Package is installed: %(package)s") % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
+            log.write("Package is installed: %(package)s" % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
             status = packageStatus[0]
-        elif pkg.candidate is not None:
+        elif not pkg.is_installed and pkg._pkg.current_state == apt_pkg.CURSTATE_NOT_INSTALLED:
             # Package is not installed
-            log.write(_("Package not installed: %(package)s") % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
+            log.write("Package not installed: %(package)s" % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
             status = packageStatus[1]
         else:
-            # Package is not found: uninstallable
-            log.write(_("Package not found: %(package)s") % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
+            # If something went wrong: assume that package is uninstallable
+            log.write("Could not get status info for package: %(package)s" % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
             status = packageStatus[2]
     except:
-        # If something went wrong: assume that package is uninstallable
-        log.write(_("Could not get status info for package: %(package)s") % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
+        # Package is not found: uninstallable
+        log.write("Package not found: %(package)s" % { "package": str(packageName) }, 'drivers.getPackageStatus', 'debug')
         status = packageStatus[2]
 
     return status
@@ -489,29 +490,30 @@ def getPackageStatus(packageName):
 def isPackageInstalled(packageName, alsoCheckVersion=True):
     isInstalled = False
     try:
-        cmd = 'dpkg-query -l %s | grep ^i' % packageName
-        if '*' in packageName:
-            cmd = 'aptitude search -w 150 %s | grep ^i' % packageName
-        ec = ExecCmd(log)
-        pckList = ec.run(cmd, False)
-        for line in pckList:
-            matchObj = re.search('([a-z]+)\s+([a-z0-9\-_\.]*)', line)
-            if matchObj:
-                if matchObj.group(1)[:1] == 'i':
-                    if alsoCheckVersion:
-                        cache = apt.Cache()
-                        pkg = cache[matchObj.group(2)]
-                        if pkg.installed.version == pkg.candidate.version:
-                            isInstalled = True
-                            break
-                    else:
-                        isInstalled = True
-                        break
-            if isInstalled:
-                break
+        pkg = cache[packageName]
+        if (not pkg.is_installed or
+            pkg._pkg.current_state != apt_pkg.CURSTATE_INSTALLED or
+            cache._depcache.broken_count > 0):
+            isInstalled = False
+        elif alsoCheckVersion:
+            if pkg.installed.version == pkg.candidate.version:
+                isInstalled = True
+        else:
+            isInstalled = True
     except:
         pass
     return isInstalled
+
+
+# Check if a package exists
+def doesPackageExist(packageName):
+    exists = False
+    try:
+        cache[packageName]
+        exists = True
+    except:
+        pass
+    return exists
 
 
 # List all dependencies of a package
@@ -530,12 +532,11 @@ def getPackageDependencies(packageName, reverseDepends=False):
                             if matchObj.group(1) != '':
                                 retList.append(matchObj.group(1))
         else:
-            cache = apt.Cache()
             pkg = cache[packageName]
-            for basedeps in pkg.installed.dependencies:
+            deps = pkg.candidate.get_dependencies("Depends")
+            for basedeps in deps:
                 for dep in basedeps:
-                    if dep.version != '':
-                        retList.append(dep.name)
+                    retList.append(dep.name)
     except:
         pass
     return retList
@@ -580,7 +581,6 @@ def killProcessByName(processName):
 def getPackageVersion(packageName, candidate=False):
     version = ''
     try:
-        cache = apt.Cache()
         pkg = cache[packageName]
         if candidate:
             version = pkg.candidate.version
@@ -595,7 +595,6 @@ def getPackageVersion(packageName, candidate=False):
 def getPackageDescription(packageName, firstLineOnly=True):
     descr = ''
     try:
-        cache = apt.Cache()
         pkg = cache[packageName]
         descr = pkg.installed.description
         if firstLineOnly:

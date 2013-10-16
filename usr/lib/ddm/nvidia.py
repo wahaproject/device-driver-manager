@@ -91,8 +91,8 @@ class Nvidia():
             self.log.write(_("Nvidia card found: %(card)s") % { "card": self.nvidiaCard[0] }, 'nvidia.getNvidia', 'info')
             for drv in self.drivers:
                 # This is a temporary hack, needed for the experimental nvidia-detect
-                # Remove the following if statement when nvidia-glx-legacy-304xx hits testing
-                if drv == "nvidia-glx-legacy-304xx":
+                # Remove "doesPackageExist" when nvidia-glx-legacy-304xx hits testing
+                if drv == "nvidia-glx-legacy-304xx" and not functions.doesPackageExist(drv):
                     drv = "nvidia-glx"
                 status = functions.getPackageStatus(drv)
                 version = functions.getPackageVersion(drv, True)
@@ -124,7 +124,7 @@ class Nvidia():
                         userName = functions.getUserLoginName()
                         self.ec.run("adduser bumblebee %s" % userName)
                     else:
-                        self.log.write(_("Configure Nvidia..."), 'nvidia.installNvidia', 'debug')
+                        self.log.write("Configure Nvidia...", 'nvidia.installNvidia', 'debug')
                         self.ec.run('nvidia-xconfig')
                         self.xc.blacklistModule('nouveau')
 
@@ -132,7 +132,7 @@ class Nvidia():
 
             if not isConfigured:
                 # Configure xorg.conf
-                self.log.write(_("Found module for driver %(drv)s: %(module)s") % { "drv": driver, "module": module }, 'nvidia.installNvidia', 'debug')
+                self.log.write("Found module for driver %(drv)s: %(module)s" % { "drv": driver, "module": module }, 'nvidia.installNvidia', 'debug')
                 if module != '':
                     self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'nvidia.installNvidia', 'info')
                     if module == 'nvidia':
@@ -159,7 +159,7 @@ class Nvidia():
             self.log.write(_("Removing Nvidia drivers"), 'nvidia.removeNvidia', 'info')
             packages = self.getAdditionalPackages(driver)
             for package in packages:
-                self.log.write(_("Remove package: %(package)s") % { "package": package[0] }, 'nvidia.removeNvidia', 'debug')
+                self.log.write("Remove package: %(package)s" % { "package": package[0] }, 'nvidia.removeNvidia', 'debug')
                 cmdPurge = 'apt-get -y --force-yes purge ' + package[0]
                 self.ec.run(cmdPurge)
             self.ec.run('apt-get -y --force-yes autoremove')
@@ -206,16 +206,14 @@ class Nvidia():
                 if package[1] == 1:
                     # Check if package is installed
                     # If it is, it's nominated for removal
-                    self.log.write(_("Is package installed: %(package)s") % { "package": package[0] }, 'nvidia.installNvidiaPackages', 'debug')
-                    drvChkCmd = 'aptitude search -w 150 %s | grep ^i | wc -l' % package[0]
-                    drvChk = self.ec.run(drvChkCmd, False)
-                    if functions.strToNumber(drvChk[0]) > 0:
+                    self.log.write("Is package installed: %(package)s" % { "package": package[0] }, 'nvidia.installNvidiaPackages', 'debug')
+                    if functions.isPackageInstalled(package[0]):
                         # Build remove packages string
                         removePackages += ' ' + package[0]
 
             # Remove these packages before installation
             if removePackages != '':
-                self.log.write(_("Remove drivers before reinstallation: %(drv)s") % { "drv": removePackages }, 'nvidia.installNvidiaPackages', 'debug')
+                self.log.write("Remove drivers before reinstallation: %(drv)s" % { "drv": removePackages }, 'nvidia.installNvidiaPackages', 'debug')
                 nvDrvRemCmd = 'apt-get -y --force-yes remove%s' % removePackages
                 self.ec.run(nvDrvRemCmd)
 
@@ -223,7 +221,7 @@ class Nvidia():
             self.preseedNvidiaPackages('install', version)
 
             # Install the packages
-            self.log.write(_("Install drivers: %(drv)s") % { "drv": installPackages }, 'nvidia.installNvidiaPackages', 'debug')
+            self.log.write("Install drivers: %(drv)s" % { "drv": installPackages }, 'nvidia.installNvidiaPackages', 'debug')
             nvDrvInstCmd = 'apt-get -y --force-yes install%s' % installPackages
             self.ec.run(nvDrvInstCmd)
 
@@ -245,7 +243,10 @@ class Nvidia():
                 if driver == 'nvidia-glx':
                     drvList.append(['nvidia-kernel-dkms', 1])
                     if 'amd64' in self.kernelRelease:
-                        drvList.append(['ia32-libs', 2])
+                        if functions.doesPackageExist('ia32-libs'):
+                            drvList.append(['ia32-libs', 2])
+                        if functions.doesPackageExist('libxvmcnvidia1'):
+                            drvList.append(['libxvmcnvidia1'], 2)
                 elif driver == 'bumblebee-nvidia':
                     drvList.append(['nvidia-kernel-dkms', 1])
                     drvList.append(['bumblebee', 1])
@@ -259,10 +260,10 @@ class Nvidia():
                     drvList.append(['nvidia-kernel-legacy-173xx-dkms', 1])
                     if 'amd64' in self.kernelRelease:
                         drvList.append(['ia32-libs', 2])
-                # Uncomment the following if statement when nvidia-glx-legacy-304xx hits testing
-                #elif driver == 'nvidia-glx-legacy-304xx':
-                #    drvList.append(['nvidia-kernel-legacy-304xx-dkms', 1])
-                #    drvList.append(['ia32-libs', 2])
+                # Remove "doesPackageExist" when nvidia-glx-legacy-304xx hits testing
+                elif driver == 'nvidia-glx-legacy-304xx' and functions.doesPackageExist(driver):
+                    drvList.append(['nvidia-kernel-legacy-304xx-dkms', 1])
+                    drvList.append(['ia32-libs', 2])
                 if 'amd64' in self.kernelRelease:
                     drvList.append(['libgl1-nvidia-glx:i386', 2])
                 drvList.append(['nvidia-xconfig', 0])

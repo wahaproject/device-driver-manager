@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-07 22:45+0200\n"
+"POT-Creation-Date: 2013-10-03 09:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,15 +54,6 @@ msgstr ""
 msgid "Install driver: %(drv)s"
 msgstr ""
 
-#: usr/lib/ddm/ati.py:111
-msgid "Configure ATI..."
-msgstr ""
-
-#: usr/lib/ddm/ati.py:118 usr/lib/ddm/nvidia.py:135
-#, python-format
-msgid "Found module for driver %(drv)s: %(module)s"
-msgstr ""
-
 #: usr/lib/ddm/ati.py:120 usr/lib/ddm/nvidia.py:137
 #, python-format
 msgid "Switch to module: %(module)s"
@@ -76,11 +67,6 @@ msgstr ""
 
 #: usr/lib/ddm/ati.py:137
 msgid "Removing ATI drivers"
-msgstr ""
-
-#: usr/lib/ddm/ati.py:140 usr/lib/ddm/ati.py:211 usr/lib/ddm/nvidia.py:162
-#, python-format
-msgid "Remove package: %(package)s"
 msgstr ""
 
 #: usr/lib/ddm/ati.py:151 usr/lib/ddm/intel.py:96 usr/lib/ddm/nvidia.py:176
@@ -131,11 +117,6 @@ msgstr ""
 msgid "Broadcom found: %(broadcom)s"
 msgstr ""
 
-#: usr/lib/ddm/broadcom.py:186
-#, python-format
-msgid "Broadcom chip set found: %(chip)s"
-msgstr ""
-
 #: usr/lib/ddm/broadcom.py:201
 #, python-format
 msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
@@ -166,21 +147,8 @@ msgstr ""
 msgid "Download package: %(drv)s"
 msgstr ""
 
-#: usr/lib/ddm/broadcom.py:235
-#, python-format
-msgid "Download package dependency: %(dep)s"
-msgstr ""
-
-#: usr/lib/ddm/broadcom.py:242
-msgid "Modprobe b44, b43, b43legacy, ssb, brcmsmac"
-msgstr ""
-
 #: usr/lib/ddm/broadcom.py:264
 msgid "Install downloaded packages"
-msgstr ""
-
-#: usr/lib/ddm/broadcom.py:267
-msgid "Remove downloaded debs"
 msgstr ""
 
 #: usr/lib/ddm/broadcom.py:272
@@ -188,42 +156,9 @@ msgstr ""
 msgid "Reconfigure package: %(package)s"
 msgstr ""
 
-#: usr/lib/ddm/broadcom.py:278
-msgid "Blacklist b43, brcmsmac, bcma, ssb"
-msgstr ""
-
-#: usr/lib/ddm/broadcom.py:283
-msgid "Modprobe wl"
-msgstr ""
-
-#: usr/lib/ddm/broadcom.py:290
-msgid "Modprobe b43legacy"
-msgstr ""
-
-#: usr/lib/ddm/broadcom.py:294
-msgid "Modprobe b43"
-msgstr ""
-
-#: usr/lib/ddm/broadcom.py:298
-msgid "Modprobe brcmsmac"
-msgstr ""
-
-#: usr/lib/ddm/broadcom.py:301
-msgid "Done installing Broadcom drivers"
-msgstr ""
-
-#: usr/lib/ddm/broadcom.py:303
-msgid "No Broadcom chip set found"
-msgstr ""
-
 #: usr/lib/ddm/broadcom.py:315
 #, python-format
 msgid "Purge driver: %(drv)s"
-msgstr ""
-
-#: usr/lib/ddm/broadcom.py:322
-#, python-format
-msgid "Remove : %(file)s"
 msgstr ""
 
 #: usr/lib/ddm/broadcom.py:325
@@ -286,21 +221,6 @@ msgstr ""
 msgid " (recommended)"
 msgstr ""
 
-#: usr/lib/ddm/ddm.py:278
-#, python-format
-msgid "Check loaded driver / available driver: %(ldrv)s / %(adrv)s"
-msgstr ""
-
-#: usr/lib/ddm/ddm.py:280
-#, python-format
-msgid "Select current driver in list: %(drv)s"
-msgstr ""
-
-#: usr/lib/ddm/ddm.py:293
-#, python-format
-msgid "Manufacturer image path: %(path)s"
-msgstr ""
-
 #: usr/lib/ddm/ddm.py:310
 msgid "Unknown driver"
 msgstr ""
@@ -336,11 +256,6 @@ msgid ""
 "Close any programs locking the file and try again."
 msgstr ""
 
-#: usr/lib/ddm/ddm.py:368
-#, python-format
-msgid "Driver to install: %(drv)s"
-msgstr ""
-
 #: usr/lib/ddm/ddm.py:441
 msgid "Driver installed"
 msgstr ""
@@ -362,62 +277,12 @@ msgid ""
 "Close any programs locking the file and restart DDM."
 msgstr ""
 
-#: usr/lib/ddm/ddm.py:551
-#, python-format
-msgid "Used drivers: %(drv)s"
-msgstr ""
-
 #: usr/lib/ddm/ddm.py:554
 msgid "Checking your hardware..."
 msgstr ""
 
 #: usr/lib/ddm/ddm.py:619
 msgid "Start automatic driver install"
-msgstr ""
-
-#: usr/lib/ddm/execcmd.py:18
-#, python-format
-msgid "Command to execute: %(cmd)s"
-msgstr ""
-
-#: usr/lib/ddm/functions.py:137
-#, python-format
-msgid "Search for extensions: %(ext)s"
-msgstr ""
-
-#: usr/lib/ddm/functions.py:155
-#, python-format
-msgid "File with extension found: %(path)s"
-msgstr ""
-
-#: usr/lib/ddm/functions.py:160
-#, python-format
-msgid "File found: %(path)s"
-msgstr ""
-
-#: usr/lib/ddm/functions.py:452
-#, python-format
-msgid "Resolution added: %(res)s"
-msgstr ""
-
-#: usr/lib/ddm/functions.py:470
-#, python-format
-msgid "Package is installed: %(package)s"
-msgstr ""
-
-#: usr/lib/ddm/functions.py:474
-#, python-format
-msgid "Package not installed: %(package)s"
-msgstr ""
-
-#: usr/lib/ddm/functions.py:478
-#, python-format
-msgid "Package not found: %(package)s"
-msgstr ""
-
-#: usr/lib/ddm/functions.py:482
-#, python-format
-msgid "Could not get status info for package: %(package)s"
 msgstr ""
 
 #: usr/lib/ddm/intel.py:47
@@ -428,11 +293,6 @@ msgstr ""
 #: usr/lib/ddm/intel.py:53
 #, python-format
 msgid "Intel driver found: %(drv)s (%(status)s)"
-msgstr ""
-
-#: usr/lib/ddm/intel.py:85 usr/lib/ddm/via.py:84
-#, python-format
-msgid "Remove package: %(drv)s"
 msgstr ""
 
 #: usr/lib/ddm/main.py:66
@@ -456,11 +316,6 @@ msgstr ""
 
 #: usr/lib/ddm/main.py:107 usr/lib/ddm/main.py:109
 msgid "Please enter your password"
-msgstr ""
-
-#: usr/lib/ddm/main.py:112
-#, python-format
-msgid "Startup command: %(cmd)s"
 msgstr ""
 
 #: usr/lib/ddm/main.py:115
@@ -529,10 +384,6 @@ msgstr ""
 msgid "Nvidia driver found: %(drv)s (%(status)s)"
 msgstr ""
 
-#: usr/lib/ddm/nvidia.py:127
-msgid "Configure Nvidia..."
-msgstr ""
-
 #: usr/lib/ddm/nvidia.py:159
 msgid "Removing Nvidia drivers"
 msgstr ""
@@ -545,25 +396,6 @@ msgstr ""
 msgid "Nouveau display driver"
 msgstr ""
 
-#: usr/lib/ddm/nvidia.py:209
-#, python-format
-msgid "Is package installed: %(package)s"
-msgstr ""
-
-#: usr/lib/ddm/nvidia.py:218
-#, python-format
-msgid "Remove drivers before reinstallation: %(drv)s"
-msgstr ""
-
-#: usr/lib/ddm/nvidia.py:226
-#, python-format
-msgid "Install drivers: %(drv)s"
-msgstr ""
-
-#: usr/lib/ddm/pae.py:31
-msgid "Already a PAE system or AMD64"
-msgstr ""
-
 #: usr/lib/ddm/pae.py:42
 #, python-format
 msgid "Installed PAE: %(pae)s"
@@ -571,11 +403,6 @@ msgstr ""
 
 #: usr/lib/ddm/pae.py:48
 msgid "Multi-core support for 32-bit systems"
-msgstr ""
-
-#: usr/lib/ddm/pae.py:49
-#, python-format
-msgid "Distribution: %(dist)s"
 msgstr ""
 
 #: usr/lib/ddm/pae.py:58
@@ -587,11 +414,6 @@ msgstr ""
 msgid "PAE capable system"
 msgstr ""
 
-#: usr/lib/ddm/pae.py:61
-#, python-format
-msgid "Single-core kernel found: %(kernel)s"
-msgstr ""
-
 #: usr/lib/ddm/pae.py:65
 msgid "Multi-core system running single-core kernel found"
 msgstr ""
@@ -600,25 +422,12 @@ msgstr ""
 msgid "PAE not installed"
 msgstr ""
 
-#: usr/lib/ddm/pae.py:76
-msgid "PAE skipped: 64-bit system"
-msgstr ""
-
 #: usr/lib/ddm/pae.py:78
 msgid "PAE kernel cannot be installed: single-core system"
 msgstr ""
 
-#: usr/lib/ddm/pae.py:88
-#, python-format
-msgid "PAE kernel install command: %(cmd)s"
-msgstr ""
-
 #: usr/lib/ddm/pae.py:94
 msgid "Done installing PAE"
-msgstr ""
-
-#: usr/lib/ddm/pae.py:105
-msgid "Not running pae, continue removal"
 msgstr ""
 
 #: usr/lib/ddm/pae.py:108
@@ -634,82 +443,6 @@ msgstr ""
 msgid "Cannot remove PAE when running PAE"
 msgstr ""
 
-#: usr/lib/ddm/treeview.py:60
-#, python-format
-msgid "Create list store eval string: %(eval)s"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:66
-msgid "Clear existing list store"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:76
-#, python-format
-msgid "First item is column name (multi-column list): %(iscolname)s"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:83
-#, python-format
-msgid "First item is column name (single-column list): %(iscolname)s"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:89
-#, python-format
-msgid "Create column names: %(cols)s"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:97
-msgid "First item is column name: skip first item"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:126
-#, python-format
-msgid "Add data to list store: %(data)s"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:131
-#, python-format
-msgid "Add data to top of list store: %(totop)s"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:135
-#, python-format
-msgid "Add data to bottom of list store: %(tobottom)s"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:162
-#, python-format
-msgid "Create column: %(col)s"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:173
-msgid "Check box found: add toggle function"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:179
-#, python-format
-msgid "Last column fills treeview: %(colnr)d"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:185
-#, python-format
-msgid "Column added: %(col)s"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:188
-#, python-format
-msgid "Column already exists: %(col)s"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:196
-msgid "Add Liststore to Treeview"
-msgstr ""
-
-#: usr/lib/ddm/treeview.py:205
-#, python-format
-msgid "Scrolled to selected row: %(row)d"
-msgstr ""
-
 #: usr/lib/ddm/via.py:46
 #, python-format
 msgid "Via card found: %(card)s"
@@ -722,11 +455,6 @@ msgstr ""
 
 #: usr/lib/ddm/via.py:103
 msgid "Chrome display driver"
-msgstr ""
-
-#: usr/lib/ddm/xorg.py:44
-#, python-format
-msgid "Modules for %(manufacturer)s: %(modules)s"
 msgstr ""
 
 #: usr/lib/ddm/xorg.py:78
@@ -744,29 +472,4 @@ msgstr ""
 
 #: usr/lib/ddm/xorg.py:126
 msgid "New section appended to xorg.conf"
-msgstr ""
-
-#: usr/lib/ddm/xorg.py:139
-#, python-format
-msgid "Blacklist %(module)s in: %(path)s"
-msgstr ""
-
-#: usr/lib/ddm/xorg.py:155
-#, python-format
-msgid "Uncomment blacklist %(module)s in: %(path)s"
-msgstr ""
-
-#: usr/lib/ddm/xorg.py:161
-#, python-format
-msgid "Remove blacklist %(module)s from: %(path)s"
-msgstr ""
-
-#: usr/lib/ddm/xorg.py:181
-#, python-format
-msgid "Blacklist %(module)s found in: %(path)s"
-msgstr ""
-
-#: usr/lib/ddm/xorg.py:189
-#, python-format
-msgid "Commented blacklist %(module)s found in: %(path)s"
 msgstr ""

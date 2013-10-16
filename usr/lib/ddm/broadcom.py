@@ -183,7 +183,7 @@ class Broadcom():
                         chipSet = re.search('14e4:([a-zA-Z0-9]*)', pid)
                         if chipSet:
                             self.currentChip = chipSet.group(1)
-                            self.log.write(_("Broadcom chip set found: %(chip)s") % { "chip": self.currentChip }, 'broadcom.setCurrentChipInfo', 'debug')
+                            self.log.write("Broadcom chip set found: %(chip)s" % { "chip": self.currentChip }, 'broadcom.setCurrentChipInfo', 'debug')
                             for chipList in bcChips:
                                 if self.currentChip == chipList[0]:
                                     # Supported chipset found: set variables
@@ -232,14 +232,14 @@ class Broadcom():
                     depList = functions.getPackageDependencies(driver)
                     for dep in depList:
                         if not functions.isPackageInstalled(dep):
-                            self.log.write(_("Download package dependency: %(dep)s") % { "dep": dep }, 'broadcom.installBroadcom', 'debug')
+                            self.log.write("Download package dependency: %(dep)s" % { "dep": dep }, 'broadcom.installBroadcom', 'debug')
                             self.ec.run('apt-get download %s' % dep)
                             debDownloaded = True
                         else:
                             reconfPackages.append(dep)
 
                 # Remove any module that might be in the way
-                self.log.write(_("Modprobe b44, b43, b43legacy, ssb, brcmsmac"), 'broadcom.installBroadcom', 'debug')
+                self.log.write("Modprobe b44, b43, b43legacy, ssb, brcmsmac", 'broadcom.installBroadcom', 'debug')
                 os.system('modprobe -rf b44')
                 os.system('modprobe -rf b43')
                 os.system('modprobe -rf b43legacy')
@@ -264,7 +264,7 @@ class Broadcom():
                     self.log.write(_("Install downloaded packages"), 'broadcom.installBroadcom', 'info')
                     self.ec.run('dpkg -i *.deb')
                     # Delete the downloaded packages
-                    self.log.write(_("Remove downloaded debs"), 'broadcom.installBroadcom', 'debug')
+                    self.log.write("Remove downloaded debs", 'broadcom.installBroadcom', 'debug')
                     os.system('rm -f *.deb')
 
                 # Reconfigure packages when needed
@@ -275,32 +275,32 @@ class Broadcom():
                 # Finish up
                 if driver == wlDebian or driver == wlUbuntu:
                     # Blacklist b43, brcmsmac
-                    self.log.write(_("Blacklist b43, brcmsmac, bcma, ssb"), 'broadcom.installBroadcom', 'debug')
+                    self.log.write("Blacklist b43, brcmsmac, bcma, ssb", 'broadcom.installBroadcom', 'debug')
                     modFile = open(blacklistPath, 'w')
                     modFile.write('blacklist b43 brcmsmac bcma ssb')
                     modFile.close()
                     # Start wl
-                    self.log.write(_("Modprobe wl"), 'broadcom.installBroadcom', 'debug')
+                    self.log.write("Modprobe wl", 'broadcom.installBroadcom', 'debug')
                     os.system('modprobe wl')
                 else:
                     if os.path.isfile(blacklistPath):
                         os.remove(blacklistPath)
                     if 'b43legacy' in driver:
                         # Start b43legacy
-                        self.log.write(_("Modprobe b43legacy"), 'broadcom.installBroadcom', 'debug')
+                        self.log.write("Modprobe b43legacy", 'broadcom.installBroadcom', 'debug')
                         os.system('modprobe b43legacy')
                     elif 'b43' in driver:
                         # Start b43
-                        self.log.write(_("Modprobe b43"), 'broadcom.installBroadcom', 'debug')
+                        self.log.write("Modprobe b43", 'broadcom.installBroadcom', 'debug')
                         os.system('modprobe b43')
                     else:
                         # Start brcmsmac
-                        self.log.write(_("Modprobe brcmsmac"), 'broadcom.installBroadcom', 'debug')
+                        self.log.write("Modprobe brcmsmac", 'broadcom.installBroadcom', 'debug')
                         os.system('modprobe brcmsmac')
 
-                self.log.write(_("Done installing Broadcom drivers"), 'broadcom.installBroadcom', 'info')
+                self.log.write("Done installing Broadcom drivers", 'broadcom.installBroadcom', 'info')
             else:
-                self.log.write(_("No Broadcom chip set found"), 'broadcom.installBroadcom', 'error')
+                self.log.write("No Broadcom chip set found", 'broadcom.installBroadcom', 'error')
 
         except Exception, detail:
             self.log.write(detail, 'broadcom.installBroadcom', 'exception')
@@ -319,7 +319,7 @@ class Broadcom():
 
                 # Remove blacklist file
                 if os.path.exists(blacklistPath):
-                    self.log.write(_("Remove : %(file)s") % { "file": blacklistPath }, 'broadcom.removeBroadcom', 'debug')
+                    self.log.write("Remove : %(file)s" % { "file": blacklistPath }, 'broadcom.removeBroadcom', 'debug')
                     os.remove(blacklistPath)
 
                 self.log.write(_("Done removing Broadcom drivers"), 'broadcom.removeBroadcom', 'info')
