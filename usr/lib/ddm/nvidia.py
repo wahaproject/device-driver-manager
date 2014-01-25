@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#-*- coding: utf-8 -*-
 
 import os
 import functions
@@ -90,9 +91,8 @@ class Nvidia():
         if self.nvidiaCard:
             self.log.write(_("Nvidia card found: %(card)s") % { "card": self.nvidiaCard[0] }, 'nvidia.getNvidia', 'info')
             for drv in self.drivers:
-                # This is a temporary hack, needed for the experimental nvidia-detect
-                # Remove "doesPackageExist" when nvidia-glx-legacy-304xx hits testing
-                if drv == "nvidia-glx-legacy-304xx" and not functions.doesPackageExist(drv):
+                # For stable we need to check for the existence of the 304 legacy drivers
+                if drv == "nvidia-legacy-304xx-driver" and not functions.doesPackageExist(drv):
                     drv = "nvidia-glx"
                 status = functions.getPackageStatus(drv)
                 version = functions.getPackageVersion(drv, True)
@@ -122,7 +122,14 @@ class Nvidia():
                 if self.distribution == 'debian' and module == 'nvidia':
                     if self.isBumblebee:
                         userName = functions.getUserLoginName()
-                        self.ec.run("adduser bumblebee %s" % userName)
+                        os.system("groupadd bumblebee")
+                        os.system("groupadd video")
+                        self.ec.run("usermod -a -G bumblebee,video %s" % userName)
+                        #self.ec.run("adduser bumblebee %s" % userName)
+                        conf = '/etc/bumblebee/bumblebee.conf'
+                        if os.path.exists(conf):
+                            os.system("sed -i 's/KernelDriver=nvidia/KernelDriver=nvidia-current/' %s" % conf)
+                        self.ec.run("service bumblebeed restart")
                     else:
                         self.log.write("Configure Nvidia...", 'nvidia.installNvidia', 'debug')
                         self.ec.run('nvidia-xconfig')
@@ -136,7 +143,7 @@ class Nvidia():
                 if module != '':
                     self.log.write(_("Switch to module: %(module)s") % { "module": module }, 'nvidia.installNvidia', 'info')
                     if module == 'nvidia':
-                        if self.distribution == 'debian':
+                        if self.distribution == 'debian' and not self.isBumblebee:
                             self.ec.run('nvidia-xconfig')
                         self.xc.blacklistModule('nouveau')
                     else:
@@ -197,7 +204,7 @@ class Nvidia():
     # Install the given packages
     def installNvidiaPackages(self, packageList, version):
         try:
-            removePackages = ''
+            reinstallPackages = ''
             installPackages = ''
             # Check if drivers are available in the repositories
             for package in packageList:
@@ -205,25 +212,25 @@ class Nvidia():
                 installPackages += ' ' + package[0]
                 if package[1] == 1:
                     # Check if package is installed
-                    # If it is, it's nominated for removal
+                    # If it is, it's nominated for reinstallation
                     self.log.write("Is package installed: %(package)s" % { "package": package[0] }, 'nvidia.installNvidiaPackages', 'debug')
                     if functions.isPackageInstalled(package[0]):
-                        # Build remove packages string
-                        removePackages += ' ' + package[0]
+                        # Build reinstall packages string
+                        reinstallPackages += ' ' + package[0]
 
-            # Remove these packages before installation
-            if removePackages != '':
-                self.log.write("Remove drivers before reinstallation: %(drv)s" % { "drv": removePackages }, 'nvidia.installNvidiaPackages', 'debug')
-                nvDrvRemCmd = 'apt-get -y --force-yes remove%s' % removePackages
-                self.ec.run(nvDrvRemCmd)
+            # Reinstall these packages before installation
+            if reinstallPackages != '':
+                self.log.write("Reintall drivers: %(drv)s" % { "drv": reinstallPackages }, 'nvidia.installNvidiaPackages', 'debug')
+                cmd = 'apt-get -y --force-yes install --reinstall%s' % reinstallPackages
+                self.ec.run(cmd)
 
             # Preseed answers for some packages
             self.preseedNvidiaPackages('install', version)
 
             # Install the packages
             self.log.write("Install drivers: %(drv)s" % { "drv": installPackages }, 'nvidia.installNvidiaPackages', 'debug')
-            nvDrvInstCmd = 'apt-get -y --force-yes install%s' % installPackages
-            self.ec.run(nvDrvInstCmd)
+            cmd = 'apt-get -y --force-yes install%s' % installPackages
+            self.ec.run(cmd)
 
         except Exception, detail:
             self.log.write(detail, 'nvidia.installNvidiaPackages', 'exception')
@@ -236,38 +243,88 @@ class Nvidia():
         drvList.append([linHeader[1], 0])
         # Distribution specific packages
         if self.distribution == 'debian':
-            if 'nvidia-' in driver:
+            if 'nvidia' in driver:
                 drvList.append(['build-essential', 0])
+                drvList.append(['nvidia-xconfig', 0])
                 drvList.append([driver, 1])
-                # This needs to change when 304 goes legacy
+
+                # Old naming convention for LTS version
                 if driver == 'nvidia-glx':
+                    drvList.append(['nvidia-settings', 0])
                     drvList.append(['nvidia-kernel-dkms', 1])
                     if 'amd64' in self.kernelRelease:
-                        if functions.doesPackageExist('ia32-libs'):
-                            drvList.append(['ia32-libs', 2])
-                        if functions.doesPackageExist('libxvmcnvidia1'):
-                            drvList.append(['libxvmcnvidia1'], 2)
+                        if functions.doesPackageExist('libgl1-nvidia-glx-i386'):
+                            drvList.append(['libgl1-nvidia-glx-i386', 2])
+                        #if functions.doesPackageExist('ia32-libs'):
+                            #drvList.append(['ia32-libs', 2])
+
+                # http://packages.debian.org/sid/nvidia-driver
+                elif driver == 'nvidia-driver':
+                    drvList.append(['nvidia-settings', 0])
+                    drvList.append(['nvidia-kernel-dkms', 1])
+                    if 'amd64' in self.kernelRelease:
+                        if functions.doesPackageExist('libgl1-nvidia-glx-i386'):
+                            drvList.append(['libgl1-nvidia-glx-i386', 2])
+                        #if functions.doesPackageExist('ia32-libs'):
+                            #drvList.append(['ia32-libs', 2])
+
+                # Old naming convention for LTS version
+                elif driver == 'nvidia-glx-legacy-96xx':
+                    drvList.append(['nvidia-settings', 0])
+                    drvList.append(['nvidia-kernel-legacy-96xx-dkms', 1])
+                    #if 'amd64' in self.kernelRelease:
+                        #if functions.doesPackageExist('ia32-libs'):
+                            #drvList.append(['ia32-libs', 2])
+
+                # http://packages.debian.org/sid/nvidia-legacy-96xx-driver
+                elif driver == 'nvidia-legacy-96xx-driver':
+                    drvList.append(['nvidia-settings-legacy-96xx', 0])
+                    drvList.append(['nvidia-legacy-96xx-kernel-dkms', 1])
+                    if 'amd64' in self.kernelRelease:
+                        if functions.doesPackageExist('libgl1-nvidia-legacy-96xx-glx-i386'):
+                            drvList.append(['libgl1-nvidia-legacy-96xx-glx-i386', 2])
+                        #if functions.doesPackageExist('ia32-libs'):
+                            #drvList.append(['ia32-libs', 2])
+
+                # Old naming convention for LTS version
+                elif driver == 'nvidia-glx-legacy-173xx':
+                    drvList.append(['nvidia-settings', 0])
+                    drvList.append(['nvidia-kernel-legacy-173xx-dkms', 1])
+                    #if 'amd64' in self.kernelRelease:
+                        #if functions.doesPackageExist('ia32-libs'):
+                            #drvList.append(['ia32-libs', 2])
+
+                # http://packages.debian.org/jessie/nvidia-legacy-173xx-driver
+                elif driver == 'nvidia-legacy-173xx-driver':
+                    drvList.append(['nvidia-settings-legacy-173xx', 0])
+                    drvList.append(['nvidia-legacy-173xx-kernel-dkms', 1])
+                    if 'amd64' in self.kernelRelease:
+                        if functions.doesPackageExist('libgl1-nvidia-legacy-173xx-glx-i386'):
+                            drvList.append(['libgl1-nvidia-legacy-173xx-glx-i386', 2])
+                        #if functions.doesPackageExist('ia32-libs'):
+                            #drvList.append(['ia32-libs', 2])
+
+                # http://packages.debian.org/jessie/nvidia-legacy-304xx-driver
+                elif driver == 'nvidia-legacy-304xx-driver':
+                    drvList.append(['nvidia-settings-legacy-304xx', 0])
+                    drvList.append(['nvidia-legacy-304xx-kernel-dkms', 1])
+                    if 'amd64' in self.kernelRelease:
+                        if functions.doesPackageExist('libgl1-nvidia-legacy-304xx-glx-i386'):
+                            drvList.append(['libgl1-nvidia-legacy-304xx-glx-i386', 2])
+                        #if functions.doesPackageExist('ia32-libs'):
+                            #drvList.append(['ia32-libs', 2])
+
+                # Bumblebee
                 elif driver == 'bumblebee-nvidia':
+                    drvList.append(['nvidia-settings', 0])
                     drvList.append(['nvidia-kernel-dkms', 1])
                     drvList.append(['bumblebee', 1])
                     drvList.append(['primus', 1])
-                    drvList.append(['primus-libs-ia32', 2])
-                elif driver == 'nvidia-glx-legacy-96xx':
-                    drvList.append(['nvidia-kernel-legacy-96xx-dkms', 1])
                     if 'amd64' in self.kernelRelease:
-                        drvList.append(['ia32-libs', 2])
-                elif driver == 'nvidia-glx-legacy-173xx':
-                    drvList.append(['nvidia-kernel-legacy-173xx-dkms', 1])
-                    if 'amd64' in self.kernelRelease:
-                        drvList.append(['ia32-libs', 2])
-                # Remove "doesPackageExist" when nvidia-glx-legacy-304xx hits testing
-                elif driver == 'nvidia-glx-legacy-304xx' and functions.doesPackageExist(driver):
-                    drvList.append(['nvidia-kernel-legacy-304xx-dkms', 1])
-                    drvList.append(['ia32-libs', 2])
-                if 'amd64' in self.kernelRelease:
-                    drvList.append(['libgl1-nvidia-glx:i386', 2])
-                drvList.append(['nvidia-xconfig', 0])
-                drvList.append(['nvidia-settings', 0])
+                        if functions.doesPackageExist('primus-libs:i386'):
+                            drvList.append(['primus-libs:i386', 2])
+                    if functions.doesPackageExist('primus-libs-ia32'):
+                            drvList.append(['primus-libs-ia32', 2])
 
             else:
                 # Nouveau, fbdev, vesa

@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#-*- coding: utf-8 -*-
 
 # Elevate permissions
 import os
@@ -10,7 +11,7 @@ import functions
 import gtk
 import gettext
 from logger import Logger
-from dialogs import MessageDialogSave
+from dialogs import MessageDialogSafe
 
 # i18n
 gettext.install("ddm", "/usr/share/locale")
@@ -114,20 +115,20 @@ if functions.hasInternetConnection() or force:
             else:
                 title = _("DDM - Kernel")
                 msg = _("You do not have the latest kernel installed.\n\nUse the Update Manager to update your system.")
-                MessageDialogSave(title, msg, gtk.MESSAGE_INFO).show()
+                MessageDialogSafe(title, msg, gtk.MESSAGE_INFO).show()
                 log.write(msg, 'main', 'warning')
         else:
             title = _("DDM - Live environment")
             msg = _("DDM cannot run in a live environment\n\nTo force start, use the --force argument")
-            MessageDialogSave(title, msg, gtk.MESSAGE_INFO).show()
+            MessageDialogSafe(title, msg, gtk.MESSAGE_INFO).show()
             log.write(msg, 'main', 'warning')
     else:
         title = _("DDM - Debian based")
         msg = _("Cannot determine the base distribution (debian or ubuntu)\n\nTo force start, use the --force argument")
-        MessageDialogSave(title, msg, gtk.MESSAGE_INFO).show()
+        MessageDialogSafe(title, msg, gtk.MESSAGE_INFO).show()
         log.write(msg, 'main', 'warning')
 else:
     title = _("DDM - Internet")
     msg = _("You do not seem to have an internet connection\n\nTo force start, use the --force argument")
-    MessageDialogSave(title, msg, gtk.MESSAGE_INFO).show()
+    MessageDialogSafe(title, msg, gtk.MESSAGE_INFO).show()
     log.write(msg, 'main', 'warning')

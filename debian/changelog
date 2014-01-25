@@ -1,3 +1,55 @@
+ddm (1.0.1) debian; urgency=low
+
+  * Added Czech translation
+  * Adapted Italian translation
+
+ -- Schoelje <schoelje@solydxk.com>  Tue, 24 Dec 2013 12:00:00 +0100
+
+ddm (1.0.0) debian; urgency=low
+
+  * Added transition naming for Nvidia packages
+  * Optimized speed of command execution
+
+ -- Schoelje <schoelje@solydxk.com>  Tue, 05 Nov 2013 11:00:00 +0100
+
+ddm (0.9.5) debian; urgency=low
+
+  * Adapted French translation
+
+ -- Schoelje <schoelje@solydxk.com>  Mon, 21 Oct 2013 19:00:00 +0100
+
+ddm (0.9.4) debian; urgency=low
+
+  * Added linux-image-686-pae linux-headers-686-pae for PAE install
+
+ -- Schoelje <schoelje@solydxk.com>  Sun, 20 Oct 2013 17:00:00 +0100
+
+ddm (0.9.3) debian; urgency=low
+
+  * Solved dependency problem missing libxvmcnvidia1 for Nvidia on amd64
+
+ -- Schoelje <schoelje@solydxk.com>  Sun, 13 Oct 2013 09:00:00 +0100
+
+ddm (0.9.1) debian; urgency=low
+
+  * Added Greek translation
+    provided by bb
+
+ -- Schoelje <schoelje@solydxk.com>  Thu, 03 Oct 2013 11:00:00 +0100
+
+ddm (0.9.0) debian; urgency=low
+
+  * Fix truncated names in aptitude search
+    provided by Jerry D. Hedden
+
+ -- Schoelje <schoelje@solydxk.com>  Sun, 29 Sep 2013 09:00:00 +0100
+
+ddm (0.8.9) debian; urgency=low
+
+  * ia32 support only for amd64
+
+ -- Schoelje <schoelje@solydxk.com>  Sat, 21 Sep 2013 17:00:00 +0100
+
 ddm (0.8.8) debian; urgency=low
 
   * Improved ia32 support for Nvidia and ATI

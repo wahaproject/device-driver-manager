@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#-*- coding: utf-8 -*-
 
 try:
     import os
@@ -20,7 +21,7 @@ try:
     from broadcom import Broadcom
     from pae import PAE
     from drivers import DriverGet, DriverInstall
-    from dialogs import QuestionDialog, MessageDialogSave
+    from dialogs import QuestionDialog, MessageDialogSafe
     from logger import Logger
 except Exception, detail:
     print detail
@@ -311,7 +312,7 @@ class DDM:
                     self.log.write("%s: %s" % (title, drv[1]), 'ddm.loadDriverSection', 'warning')
                     self.lblActivatedDriver.set_text(drv[1])
                     msg = _("Unknown driver found.\n\nPlease remove before installing drivers with DDM.")
-                    MessageDialogSave(title, msg, gtk.MESSAGE_WARNING, self.window).show()
+                    MessageDialogSafe(title, msg, gtk.MESSAGE_WARNING, self.window).show()
 
         if showAlternatives:
             # Fill treeview with drivers
@@ -360,7 +361,7 @@ class DDM:
             if answer:
                 # Check if /var/dpkg/lock has been locked by another process
                 if functions.isFileLocked(self.lockFile):
-                    MessageDialogSave(_("Locked"), _("Could not get lock on %(file)s.\n\nClose any programs locking the file and try again.") % { "file": self.lockFile }, gtk.MESSAGE_WARNING, self.window).show()
+                    MessageDialogSafe(_("Locked"), _("Could not get lock on %(file)s.\n\nClose any programs locking the file and try again.") % { "file": self.lockFile }, gtk.MESSAGE_WARNING, self.window).show()
                 else:
                     cardsDone = []
                     for card in self.cards:
@@ -500,7 +501,7 @@ class DDM:
 
         # Check if self.lockFile is locked by another process
         if functions.isFileLocked(self.lockFile):
-            MessageDialogSave(_("Locked"), _("Could not get lock on %(file)s.\n\nClose any programs locking the file and restart DDM.") % { "file": self.lockFile }, gtk.MESSAGE_WARNING, self.window).show()
+            MessageDialogSafe(_("Locked"), _("Could not get lock on %(file)s.\n\nClose any programs locking the file and restart DDM.") % { "file": self.lockFile }, gtk.MESSAGE_WARNING, self.window).show()
             sys.exit(2)
 
         # Initiate the treeview handler and connect the custom toggle event with driverCheckBoxToggled

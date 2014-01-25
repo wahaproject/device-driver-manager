@@ -1,11 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python -u
+#-*- coding: utf-8 -*-
+
+# python -u tells python not to buffer stdout
 
 import sys
 import subprocess
-import gettext
-
-# i18n
-gettext.install("ddm", "/usr/share/locale")
 
 
 # Class to execute a command and return the output in an array
@@ -15,20 +14,24 @@ class ExecCmd(object):
         self.log = loggerObject
 
     def run(self, cmd, realTime=True, defaultMessage=''):
-        self.log.write("Command to execute: %(cmd)s" % { "cmd": cmd }, 'execcmd.run', 'debug')
+        if self.log:
+            self.log.write("Command to execute: %(cmd)s" % { "cmd": cmd }, 'execcmd.run', 'debug')
 
-        p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        p = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         lstOut = []
         while True:
-            # Strip the line, also from null spaces (strip() only strips white spaces)
-            line = p.stdout.readline().strip().strip("\0")
-            if line == '' and p.poll() is not None:
+            line = p.stdout.readline()
+            if not line:
                 break
-
-            if line != '':
-                lstOut.append(line)
-                if realTime:
-                    sys.stdout.flush()
+            # Strip the line, also from null spaces (strip() only strips white spaces)
+            line = line.decode('utf-8').strip().strip("\0")
+            #if line == '' and p.poll() is not None:
+            lstOut.append(line)
+            if realTime:
+                if self.log:
                     self.log.write(line, 'execcmd.run', 'info')
+                else:
+                    print line
+            sys.stdout.flush()
 
         return lstOut

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#-*- coding: utf-8 -*-
 
 import functions
 import gettext
@@ -82,7 +83,7 @@ class PAE():
     # Called from drivers.py: install PAE kernel
     def installPAE(self):
         try:
-            cmdPae = 'apt-get -y --force-yes install'
+            cmdPae = 'apt-get -y --force-yes install linux-image-686-pae linux-headers-686-pae'
             for package in self.packages:
                 cmdPae += ' ' + package
             self.log.write("PAE kernel install command: %(cmd)s" % { "cmd": cmdPae }, 'pae.installPAE', 'debug')
@@ -104,7 +105,7 @@ class PAE():
             if not 'pae' in kernelRelease[0]:
                 self.log.write("Not running pae, continue removal", 'pae.removePAE', 'debug')
                 for package in self.packages:
-                    cmdPurge = 'apt-get -y --force-yes purge %s' % package
+                    cmdPurge = 'apt-get -y --force-yes purge linux-image-686-pae linux-headers-686-pae %s' % package
                     self.log.write(_("PAE package to remove: %(package)s") % { "package": package }, 'pae.removePAE', 'info')
                     self.ec.run(cmdPurge)
                 self.ec.run('apt-get -y --force-yes autoremove')

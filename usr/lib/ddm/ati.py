@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#-*- coding: utf-8 -*-
 
 import os
 import re
@@ -184,14 +185,15 @@ class ATI():
             if 'fglrx' in driver:
                 drvList.append(['build-essential', 0])
                 drvList.append(['module-assistant', 0])
+                drvList.append(['fglrx-control', 0])
                 drvList.append([driver, 1])
                 drvList.append(['fglrx-modules-dkms', 1])
                 drvList.append(['libgl1-fglrx-glx', 1])
-                drvList.append(['glx-alternative-fglrx', 0])
-                drvList.append(['fglrx-control', 1])
                 if 'amd64' in self.kernelRelease:
-                    drvList.append(['ia32-libs', 2])
-                    drvList.append(['libgl1-fglrx-glx:i386', 2])
+                    if functions.doesPackageExist('libgl1-fglrx-glx-i386'):
+                        drvList.append(['libgl1-fglrx-glx-i386', 2])
+                    #if functions.doesPackageExist('ia32-libs'):
+                        #drvList.append(['ia32-libs', 2])
             else:
                 # Radeon, fbdev, vesa
                 drvList.append([driver, 1])
@@ -204,30 +206,33 @@ class ATI():
     # Install the given packages
     def installATIDriver(self, packageList):
         try:
-            # Remove certain packages before installing the drivers
+            reinstallPackages = ''
+            installPackages = ''
+            # Check if drivers are available in the repositories
             for package in packageList:
+                # Build install packages string
+                installPackages += ' ' + package[0]
                 if package[1] == 1:
+                    # Check if package is installed
+                    # If it is, it's nominated for reinstallation
+                    self.log.write("Is package installed: %(package)s" % { "package": package[0] }, 'ati.installATIDriver', 'debug')
                     if functions.isPackageInstalled(package[0]):
-                        self.log.write("Remove package: %(package)s" % { "package": package[0] }, 'ati.installATIDriver', 'debug')
-                        self.ec.run("apt-get -y --force-yes remove %s" % package[0])
+                        # Build reinstall packages string
+                        reinstallPackages += ' ' + package[0]
+
+            # Reinstall these packages before installation
+            if reinstallPackages != '':
+                self.log.write("Reinstall drivers: %(drv)s" % { "drv": reinstallPackages }, 'ati.installATIDriver', 'debug')
+                cmd = 'apt-get -y --force-yes install --reinstall%s' % reinstallPackages
+                self.ec.run(cmd)
 
             # Preseed answers for some packages
             self.preseedATIPackages('install')
 
             # Install the packages
-            installString = ''
-            notInRepo = ''
-            for package in packageList:
-                chkStatus = functions.getPackageStatus(package[0])
-                if chkStatus != packageStatus[2]:
-                    installString += ' ' + package[0]
-                elif package[1] != 2:
-                    notInRepo += ', ' + package[0]
-
-            if notInRepo == '':
-                self.ec.run('apt-get -y --force-yes install' + installString)
-            else:
-                self.log.write(_("Install aborted: not in repository: %(repo)s") % { "repo": notInRepo[2:] }, 'ati.installATIDriver', 'error')
+            self.log.write("Install drivers: %(drv)s" % { "drv": installPackages }, 'ati.installATIDriver', 'debug')
+            cmd = 'apt-get -y --force-yes install%s' % installPackages
+            self.ec.run(cmd)
 
         except Exception, detail:
             self.log.write(detail, 'ati.installATIDriver', 'exception')
