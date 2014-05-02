@@ -115,3 +115,9 @@ class PAE():
 
         except Exception, detail:
             self.log.write(detail, 'pae.removePAE', 'error')
+
+# Pre-seed ?
+## Installatie afbreken na depmod fout?
+#linux-image-3.13-1-686-pae linux-image-3.13-1-686-pae/postinst/depmod-error-initrd-3.13-1-686-pae boolean false
+## Het verwijderen van de kernel afbreken?
+#linux-image-3.13-1-686-pae linux-image-3.13-1-686-pae/prerm/removing-running-kernel-3.13-1-686-pae boolean true

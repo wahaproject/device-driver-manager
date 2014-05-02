@@ -11,7 +11,7 @@ import functions
 import gtk
 import gettext
 from logger import Logger
-from dialogs import MessageDialogSafe
+from dialogs import MessageDialogSave
 
 # i18n
 gettext.install("ddm", "/usr/share/locale")
@@ -105,7 +105,7 @@ if functions.hasInternetConnection() or force:
                 # Add launcher string, only when not root
                 launcher = ''
                 if os.geteuid() > 0:
-                    launcher = "gksu --message \"<b>%s</b>\"" % _("Please enter your password")
+                    launcher = "gksudo --message \"<b>%s</b>\"" % _("Please enter your password")
                     if os.path.exists('/usr/bin/kdesudo'):
                         launcher = "kdesudo -i /usr/share/ddm/logo.png -d --comment \"<b>%s</b>\"" % _("Please enter your password")
 
@@ -115,20 +115,20 @@ if functions.hasInternetConnection() or force:
             else:
                 title = _("DDM - Kernel")
                 msg = _("You do not have the latest kernel installed.\n\nUse the Update Manager to update your system.")
-                MessageDialogSafe(title, msg, gtk.MESSAGE_INFO).show()
+                MessageDialogSave(title, msg, gtk.MESSAGE_INFO).show()
                 log.write(msg, 'main', 'warning')
         else:
             title = _("DDM - Live environment")
             msg = _("DDM cannot run in a live environment\n\nTo force start, use the --force argument")
-            MessageDialogSafe(title, msg, gtk.MESSAGE_INFO).show()
+            MessageDialogSave(title, msg, gtk.MESSAGE_INFO).show()
             log.write(msg, 'main', 'warning')
     else:
         title = _("DDM - Debian based")
         msg = _("Cannot determine the base distribution (debian or ubuntu)\n\nTo force start, use the --force argument")
-        MessageDialogSafe(title, msg, gtk.MESSAGE_INFO).show()
+        MessageDialogSave(title, msg, gtk.MESSAGE_INFO).show()
         log.write(msg, 'main', 'warning')
 else:
     title = _("DDM - Internet")
     msg = _("You do not seem to have an internet connection\n\nTo force start, use the --force argument")
-    MessageDialogSafe(title, msg, gtk.MESSAGE_INFO).show()
+    MessageDialogSave(title, msg, gtk.MESSAGE_INFO).show()
     log.write(msg, 'main', 'warning')
