@@ -1,181 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkWindow" id="ddmWindow">
+    <property name="width_request">700</property>
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Device Driver Manager</property>
     <property name="role">ddm</property>
     <property name="window_position">center-always</property>
-    <property name="icon">logo.png</property>
+    <property name="icon_name">ddm</property>
     <signal name="destroy" handler="on_ddmWindow_destroy" swapped="no"/>
     <child>
       <object class="GtkVBox" id="box1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkEventBox" id="ebTitle">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkHBox" id="box12">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <object class="GtkImage" id="image1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xpad">5</property>
-                    <property name="ypad">2</property>
-                    <property name="pixbuf">logo.png</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="lblDDM">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xpad">10</property>
-                    <property name="ypad">15</property>
-                    <property name="label" translatable="yes">Device Driver Manager</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                      <attribute name="size" value="24000"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkImage" id="sep11">
-            <property name="width_request">5</property>
-            <property name="height_request">5</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="pixbuf">empty.png</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkHBox" id="box2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkEventBox" id="ebMenu">
+              <object class="GtkFrame" id="frmMenu">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="label_xalign">0</property>
+                <property name="label_yalign">0</property>
+                <property name="shadow_type">out</property>
                 <child>
-                  <object class="GtkHBox" id="boxMenu">
+                  <object class="GtkAlignment" id="alignment1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="top_padding">5</property>
+                    <property name="bottom_padding">5</property>
+                    <property name="left_padding">5</property>
+                    <property name="right_padding">5</property>
                     <child>
-                      <object class="GtkImage" id="sep7">
-                        <property name="width_request">5</property>
-                        <property name="height_request">5</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">empty.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkVBox" id="box3">
+                      <object class="GtkVBox" id="box6">
+                        <property name="width_request">100</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkEventBox" id="ebMenuGraphics">
+                          <object class="GtkButton" id="btnGraphics">
+                            <property name="label" translatable="yes">Graphics</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK</property>
-                            <signal name="button-release-event" handler="on_ebMenuGraphics_button_release_event" swapped="no"/>
-                            <signal name="leave-notify-event" handler="on_ebMenuGraphics_leave_notify_event" swapped="no"/>
-                            <signal name="enter-notify-event" handler="on_ebMenuGraphics_enter_notify_event" swapped="no"/>
-                            <child>
-                              <object class="GtkHBox" id="boxMenuGraphics">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkImage" id="imgMenuGraphics">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">graphics.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkImage" id="sep1">
-                                    <property name="width_request">5</property>
-                                    <property name="height_request">5</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">empty.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="lblMenuGraphics">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">Graphics</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"/>
-                                      <attribute name="size" value="14000"/>
-                                    </attributes>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkImage" id="sep13">
-                                    <property name="width_request">5</property>
-                                    <property name="height_request">5</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">empty.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">3</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="yalign">0.44999998807907104</property>
+                            <signal name="clicked" handler="on_btnGraphics_clicked" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -185,76 +55,12 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkEventBox" id="ebMenuWireless">
+                          <object class="GtkButton" id="btnWireless">
+                            <property name="label" translatable="yes">Wireless</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK</property>
-                            <signal name="button-release-event" handler="on_ebMenuWireless_button_release_event" swapped="no"/>
-                            <signal name="enter-notify-event" handler="on_ebMenuWireless_enter_notify_event" swapped="no"/>
-                            <signal name="leave-notify-event" handler="on_ebMenuWireless_leave_notify_event" swapped="no"/>
-                            <child>
-                              <object class="GtkHBox" id="boxMenuWireless">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkImage" id="imgMenuWireless">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">wireless.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkImage" id="sep2">
-                                    <property name="width_request">5</property>
-                                    <property name="height_request">5</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">empty.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="lblMenuWireless">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">Wireless</property>
-                                    <property name="wrap">True</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"/>
-                                      <attribute name="size" value="14000"/>
-                                    </attributes>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkImage" id="sep14">
-                                    <property name="width_request">5</property>
-                                    <property name="height_request">5</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">empty.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">3</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <signal name="clicked" handler="on_btnWireless_clicked" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -264,75 +70,12 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkEventBox" id="ebMenuKernel">
+                          <object class="GtkButton" id="btnKernel">
+                            <property name="label" translatable="yes">Kernel</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK</property>
-                            <signal name="button-release-event" handler="on_ebMenuKernel_button_release_event" swapped="no"/>
-                            <signal name="enter-notify-event" handler="on_ebMenuKernel_enter_notify_event" swapped="no"/>
-                            <signal name="leave-notify-event" handler="on_ebMenuKernel_leave_notify_event" swapped="no"/>
-                            <child>
-                              <object class="GtkHBox" id="boxMenuKernel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkImage" id="imgMenuKernel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">kernel.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkImage" id="sep3">
-                                    <property name="width_request">5</property>
-                                    <property name="height_request">5</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">empty.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="lblMenuKernel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">Kernel</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"/>
-                                      <attribute name="size" value="14000"/>
-                                    </attributes>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkImage" id="sep15">
-                                    <property name="width_request">5</property>
-                                    <property name="height_request">5</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">empty.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">3</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <signal name="clicked" handler="on_btnKernel_clicked" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -342,12 +85,9 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkImage" id="sep4">
-                            <property name="width_request">5</property>
-                            <property name="height_request">5</property>
+                          <object class="GtkLabel" id="lblSep1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="pixbuf">empty.png</property>
                           </object>
                           <packing>
                             <property name="expand">True</property>
@@ -367,62 +107,19 @@
                             <property name="position">4</property>
                           </packing>
                         </child>
-                        <child>
-                          <object class="GtkImage" id="sep12">
-                            <property name="width_request">5</property>
-                            <property name="height_request">5</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">empty.png</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">5</property>
-                          </packing>
-                        </child>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkImage" id="sep8">
-                        <property name="width_request">5</property>
-                        <property name="height_request">5</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">empty.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
                     </child>
                   </object>
+                </child>
+                <child type="label_item">
+                  <placeholder/>
                 </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
+                <property name="padding">2</property>
                 <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkImage" id="sep5">
-                <property name="width_request">5</property>
-                <property name="height_request">5</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="pixbuf">empty.png</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -462,20 +159,15 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkFixed" id="fixed1">
+                          <object class="GtkLabel" id="lblTitleHardware">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <child>
-                              <object class="GtkLabel" id="lblTitleHardware">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Hardware</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                  <attribute name="size" value="12000"/>
-                                </attributes>
-                              </object>
-                            </child>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Hardware</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                              <attribute name="size" value="12000"/>
+                            </attributes>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -489,12 +181,10 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkImage" id="sep6">
-                                <property name="width_request">20</property>
-                                <property name="height_request">5</property>
+                              <object class="GtkLabel" id="lblSep2">
+                                <property name="width_request">30</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">empty.png</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -525,6 +215,7 @@
                               <object class="GtkLabel" id="lblCardName">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="xalign">0.05000000074505806</property>
                                 <property name="xpad">10</property>
                                 <property name="label" translatable="yes">card name</property>
                                 <attributes>
@@ -546,20 +237,15 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkFixed" id="fixed2">
+                          <object class="GtkLabel" id="lblTitleActivatedDriver">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <child>
-                              <object class="GtkLabel" id="lblTitleActivatedDriver">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Activated driver</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                  <attribute name="size" value="12000"/>
-                                </attributes>
-                              </object>
-                            </child>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Activated driver</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                              <attribute name="size" value="12000"/>
+                            </attributes>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -572,34 +258,15 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkImage" id="sep9">
-                                <property name="width_request">5</property>
-                                <property name="height_request">5</property>
+                              <object class="GtkLabel" id="lblActivatedDriver">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">empty.png</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkFixed" id="fixed4">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel" id="lblActivatedDriver">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="xpad">20</property>
-                                    <property name="label" translatable="yes">activated driver version</property>
-                                    <attributes>
-                                      <attribute name="size" value="12000"/>
-                                    </attributes>
-                                  </object>
-                                </child>
+                                <property name="xalign">0.05000000074505806</property>
+                                <property name="xpad">20</property>
+                                <property name="label" translatable="yes">activated driver version</property>
+                                <attributes>
+                                  <attribute name="size" value="12000"/>
+                                </attributes>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -616,20 +283,15 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkFixed" id="fixed3">
+                          <object class="GtkLabel" id="lblAlternativeDriversTitle">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <child>
-                              <object class="GtkLabel" id="lblAlternativeDriversTitle">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Alternative drivers</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                  <attribute name="size" value="12000"/>
-                                </attributes>
-                              </object>
-                            </child>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Alternative drivers</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                              <attribute name="size" value="12000"/>
+                            </attributes>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -671,14 +333,15 @@
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="padding">2</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">0</property>
           </packing>
         </child>
         <child>
@@ -692,7 +355,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="position">3</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
@@ -704,7 +367,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">4</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>

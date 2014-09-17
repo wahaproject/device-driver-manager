@@ -1,3 +1,15 @@
+ddm (1.0.6) debian; urgency=low
+
+  * Changed icon handling for Evolvere icon theme
+
+ -- Schoelje <schoelje@solydxk.com>  Fri, 12 Sep 2014 11:00:00 +0100
+
+ddm (1.0.5) debian; urgency=low
+
+  * Moved locale to solydxk-locale
+
+ -- Schoelje <schoelje@solydxk.com>  Thu, 26 May 2014 08:00:00 +0100
+
 ddm (1.0.4) debian; urgency=low
 
   * Start with gksudo instead of gksu

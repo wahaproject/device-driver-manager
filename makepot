@@ -1,3 +1,3 @@
 #!/bin/bash
 
-xgettext --language=Python --keyword=_ --output=ddm.pot usr/lib/ddm/ati.py usr/lib/ddm/broadcom.py usr/lib/ddm/ddm.py usr/lib/ddm/execcmd.py usr/lib/ddm/functions.py usr/lib/ddm/intel.py usr/lib/ddm/main.py usr/lib/ddm/nvidia.py  usr/lib/ddm/pae.py usr/lib/ddm/treeview.py usr/lib/ddm/via.py usr/lib/ddm/xorg.py
+xgettext --language=Python --keyword=_ --output=ddm.pot $(find . -name "*.py" -type f)

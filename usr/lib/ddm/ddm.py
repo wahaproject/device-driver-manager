@@ -50,15 +50,10 @@ class DDM:
         self.swDrivers = self.builder.get_object('swDrivers')
         self.tvDrivers = self.builder.get_object('tvDrivers')
         self.statusbar = self.builder.get_object('statusbar')
-        self.ebTitle = self.builder.get_object('ebTitle')
         self.lblDDM = self.builder.get_object('lblDDM')
-        self.ebMenu = self.builder.get_object('ebMenu')
-        self.ebMenuGraphics = self.builder.get_object('ebMenuGraphics')
-        self.lblMenuGraphics = self.builder.get_object('lblMenuGraphics')
-        self.ebMenuWireless = self.builder.get_object('ebMenuWireless')
-        self.lblMenuWireless = self.builder.get_object('lblMenuWireless')
-        self.ebMenuKernel = self.builder.get_object('ebMenuKernel')
-        self.lblMenuKernel = self.builder.get_object('lblMenuKernel')
+        self.btnGraphics = self.builder.get_object('btnGraphics')
+        self.btnWireless = self.builder.get_object('btnWireless')
+        self.btnKernel = self.builder.get_object('btnKernel')
         self.imgManufacturer = self.builder.get_object('imgManufacturer')
         self.lblActivatedDriver = self.builder.get_object('lblActivatedDriver')
         self.ebManufacturer = self.builder.get_object('ebManufacturer')
@@ -66,11 +61,6 @@ class DDM:
 
         # Read from config file
         self.cfg = Config('ddm.conf')
-        self.clrTitleFg = gtk.gdk.Color(self.cfg.getValue('COLORS', 'title_fg'))
-        self.clrTitleBg = gtk.gdk.Color(self.cfg.getValue('COLORS', 'title_bg'))
-        self.clrMenuSelect = gtk.gdk.Color(self.cfg.getValue('COLORS', 'menu_select'))
-        self.clrMenuHover = gtk.gdk.Color(self.cfg.getValue('COLORS', 'menu_hover'))
-        self.clrMenuBg = gtk.gdk.Color(self.cfg.getValue('COLORS', 'menu_bg'))
         self.urlNvidia = self.cfg.getValue('MANUFACTURERS_SITES', 'nvidia')
         self.urlAmd = self.cfg.getValue('MANUFACTURERS_SITES', 'amd')
         self.urlBroadcom = self.cfg.getValue('MANUFACTURERS_SITES', 'broadcom')
@@ -79,9 +69,9 @@ class DDM:
         self.urlVia = self.cfg.getValue('MANUFACTURERS_SITES', 'via')
 
         # Translations
-        self.lblMenuGraphics.set_text(_("Graphics"))
-        self.lblMenuWireless.set_text(_("Wireless"))
-        self.lblMenuKernel.set_text(_("Kernel"))
+        self.btnGraphics.set_label(_("Graphics"))
+        self.btnWireless.set_label(_("Wireless"))
+        self.btnKernel.set_label(_("Kernel"))
         self.lblTitleHardware.set_text(_("Hardware"))
         self.lblTitleActivatedDriver.set_text(_("Activated driver"))
         self.lblAlternativeDriversTitle.set_text(_("Alternative drivers"))
@@ -110,21 +100,8 @@ class DDM:
         self.currentHwCode = None
         self.prevDriverPath = None
 
-        # Add events
-        signals = {
-            'on_ebMenuGraphics_button_release_event': self.showMenuGraphics,
-            'on_ebMenuGraphics_enter_notify_event': self.changeMenuGraphics,
-            'on_ebMenuGraphics_leave_notify_event': self.cleanMenu,
-            'on_ebMenuWireless_button_release_event': self.showMenuWireless,
-            'on_ebMenuWireless_enter_notify_event': self.changeMenuWireless,
-            'on_ebMenuWireless_leave_notify_event': self.cleanMenu,
-            'on_ebMenuKernel_button_release_event': self.showMenuKernel,
-            'on_ebMenuKernel_enter_notify_event': self.changeMenuKernel,
-            'on_ebMenuKernel_leave_notify_event': self.cleanMenu,
-            'on_ebManufacturer_button_release_event': self.showManufacturerSite,
-            'on_ddmWindow_destroy': self.destroy
-        }
-        self.builder.connect_signals(signals)
+        # Connect the signals and show the window
+        self.builder.connect_signals(self)
 
         self.window.show()
 
@@ -132,39 +109,10 @@ class DDM:
     # Menu section functions
     # ===============================================
 
-    def cleanMenu(self, widget, event):
-        self.changeMenuBackground(self.selectedMenuItem)
-
-    def changeMenuGraphics(self, widget, event):
-        self.changeMenuBackground(menuItems[0])
-
-    def changeMenuWireless(self, widget, event):
-        self.changeMenuBackground(menuItems[1])
-
-    def changeMenuKernel(self, widget, event):
-        self.changeMenuBackground(menuItems[2])
-
-    def changeMenuBackground(self, menuItem, select=False):
-        ebs = []
-        ebs.append([menuItems[0], self.ebMenuGraphics])
-        ebs.append([menuItems[1], self.ebMenuWireless])
-        ebs.append([menuItems[2], self.ebMenuKernel])
-        for eb in ebs:
-            if eb[0] == menuItem:
-                if select:
-                    self.selectedMenuItem = menuItem
-                    eb[1].modify_bg(gtk.STATE_NORMAL, self.clrMenuSelect)
-                else:
-                    if eb[0] != self.selectedMenuItem:
-                        eb[1].modify_bg(gtk.STATE_NORMAL, self.clrMenuHover)
-            else:
-                if eb[0] != self.selectedMenuItem or select:
-                    eb[1].modify_bg(gtk.STATE_NORMAL, self.clrMenuBg)
-
-    def showMenuGraphics(self, widget=None, event=None):
+    def on_btnGraphics_clicked(self, widget=None, event=None):
         if self.selectedMenuItem != menuItems[0]:
-            self.changeMenuBackground(menuItems[0], True)
-            self.lblTitle.set_text(self.lblMenuGraphics.get_text())
+            self.selectedMenuItem = menuItems[0]
+            self.lblTitle.set_text(self.btnGraphics.get_label())
             self.clearDriverSection(_("Current drivers are correct"))
 
             if self.nvidiaDrivers:
@@ -192,20 +140,20 @@ class DDM:
                 self.manufacturerModules = self.xc.getModules(hwCodes[7])
                 self.loadDriverSection(self.atiIntelDrivers)
 
-    def showMenuWireless(self, widget=None, event=None):
+    def on_btnWireless_clicked(self, widget=None, event=None):
         if self.selectedMenuItem != menuItems[1]:
-            self.changeMenuBackground(menuItems[1], True)
-            self.lblTitle.set_text(self.lblMenuWireless.get_text())
+            self.selectedMenuItem = menuItems[1]
+            self.lblTitle.set_label(self.btnWireless.get_label())
             self.clearDriverSection(_("Current drivers are correct"))
 
             if self.broadcomDrivers:
                 self.currentHwCode = hwCodes[2]
                 self.loadDriverSection(self.broadcomDrivers)
 
-    def showMenuKernel(self, widget=None, event=None):
+    def on_btnKernel_clicked(self, widget=None, event=None):
         if self.selectedMenuItem != menuItems[2]:
-            self.changeMenuBackground(menuItems[2], True)
-            self.lblTitle.set_text(self.lblMenuKernel.get_text())
+            self.selectedMenuItem = menuItems[2]
+            self.lblTitle.set_label(self.btnKernel.get_label())
             msg = _("PAE already installed")
             if 'amd64' in self.kernelRelease:
                 msg = _("PAE support only for 32-bit systems")
@@ -233,7 +181,7 @@ class DDM:
         imgPath = os.path.join(self.mediaDir, 'empty.png')
         if os.path.exists(imgPath):
             self.imgManufacturer.set_from_file(imgPath)
-        self.lblActivatedDriver.set_text('')
+        self.lblActivatedDriver.set_label('')
         self.tvHandler.clearTreeView()
 
     # Show driver information of the selected menu topic
@@ -258,7 +206,7 @@ class DDM:
         for item in driverList:
             if len(driverList) == 1 and item[2] == 'uninstallable':
                 showAlternatives = False
-                self.lblActivatedDriver.set_text(item[5])
+                self.lblActivatedDriver.set_label(item[5])
             activate = False
 
             recommended = ''
@@ -279,7 +227,7 @@ class DDM:
                     self.log.write("Check loaded driver / available driver: %(ldrv)s / %(adrv)s" % { "ldrv": drv[1], "adrv": item[3] }, 'ddm.loadDriverSection', 'debug')
                     if (drv[1] in item[3] or ('bumblebee' in item[3] and item[2] == 'installed')) and drv[0] == self.selectedMenuItem:
                         self.log.write("Select current driver in list: %(drv)s" % { "drv": drv[1] }, 'ddm.loadDriverSection', 'debug')
-                        self.lblActivatedDriver.set_text('%s %s%s' % (item[3], item[4], recommended))
+                        self.lblActivatedDriver.set_label('%s %s%s' % (item[3], item[4], recommended))
                         activate = True
                         actDrvFound = True
                         rowCnt += 1
@@ -310,7 +258,7 @@ class DDM:
                     self.tvDrivers.set_sensitive(False)
                     title = _("Unknown driver")
                     self.log.write("%s: %s" % (title, drv[1]), 'ddm.loadDriverSection', 'warning')
-                    self.lblActivatedDriver.set_text(drv[1])
+                    self.lblActivatedDriver.set_label(drv[1])
                     msg = _("Unknown driver found.\n\nPlease remove before installing drivers with DDM.")
                     MessageDialogSafe(title, msg, gtk.MESSAGE_WARNING, self.window).show()
 
@@ -325,7 +273,7 @@ class DDM:
             cols[4].set_visible(False)
 
     # Open the manufacturer site in the default browser
-    def showManufacturerSite(self, widget, event):
+    def on_ebManufacturer_button_release_event(self, widget, event):
         url = ''
         if self.currentHwCode == hwCodes[0] or self.currentHwCode == hwCodes[6]:
             url = self.urlNvidia
@@ -419,13 +367,13 @@ class DDM:
         if threading.active_count() == 1:
             self.selectedMenuItem = None
             if self.nvidiaDrivers or self.atiDrivers or self.intelDrivers or self.viaDrivers or self.nvidiaIntelDrivers or self.atiIntelDrivers:
-                self.showMenuGraphics()
+                self.on_btnGraphics_clicked()
             elif self.broadcomDrivers:
-                self.showMenuWireless()
+                self.on_btnWireless_clicked()()
             elif self.paePackage:
-                self.showMenuKernel()
+                self.on_btnKernel_clicked()()
             else:
-                self.showMenuGraphics()
+                self.on_btnGraphics_clicked()
 
         self.toggleGuiElements(False)
 
@@ -508,24 +456,6 @@ class DDM:
         self.tvHandler = TreeViewHandler(self.tvDrivers, self.log)
         self.tvHandler.connect('checkbox-toggled', self.driverCheckBoxToggled)
 
-        # Set background and forground colors
-        self.ebTitle.modify_bg(gtk.STATE_NORMAL, self.clrTitleBg)
-        self.lblMenuGraphics.modify_fg(gtk.STATE_NORMAL, self.clrTitleBg)
-        self.lblMenuWireless.modify_fg(gtk.STATE_NORMAL, self.clrTitleBg)
-        self.lblMenuKernel.modify_fg(gtk.STATE_NORMAL, self.clrTitleBg)
-        self.lblTitle.modify_fg(gtk.STATE_NORMAL, self.clrTitleBg)
-        self.lblDDM.modify_fg(gtk.STATE_NORMAL, self.clrTitleFg)
-        self.ebMenu.modify_bg(gtk.STATE_NORMAL, self.clrMenuBg)
-        self.ebMenuGraphics.modify_bg(gtk.STATE_NORMAL, self.clrMenuBg)
-        self.ebMenuWireless.modify_bg(gtk.STATE_NORMAL, self.clrMenuBg)
-        self.ebMenuKernel.modify_bg(gtk.STATE_NORMAL, self.clrMenuBg)
-
-        # Change cursor
-        self.ebMenuGraphics.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.HAND1))
-        self.ebMenuWireless.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.HAND1))
-        self.ebMenuKernel.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.HAND1))
-        self.ebManufacturer.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.HAND1))
-
         # Get currently loaded drivers
         self.version = functions.getPackageVersion('ddm')
         self.distribution = functions.getDistribution()
@@ -555,7 +485,7 @@ class DDM:
         msg = _("Checking your hardware...")
         self.log.write(msg, 'ddm.main', 'info')
         functions.pushMessage(self.statusbar, msg)
-        self.showMenuGraphics()
+        self.on_btnGraphics_clicked()
         self.clearDriverSection()
         self.lblCardName.set_text('')
         functions.repaintGui()
@@ -624,7 +554,7 @@ class DDM:
         #self.window.set_keep_above(True)
         gtk.main()
 
-    def destroy(self, widget, data=None):
+    def on_ddmWindow_destroy(self, widget, data=None):
         # Close the app
         gtk.main_quit()
 

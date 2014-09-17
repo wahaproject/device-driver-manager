@@ -45,7 +45,7 @@ class MessageDialog(gtk.MessageDialog):
 # gtk.MESSAGE_INFO
 # gtk.MESSAGE_WARNING
 # gtk.MESSAGE_ERROR
-# MessageDialogSave can NOT be called from a working thread, only from main (UI) thread
+# MessageDialogSafe can NOT be called from a working thread, only from main (UI) thread
 class MessageDialogSafe(object):
     def __init__(self, title, message, style, parent=None):
         self.title = title

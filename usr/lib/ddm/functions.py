@@ -547,12 +547,13 @@ def getPackageDependencies(packageName, reverseDepends=False):
 def getPackagesWithFile(fileName):
     packages = []
     if len(fileName) > 0:
-        cmd = 'dpkg -S %s' % fileName
+        cmd = "dpkg -S %s | awk '{print $1}'" % fileName
         ec = ExecCmd(log)
         packageList = ec.run(cmd, False)
         for package in packageList:
-            if '*' not in package:
-                packages.append(package[:package.find(':')])
+            package = package[0: len(package) - 1]
+            if '*' not in package and package not in packages:
+                packages.append(package)
     return packages
 
 
