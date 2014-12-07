@@ -59,7 +59,7 @@ class XorgConf():
     # TODO: is lsmod an alternative?
     def getUsedDriver(self):
         # find the most recent X.org log
-        module = None
+        module = ''
         logDir = '/var/log/'
         logPath = None
         maxTime = 0
@@ -68,13 +68,15 @@ class XorgConf():
             if mtime > maxTime:
                 maxTime = mtime
                 logPath = f
-        # Search for "depth" in each line and check the used module
-        f = open(logPath, 'r')
-        log = f.read()
-        f.close()
-        matchObj = re.search('([a-zA-Z]*)\(\d+\):\s+depth.*framebuffer', log, flags=re.IGNORECASE)
-        if matchObj:
-            module = matchObj.group(1).lower()
+
+        if logPath is not None:
+            # Search for "depth" in each line and check the used module
+            f = open(logPath, 'r')
+            log = f.read()
+            f.close()
+            matchObj = re.search('([a-zA-Z]*)\(\d+\):\s+depth.*framebuffer', log, flags=re.IGNORECASE)
+            if matchObj:
+                module = matchObj.group(1).lower()
 
         self.log.write(_("Used graphics driver: %(module)s") % { "module": module }, 'XorgConf.getUsedModule', 'info')
         return module

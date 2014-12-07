@@ -1,118 +1,130 @@
+ddm (1.0.8) debian; urgency=low
+
+  * Improved translation handling
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sun, 02 Nov 2014 11:00:00 +0200
+
+ddm (1.0.7) debian; urgency=low
+
+  * Gtk2 bug solved
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Mon, 04 Oct 2014 12:00:00 +0100
+
 ddm (1.0.6) debian; urgency=low
 
   * Changed icon handling for Evolvere icon theme
 
- -- Schoelje <schoelje@solydxk.com>  Fri, 12 Sep 2014 11:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Fri, 12 Sep 2014 11:00:00 +0100
 
 ddm (1.0.5) debian; urgency=low
 
   * Moved locale to solydxk-locale
 
- -- Schoelje <schoelje@solydxk.com>  Thu, 26 May 2014 08:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Thu, 26 May 2014 08:00:00 +0100
 
 ddm (1.0.4) debian; urgency=low
 
   * Start with gksudo instead of gksu
 
- -- Schoelje <schoelje@solydxk.com>  Wed, 23 Apr 2014 19:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 23 Apr 2014 19:00:00 +0100
 
 ddm (1.0.3) debian; urgency=low
 
   * Added Russian translation
   * Adapted Dutch translation
 
- -- Schoelje <schoelje@solydxk.com>  Tue, 01 Apr 2014 18:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Tue, 01 Apr 2014 18:00:00 +0100
 
 ddm (1.0.1) debian; urgency=low
 
   * Added Czech translation
   * Adapted Italian translation
 
- -- Schoelje <schoelje@solydxk.com>  Tue, 24 Dec 2013 12:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Tue, 24 Dec 2013 12:00:00 +0100
 
 ddm (1.0.0) debian; urgency=low
 
   * Added transition naming for Nvidia packages
   * Optimized speed of command execution
 
- -- Schoelje <schoelje@solydxk.com>  Tue, 05 Nov 2013 11:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Tue, 05 Nov 2013 11:00:00 +0100
 
 ddm (0.9.5) debian; urgency=low
 
   * Adapted French translation
 
- -- Schoelje <schoelje@solydxk.com>  Mon, 21 Oct 2013 19:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Mon, 21 Oct 2013 19:00:00 +0100
 
 ddm (0.9.4) debian; urgency=low
 
   * Added linux-image-686-pae linux-headers-686-pae for PAE install
 
- -- Schoelje <schoelje@solydxk.com>  Sun, 20 Oct 2013 17:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sun, 20 Oct 2013 17:00:00 +0100
 
 ddm (0.9.3) debian; urgency=low
 
   * Solved dependency problem missing libxvmcnvidia1 for Nvidia on amd64
 
- -- Schoelje <schoelje@solydxk.com>  Sun, 13 Oct 2013 09:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sun, 13 Oct 2013 09:00:00 +0100
 
 ddm (0.9.1) debian; urgency=low
 
   * Added Greek translation
     provided by bb
 
- -- Schoelje <schoelje@solydxk.com>  Thu, 03 Oct 2013 11:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Thu, 03 Oct 2013 11:00:00 +0100
 
 ddm (0.9.0) debian; urgency=low
 
   * Fix truncated names in aptitude search
     provided by Jerry D. Hedden
 
- -- Schoelje <schoelje@solydxk.com>  Sun, 29 Sep 2013 09:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sun, 29 Sep 2013 09:00:00 +0100
 
 ddm (0.8.9) debian; urgency=low
 
   * ia32 support only for amd64
 
- -- Schoelje <schoelje@solydxk.com>  Sat, 21 Sep 2013 17:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sat, 21 Sep 2013 17:00:00 +0100
 
 ddm (0.8.8) debian; urgency=low
 
   * Improved ia32 support for Nvidia and ATI
   * Added French translation
 
- -- Schoelje <schoelje@solydxk.com>  Sat, 07 Sep 2013 15:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sat, 07 Sep 2013 15:00:00 +0100
 
 ddm (0.8.6) debian; urgency=low
 
   * Removed xorg.conf settings for Intel and Via
 
- -- Schoelje <schoelje@solydxk.com>  Tue, 20 Aug 2013 07:30:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Tue, 20 Aug 2013 07:30:00 +0100
 
 ddm (0.8.5) debian; urgency=low
 
   * Solved PAE detection bug
 
- -- Schoelje <schoelje@solydxk.com>  Mon, 19 Aug 2013 21:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Mon, 19 Aug 2013 21:00:00 +0100
 
 ddm (0.8.4) debian; urgency=low
 
   * Solved Nvidia detection bug
   * Better kernel detection
 
- -- Schoelje <schoelje@solydxk.com>  Sat, 10 Aug 2013 21:30:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sat, 10 Aug 2013 21:30:00 +0100
 
 ddm (0.8.3) debian; urgency=low
 
   * Added pre-seeding for b43-fwcutter
 
- -- Schoelje <schoelje@solydxk.com>  Sun, 28 Jul 2013 22:30:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sun, 28 Jul 2013 22:30:00 +0100
 
 ddm (0.8.2) debian; urgency=low
 
   * Loaded Broadcom driver not detected correctly
   * Added Italian and Polish translations
 
- -- Schoelje <schoelje@solydxk.com>  Di, 23 Jul 2013 19:30:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Di, 23 Jul 2013 19:30:00 +0100
 
 ddm (0.8.1) debian; urgency=low
 
@@ -120,109 +132,109 @@ ddm (0.8.1) debian; urgency=low
   * Make GUI objects size with textual contents
   * Added German translation
 
- -- Schoelje <schoelje@solydxk.com>  Wed, 12 Jun 2013 14:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 12 Jun 2013 14:00:00 +0100
 
 ddm (0.7.5) debian; urgency=low
 
   * Moved translations to standard directory /usr/share/locale
 
- -- Schoelje <schoelje@solydxk.com>  Wed, 06 Jun 2013 10:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 06 Jun 2013 10:00:00 +0100
 
 ddm (0.7.4) debian; urgency=low
 
   * Added Catalan translation
 
- -- Schoelje <schoelje@solydxk.com>  Wed, 05 Jun 2013 03:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 05 Jun 2013 03:00:00 +0100
 
 ddm (0.7.3) debian; urgency=low
 
   * Handle future nvidia-glx-legacy-304xx
 
- -- Schoelje <schoelje@solydxk.com>  Mon, 03 Jun 2013 23:30:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Mon, 03 Jun 2013 23:30:00 +0100
 
 ddm (0.7.2) debian; urgency=low
 
   * Included Spanish and Dutch translations
 
- -- Schoelje <schoelje@solydxk.com>  Tue, 28 May 2013 10:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Tue, 28 May 2013 10:00:00 +0100
 
 ddm (0.7.0) debian; urgency=low
 
   * Check for internet connection on startup
 
- -- Schoelje <schoelje@solydxk.com>  Sun, 19 May 2013 10:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sun, 19 May 2013 10:00:00 +0100
 
 ddm (0.6.9) debian; urgency=low
 
   * Broadcom: multiple chipsets not handled correctly
 
- -- Schoelje <schoelje@solydxk.com>  Sat, 18 May 2013 10:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sat, 18 May 2013 10:00:00 +0100
 
 ddm (0.6.8) debian; urgency=low
 
   * Check installed driver not recognized resolved
 
- -- Schoelje <schoelje@solydxk.com>  Thu, 18 Apr 2013 21:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Thu, 18 Apr 2013 21:00:00 +0100
 
 ddm (0.6.7) debian; urgency=low
 
   * Drivers were reported installed, even if the versions did not match
 
- -- Schoelje <schoelje@solydxk.com>  Wed, 10 Apr 2013 23:30:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 10 Apr 2013 23:30:00 +0100
 
 ddm (0.6.6) debian; urgency=low
 
   * Some minor bugs resolved
 
- -- Schoelje <schoelje@solydxk.com>  Thu, 03 Apr 2013 11:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Thu, 03 Apr 2013 11:00:00 +0100
  
 ddm (0.6.5) debian; urgency=low
 
   * Broadcom ethernet was mistaken for a wireless chipset
 
- -- Schoelje <schoelje@solydxk.com>  Sat, 23 Mar 2013 15:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sat, 23 Mar 2013 15:00:00 +0100
 
 ddm (0.6.2) debian; urgency=low
 
   * Speed improvement detecting graphics cards and fix wrong detection of ATI cards
 
- -- Schoelje <schoelje@solydxk.com>  Fri, 22 Mar 2013 16:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Fri, 22 Mar 2013 16:00:00 +0100
 
 ddm (0.6.1) debian; urgency=low
 
   * Fix fglrx-glx-ia32 being installed on 32-bit systems
 
- -- Schoelje <schoelje@solydxk.com>  Wed, 20 Mar 2013 16:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 20 Mar 2013 16:00:00 +0100
  
 ddm (0.5.9) debian; urgency=low
 
   * Fix ATI bug
 
- -- Schoelje <schoelje@solydxk.com>  Mon, 18 Feb 2013 20:30:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Mon, 18 Feb 2013 20:30:00 +0100
 
 ddm (0.5.8) debian; urgency=low
 
   * Nvidia feed made flexible
 
- -- Schoelje <schoelje@solydxk.com>  Sat, 16 Feb 2013 12:30:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sat, 16 Feb 2013 12:30:00 +0100
 
 ddm (0.5.7) debian; urgency=low
 
   * ATI issue not finding fglrx-glx-ia32 version 0.5.6
 
- -- Schoelje <schoelje@solydxk.com>  Tue, 26 Feb 2013 20:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Tue, 26 Feb 2013 20:00:00 +0100
 
 ddm (0.5.6) debian; urgency=low
 
   * Minor bug fixes version 0.5.6
 
- -- Schoelje <schoelje@solydxk.com>  Tue, 19 Feb 2013 12:30:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Tue, 19 Feb 2013 12:30:00 +0100
  
 ddm (0.5.5) debian; urgency=low
 
   * Updated Nvidia last-mismatching-module-version to 304.64 version 0.5.5
 
- -- Schoelje <schoelje@solydxk.com>  Fri, 15 Feb 2013 13:00:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Fri, 15 Feb 2013 13:00:00 +0100
  
 ddm (0.5.4) debian; urgency=low
 

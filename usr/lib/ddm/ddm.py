@@ -552,7 +552,9 @@ class DDM:
 
         # Show window and keep it on top of other windows
         #self.window.set_keep_above(True)
+        gtk.gdk.threads_enter()
         gtk.main()
+        gtk.gdk.threads_leave()
 
     def on_ddmWindow_destroy(self, widget, data=None):
         # Close the app
