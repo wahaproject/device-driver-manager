@@ -1,4 +1,12 @@
 #!/bin/bash
-# Launch ddm with all passed arguments
-/usr/bin/python2.7 -tt /usr/lib/ddm/main.py $*
 
+optimize='OO'; case "$*" in *--debug*) unset optimize; esac
+# Launch solydxk-welcome with all passed arguments (future reserved)
+
+MSG='Please enter your password'
+CMD="python3 -tt${optimize} /usr/lib/ddm/main.py $@"
+if [ -e "/usr/bin/kdesudo" ]; then
+  kdesudo -i "ddm" -d --comment "<b>$MSG</b>" "$CMD"
+else
+  gksudo --message "<b>$MSG</b>" "$CMD"
+fi

@@ -1,7 +1,0 @@
-#!/bin/bash
-
-sudo rm -rf /usr/lib/ddm
-sudo cp -R usr /
-ddm
-
-

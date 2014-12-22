@@ -1,0 +1,127 @@
+#!/bin/bash
+
+# Log file for traceback
+MAX_SIZE_KB=5120
+LOG_SIZE_KB=0
+LOG_FILE=/var/log/ddm.log
+LOG_FILE2=/var/log/ddm.log.1
+if [ -f $LOG_FILE ]; then
+  LOG_SIZE_KB=$(ls -s $LOG_FILE | awk '{print $1}')
+  if [ $LOG_SIZE_KB -gt $MAX_SIZE_KB ]; then
+    rm $LOG_FILE2
+    mv $LOG_FILE $LOG_FILE2
+  fi
+fi
+
+# Start the log
+echo "===================================" | tee -a $LOG_FILE
+echo "Running the script install-nvidia" | tee -a $LOG_FILE
+echo "Start at (m/d/y):" $(date +"%m/%d/%Y %H:%M:%S") | tee -a $LOG_FILE
+echo "===================================" | tee -a $LOG_FILE
+
+# Bumblebee: https://wiki.debian.org/Bumblebee
+
+# If 'purge' is passed as an argument, install-nouveau is called to cleanup the system
+if [ "$1" == "purge" ]; then
+  install-nouveau
+  exit
+fi
+
+# Get device ids for Nvidia
+BCID='10de'
+DEVICEIDS=$(lspci -n -d $BCID: | awk '{print $3}' | cut -d':' -f2)
+
+if [ "$DEVICEIDS" == "" ]; then
+  echo "No Nvidia card found - exiting" | tee -a $LOG_FILE
+  exit
+fi
+
+USER=$(logname)
+DRIVER=$(nvidia-detect | grep nvidia- | tr -d ' ')
+CANDIDATE=`env LANG=C apt-cache policy $DRIVER | grep Candidate | awk '{print $2}' | tr -d ' '`
+INSTALLED=`env LANG=C apt-cache policy $DRIVER | grep Installed | awk '{print $2}' | tr -d ' '`
+ARCHITECTURE=$(uname -m)
+
+if [ "$DRIVER" == "" ] || [ "$CANDIDATE" == "" ]; then
+  exit
+fi
+
+echo "Need driver: $DRIVER ($CANDIDATE)" | tee -a $LOG_FILE
+
+function preseed {
+  echo 'nvidia-support nvidia-support/check-xorg-conf-on-removal boolean false' | debconf-set-selections
+  echo 'nvidia-support nvidia-support/check-running-module-version boolean true' | debconf-set-selections
+  echo 'nvidia-installer-cleanup nvidia-installer-cleanup/delete-nvidia-installer boolean true' | debconf-set-selections
+  echo 'nvidia-installer-cleanup nvidia-installer-cleanup/remove-conflicting-libraries boolean true' | debconf-set-selections
+  echo "nvidia-support nvidia-support/last-mismatching-module-version string $CANDIDATE" | debconf-set-selections
+  echo 'nvidia-support nvidia-support/needs-xorg-conf-to-enable note ' | debconf-set-selections
+  echo 'nvidia-support nvidia-support/create-nvidia-conf boolean true' | debconf-set-selections
+  echo 'nvidia-installer-cleanup nvidia-installer-cleanup/uninstall-nvidia-installer boolean true' | debconf-set-selections
+}
+
+function install_nvidia {
+  # Add additional packages
+  if [[ "$DRIVER" =~ "legacy" ]]; then
+    # Legacy drivers
+    DRIVER="$DRIVER nvidia-settings-legacy-304xx"
+    if [ "$ARCHITECTURE" == "x86_64" ]; then
+      DRIVER="$DRIVER libgl1-nvidia-legacy-304xx-glx-i386"
+    fi
+  else
+    if [[ "$DRIVER" =~ "bumblebee" ]]; then
+      # Bumblebee drivers
+      DRIVER="$DRIVER primus"
+      if [ "$ARCHITECTURE" == "x86_64" ]; then
+	# Additional 32-bit drivers for 64-bit systems
+	DRIVER="$DRIVER primus-libs:i386 primus-libs-ia32:i386"
+      fi
+    else
+      if [ "$ARCHITECTURE" == "x86_64" ]; then
+	# Additional 32-bit drivers for 64-bit systems
+	DRIVER="$DRIVER libgl1-nvidia-glx-i386"
+      fi
+    fi
+    DRIVER="$DRIVER nvidia-settings"
+  fi
+  
+  # In case this is a bybrid (by default installed on SolydXK)
+  DRIVER="$DRIVER xserver-xorg-video-intel"
+  
+  # Configuration package
+  DRIVER="$DRIVER nvidia-xconfig"
+  
+  # Reinstall packages if already installed
+  REINST=''
+  if [ "$INSTALLED" == "$CANDIDATE" ]; then
+    REINST='--reinstall'
+  fi
+  
+  # Preseed debconf answers
+  preseed
+  
+  # Install the packages
+  apt-get install -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree 2>&1 | tee -a $LOG_FILE
+  apt-get install -y --force-yes $REINST $DRIVER 2>&1 | tee -a $LOG_FILE;
+  
+  # Configure
+  if [[ "$DRIVER" =~ "bumblebee" ]]; then
+    if [ "$USER" != "" ] && [ "$USER" != "root" ]; then
+      groupadd bumblebee
+      groupadd video
+      usermod -a -G bumblebee,video $USER
+      if [ -f /etc/bumblebee/bumblebee.conf ]; then
+	sed -i 's/KernelDriver=nvidia/KernelDriver=nvidia-current/' /etc/bumblebee/bumblebee.conf
+      fi
+      service bumblebeed restart
+    else
+      echo "ERROR: Could not configure Bumblebee for user: $USER" | tee -a $LOG_FILE
+    fi
+  else
+    nvidia-xconfig 2>&1 | tee -a $LOG_FILE
+  fi
+  
+  echo "Nvidia driver successfully installed" | tee -a $LOG_FILE
+}
+
+# Install the Nvidia drivers
+install_nvidia

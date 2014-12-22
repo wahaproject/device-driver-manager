@@ -1,11 +1,12 @@
-#!/usr/bin/env python
+#! /usr/bin/env python3
 #-*- coding: utf-8 -*-
 
 import os
 import pwd
 import logging
-import functions
-import gtk
+import re
+from shutil import move
+from gi.repository import Gtk
 from dialogs import MessageDialog
 from treeview import TreeViewHandler
 
@@ -21,7 +22,7 @@ class Logger():
         self.defaultLevel = getattr(logging, defaultLogLevel.upper())
         self.logTime = addLogTime
         self.rtobject = rtObject
-        self.typeString = functions.getTypeString(self.rtobject)
+        self.typeString = self.getTypeString(self.rtobject)
         self.parent = parent
         self.maxSizeKB = maxSizeKB
 
@@ -32,7 +33,10 @@ class Logger():
             if os.path.exists(self.logPath) and self.maxSizeKB is not None:
                 b = os.path.getsize(self.logPath)
                 if b > self.maxSizeKB * 1024:
-                    os.remove(self.logPath)
+                    old = "%s.old" % self.logPath
+                    if os.path.exists(old):
+                        os.remove(old)
+                    move(self.logPath, "%s.old" % self.logPath)
             # Set basic configuration
             formatStr = '%(name)-30s%(levelname)-10s%(message)s'
             dateFmtStr = None
@@ -69,31 +73,45 @@ class Logger():
                 myLogger.error(message)
                 self.rtobjectWrite(message)
                 if showErrorDialog:
-                    MessageDialog('Error', message, gtk.MESSAGE_ERROR, self.parent).show()
+                    MessageDialog('Error', message, Gtk.MessageType.ERROR, self.parent).show()
             elif logLevel == 'critical':
                 myLogger.critical(message)
                 self.rtobjectWrite(message)
                 if showErrorDialog:
-                    MessageDialog('Critical', message, gtk.MESSAGE_ERROR, self.parent).show()
+                    MessageDialog('Critical', message, Gtk.MessageType.ERROR, self.parent).show()
             elif logLevel == 'exception':
                 myLogger.exception(message)
                 self.rtobjectWrite(message)
                 if showErrorDialog:
-                    MessageDialog('Exception', message, gtk.MESSAGE_ERROR, self.parent).show()
+                    MessageDialog('Exception', message, Gtk.MessageType.ERROR, self.parent).show()
 
     # Return messge to given object
     def rtobjectWrite(self, message):
         if self.rtobject is not None and self.typeString != '':
-            if self.typeString == 'gtk.Label':
+            if 'label' in self.typeString.lower():
                 self.rtobject.set_text(message)
-            elif self.typeString == 'gtk.TreeView':
+            elif 'treeview' in self.typeString.lower():
                 tvHandler = TreeViewHandler(self.rtobject)
                 tvHandler.fillTreeview([message], ['str'], [-1], 0, 400, False, True, True, fontSize=10000)
-            elif self.typeString == 'gtk.Statusbar':
-                functions.pushMessage(self.rtobject, message)
+            elif 'statusbar' in self.typeString.lower():
+                self.pushMessage(message)
             else:
                 # For obvious reasons: do not log this...
-                print 'Return object type not implemented: %s' % self.typeString
+                print(('Return object type not implemented: %s' % self.typeString))
+
+    # Return the type string of a object
+    def getTypeString(self, object):
+        tpString = ''
+        tp = str(type(object))
+        matchObj = re.search("'(.*)'", tp)
+        if matchObj:
+            tpString = matchObj.group(1)
+        return tpString
+
+    def pushMessage(self, message):
+        if message is not None:
+            context = self.rtobject.get_context_id('message')
+            self.rtobject.push(context, message)
 
 
 # Test

@@ -1,0 +1,115 @@
+#!/bin/bash
+
+# If 'purge' is passed as an argument, install-nouveau is called to cleanup the system
+if [ "$1" == "purge" ]; then
+  install-nouveau
+  exit
+fi
+
+# Log file for traceback
+MAX_SIZE_KB=5120
+LOG_SIZE_KB=0
+LOG_FILE=/var/log/ddm.log
+LOG_FILE2=/var/log/ddm.log.1
+if [ -f $LOG_FILE ]; then
+  LOG_SIZE_KB=$(ls -s $LOG_FILE | awk '{print $1}')
+  if [ $LOG_SIZE_KB -gt $MAX_SIZE_KB ]; then
+    rm $LOG_FILE2
+    mv $LOG_FILE $LOG_FILE2
+  fi
+fi
+
+# Start the log
+echo "===================================" | tee -a $LOG_FILE
+echo "Running the script install-ati" | tee -a $LOG_FILE
+echo "Start at (m/d/y):" $(date +"%m/%d/%Y %H:%M:%S") | tee -a $LOG_FILE
+echo "===================================" | tee -a $LOG_FILE
+
+# Get device ids for Ati
+BCID='1002'
+DEVICEIDS=$(lspci -n -d $BCID: | awk '{print $3}' | cut -d':' -f2)
+
+if [ "$DEVICEIDS" == "" ]; then
+  echo "No ATI card found - exiting" | tee -a $LOG_FILE
+  exit
+fi
+
+CARD=`lspci | grep VGA`
+CARD=${CARD#*: }
+STARTSERIE=5000
+DRIVER='fglrx-driver'
+RADEON=false
+
+# Split the card string into separate words and check for the Radeon series
+IFS=" "
+set $CARD
+i=0
+for ITEM
+do
+  # Is it a number?
+  if [[ "$ITEM" == ?(+|-)+([0-9]) ]]; then
+    # Is the number between 1000 and STARTSERIE?
+    if [ $ITEM -gt 1000 ] && [ $ITEM -lt $STARTSERIE ]; then
+      echo "Old ATI: use radeon" | tee -a $LOG_FILE
+      DRIVER='xserver-xorg-video-radeon'
+      RADEON=true
+      exit
+    fi
+  fi
+  ((i++))
+done
+
+
+CANDIDATE=`env LANG=C apt-cache policy $DRIVER | grep Candidate | awk '{print $2}' | tr -d ' '`
+INSTALLED=`env LANG=C apt-cache policy $DRIVER | grep Installed | awk '{print $2}' | tr -d ' '`
+ARCHITECTURE=$(uname -m)
+
+if [ "$CANDIDATE" == "" ]; then
+  exit
+fi
+
+echo "Need driver: $DRIVER ($CANDIDATE)" | tee -a $LOG_FILE
+
+function preseed {
+  echo 'libfglrx fglrx-driver/check-for-unsupported-gpu boolean false' | debconf-set-selections
+  echo 'fglrx-driver fglrx-driver/check-xorg-conf-on-removal boolean false' | debconf-set-selections
+  echo 'libfglrx fglrx-driver/install-even-if-unsupported-gpu-exists boolean false' | debconf-set-selections
+  echo 'fglrx-driver fglrx-driver/removed-but-enabled-in-xorg-conf note ' | debconf-set-selections
+  echo 'fglrx-driver fglrx-driver/needs-xorg-conf-to-enable note ' | debconf-set-selections
+}
+
+function install_fglrx {
+  # Reinstall packages if driver is already installed
+  REINST=''
+  if [ "$INSTALLED" == "$CANDIDATE" ]; then
+    REINST='--reinstall';
+  fi
+  
+  # Add additional packages
+  if ! $RADEON; then
+    DRIVER="$DRIVER fglrx-atieventsd fglrx-control fglrx-modules-dkms libgl1-fglrx-glx"
+    if [ "$ARCHITECTURE" == "x86_64" ]; then
+      DRIVER="$DRIVER libgl1-fglrx-glx-i386";
+    fi
+  fi
+  
+  # In case this is a bybrid (by default installed on SolydXK)
+  DRIVER="$DRIVER xserver-xorg-video-intel"
+  
+  # Preseed debconf answers
+  preseed
+  
+  # Install the packages
+  apt-get install -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree amd-opencl-icd 2>&1 | tee -a $LOG_FILE
+  apt-get install -y --force-yes $REINST $DRIVER 2>&1 | tee -a $LOG_FILE
+  
+  # Configure
+  if ! $RADEON; then
+    aticonfig --initial -f 2>&1 | tee -a $LOG_FILE
+  fi
+
+  echo "Fglrx driver successfully installed" | tee -a $LOG_FILE
+}
+
+# Install the AMD/Ati drivers
+install_fglrx

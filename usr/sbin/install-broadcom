@@ -1,0 +1,144 @@
+#!/bin/bash
+
+# Log file for traceback
+MAX_SIZE_KB=5120
+LOG_SIZE_KB=0
+LOG_FILE=/var/log/ddm.log
+LOG_FILE2=/var/log/ddm.log.1
+if [ -f $LOG_FILE ]; then
+  LOG_SIZE_KB=$(ls -s $LOG_FILE | awk '{print $1}')
+  if [ $LOG_SIZE_KB -gt $MAX_SIZE_KB ]; then
+    rm $LOG_FILE2
+    mv $LOG_FILE $LOG_FILE2
+  fi
+fi
+
+# Start the log
+echo "===================================" | tee -a $LOG_FILE
+echo "Running the script install-broadcom" | tee -a $LOG_FILE
+echo "Start at (m/d/y):" $(date +"%m/%d/%Y %H:%M:%S") | tee -a $LOG_FILE
+echo "===================================" | tee -a $LOG_FILE
+
+# Blacklist conf file
+CONF='/etc/modprobe.d/blacklist-broadcom.conf'
+
+# If 'purge' is passed as an argument, purge Broadcom
+if [ "$1" == "purge" ]; then
+  apt-get purge -y --force-yes firmware-b43* 2>&1 | tee -a $LOG_FILE
+  apt-get purge -y --force-yes broadcom-sta-dkms 2>&1 | tee -a $LOG_FILE
+  apt-get purge -y --force-yes firmware-brcm80211 2>&1 | tee -a $LOG_FILE
+  rm $CONF 2>/dev/null
+  exit
+fi
+
+# Get device ids for Broadcom
+BCID='14e4'
+DEVICEIDS=$(lspci -n -d $BCID: | awk '{print $3}' | cut -d':' -f2)
+if [ "$DEVICEIDS" == "" ]; then
+  echo "No Broadcom device found - exiting" | tee -a $LOG_FILE
+  exit
+fi
+
+# Hardware list (device ids)
+# http://linuxwireless.org/en/users/Drivers/b43
+B43='|4307|4311|4312|4315|4318|4319|4320|4321|4324|4331|4350|4353|4357|a8d6|a8d8|432c|'
+B43LEGACY='|4301|4306|4325|'
+WLDEBIAN='|4313|4328|4329|432a|432b|432d|4358|4359|435a|a99d|'
+BRCMDEBIAN='|576|4727|'
+UNKNOWN='|4322|4360|4365|43b1|'
+
+# Get the appropriate driver
+DRIVER=''
+BLACKLIST=''
+MODPROBE=''
+for DID in $DEVICEIDS; do
+  if [[ "$B43" =~ "|$DID|" ]] ; then
+    DRIVER='firmware-b43-installer'
+    MODPROBE='b43'
+  elif [[ "$B43LEGACY" =~ "|$DID|" ]] ; then
+    DRIVER='firmware-b43legacy-installer'
+    MODPROBE='b43legacy'
+  elif [[ "$WLDEBIAN" =~ "|$DID|" ]] ; then
+    DRIVER='broadcom-sta-dkms'
+    BLACKLIST='blacklist b43 brcmsmac bcma ssb'
+    MODPROBE='wl'
+  elif [[ "$BRCMDEBIAN" =~ "|$DID|" ]] ; then
+    DRIVER='firmware-brcm80211'
+    MODPROBE='brcmsmac'
+  elif [[ "$UNKNOWN" =~ "|$DID|" ]] ; then
+    echo "This Broadcom device is not supported: $DID"
+  fi
+done
+
+function preseed {
+  echo 'b43-fwcutter b43-fwcutter/install-unconditional boolean true' | debconf-set-selections
+}
+
+function add_dependencies {
+  HEADERS="linux-headers-$(uname -r)"
+  INSTALLED=`env LANG=C apt-cache policy $HEADERS | grep Installed | awk '{print $2}' | tr -d ' '`
+  if [ "$INSTALLED" == "" ]; then
+    DRIVER="$DRIVER $HEADER"
+  fi
+  DEPS=`apt-cache depends $DRIVER | grep Depends: | awk '{print $2}' | sed '/>/d' | tr '\n' ' '`
+  DRIVER="$DRIVER $DEPS"
+}
+
+function install_broadcom {
+  if [ "$DRIVER" != "" ]; then
+    # Add the dependencies 
+    add_dependencies
+    
+    # Preseed debconf answers
+    preseed
+    
+    # Remove previously downloaded packages
+    rm -f *.deb 2>/dev/null
+    
+    # Create download directory
+    CURDIR=$PWD
+    DLDIR='/tmp/dl'
+    mkdir -p $DLDIR
+    cd $DLDIR
+    
+    # Download the packages
+    apt-get download $DRIVER 2>&1 | tee -a $LOG_FILE
+    
+    # Check if packages were downloaded
+    CNT=`ls -1 *.deb 2>/dev/null | wc -l`
+    if [ $CNT -eq 0 ]; then
+      echo "No packages were downloaded - exiting" | tee -a $LOG_FILE
+      exit
+    fi
+    
+    # Remove modules
+    modprobe -rf b44
+    modprobe -rf b43
+    modprobe -rf b43legacy
+    modprobe -rf ssb
+    modprobe -rf brcmsmac
+    
+    # Install the downloaded packages
+    dpkg -i *.deb 2>&1 | tee -a $LOG_FILE
+    
+    # Remove download directory
+    cd $CURDIR
+    rm -r $DLDIR
+    
+    # Blacklist if needed
+    if [ "$BLACKLIST" != "" ]; then
+      echo $BLACKLIST > $CONF
+    else
+      rm -f $CONF 2>/dev/null
+    fi
+    
+    # Start the new driver
+    modprobe $MODPROBE
+
+    echo "Broadcomm driver successfully installed" | tee -a $LOG_FILE
+    
+  fi
+}
+
+# Install the Broadcom drivers
+install_broadcom

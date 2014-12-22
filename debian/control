@@ -3,26 +3,27 @@ Section: admin
 Priority: optional
 Maintainer: Arjen Balfoort <arjenbalfoort@solydxk.com>
 Build-Depends: debhelper (>= 9)
-  , python
+  , python3 (>= 3.2)
   , intltool
-X-Python-Version: >= 2.7
+X-Python3-Version: >= 3.2
 Standards-Version: 3.9.5
 Vcs-Git: git://github.com/SolydXK/ddm.git
 Vcs-Browser: https://github.com/SolydXK/ddm
 
 Package: ddm
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}
-  , python (>= 2.7), python (<< 3)
-  , python-gtk2
-  , python-glade2
-  , aptitude
-  , wireless-tools
-  , apt
-  , dpkg
-  , pciutils
-  , debconf
-  , lsof
+Depends: ${misc:Depends}, ${python3:Depends}
+  , python3
+  , python3-gi
+  , gir1.2-webkit-3.0
+  , gir1.2-gtk-3.0
+  , nvidia-detect
+  , xserver-xorg-video-intel
+  , xserver-xorg-video-fbdev
+  , xserver-xorg-video-radeon
+  , xserver-xorg-video-ati
+  , xserver-xorg-video-nouveau
+  , xserver-xorg-video-vesa
 Conflicts: solydxk-locale
 Replaces: solydxk-locale
 Description: Device driver manager

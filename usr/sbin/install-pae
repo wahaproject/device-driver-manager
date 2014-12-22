@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# You can pass 'purge' as an argument to remove the pae kernel
+# It is purged only when not booted from that kernel
+
+# Log file for traceback
+MAX_SIZE_KB=5120
+LOG_SIZE_KB=0
+LOG_FILE=/var/log/ddm.log
+LOG_FILE2=/var/log/ddm.log.1
+if [ -f $LOG_FILE ]; then
+  LOG_SIZE_KB=$(ls -s $LOG_FILE | awk '{print $1}')
+  if [ $LOG_SIZE_KB -gt $MAX_SIZE_KB ]; then
+    rm $LOG_FILE2
+    mv $LOG_FILE $LOG_FILE2
+  fi
+fi
+
+# Start the log
+echo "===================================" | tee -a $LOG_FILE
+echo "Running the script install-pae" | tee -a $LOG_FILE
+echo "Start at (m/d/y):" $(date +"%m/%d/%Y %H:%M:%S") | tee -a $LOG_FILE
+echo "===================================" | tee -a $LOG_FILE
+
+NRCPUS=`cat /proc/cpuinfo | grep processor | wc -l`
+RELEASE=`uname -r`
+
+# Install PAE when more than one CPU and not running on 64-bit system
+if [ $NRCPUS -gt 1 ] && [[ ! "$RELEASE" =~ "amd64" ]]; then
+  if [ "$1" == "purge" ]; then
+    if [[ "$RELEASE" =~ "pae" ]]; then
+      echo "ERROR: Cannot remove PAE kernel when PAE is booted" | tee -a $LOG_FILE
+    else
+      apt-get purge -y --force-yes linux-headers-686-pae linux-image-686-pae 2>&1 | tee -a $LOG_FILE
+      echo "PAE kernel successfully removed" | tee -a $LOG_FILE
+    fi
+  else
+    apt-get install -y --force-yes linux-headers-686-pae linux-image-686-pae 2>&1 | tee -a $LOG_FILE
+    echo "PAE kernel successfully installed" | tee -a $LOG_FILE
+  fi
+fi

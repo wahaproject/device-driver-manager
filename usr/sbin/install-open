@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# This script is used when things has gotten messy and we need to return to the default open drivers
+
+# Log file for traceback
+MAX_SIZE_KB=5120
+LOG_SIZE_KB=0
+LOG_FILE=/var/log/ddm.log
+LOG_FILE2=/var/log/ddm.log.1
+if [ -f $LOG_FILE ]; then
+  LOG_SIZE_KB=$(ls -s $LOG_FILE | awk '{print $1}')
+  if [ $LOG_SIZE_KB -gt $MAX_SIZE_KB ]; then
+    rm $LOG_FILE2
+    mv $LOG_FILE $LOG_FILE2
+  fi
+fi
+
+# Start the log
+echo "===================================" | tee -a $LOG_FILE
+echo "Running the script install-open" | tee -a $LOG_FILE
+echo "Start at (m/d/y):" $(date +"%m/%d/%Y %H:%M:%S") | tee -a $LOG_FILE
+echo "===================================" | tee -a $LOG_FILE
+
+function purge_proprietary_drivers {
+  rm /etc/X11/xorg.conf 2>/dev/null
+  rm /etc/modprobe.d/nvidia* 2>/dev/null
+  rm /etc/modprobe.d/blacklist-nouveau.conf 2>/dev/null
+  apt-get purge -y --force-yes nvidia-driver* 2>&1 | tee -a $LOG_FILE
+  apt-get purge -y --force-yes nvidia-legacy* 2>&1 | tee -a $LOG_FILE
+  apt-get purge -y --force-yes bumblebee* 2>&1 | tee -a $LOG_FILE
+  apt-get purge -y --force-yes primus* 2>&1 | tee -a $LOG_FILE
+  apt-get purge -y --force-yes libgl1-nvidia* 2>&1 | tee -a $LOG_FILE
+  apt-get purge -y --force-yes fglrx* 2>&1 | tee -a $LOG_FILE
+  apt-get purge -y --force-yes libgl1-fglrx* 2>&1 | tee -a $LOG_FILE
+  apt-get purge -y --force-yes libfglrx* 2>&1 | tee -a $LOG_FILE
+  
+  echo "Propietary drivers successfully removed" | tee -a $LOG_FILE
+}
+
+function install_open {
+  # Cleanup first
+  purge_proprietary_drivers
+  
+  # Make sure you have the most used drivers installed 
+  # These are installed by default on SolydXK
+  DRIVER="xserver-xorg-video-nouveau xserver-xorg-video-vesa xserver-xorg-video-intel xserver-xorg-video-fbdev xserver-xorg-video-radeon xserver-xorg-video-ati xserver-xorg-video-nouveau"
+  
+  # Install the packages
+  apt-get install -y --force-yes $DRIVER 2>&1 | tee -a $LOG_FILE
+  
+  echo "Open drivers successfully installed" | tee -a $LOG_FILE
+}
+
+# Install the open drivers
+install_open

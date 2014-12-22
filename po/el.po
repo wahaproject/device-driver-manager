@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ddm 0.8.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-03 16:41+0100\n"
+"POT-Creation-Date: 2014-12-22 12:27+0100\n"
 "PO-Revision-Date: 2013-10-03 10:45+0100\n"
 "Last-Translator: Schoelje <schoelje@solydxk.com>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -18,492 +18,441 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../usr/lib/ddm/ati.py:73
-#, python-format
-msgid "ATI card found: %(card)s"
-msgstr "Βρέθηκε κάρτα ATI: %(card)s"
+#: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:26
+#: ../debian/ddm/usr/lib/ddm/ddm.py:46 ../debian/ddm/usr/lib/ddm/main.py:26
+#: ../usr/share/applications/ddm.desktop.in.h:1
+#: ../debian/ddm/usr/share/applications/ddm.desktop.in.h:1
+msgid "Device Driver Manager"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:78
-#, python-format
-msgid "ATI chip serie found: %(serie)s"
-msgstr "Βρέθηκε ATI chip: %(serie)s"
+#: ../usr/lib/ddm/ddm.py:47 ../debian/ddm/usr/lib/ddm/ddm.py:47
+msgid "Save"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:87
-#, python-format
-msgid "ATI driver found: %(drv)s (%(status)s)"
-msgstr "Βρέθηκε οδηγός ATI: %(drv)s (%(status)s)"
+#: ../usr/lib/ddm/ddm.py:48 ../debian/ddm/usr/lib/ddm/ddm.py:48
+msgid "Help"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:90 ../usr/lib/ddm/via.py:56
-#: ../usr/lib/ddm/intel.py:57 ../usr/lib/ddm/nvidia.py:104
-#, python-format
-msgid "Driver not installable: %(drv)s"
-msgstr "Ο οδηγός δεν μπορεί να εγκατασταθεί: %(drv)s"
+#: ../usr/lib/ddm/ddm.py:49 ../debian/ddm/usr/lib/ddm/ddm.py:49
+msgid "Quit"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:92
-#, python-format
-msgid "ATI chip serie not supported: %(serie)d"
-msgstr "Μη υποστηριζόμενο ATI chip: %(serie)d"
+#: ../usr/lib/ddm/ddm.py:103 ../debian/ddm/usr/lib/ddm/ddm.py:103
+msgid "No internet connection"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:94
-#, python-format
-msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
-msgstr "Δέν βρέθηκε οδηγός: %(card)s (%(man)s:%(serie)s)"
+#: ../usr/lib/ddm/ddm.py:104 ../debian/ddm/usr/lib/ddm/ddm.py:104
+msgid ""
+"You need an internet connection to install the additional software.\n"
+"Please, connect to the internet and try again."
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:107 ../usr/lib/ddm/via.py:68
-#: ../usr/lib/ddm/intel.py:69 ../usr/lib/ddm/nvidia.py:118
-#, python-format
-msgid "Install driver: %(drv)s"
-msgstr "Εγκατάσταση οδηγού: %(drv)s"
+#: ../usr/lib/ddm/ddm.py:154 ../debian/ddm/usr/lib/ddm/ddm.py:154
+msgid "Install"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:121 ../usr/lib/ddm/nvidia.py:144
-#, python-format
-msgid "Switch to module: %(module)s"
-msgstr "Μετάβαση στο στοιχείο: %(module)s"
+#: ../usr/lib/ddm/ddm.py:154 ../debian/ddm/usr/lib/ddm/ddm.py:154
+msgid "Device"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:127 ../usr/lib/ddm/via.py:77
-#: ../usr/lib/ddm/intel.py:78 ../usr/lib/ddm/nvidia.py:154
-#, python-format
-msgid "Driver installed: %(drv)s"
-msgstr "Ο οδηγός εγκαταστάθηκε: %(drv)s"
-
-#: ../usr/lib/ddm/ati.py:138
-msgid "Removing ATI drivers"
-msgstr "Αφαίρεση οδηγού ΑΤΙ"
-
-#: ../usr/lib/ddm/ati.py:152 ../usr/lib/ddm/via.py:96
-#: ../usr/lib/ddm/intel.py:97 ../usr/lib/ddm/nvidia.py:183
-#, python-format
-msgid "Driver removed: %(drv)s"
-msgstr "Ο οδηγός αφαιρέθηκε: %(drv)s"
-
-#: ../usr/lib/ddm/ati.py:160
-msgid "ATI display driver"
-msgstr "Οδηγός γραφικών ATI"
-
-#: ../usr/lib/ddm/ati.py:162 ../usr/lib/ddm/intel.py:105
-#: ../usr/lib/ddm/nvidia.py:193
-msgid "Intel display driver"
-msgstr "Οδηγός γραφικών Intel"
-
-#: ../usr/lib/ddm/ati.py:164
-msgid "Radeon display driver"
-msgstr "Οδηγός γραφικών Radeon"
-
-#: ../usr/lib/ddm/ati.py:166 ../usr/lib/ddm/via.py:106
-#: ../usr/lib/ddm/intel.py:107 ../usr/lib/ddm/nvidia.py:197
-msgid "Framebuffer display driver"
-msgstr "Οδηγός γραφικών Framebuffer"
-
-#: ../usr/lib/ddm/ati.py:168 ../usr/lib/ddm/via.py:108
-#: ../usr/lib/ddm/intel.py:109 ../usr/lib/ddm/nvidia.py:199
-msgid "Vesa display driver"
-msgstr "Οδηγός γραφικών Vesa"
-
-#: ../usr/lib/ddm/broadcom.py:89
-#, python-format
-msgid "Broadcom chip serie found: %(chip)s"
-msgstr "Βρέθηκε Broadcom chip: %(chip)s"
-
-#: ../usr/lib/ddm/broadcom.py:158
-#, python-format
-msgid "Used wireless driver: %(drv)s"
-msgstr "Επιλεγμένος οδηγός ασύρματης κάρτας: %(drv)s"
-
-#: ../usr/lib/ddm/broadcom.py:179
-#, python-format
-msgid "Broadcom found: %(broadcom)s"
-msgstr "Βρέθηκε Broadcom: %(broadcom)s"
-
-#: ../usr/lib/ddm/broadcom.py:202
-#, python-format
-msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
-msgstr "Μη υποστηριζόμενο Broadcom chipset ή ελεγκτής ethernet : %(broadcom)s"
-
-#: ../usr/lib/ddm/broadcom.py:204
-#, python-format
-msgid "Broadcom chipset not found: %(chip)s"
-msgstr "Δεν βρεθηκε Broadcom chipset: %(chip)s"
-
-#: ../usr/lib/ddm/broadcom.py:207
-#, python-format
-msgid "Broadcom pci ID not found: %(id)s"
-msgstr "Δεν βρέθηκε Broadcom pci: %(id)s"
-
-#: ../usr/lib/ddm/broadcom.py:216
-#, python-format
-msgid "Linux header name to install: %(header)s"
-msgstr "Όνομα Linux header προς εγκατάσταση: %(header)s"
-
-#: ../usr/lib/ddm/broadcom.py:220
-#, python-format
-msgid "Download package: %(package)s"
-msgstr "Λήψη πακέτου: %(package)s"
-
-#: ../usr/lib/ddm/broadcom.py:228
-#, python-format
-msgid "Download package: %(drv)s"
-msgstr "Λήψη πακέτου: %(drv)s"
-
-#: ../usr/lib/ddm/broadcom.py:265
-msgid "Install downloaded packages"
-msgstr "Εγκατάσταση ληφθέντων πακέτων"
-
-#: ../usr/lib/ddm/broadcom.py:273
-#, python-format
-msgid "Reconfigure package: %(package)s"
-msgstr "Επαναρύθμιση πακέτου: %(package)s"
-
-#: ../usr/lib/ddm/broadcom.py:316
-#, python-format
-msgid "Purge driver: %(drv)s"
-msgstr "Απαλοιφή οδηγού: %(drv)s"
-
-#: ../usr/lib/ddm/broadcom.py:326
-msgid "Done removing Broadcom drivers"
-msgstr "Έγινε η αφαίρεση των οδηγών Broadcom"
-
-#: ../usr/lib/ddm/xorg.py:81
-#, python-format
-msgid "Used graphics driver: %(module)s"
-msgstr "Επιλεγμένος οδηγός γραφικών: %(module)s"
-
-#: ../usr/lib/ddm/xorg.py:103
-msgid "No xorg.conf - create minimal xorg.conf"
-msgstr "Δεν βρέθηκε xorg.conf - δημιουργία ελάχιστου xorg.conf"
-
-#: ../usr/lib/ddm/xorg.py:123
-msgid "New xorg.conf written"
-msgstr "Το νέο xorg.conf δημιουργήθηκε"
-
-#: ../usr/lib/ddm/xorg.py:129
-msgid "New section appended to xorg.conf"
-msgstr "Η νέα ενότητα προστέθηκε στο xorg.conf"
-
-#: ../usr/lib/ddm/via.py:47
-#, python-format
-msgid "Via card found: %(card)s"
-msgstr "Βρέθηκε κάρτα Via: %(card)s"
-
-#: ../usr/lib/ddm/via.py:53
-#, python-format
-msgid "Via driver found: %(drv)s (%(status)s)"
-msgstr "Βρέθηκε οδηγός Via: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/via.py:104
-msgid "Chrome display driver"
-msgstr "Οδηγός γραφικών Chrome"
-
-#: ../usr/lib/ddm/intel.py:48
-#, python-format
-msgid "Intel card found: %(card)s"
-msgstr "Βρέθηκε κάρτα Intel: %(card)s"
-
-#: ../usr/lib/ddm/intel.py:54
-#, python-format
-msgid "Intel driver found: %(drv)s (%(status)s)"
-msgstr "Βρέθηκε οδηγός Intel: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/ddm.py:72
-msgid "Graphics"
-msgstr "Γραφικά"
-
-#: ../usr/lib/ddm/ddm.py:73
-msgid "Wireless"
-msgstr "Ασύρματη σύνδεση"
-
-#: ../usr/lib/ddm/ddm.py:74
-msgid "Kernel"
-msgstr "Πυρήνας"
-
-#: ../usr/lib/ddm/ddm.py:75
-msgid "Hardware"
+#: ../usr/lib/ddm/ddm.py:189 ../debian/ddm/usr/lib/ddm/ddm.py:189
+#, fuzzy
+msgid "Hardware scan"
 msgstr "Υλικό συστήματος"
 
-#: ../usr/lib/ddm/ddm.py:76
-msgid "Activated driver"
-msgstr "Ενεργοποιημένος οδηγός"
-
-#: ../usr/lib/ddm/ddm.py:77
-msgid "Alternative drivers"
-msgstr "Εναλλακτικοί οδηγοί"
-
-#: ../usr/lib/ddm/ddm.py:116 ../usr/lib/ddm/ddm.py:147
-msgid "Current drivers are correct"
-msgstr "Οι τρέχοντες οδηγοί είναι σωστοί"
-
-#: ../usr/lib/ddm/ddm.py:157
-msgid "PAE already installed"
-msgstr "PAE εγκατεστημένο"
-
-#: ../usr/lib/ddm/ddm.py:159
-msgid "PAE support only for 32-bit systems"
-msgstr "Υποστήριξη PAE μόνο για συστήματα 32-bit"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Activate"
-msgstr "Ενεργοποίηση"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Driver"
-msgstr "Οδηγός υλικού"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Version"
-msgstr "Έκδοση"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Description"
-msgstr "Περιγραφή"
-
-#: ../usr/lib/ddm/ddm.py:214
-msgid " (recommended)"
-msgstr " (προτεινόμενος)"
-
-#: ../usr/lib/ddm/ddm.py:259
-msgid "Unknown driver"
-msgstr "Άγνωστος οδηγός"
-
-#: ../usr/lib/ddm/ddm.py:262
-msgid ""
-"Unknown driver found.\n"
-"\n"
-"Please remove before installing drivers with DDM."
+#: ../usr/lib/ddm/ddm.py:193 ../debian/ddm/usr/lib/ddm/ddm.py:193
+msgid "There are no available drivers for your hardware:"
 msgstr ""
-"Βρέθηκε άγνωστος οδηγός.\n"
-"\n"
-"Παρακαλώ αφαιρέστε πριν την εγκατάσταση οδηγών με τον DDM."
 
-#: ../usr/lib/ddm/ddm.py:307
-msgid "Driver activation"
-msgstr "Ενεργοποίηση οδηγού"
-
-#: ../usr/lib/ddm/ddm.py:307
-#, python-format
-msgid ""
-"Are you sure you want to install the following driver:\n"
-"\n"
-"%(drv)s"
+#: ../usr/lib/ddm/ddm.py:199 ../debian/ddm/usr/lib/ddm/ddm.py:199
+msgid "DDM did not find any supported hardware."
 msgstr ""
-"Είστε βέβαιος ότι θέλετε να εγκαταστήσετε τον ακόλουθο οδηγό:\n"
-"\n"
-"%(drv)s"
 
-#: ../usr/lib/ddm/ddm.py:312 ../usr/lib/ddm/ddm.py:452
-msgid "Locked"
-msgstr "Κλείδωμένο"
-
-#: ../usr/lib/ddm/ddm.py:312
-#, python-format
-msgid ""
-"Could not get lock on %(file)s.\n"
-"\n"
-"Close any programs locking the file and try again."
+#: ../usr/lib/ddm/ddm.py:247 ../debian/ddm/usr/lib/ddm/ddm.py:247
+msgid "Saved"
 msgstr ""
-"Αδύνατο ξεκλείδωμα του %(file)s.\n"
-"\n"
-"Κλείστε όποιο πρόγραμμα κλειδώνει το αρχείο και προσπαθήστε ξανά."
 
-#: ../usr/lib/ddm/ddm.py:390
-msgid "Driver installed"
-msgstr "Ο οδηγός εγκαταστάθηκε"
-
-#: ../usr/lib/ddm/ddm.py:390
-#, python-format
-msgid ""
-"Driver installed: %(drv)s\n"
-"\n"
-"Drivers will be used on next boot.\n"
-"Do you want to reboot now?"
+#: ../usr/lib/ddm/ddm.py:248 ../debian/ddm/usr/lib/ddm/ddm.py:248
+msgid "You will need to restart your system."
 msgstr ""
-"Ο οδηγός εγκαταστάθηκε: %(drv)s\n"
-"\n"
-"Ο οδηγός θα μπει σε χρήση στην επόμενη εκκίνηση.\n"
-"Θέλετε να επανεκκινήσετε τώρα;"
 
-#: ../usr/lib/ddm/ddm.py:452
-#, python-format
-msgid ""
-"Could not get lock on %(file)s.\n"
-"\n"
-"Close any programs locking the file and restart DDM."
-msgstr ""
-"Αδύνατο ξεκλείδωμα του %(file)s.\n"
-"\n"
-"Κλείστε όποιο πρόγραμμα κλειδώνει το αρχείο και επανεκκινήστε τον DDM."
-
-#: ../usr/lib/ddm/ddm.py:485
-msgid "Checking your hardware..."
-msgstr "Έλεγχος υλικού συστήματος..."
-
-#: ../usr/lib/ddm/ddm.py:550
-msgid "Start automatic driver install"
-msgstr "Εκκίνηση αυτόματης εγκατάστασης του οδηγού"
-
-#: ../usr/lib/ddm/pae.py:43
-#, python-format
-msgid "Installed PAE: %(pae)s"
-msgstr "Εγκατεστημένο PAE: %(pae)s"
-
-#: ../usr/lib/ddm/pae.py:49
-msgid "Multi-core support for 32-bit systems"
-msgstr "Multi-core υποστήριξη για συστήματα 32-bit"
-
-#: ../usr/lib/ddm/pae.py:59
-#, python-format
-msgid "Multi-core already installed: %(package)s"
-msgstr "Multi-core εγκατεστημένο: %(package)s"
-
-#: ../usr/lib/ddm/pae.py:60 ../usr/lib/ddm/pae.py:73
+#: ../usr/lib/ddm/ddm.py:426 ../debian/ddm/usr/lib/ddm/ddm.py:426
 msgid "PAE capable system"
 msgstr "Σύστημα με δυνατότητα PAE"
 
-#: ../usr/lib/ddm/pae.py:66
-msgid "Multi-core system running single-core kernel found"
-msgstr "Βρέθηκε Multi-core σύστημα που εκτελεί πυρήνα single-core"
-
-#: ../usr/lib/ddm/pae.py:70
-msgid "PAE not installed"
-msgstr "PAE μη εγκατεστημένο"
-
-#: ../usr/lib/ddm/pae.py:79
-msgid "PAE kernel cannot be installed: single-core system"
-msgstr "Αδύνατη η εγκατάσταση πυρήνα PAE: σύστημα single-core"
-
-#: ../usr/lib/ddm/pae.py:95
-msgid "Done installing PAE"
-msgstr "Έγινε η εγκατάσταση PAE"
-
-#: ../usr/lib/ddm/pae.py:109
-#, python-format
-msgid "PAE package to remove: %(package)s"
-msgstr "Πακέτο PAE πρός αφαίρεση: %(package)s"
-
-#: ../usr/lib/ddm/pae.py:112
-msgid "Done removing PAE"
-msgstr "Έγινε η αφαίρεση PAE"
-
-#: ../usr/lib/ddm/pae.py:114
-msgid "Cannot remove PAE when running PAE"
-msgstr "Αδύνατη η αφαιρεση PAE όταν εκτελείται"
-
-#: ../usr/lib/ddm/nvidia.py:57
-msgid "Update apt"
-msgstr "Ενημέρωση apt"
-
-#: ../usr/lib/ddm/nvidia.py:60
-msgid "Install nvidia-detect"
-msgstr "Εγκατάσταση nvidia-detect"
-
-#: ../usr/lib/ddm/nvidia.py:68
-msgid "Cannot install nvidia-detect: abort"
-msgstr "Αδυναμία εγκατάστασης nvidia-detect: απόρριψη"
-
-#: ../usr/lib/ddm/nvidia.py:92
-#, python-format
-msgid "Nvidia card found: %(card)s"
-msgstr "Βρέθηκε κάρτα Nvidia: %(card)s"
-
-#: ../usr/lib/ddm/nvidia.py:101
-#, python-format
-msgid "Nvidia driver found: %(drv)s (%(status)s)"
-msgstr "Βρέθηκε οδηγόςNvidia: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/nvidia.py:166
-msgid "Removing Nvidia drivers"
-msgstr "Αφαίρεση οδηγών Nvidia"
-
-#: ../usr/lib/ddm/nvidia.py:191
-msgid "Nvidia display driver"
-msgstr "Οδηγός γραφικών Nvidia"
-
-#: ../usr/lib/ddm/nvidia.py:195
-msgid "Nouveau display driver"
-msgstr "Οδηγός γραφικών Nouveau"
-
-#: ../usr/lib/ddm/main.py:67
-#, python-format
-msgid "Write debug information to file: %(path)s"
-msgstr "Εγγραφή πληροφοριών αποσφαλμάτωσης στο αρχείο: %(path)s"
-
-#: ../usr/lib/ddm/main.py:71
-#, python-format
-msgid "Machine info: %(info)s"
-msgstr "Πληροφορίες συστήματος: %(info)s"
-
-#: ../usr/lib/ddm/main.py:73
-#, python-format
-msgid "DDM version: %(version)s"
-msgstr "Έκδοση DDM: %(version)s"
-
-#: ../usr/lib/ddm/main.py:78
-msgid "apt-listbugs is installed and might interfere with driver installation"
-msgstr ""
-"Το apt-listbugs είναι εγκατεστημένο και μπορεί να αλληλεπιδρά με την "
-"εγκτάσταση του οδηγού"
-
-#: ../usr/lib/ddm/main.py:108 ../usr/lib/ddm/main.py:110
-msgid "Please enter your password"
-msgstr "Παρακαλώ εισάγετε τον κωδικό σας"
-
-#: ../usr/lib/ddm/main.py:116
-msgid "DDM - Kernel"
-msgstr "DDM - Πυρήνας "
-
-#: ../usr/lib/ddm/main.py:117
+#: ../usr/lib/ddm/ddm.py:512 ../debian/ddm/usr/lib/ddm/ddm.py:512
 msgid ""
-"You do not have the latest kernel installed.\n"
-"\n"
-"Use the Update Manager to update your system."
+"There was an error during the installation.\n"
+"Please, run 'sudo apt-get -f install' in a terminal.\n"
+"Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
-"Δέν έχετε εγκατεστημένο τον τελευταίο πυρήνα.\n"
-"\n"
-"Χρησιμοποιήστε τον διαχειριστή ενημερώσεων για να ενημερώσετε το σύστημά σας."
 
-#: ../usr/lib/ddm/main.py:121
-msgid "DDM - Live environment"
-msgstr "DDM - Περιβάλλον live"
+#: ../usr/lib/ddm/ddm.py:521 ../debian/ddm/usr/lib/ddm/ddm.py:521
+msgid "The software has been successfully installed."
+msgstr ""
 
-#: ../usr/lib/ddm/main.py:122
+#: ../usr/lib/ddm/main.py:27 ../debian/ddm/usr/lib/ddm/main.py:27
+#, fuzzy
 msgid ""
-"DDM cannot run in a live environment\n"
-"\n"
-"To force start, use the --force argument"
+"Device Driver Manager cannot be started in a live environment\n"
+"You can use the --force argument to start DDM in a live environment"
 msgstr ""
 "Αδύνατη η εκτέλεση του DDM σε περιβάλλον live\n"
 "\n"
 "Για εξαναγκασμό εκκίνησης, χρησιμοποίησε την επιλογή --force"
 
-#: ../usr/lib/ddm/main.py:126
-msgid "DDM - Debian based"
-msgstr "DDM - βασισμένο στο Debian"
+#: ../usr/lib/ddm/main.py:77 ../debian/ddm/usr/lib/ddm/main.py:77
+msgid "Unexpected error"
+msgstr ""
 
-#: ../usr/lib/ddm/main.py:127
+#: ../usr/lib/ddm/main.py:78 ../debian/ddm/usr/lib/ddm/main.py:78
 msgid ""
-"Cannot determine the base distribution (debian or ubuntu)\n"
-"\n"
-"To force start, use the --force argument"
+"Device Driver Manager has failed with the following unexpected error.\n"
+"Please submit a bug report!"
 msgstr ""
-"Αδύνατος ο καθορισμός της βασικής διανομής (debian or ubuntu)\n"
-"\n"
-"Για εξαναγκαστική εκτέλεση, χρησιμοποιήστε την επιλογή --force"
 
-#: ../usr/lib/ddm/main.py:131
-msgid "DDM - Internet"
-msgstr "DDM - διαδίκτυο"
+#~ msgid "Driver"
+#~ msgstr "Οδηγός υλικού"
 
-#: ../usr/lib/ddm/main.py:132
-msgid ""
-"You do not seem to have an internet connection\n"
-"\n"
-"To force start, use the --force argument"
-msgstr ""
-"Δέν φαίνεται να έχετε σύνδεση στο διαδίκτυο\n"
-"\n"
-"Για εξαναγκαστική εκτέλεση, χρησιμοποιήστε την επιλογή --force"
+#~ msgid "ATI card found: %(card)s"
+#~ msgstr "Βρέθηκε κάρτα ATI: %(card)s"
 
-#: ../usr/share/applications/ddm.desktop.in.h:1
-msgid "Device Driver Manager"
-msgstr ""
+#~ msgid "ATI chip serie found: %(serie)s"
+#~ msgstr "Βρέθηκε ATI chip: %(serie)s"
+
+#~ msgid "ATI driver found: %(drv)s (%(status)s)"
+#~ msgstr "Βρέθηκε οδηγός ATI: %(drv)s (%(status)s)"
+
+#~ msgid "Driver not installable: %(drv)s"
+#~ msgstr "Ο οδηγός δεν μπορεί να εγκατασταθεί: %(drv)s"
+
+#~ msgid "ATI chip serie not supported: %(serie)d"
+#~ msgstr "Μη υποστηριζόμενο ATI chip: %(serie)d"
+
+#~ msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
+#~ msgstr "Δέν βρέθηκε οδηγός: %(card)s (%(man)s:%(serie)s)"
+
+#~ msgid "Install driver: %(drv)s"
+#~ msgstr "Εγκατάσταση οδηγού: %(drv)s"
+
+#~ msgid "Switch to module: %(module)s"
+#~ msgstr "Μετάβαση στο στοιχείο: %(module)s"
+
+#~ msgid "Driver installed: %(drv)s"
+#~ msgstr "Ο οδηγός εγκαταστάθηκε: %(drv)s"
+
+#~ msgid "Removing ATI drivers"
+#~ msgstr "Αφαίρεση οδηγού ΑΤΙ"
+
+#~ msgid "Driver removed: %(drv)s"
+#~ msgstr "Ο οδηγός αφαιρέθηκε: %(drv)s"
+
+#~ msgid "ATI display driver"
+#~ msgstr "Οδηγός γραφικών ATI"
+
+#~ msgid "Intel display driver"
+#~ msgstr "Οδηγός γραφικών Intel"
+
+#~ msgid "Radeon display driver"
+#~ msgstr "Οδηγός γραφικών Radeon"
+
+#~ msgid "Framebuffer display driver"
+#~ msgstr "Οδηγός γραφικών Framebuffer"
+
+#~ msgid "Vesa display driver"
+#~ msgstr "Οδηγός γραφικών Vesa"
+
+#~ msgid "Broadcom chip serie found: %(chip)s"
+#~ msgstr "Βρέθηκε Broadcom chip: %(chip)s"
+
+#~ msgid "Used wireless driver: %(drv)s"
+#~ msgstr "Επιλεγμένος οδηγός ασύρματης κάρτας: %(drv)s"
+
+#~ msgid "Broadcom found: %(broadcom)s"
+#~ msgstr "Βρέθηκε Broadcom: %(broadcom)s"
+
+#~ msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
+#~ msgstr ""
+#~ "Μη υποστηριζόμενο Broadcom chipset ή ελεγκτής ethernet : %(broadcom)s"
+
+#~ msgid "Broadcom chipset not found: %(chip)s"
+#~ msgstr "Δεν βρεθηκε Broadcom chipset: %(chip)s"
+
+#~ msgid "Broadcom pci ID not found: %(id)s"
+#~ msgstr "Δεν βρέθηκε Broadcom pci: %(id)s"
+
+#~ msgid "Linux header name to install: %(header)s"
+#~ msgstr "Όνομα Linux header προς εγκατάσταση: %(header)s"
+
+#~ msgid "Download package: %(package)s"
+#~ msgstr "Λήψη πακέτου: %(package)s"
+
+#~ msgid "Download package: %(drv)s"
+#~ msgstr "Λήψη πακέτου: %(drv)s"
+
+#~ msgid "Install downloaded packages"
+#~ msgstr "Εγκατάσταση ληφθέντων πακέτων"
+
+#~ msgid "Reconfigure package: %(package)s"
+#~ msgstr "Επαναρύθμιση πακέτου: %(package)s"
+
+#~ msgid "Purge driver: %(drv)s"
+#~ msgstr "Απαλοιφή οδηγού: %(drv)s"
+
+#~ msgid "Done removing Broadcom drivers"
+#~ msgstr "Έγινε η αφαίρεση των οδηγών Broadcom"
+
+#~ msgid "Used graphics driver: %(module)s"
+#~ msgstr "Επιλεγμένος οδηγός γραφικών: %(module)s"
+
+#~ msgid "No xorg.conf - create minimal xorg.conf"
+#~ msgstr "Δεν βρέθηκε xorg.conf - δημιουργία ελάχιστου xorg.conf"
+
+#~ msgid "New xorg.conf written"
+#~ msgstr "Το νέο xorg.conf δημιουργήθηκε"
+
+#~ msgid "New section appended to xorg.conf"
+#~ msgstr "Η νέα ενότητα προστέθηκε στο xorg.conf"
+
+#~ msgid "Via card found: %(card)s"
+#~ msgstr "Βρέθηκε κάρτα Via: %(card)s"
+
+#~ msgid "Via driver found: %(drv)s (%(status)s)"
+#~ msgstr "Βρέθηκε οδηγός Via: %(drv)s (%(status)s)"
+
+#~ msgid "Chrome display driver"
+#~ msgstr "Οδηγός γραφικών Chrome"
+
+#~ msgid "Intel card found: %(card)s"
+#~ msgstr "Βρέθηκε κάρτα Intel: %(card)s"
+
+#~ msgid "Intel driver found: %(drv)s (%(status)s)"
+#~ msgstr "Βρέθηκε οδηγός Intel: %(drv)s (%(status)s)"
+
+#~ msgid "Graphics"
+#~ msgstr "Γραφικά"
+
+#~ msgid "Wireless"
+#~ msgstr "Ασύρματη σύνδεση"
+
+#~ msgid "Kernel"
+#~ msgstr "Πυρήνας"
+
+#~ msgid "Hardware"
+#~ msgstr "Υλικό συστήματος"
+
+#~ msgid "Activated driver"
+#~ msgstr "Ενεργοποιημένος οδηγός"
+
+#~ msgid "Alternative drivers"
+#~ msgstr "Εναλλακτικοί οδηγοί"
+
+#~ msgid "Current drivers are correct"
+#~ msgstr "Οι τρέχοντες οδηγοί είναι σωστοί"
+
+#~ msgid "PAE already installed"
+#~ msgstr "PAE εγκατεστημένο"
+
+#~ msgid "PAE support only for 32-bit systems"
+#~ msgstr "Υποστήριξη PAE μόνο για συστήματα 32-bit"
+
+#~ msgid "Activate"
+#~ msgstr "Ενεργοποίηση"
+
+#~ msgid "Version"
+#~ msgstr "Έκδοση"
+
+#~ msgid "Description"
+#~ msgstr "Περιγραφή"
+
+#~ msgid " (recommended)"
+#~ msgstr " (προτεινόμενος)"
+
+#~ msgid "Unknown driver"
+#~ msgstr "Άγνωστος οδηγός"
+
+#~ msgid ""
+#~ "Unknown driver found.\n"
+#~ "\n"
+#~ "Please remove before installing drivers with DDM."
+#~ msgstr ""
+#~ "Βρέθηκε άγνωστος οδηγός.\n"
+#~ "\n"
+#~ "Παρακαλώ αφαιρέστε πριν την εγκατάσταση οδηγών με τον DDM."
+
+#~ msgid "Driver activation"
+#~ msgstr "Ενεργοποίηση οδηγού"
+
+#~ msgid ""
+#~ "Are you sure you want to install the following driver:\n"
+#~ "\n"
+#~ "%(drv)s"
+#~ msgstr ""
+#~ "Είστε βέβαιος ότι θέλετε να εγκαταστήσετε τον ακόλουθο οδηγό:\n"
+#~ "\n"
+#~ "%(drv)s"
+
+#~ msgid "Locked"
+#~ msgstr "Κλείδωμένο"
+
+#~ msgid ""
+#~ "Could not get lock on %(file)s.\n"
+#~ "\n"
+#~ "Close any programs locking the file and try again."
+#~ msgstr ""
+#~ "Αδύνατο ξεκλείδωμα του %(file)s.\n"
+#~ "\n"
+#~ "Κλείστε όποιο πρόγραμμα κλειδώνει το αρχείο και προσπαθήστε ξανά."
+
+#~ msgid "Driver installed"
+#~ msgstr "Ο οδηγός εγκαταστάθηκε"
+
+#~ msgid ""
+#~ "Driver installed: %(drv)s\n"
+#~ "\n"
+#~ "Drivers will be used on next boot.\n"
+#~ "Do you want to reboot now?"
+#~ msgstr ""
+#~ "Ο οδηγός εγκαταστάθηκε: %(drv)s\n"
+#~ "\n"
+#~ "Ο οδηγός θα μπει σε χρήση στην επόμενη εκκίνηση.\n"
+#~ "Θέλετε να επανεκκινήσετε τώρα;"
+
+#~ msgid ""
+#~ "Could not get lock on %(file)s.\n"
+#~ "\n"
+#~ "Close any programs locking the file and restart DDM."
+#~ msgstr ""
+#~ "Αδύνατο ξεκλείδωμα του %(file)s.\n"
+#~ "\n"
+#~ "Κλείστε όποιο πρόγραμμα κλειδώνει το αρχείο και επανεκκινήστε τον DDM."
+
+#~ msgid "Checking your hardware..."
+#~ msgstr "Έλεγχος υλικού συστήματος..."
+
+#~ msgid "Start automatic driver install"
+#~ msgstr "Εκκίνηση αυτόματης εγκατάστασης του οδηγού"
+
+#~ msgid "Installed PAE: %(pae)s"
+#~ msgstr "Εγκατεστημένο PAE: %(pae)s"
+
+#~ msgid "Multi-core support for 32-bit systems"
+#~ msgstr "Multi-core υποστήριξη για συστήματα 32-bit"
+
+#~ msgid "Multi-core already installed: %(package)s"
+#~ msgstr "Multi-core εγκατεστημένο: %(package)s"
+
+#~ msgid "Multi-core system running single-core kernel found"
+#~ msgstr "Βρέθηκε Multi-core σύστημα που εκτελεί πυρήνα single-core"
+
+#~ msgid "PAE not installed"
+#~ msgstr "PAE μη εγκατεστημένο"
+
+#~ msgid "PAE kernel cannot be installed: single-core system"
+#~ msgstr "Αδύνατη η εγκατάσταση πυρήνα PAE: σύστημα single-core"
+
+#~ msgid "Done installing PAE"
+#~ msgstr "Έγινε η εγκατάσταση PAE"
+
+#~ msgid "PAE package to remove: %(package)s"
+#~ msgstr "Πακέτο PAE πρός αφαίρεση: %(package)s"
+
+#~ msgid "Done removing PAE"
+#~ msgstr "Έγινε η αφαίρεση PAE"
+
+#~ msgid "Cannot remove PAE when running PAE"
+#~ msgstr "Αδύνατη η αφαιρεση PAE όταν εκτελείται"
+
+#~ msgid "Update apt"
+#~ msgstr "Ενημέρωση apt"
+
+#~ msgid "Install nvidia-detect"
+#~ msgstr "Εγκατάσταση nvidia-detect"
+
+#~ msgid "Cannot install nvidia-detect: abort"
+#~ msgstr "Αδυναμία εγκατάστασης nvidia-detect: απόρριψη"
+
+#~ msgid "Nvidia card found: %(card)s"
+#~ msgstr "Βρέθηκε κάρτα Nvidia: %(card)s"
+
+#~ msgid "Nvidia driver found: %(drv)s (%(status)s)"
+#~ msgstr "Βρέθηκε οδηγόςNvidia: %(drv)s (%(status)s)"
+
+#~ msgid "Removing Nvidia drivers"
+#~ msgstr "Αφαίρεση οδηγών Nvidia"
+
+#~ msgid "Nvidia display driver"
+#~ msgstr "Οδηγός γραφικών Nvidia"
+
+#~ msgid "Nouveau display driver"
+#~ msgstr "Οδηγός γραφικών Nouveau"
+
+#~ msgid "Write debug information to file: %(path)s"
+#~ msgstr "Εγγραφή πληροφοριών αποσφαλμάτωσης στο αρχείο: %(path)s"
+
+#~ msgid "Machine info: %(info)s"
+#~ msgstr "Πληροφορίες συστήματος: %(info)s"
+
+#~ msgid "DDM version: %(version)s"
+#~ msgstr "Έκδοση DDM: %(version)s"
+
+#~ msgid ""
+#~ "apt-listbugs is installed and might interfere with driver installation"
+#~ msgstr ""
+#~ "Το apt-listbugs είναι εγκατεστημένο και μπορεί να αλληλεπιδρά με την "
+#~ "εγκτάσταση του οδηγού"
+
+#~ msgid "Please enter your password"
+#~ msgstr "Παρακαλώ εισάγετε τον κωδικό σας"
+
+#~ msgid "DDM - Kernel"
+#~ msgstr "DDM - Πυρήνας "
+
+#~ msgid ""
+#~ "You do not have the latest kernel installed.\n"
+#~ "\n"
+#~ "Use the Update Manager to update your system."
+#~ msgstr ""
+#~ "Δέν έχετε εγκατεστημένο τον τελευταίο πυρήνα.\n"
+#~ "\n"
+#~ "Χρησιμοποιήστε τον διαχειριστή ενημερώσεων για να ενημερώσετε το σύστημά "
+#~ "σας."
+
+#~ msgid "DDM - Live environment"
+#~ msgstr "DDM - Περιβάλλον live"
+
+#~ msgid ""
+#~ "DDM cannot run in a live environment\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "Αδύνατη η εκτέλεση του DDM σε περιβάλλον live\n"
+#~ "\n"
+#~ "Για εξαναγκασμό εκκίνησης, χρησιμοποίησε την επιλογή --force"
+
+#~ msgid "DDM - Debian based"
+#~ msgstr "DDM - βασισμένο στο Debian"
+
+#~ msgid ""
+#~ "Cannot determine the base distribution (debian or ubuntu)\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "Αδύνατος ο καθορισμός της βασικής διανομής (debian or ubuntu)\n"
+#~ "\n"
+#~ "Για εξαναγκαστική εκτέλεση, χρησιμοποιήστε την επιλογή --force"
+
+#~ msgid "DDM - Internet"
+#~ msgstr "DDM - διαδίκτυο"
+
+#~ msgid ""
+#~ "You do not seem to have an internet connection\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "Δέν φαίνεται να έχετε σύνδεση στο διαδίκτυο\n"
+#~ "\n"
+#~ "Για εξαναγκαστική εκτέλεση, χρησιμοποιήστε την επιλογή --force"
 
 #~ msgid "Install aborted: not in repository: %(repo)s"
 #~ msgstr "Η εγκατάσταση απορρίφθηκε: δέν υπάρχει στο αποθετήριο: %(repo)s"

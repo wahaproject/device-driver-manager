@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDM 201406\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-03 16:41+0100\n"
+"POT-Creation-Date: 2014-12-22 12:27+0100\n"
 "PO-Revision-Date: 2014-06-28 13:16+0100\n"
 "Last-Translator: Eduard Selma <selma@tinet.cat>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -19,493 +19,441 @@ msgstr ""
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../usr/lib/ddm/ati.py:73
-#, python-format
-msgid "ATI card found: %(card)s"
-msgstr "S'ha trobat una tarja ATI: %(card)s"
-
-#: ../usr/lib/ddm/ati.py:78
-#, python-format
-msgid "ATI chip serie found: %(serie)s"
-msgstr "S'ha trobat la sèrie del xip ATI: %(serie)s"
-
-#: ../usr/lib/ddm/ati.py:87
-#, python-format
-msgid "ATI driver found: %(drv)s (%(status)s)"
-msgstr "S'ha trobat un controlador ATI: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/ati.py:90 ../usr/lib/ddm/via.py:56
-#: ../usr/lib/ddm/intel.py:57 ../usr/lib/ddm/nvidia.py:104
-#, python-format
-msgid "Driver not installable: %(drv)s"
-msgstr "No es pot instal·lar el controlador %(drv)s."
-
-#: ../usr/lib/ddm/ati.py:92
-#, python-format
-msgid "ATI chip serie not supported: %(serie)d"
-msgstr "Sèrie del xip ATI no compatible: %(serie)d"
-
-#: ../usr/lib/ddm/ati.py:94
-#, python-format
-msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
-msgstr "No s'ha trobat cap controlador per a: %(card)s (%(man)s:%(serie)s)"
-
-#: ../usr/lib/ddm/ati.py:107 ../usr/lib/ddm/via.py:68
-#: ../usr/lib/ddm/intel.py:69 ../usr/lib/ddm/nvidia.py:118
-#, python-format
-msgid "Install driver: %(drv)s"
-msgstr "Instal·la el controlador: %(drv)s"
-
-#: ../usr/lib/ddm/ati.py:121 ../usr/lib/ddm/nvidia.py:144
-#, python-format
-msgid "Switch to module: %(module)s"
-msgstr "Canvia al mòdul: %(module)s"
-
-#: ../usr/lib/ddm/ati.py:127 ../usr/lib/ddm/via.py:77
-#: ../usr/lib/ddm/intel.py:78 ../usr/lib/ddm/nvidia.py:154
-#, python-format
-msgid "Driver installed: %(drv)s"
-msgstr "Controlador instal·lat: %(drv)s"
-
-#: ../usr/lib/ddm/ati.py:138
-msgid "Removing ATI drivers"
-msgstr "Eliminant controladors ATI"
-
-#: ../usr/lib/ddm/ati.py:152 ../usr/lib/ddm/via.py:96
-#: ../usr/lib/ddm/intel.py:97 ../usr/lib/ddm/nvidia.py:183
-#, python-format
-msgid "Driver removed: %(drv)s"
-msgstr "S'ha eliminat el controlador: %(drv)s"
-
-#: ../usr/lib/ddm/ati.py:160
-msgid "ATI display driver"
-msgstr "Controlador de pantalla ATI"
-
-#: ../usr/lib/ddm/ati.py:162 ../usr/lib/ddm/intel.py:105
-#: ../usr/lib/ddm/nvidia.py:193
-msgid "Intel display driver"
-msgstr "Controlador de pantalla Intel"
-
-#: ../usr/lib/ddm/ati.py:164
-msgid "Radeon display driver"
-msgstr "Controlador de pantalla Radeon"
-
-#: ../usr/lib/ddm/ati.py:166 ../usr/lib/ddm/via.py:106
-#: ../usr/lib/ddm/intel.py:107 ../usr/lib/ddm/nvidia.py:197
-msgid "Framebuffer display driver"
-msgstr "Controlador de pantalla Framebuffer"
-
-#: ../usr/lib/ddm/ati.py:168 ../usr/lib/ddm/via.py:108
-#: ../usr/lib/ddm/intel.py:109 ../usr/lib/ddm/nvidia.py:199
-msgid "Vesa display driver"
-msgstr "Controlador de pantalla Vesa"
-
-#: ../usr/lib/ddm/broadcom.py:89
-#, python-format
-msgid "Broadcom chip serie found: %(chip)s"
-msgstr "S'ha trobat la sèrie d'un xip Broadcom: %(chip)s"
-
-#: ../usr/lib/ddm/broadcom.py:158
-#, python-format
-msgid "Used wireless driver: %(drv)s"
-msgstr "Controlador sense fil en ús: %(drv)s"
-
-#: ../usr/lib/ddm/broadcom.py:179
-#, python-format
-msgid "Broadcom found: %(broadcom)s"
-msgstr "S'ha trobat un Broadcom: %(broadcom)s"
-
-#: ../usr/lib/ddm/broadcom.py:202
-#, python-format
-msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
+#: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:26
+#: ../debian/ddm/usr/lib/ddm/ddm.py:46 ../debian/ddm/usr/lib/ddm/main.py:26
+#: ../usr/share/applications/ddm.desktop.in.h:1
+#: ../debian/ddm/usr/share/applications/ddm.desktop.in.h:1
+msgid "Device Driver Manager"
 msgstr ""
-"Joc de xips Broadcom o controlador d'ethernet incompatible: %(broadcom)s"
 
-#: ../usr/lib/ddm/broadcom.py:204
-#, python-format
-msgid "Broadcom chipset not found: %(chip)s"
-msgstr "No s'ha trobat cap joc de xips Broadcom: %(chip)s"
+#: ../usr/lib/ddm/ddm.py:47 ../debian/ddm/usr/lib/ddm/ddm.py:47
+msgid "Save"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:207
-#, python-format
-msgid "Broadcom pci ID not found: %(id)s"
-msgstr "No s'ha trobat la ID pci de Broadcom: %(id)s"
+#: ../usr/lib/ddm/ddm.py:48 ../debian/ddm/usr/lib/ddm/ddm.py:48
+msgid "Help"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:216
-#, python-format
-msgid "Linux header name to install: %(header)s"
-msgstr "Nom de la capçalera Linux a instal·lar: %(header)s"
+#: ../usr/lib/ddm/ddm.py:49 ../debian/ddm/usr/lib/ddm/ddm.py:49
+msgid "Quit"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:220
-#, python-format
-msgid "Download package: %(package)s"
-msgstr "Descarrega el paquet: %(package)s"
+#: ../usr/lib/ddm/ddm.py:103 ../debian/ddm/usr/lib/ddm/ddm.py:103
+msgid "No internet connection"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:228
-#, python-format
-msgid "Download package: %(drv)s"
-msgstr "Descarrega el paquet: %(drv)s"
+#: ../usr/lib/ddm/ddm.py:104 ../debian/ddm/usr/lib/ddm/ddm.py:104
+msgid ""
+"You need an internet connection to install the additional software.\n"
+"Please, connect to the internet and try again."
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:265
-msgid "Install downloaded packages"
-msgstr "Instal·la els paquets baixats"
+#: ../usr/lib/ddm/ddm.py:154 ../debian/ddm/usr/lib/ddm/ddm.py:154
+msgid "Install"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:273
-#, python-format
-msgid "Reconfigure package: %(package)s"
-msgstr "Reconfigura el paquet: %(package)s"
+#: ../usr/lib/ddm/ddm.py:154 ../debian/ddm/usr/lib/ddm/ddm.py:154
+msgid "Device"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:316
-#, python-format
-msgid "Purge driver: %(drv)s"
-msgstr "Purga el controlador: %(drv)s"
-
-#: ../usr/lib/ddm/broadcom.py:326
-msgid "Done removing Broadcom drivers"
-msgstr "Eliminació de controladors Broadcom feta"
-
-#: ../usr/lib/ddm/xorg.py:81
-#, python-format
-msgid "Used graphics driver: %(module)s"
-msgstr "Controlador gràfic en ús: %(module)s"
-
-#: ../usr/lib/ddm/xorg.py:103
-msgid "No xorg.conf - create minimal xorg.conf"
-msgstr "No hi ha xorg.conf. Se'n crea un de mínim"
-
-#: ../usr/lib/ddm/xorg.py:123
-msgid "New xorg.conf written"
-msgstr "S'ha escrit un nou xorg.conf"
-
-#: ../usr/lib/ddm/xorg.py:129
-msgid "New section appended to xorg.conf"
-msgstr "S'ha afegit una nova secció al xorg.conf"
-
-#: ../usr/lib/ddm/via.py:47
-#, python-format
-msgid "Via card found: %(card)s"
-msgstr "S'ha trobat una tarja VIA: %(card)s"
-
-#: ../usr/lib/ddm/via.py:53
-#, python-format
-msgid "Via driver found: %(drv)s (%(status)s)"
-msgstr "S'ha trobat un controlador VIA: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/via.py:104
-msgid "Chrome display driver"
-msgstr "Controlador de pantalla Chrome"
-
-#: ../usr/lib/ddm/intel.py:48
-#, python-format
-msgid "Intel card found: %(card)s"
-msgstr "S'ha trobat una tarja Intel: %(card)s"
-
-#: ../usr/lib/ddm/intel.py:54
-#, python-format
-msgid "Intel driver found: %(drv)s (%(status)s)"
-msgstr "S'ha trobat aquest controlador Intel: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/ddm.py:72
-msgid "Graphics"
-msgstr "Gràfics"
-
-#: ../usr/lib/ddm/ddm.py:73
-msgid "Wireless"
-msgstr "Sense fil"
-
-#: ../usr/lib/ddm/ddm.py:74
-msgid "Kernel"
-msgstr "Nucli"
-
-#: ../usr/lib/ddm/ddm.py:75
-msgid "Hardware"
+#: ../usr/lib/ddm/ddm.py:189 ../debian/ddm/usr/lib/ddm/ddm.py:189
+#, fuzzy
+msgid "Hardware scan"
 msgstr "Maquinari"
 
-#: ../usr/lib/ddm/ddm.py:76
-msgid "Activated driver"
-msgstr "Controlador activat"
-
-#: ../usr/lib/ddm/ddm.py:77
-msgid "Alternative drivers"
-msgstr "Controladors alternatius"
-
-#: ../usr/lib/ddm/ddm.py:116 ../usr/lib/ddm/ddm.py:147
-msgid "Current drivers are correct"
-msgstr "Els controladors actuals són correctes"
-
-#: ../usr/lib/ddm/ddm.py:157
-msgid "PAE already installed"
-msgstr "Ja s'ha instal·lat el PAE"
-
-#: ../usr/lib/ddm/ddm.py:159
-msgid "PAE support only for 32-bit systems"
-msgstr "El PAE només funciona en sistemes de 32 bit"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Activate"
-msgstr "Activa"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Driver"
-msgstr "Controlador"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Version"
-msgstr "Versió"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Description"
-msgstr "Descripció"
-
-#: ../usr/lib/ddm/ddm.py:214
-msgid " (recommended)"
-msgstr " (recomanat)"
-
-#: ../usr/lib/ddm/ddm.py:259
-msgid "Unknown driver"
-msgstr "Controlador desconegut"
-
-#: ../usr/lib/ddm/ddm.py:262
-msgid ""
-"Unknown driver found.\n"
-"\n"
-"Please remove before installing drivers with DDM."
+#: ../usr/lib/ddm/ddm.py:193 ../debian/ddm/usr/lib/ddm/ddm.py:193
+msgid "There are no available drivers for your hardware:"
 msgstr ""
-"S'ha trobat un controlador desconegut.\n"
-"\n"
-"Elimineu-lo abans d'instal·lar controladors amb el DDM."
 
-#: ../usr/lib/ddm/ddm.py:307
-msgid "Driver activation"
-msgstr "Activació del controlador"
-
-#: ../usr/lib/ddm/ddm.py:307
-#, python-format
-msgid ""
-"Are you sure you want to install the following driver:\n"
-"\n"
-"%(drv)s"
+#: ../usr/lib/ddm/ddm.py:199 ../debian/ddm/usr/lib/ddm/ddm.py:199
+msgid "DDM did not find any supported hardware."
 msgstr ""
-"Esteu segur de voler instal·lar aquest controlador:\n"
-"\n"
-"%(drv)s"
 
-#: ../usr/lib/ddm/ddm.py:312 ../usr/lib/ddm/ddm.py:452
-msgid "Locked"
-msgstr "Bloquejat"
-
-#: ../usr/lib/ddm/ddm.py:312
-#, python-format
-msgid ""
-"Could not get lock on %(file)s.\n"
-"\n"
-"Close any programs locking the file and try again."
+#: ../usr/lib/ddm/ddm.py:247 ../debian/ddm/usr/lib/ddm/ddm.py:247
+msgid "Saved"
 msgstr ""
-"No s'ha pogut bloquejar el fitxer %(file)s.\n"
-"\n"
-"Tanqueu qualsevol programa que bloquegi el fitxer i torneu a provar-ho."
 
-#: ../usr/lib/ddm/ddm.py:390
-msgid "Driver installed"
-msgstr "Controlador instal·lat"
-
-#: ../usr/lib/ddm/ddm.py:390
-#, python-format
-msgid ""
-"Driver installed: %(drv)s\n"
-"\n"
-"Drivers will be used on next boot.\n"
-"Do you want to reboot now?"
+#: ../usr/lib/ddm/ddm.py:248 ../debian/ddm/usr/lib/ddm/ddm.py:248
+msgid "You will need to restart your system."
 msgstr ""
-"Controlador instal·lat: %(drv)s\n"
-"\n"
-"El controlador s'usarà en la propera arrencada.\n"
-"Voleu arrencar de nou ara?"
 
-#: ../usr/lib/ddm/ddm.py:452
-#, python-format
-msgid ""
-"Could not get lock on %(file)s.\n"
-"\n"
-"Close any programs locking the file and restart DDM."
-msgstr ""
-"No s'ha pogut bloquejar un fitxer a %(file)s.\n"
-"\n"
-"Tanqueu qualsevol programa que bloquegi el fitxer i torneu a engegar DDM."
-
-#: ../usr/lib/ddm/ddm.py:485
-msgid "Checking your hardware..."
-msgstr "Comprovant el maquinari..."
-
-#: ../usr/lib/ddm/ddm.py:550
-msgid "Start automatic driver install"
-msgstr "Engega la instal·lació automàtica del controlador"
-
-#: ../usr/lib/ddm/pae.py:43
-#, python-format
-msgid "Installed PAE: %(pae)s"
-msgstr "PAE instal·lat: %(pae)s"
-
-#: ../usr/lib/ddm/pae.py:49
-msgid "Multi-core support for 32-bit systems"
-msgstr "Suport de nucli múltiple per a sistemes de 32 bit"
-
-#: ../usr/lib/ddm/pae.py:59
-#, python-format
-msgid "Multi-core already installed: %(package)s"
-msgstr "El nucli múltiple ja està instal·lat: %(package)s"
-
-#: ../usr/lib/ddm/pae.py:60 ../usr/lib/ddm/pae.py:73
+#: ../usr/lib/ddm/ddm.py:426 ../debian/ddm/usr/lib/ddm/ddm.py:426
 msgid "PAE capable system"
 msgstr "Sistema amb capacitat PAE"
 
-#: ../usr/lib/ddm/pae.py:66
-msgid "Multi-core system running single-core kernel found"
-msgstr "S'ha trobat un sistema de nucli múltiple amb un kernel d'un sol nucli "
-
-#: ../usr/lib/ddm/pae.py:70
-msgid "PAE not installed"
-msgstr "PAE no instal·lat"
-
-#: ../usr/lib/ddm/pae.py:79
-msgid "PAE kernel cannot be installed: single-core system"
-msgstr "No es pot instal·lar un nucli PAE en un sistema d'un sol nucli"
-
-#: ../usr/lib/ddm/pae.py:95
-msgid "Done installing PAE"
-msgstr "Instal·lació del PAE acomplerta"
-
-#: ../usr/lib/ddm/pae.py:109
-#, python-format
-msgid "PAE package to remove: %(package)s"
-msgstr "Paquet PAE per eliminar: %(package)s"
-
-#: ../usr/lib/ddm/pae.py:112
-msgid "Done removing PAE"
-msgstr "Eliminació del PAE acomplerta"
-
-#: ../usr/lib/ddm/pae.py:114
-msgid "Cannot remove PAE when running PAE"
-msgstr "No es pot eliminar el PAE mentre està en ús"
-
-#: ../usr/lib/ddm/nvidia.py:57
-msgid "Update apt"
-msgstr "Actualitza l'apt"
-
-#: ../usr/lib/ddm/nvidia.py:60
-msgid "Install nvidia-detect"
-msgstr "Instal·la nvidia-detect"
-
-#: ../usr/lib/ddm/nvidia.py:68
-msgid "Cannot install nvidia-detect: abort"
-msgstr "Interromput: no es pot instal·lar nvidia-detect"
-
-#: ../usr/lib/ddm/nvidia.py:92
-#, python-format
-msgid "Nvidia card found: %(card)s"
-msgstr "S'ha trobat una tarja Nvidia: %(card)s"
-
-#: ../usr/lib/ddm/nvidia.py:101
-#, python-format
-msgid "Nvidia driver found: %(drv)s (%(status)s)"
-msgstr "S'ha trobat un controlador Nvidia: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/nvidia.py:166
-msgid "Removing Nvidia drivers"
-msgstr "Eliminant els controladors Nvidia"
-
-#: ../usr/lib/ddm/nvidia.py:191
-msgid "Nvidia display driver"
-msgstr "Controlador de pantalla Nvidia"
-
-#: ../usr/lib/ddm/nvidia.py:195
-msgid "Nouveau display driver"
-msgstr "Controlador de pantalla Noveau"
-
-#: ../usr/lib/ddm/main.py:67
-#, python-format
-msgid "Write debug information to file: %(path)s"
-msgstr "Escriu informació de depuració al fitxer: %(path)s"
-
-#: ../usr/lib/ddm/main.py:71
-#, python-format
-msgid "Machine info: %(info)s"
-msgstr "Informació de la màquina: %(info)s"
-
-#: ../usr/lib/ddm/main.py:73
-#, python-format
-msgid "DDM version: %(version)s"
-msgstr "Versió del DDM: %(version)s"
-
-#: ../usr/lib/ddm/main.py:78
-msgid "apt-listbugs is installed and might interfere with driver installation"
-msgstr ""
-"apt-listbugs està instal·lat i pot interferir amb la instal·lació del "
-"controlador"
-
-#: ../usr/lib/ddm/main.py:108 ../usr/lib/ddm/main.py:110
-msgid "Please enter your password"
-msgstr "Entreu la vostra contrasenya"
-
-#: ../usr/lib/ddm/main.py:116
-msgid "DDM - Kernel"
-msgstr "DDM - Nucli"
-
-#: ../usr/lib/ddm/main.py:117
+#: ../usr/lib/ddm/ddm.py:512 ../debian/ddm/usr/lib/ddm/ddm.py:512
 msgid ""
-"You do not have the latest kernel installed.\n"
-"\n"
-"Use the Update Manager to update your system."
+"There was an error during the installation.\n"
+"Please, run 'sudo apt-get -f install' in a terminal.\n"
+"Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
-"No teniu el darrer nucli (kernel) instal·lat:\n"
-"\n"
-"Useu el Gestor d'Actualitzacions per actualitzar el sistema."
 
-#: ../usr/lib/ddm/main.py:121
-msgid "DDM - Live environment"
-msgstr "DDM - Entorn autònom"
+#: ../usr/lib/ddm/ddm.py:521 ../debian/ddm/usr/lib/ddm/ddm.py:521
+msgid "The software has been successfully installed."
+msgstr ""
 
-#: ../usr/lib/ddm/main.py:122
+#: ../usr/lib/ddm/main.py:27 ../debian/ddm/usr/lib/ddm/main.py:27
+#, fuzzy
 msgid ""
-"DDM cannot run in a live environment\n"
-"\n"
-"To force start, use the --force argument"
+"Device Driver Manager cannot be started in a live environment\n"
+"You can use the --force argument to start DDM in a live environment"
 msgstr ""
 "DDM no pot funcionar en un entorn autònom\n"
 "\n"
 "Per forçar l'arrencada, useu l'argument '--force'"
 
-#: ../usr/lib/ddm/main.py:126
-msgid "DDM - Debian based"
-msgstr "DDM - Basat en Debian"
+#: ../usr/lib/ddm/main.py:77 ../debian/ddm/usr/lib/ddm/main.py:77
+msgid "Unexpected error"
+msgstr ""
 
-#: ../usr/lib/ddm/main.py:127
+#: ../usr/lib/ddm/main.py:78 ../debian/ddm/usr/lib/ddm/main.py:78
 msgid ""
-"Cannot determine the base distribution (debian or ubuntu)\n"
-"\n"
-"To force start, use the --force argument"
+"Device Driver Manager has failed with the following unexpected error.\n"
+"Please submit a bug report!"
 msgstr ""
-"No es pot determinar la distribució base (Debian o Ubuntu)\n"
-"\n"
-"Per forçar l'arrencada, useu l'argument '--force'"
 
-#: ../usr/lib/ddm/main.py:131
-msgid "DDM - Internet"
-msgstr "DDM - Internet"
+#~ msgid "Driver"
+#~ msgstr "Controlador"
 
-#: ../usr/lib/ddm/main.py:132
-msgid ""
-"You do not seem to have an internet connection\n"
-"\n"
-"To force start, use the --force argument"
-msgstr ""
-"No sembla que hi hagi connexió a Internet\n"
-"\n"
-"Per forçar l'arrencada, useu l'argument '--force'"
+#~ msgid "ATI card found: %(card)s"
+#~ msgstr "S'ha trobat una tarja ATI: %(card)s"
 
-#: ../usr/share/applications/ddm.desktop.in.h:1
-msgid "Device Driver Manager"
-msgstr ""
+#~ msgid "ATI chip serie found: %(serie)s"
+#~ msgstr "S'ha trobat la sèrie del xip ATI: %(serie)s"
+
+#~ msgid "ATI driver found: %(drv)s (%(status)s)"
+#~ msgstr "S'ha trobat un controlador ATI: %(drv)s (%(status)s)"
+
+#~ msgid "Driver not installable: %(drv)s"
+#~ msgstr "No es pot instal·lar el controlador %(drv)s."
+
+#~ msgid "ATI chip serie not supported: %(serie)d"
+#~ msgstr "Sèrie del xip ATI no compatible: %(serie)d"
+
+#~ msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
+#~ msgstr "No s'ha trobat cap controlador per a: %(card)s (%(man)s:%(serie)s)"
+
+#~ msgid "Install driver: %(drv)s"
+#~ msgstr "Instal·la el controlador: %(drv)s"
+
+#~ msgid "Switch to module: %(module)s"
+#~ msgstr "Canvia al mòdul: %(module)s"
+
+#~ msgid "Driver installed: %(drv)s"
+#~ msgstr "Controlador instal·lat: %(drv)s"
+
+#~ msgid "Removing ATI drivers"
+#~ msgstr "Eliminant controladors ATI"
+
+#~ msgid "Driver removed: %(drv)s"
+#~ msgstr "S'ha eliminat el controlador: %(drv)s"
+
+#~ msgid "ATI display driver"
+#~ msgstr "Controlador de pantalla ATI"
+
+#~ msgid "Intel display driver"
+#~ msgstr "Controlador de pantalla Intel"
+
+#~ msgid "Radeon display driver"
+#~ msgstr "Controlador de pantalla Radeon"
+
+#~ msgid "Framebuffer display driver"
+#~ msgstr "Controlador de pantalla Framebuffer"
+
+#~ msgid "Vesa display driver"
+#~ msgstr "Controlador de pantalla Vesa"
+
+#~ msgid "Broadcom chip serie found: %(chip)s"
+#~ msgstr "S'ha trobat la sèrie d'un xip Broadcom: %(chip)s"
+
+#~ msgid "Used wireless driver: %(drv)s"
+#~ msgstr "Controlador sense fil en ús: %(drv)s"
+
+#~ msgid "Broadcom found: %(broadcom)s"
+#~ msgstr "S'ha trobat un Broadcom: %(broadcom)s"
+
+#~ msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
+#~ msgstr ""
+#~ "Joc de xips Broadcom o controlador d'ethernet incompatible: %(broadcom)s"
+
+#~ msgid "Broadcom chipset not found: %(chip)s"
+#~ msgstr "No s'ha trobat cap joc de xips Broadcom: %(chip)s"
+
+#~ msgid "Broadcom pci ID not found: %(id)s"
+#~ msgstr "No s'ha trobat la ID pci de Broadcom: %(id)s"
+
+#~ msgid "Linux header name to install: %(header)s"
+#~ msgstr "Nom de la capçalera Linux a instal·lar: %(header)s"
+
+#~ msgid "Download package: %(package)s"
+#~ msgstr "Descarrega el paquet: %(package)s"
+
+#~ msgid "Download package: %(drv)s"
+#~ msgstr "Descarrega el paquet: %(drv)s"
+
+#~ msgid "Install downloaded packages"
+#~ msgstr "Instal·la els paquets baixats"
+
+#~ msgid "Reconfigure package: %(package)s"
+#~ msgstr "Reconfigura el paquet: %(package)s"
+
+#~ msgid "Purge driver: %(drv)s"
+#~ msgstr "Purga el controlador: %(drv)s"
+
+#~ msgid "Done removing Broadcom drivers"
+#~ msgstr "Eliminació de controladors Broadcom feta"
+
+#~ msgid "Used graphics driver: %(module)s"
+#~ msgstr "Controlador gràfic en ús: %(module)s"
+
+#~ msgid "No xorg.conf - create minimal xorg.conf"
+#~ msgstr "No hi ha xorg.conf. Se'n crea un de mínim"
+
+#~ msgid "New xorg.conf written"
+#~ msgstr "S'ha escrit un nou xorg.conf"
+
+#~ msgid "New section appended to xorg.conf"
+#~ msgstr "S'ha afegit una nova secció al xorg.conf"
+
+#~ msgid "Via card found: %(card)s"
+#~ msgstr "S'ha trobat una tarja VIA: %(card)s"
+
+#~ msgid "Via driver found: %(drv)s (%(status)s)"
+#~ msgstr "S'ha trobat un controlador VIA: %(drv)s (%(status)s)"
+
+#~ msgid "Chrome display driver"
+#~ msgstr "Controlador de pantalla Chrome"
+
+#~ msgid "Intel card found: %(card)s"
+#~ msgstr "S'ha trobat una tarja Intel: %(card)s"
+
+#~ msgid "Intel driver found: %(drv)s (%(status)s)"
+#~ msgstr "S'ha trobat aquest controlador Intel: %(drv)s (%(status)s)"
+
+#~ msgid "Graphics"
+#~ msgstr "Gràfics"
+
+#~ msgid "Wireless"
+#~ msgstr "Sense fil"
+
+#~ msgid "Kernel"
+#~ msgstr "Nucli"
+
+#~ msgid "Hardware"
+#~ msgstr "Maquinari"
+
+#~ msgid "Activated driver"
+#~ msgstr "Controlador activat"
+
+#~ msgid "Alternative drivers"
+#~ msgstr "Controladors alternatius"
+
+#~ msgid "Current drivers are correct"
+#~ msgstr "Els controladors actuals són correctes"
+
+#~ msgid "PAE already installed"
+#~ msgstr "Ja s'ha instal·lat el PAE"
+
+#~ msgid "PAE support only for 32-bit systems"
+#~ msgstr "El PAE només funciona en sistemes de 32 bit"
+
+#~ msgid "Activate"
+#~ msgstr "Activa"
+
+#~ msgid "Version"
+#~ msgstr "Versió"
+
+#~ msgid "Description"
+#~ msgstr "Descripció"
+
+#~ msgid " (recommended)"
+#~ msgstr " (recomanat)"
+
+#~ msgid "Unknown driver"
+#~ msgstr "Controlador desconegut"
+
+#~ msgid ""
+#~ "Unknown driver found.\n"
+#~ "\n"
+#~ "Please remove before installing drivers with DDM."
+#~ msgstr ""
+#~ "S'ha trobat un controlador desconegut.\n"
+#~ "\n"
+#~ "Elimineu-lo abans d'instal·lar controladors amb el DDM."
+
+#~ msgid "Driver activation"
+#~ msgstr "Activació del controlador"
+
+#~ msgid ""
+#~ "Are you sure you want to install the following driver:\n"
+#~ "\n"
+#~ "%(drv)s"
+#~ msgstr ""
+#~ "Esteu segur de voler instal·lar aquest controlador:\n"
+#~ "\n"
+#~ "%(drv)s"
+
+#~ msgid "Locked"
+#~ msgstr "Bloquejat"
+
+#~ msgid ""
+#~ "Could not get lock on %(file)s.\n"
+#~ "\n"
+#~ "Close any programs locking the file and try again."
+#~ msgstr ""
+#~ "No s'ha pogut bloquejar el fitxer %(file)s.\n"
+#~ "\n"
+#~ "Tanqueu qualsevol programa que bloquegi el fitxer i torneu a provar-ho."
+
+#~ msgid "Driver installed"
+#~ msgstr "Controlador instal·lat"
+
+#~ msgid ""
+#~ "Driver installed: %(drv)s\n"
+#~ "\n"
+#~ "Drivers will be used on next boot.\n"
+#~ "Do you want to reboot now?"
+#~ msgstr ""
+#~ "Controlador instal·lat: %(drv)s\n"
+#~ "\n"
+#~ "El controlador s'usarà en la propera arrencada.\n"
+#~ "Voleu arrencar de nou ara?"
+
+#~ msgid ""
+#~ "Could not get lock on %(file)s.\n"
+#~ "\n"
+#~ "Close any programs locking the file and restart DDM."
+#~ msgstr ""
+#~ "No s'ha pogut bloquejar un fitxer a %(file)s.\n"
+#~ "\n"
+#~ "Tanqueu qualsevol programa que bloquegi el fitxer i torneu a engegar DDM."
+
+#~ msgid "Checking your hardware..."
+#~ msgstr "Comprovant el maquinari..."
+
+#~ msgid "Start automatic driver install"
+#~ msgstr "Engega la instal·lació automàtica del controlador"
+
+#~ msgid "Installed PAE: %(pae)s"
+#~ msgstr "PAE instal·lat: %(pae)s"
+
+#~ msgid "Multi-core support for 32-bit systems"
+#~ msgstr "Suport de nucli múltiple per a sistemes de 32 bit"
+
+#~ msgid "Multi-core already installed: %(package)s"
+#~ msgstr "El nucli múltiple ja està instal·lat: %(package)s"
+
+#~ msgid "Multi-core system running single-core kernel found"
+#~ msgstr ""
+#~ "S'ha trobat un sistema de nucli múltiple amb un kernel d'un sol nucli "
+
+#~ msgid "PAE not installed"
+#~ msgstr "PAE no instal·lat"
+
+#~ msgid "PAE kernel cannot be installed: single-core system"
+#~ msgstr "No es pot instal·lar un nucli PAE en un sistema d'un sol nucli"
+
+#~ msgid "Done installing PAE"
+#~ msgstr "Instal·lació del PAE acomplerta"
+
+#~ msgid "PAE package to remove: %(package)s"
+#~ msgstr "Paquet PAE per eliminar: %(package)s"
+
+#~ msgid "Done removing PAE"
+#~ msgstr "Eliminació del PAE acomplerta"
+
+#~ msgid "Cannot remove PAE when running PAE"
+#~ msgstr "No es pot eliminar el PAE mentre està en ús"
+
+#~ msgid "Update apt"
+#~ msgstr "Actualitza l'apt"
+
+#~ msgid "Install nvidia-detect"
+#~ msgstr "Instal·la nvidia-detect"
+
+#~ msgid "Cannot install nvidia-detect: abort"
+#~ msgstr "Interromput: no es pot instal·lar nvidia-detect"
+
+#~ msgid "Nvidia card found: %(card)s"
+#~ msgstr "S'ha trobat una tarja Nvidia: %(card)s"
+
+#~ msgid "Nvidia driver found: %(drv)s (%(status)s)"
+#~ msgstr "S'ha trobat un controlador Nvidia: %(drv)s (%(status)s)"
+
+#~ msgid "Removing Nvidia drivers"
+#~ msgstr "Eliminant els controladors Nvidia"
+
+#~ msgid "Nvidia display driver"
+#~ msgstr "Controlador de pantalla Nvidia"
+
+#~ msgid "Nouveau display driver"
+#~ msgstr "Controlador de pantalla Noveau"
+
+#~ msgid "Write debug information to file: %(path)s"
+#~ msgstr "Escriu informació de depuració al fitxer: %(path)s"
+
+#~ msgid "Machine info: %(info)s"
+#~ msgstr "Informació de la màquina: %(info)s"
+
+#~ msgid "DDM version: %(version)s"
+#~ msgstr "Versió del DDM: %(version)s"
+
+#~ msgid ""
+#~ "apt-listbugs is installed and might interfere with driver installation"
+#~ msgstr ""
+#~ "apt-listbugs està instal·lat i pot interferir amb la instal·lació del "
+#~ "controlador"
+
+#~ msgid "Please enter your password"
+#~ msgstr "Entreu la vostra contrasenya"
+
+#~ msgid "DDM - Kernel"
+#~ msgstr "DDM - Nucli"
+
+#~ msgid ""
+#~ "You do not have the latest kernel installed.\n"
+#~ "\n"
+#~ "Use the Update Manager to update your system."
+#~ msgstr ""
+#~ "No teniu el darrer nucli (kernel) instal·lat:\n"
+#~ "\n"
+#~ "Useu el Gestor d'Actualitzacions per actualitzar el sistema."
+
+#~ msgid "DDM - Live environment"
+#~ msgstr "DDM - Entorn autònom"
+
+#~ msgid ""
+#~ "DDM cannot run in a live environment\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "DDM no pot funcionar en un entorn autònom\n"
+#~ "\n"
+#~ "Per forçar l'arrencada, useu l'argument '--force'"
+
+#~ msgid "DDM - Debian based"
+#~ msgstr "DDM - Basat en Debian"
+
+#~ msgid ""
+#~ "Cannot determine the base distribution (debian or ubuntu)\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "No es pot determinar la distribució base (Debian o Ubuntu)\n"
+#~ "\n"
+#~ "Per forçar l'arrencada, useu l'argument '--force'"
+
+#~ msgid "DDM - Internet"
+#~ msgstr "DDM - Internet"
+
+#~ msgid ""
+#~ "You do not seem to have an internet connection\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "No sembla que hi hagi connexió a Internet\n"
+#~ "\n"
+#~ "Per forçar l'arrencada, useu l'argument '--force'"
 
 #~ msgid "Install aborted: not in repository: %(repo)s"
 #~ msgstr "Instal·lació interrompuda; no està al dipòsit: %(repo)s"

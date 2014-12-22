@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-03 16:41+0100\n"
+"POT-Creation-Date: 2014-12-22 12:27+0100\n"
 "PO-Revision-Date: 2013-12-24 16:09+0100\n"
 "Last-Translator: Phi <phissica@gmail.com>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -18,492 +18,436 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../usr/lib/ddm/ati.py:73
-#, python-format
-msgid "ATI card found: %(card)s"
-msgstr "ATI Karte gefunden: %(card)s"
-
-#: ../usr/lib/ddm/ati.py:78
-#, python-format
-msgid "ATI chip serie found: %(serie)s"
-msgstr "ATI Karte der Chipserie gefunden: %(serie)s"
-
-#: ../usr/lib/ddm/ati.py:87
-#, python-format
-msgid "ATI driver found: %(drv)s (%(status)s)"
-msgstr "ATI Treiber gefunden: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/ati.py:90 ../usr/lib/ddm/via.py:56
-#: ../usr/lib/ddm/intel.py:57 ../usr/lib/ddm/nvidia.py:104
-#, python-format
-msgid "Driver not installable: %(drv)s"
-msgstr "Treiber nicht installierbar: %(drv)s"
-
-#: ../usr/lib/ddm/ati.py:92
-#, python-format
-msgid "ATI chip serie not supported: %(serie)d"
-msgstr "ATI Karte dieser Chipserie wird nicht unterstützt: %(serie)d"
-
-#: ../usr/lib/ddm/ati.py:94
-#, python-format
-msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
-msgstr "Kein Treiber gefunden, für: %(card)s (%(man)s:%(serie)s)"
-
-#: ../usr/lib/ddm/ati.py:107 ../usr/lib/ddm/via.py:68
-#: ../usr/lib/ddm/intel.py:69 ../usr/lib/ddm/nvidia.py:118
-#, python-format
-msgid "Install driver: %(drv)s"
-msgstr "installiere Treiber: %(drv)s"
-
-#: ../usr/lib/ddm/ati.py:121 ../usr/lib/ddm/nvidia.py:144
-#, python-format
-msgid "Switch to module: %(module)s"
-msgstr "Wechsle zu Modul: %(module)s"
-
-#: ../usr/lib/ddm/ati.py:127 ../usr/lib/ddm/via.py:77
-#: ../usr/lib/ddm/intel.py:78 ../usr/lib/ddm/nvidia.py:154
-#, python-format
-msgid "Driver installed: %(drv)s"
-msgstr "Treiber installiert: %(drv)s"
-
-#: ../usr/lib/ddm/ati.py:138
-msgid "Removing ATI drivers"
-msgstr "Entferne ATI Treiber"
-
-#: ../usr/lib/ddm/ati.py:152 ../usr/lib/ddm/via.py:96
-#: ../usr/lib/ddm/intel.py:97 ../usr/lib/ddm/nvidia.py:183
-#, python-format
-msgid "Driver removed: %(drv)s"
-msgstr "Treiber wurde deinstalliert: %(drv)s"
-
-#: ../usr/lib/ddm/ati.py:160
-msgid "ATI display driver"
-msgstr "ATI Display Treiber"
-
-#: ../usr/lib/ddm/ati.py:162 ../usr/lib/ddm/intel.py:105
-#: ../usr/lib/ddm/nvidia.py:193
-msgid "Intel display driver"
-msgstr "Intel Display Treiber"
-
-#: ../usr/lib/ddm/ati.py:164
-msgid "Radeon display driver"
-msgstr "Radeon Display Treiber"
-
-#: ../usr/lib/ddm/ati.py:166 ../usr/lib/ddm/via.py:106
-#: ../usr/lib/ddm/intel.py:107 ../usr/lib/ddm/nvidia.py:197
-msgid "Framebuffer display driver"
-msgstr "Framebuffer Display Treiber"
-
-#: ../usr/lib/ddm/ati.py:168 ../usr/lib/ddm/via.py:108
-#: ../usr/lib/ddm/intel.py:109 ../usr/lib/ddm/nvidia.py:199
-msgid "Vesa display driver"
-msgstr "Vesa Display Treiber"
-
-#: ../usr/lib/ddm/broadcom.py:89
-#, python-format
-msgid "Broadcom chip serie found: %(chip)s"
-msgstr "Broadcom der Chipserie gefunden: %(chip)s"
-
-#: ../usr/lib/ddm/broadcom.py:158
-#, python-format
-msgid "Used wireless driver: %(drv)s"
-msgstr "Verwendeter WLAN-Treiber: %(drv)s"
-
-#: ../usr/lib/ddm/broadcom.py:179
-#, python-format
-msgid "Broadcom found: %(broadcom)s"
-msgstr "Broadcom gefunden: %(broadcom)s"
-
-#: ../usr/lib/ddm/broadcom.py:202
-#, python-format
-msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
+#: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:26
+#: ../debian/ddm/usr/lib/ddm/ddm.py:46 ../debian/ddm/usr/lib/ddm/main.py:26
+#: ../usr/share/applications/ddm.desktop.in.h:1
+#: ../debian/ddm/usr/share/applications/ddm.desktop.in.h:1
+msgid "Device Driver Manager"
 msgstr ""
-"Broadcom-Chipsatz oder Ethernet-Controller nicht unterstützt : %(broadcom)s"
 
-#: ../usr/lib/ddm/broadcom.py:204
-#, python-format
-msgid "Broadcom chipset not found: %(chip)s"
-msgstr "Broadcom-Chipsatz nicht gefunden: %(chip)s"
+#: ../usr/lib/ddm/ddm.py:47 ../debian/ddm/usr/lib/ddm/ddm.py:47
+msgid "Save"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:207
-#, python-format
-msgid "Broadcom pci ID not found: %(id)s"
-msgstr "Broadcom pci ID nicht gefunden: %(id)s"
+#: ../usr/lib/ddm/ddm.py:48 ../debian/ddm/usr/lib/ddm/ddm.py:48
+msgid "Help"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:216
-#, python-format
-msgid "Linux header name to install: %(header)s"
-msgstr "Linux Header für Kernel zu installieren: %(header)s"
+#: ../usr/lib/ddm/ddm.py:49 ../debian/ddm/usr/lib/ddm/ddm.py:49
+msgid "Quit"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:220
-#, python-format
-msgid "Download package: %(package)s"
-msgstr "Lade die erforderlichen Pakete herunter: %(package)s"
+#: ../usr/lib/ddm/ddm.py:103 ../debian/ddm/usr/lib/ddm/ddm.py:103
+msgid "No internet connection"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:228
-#, python-format
-msgid "Download package: %(drv)s"
-msgstr "Lade die Treiber-Pakete herunter: %(drv)s"
+#: ../usr/lib/ddm/ddm.py:104 ../debian/ddm/usr/lib/ddm/ddm.py:104
+msgid ""
+"You need an internet connection to install the additional software.\n"
+"Please, connect to the internet and try again."
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:265
-msgid "Install downloaded packages"
-msgstr "Installiere die heruntergeladenen Pakete"
+#: ../usr/lib/ddm/ddm.py:154 ../debian/ddm/usr/lib/ddm/ddm.py:154
+msgid "Install"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:273
-#, python-format
-msgid "Reconfigure package: %(package)s"
-msgstr "Konfigure die Pakete erneut: %(package)s"
+#: ../usr/lib/ddm/ddm.py:154 ../debian/ddm/usr/lib/ddm/ddm.py:154
+msgid "Device"
+msgstr ""
 
-#: ../usr/lib/ddm/broadcom.py:316
-#, python-format
-msgid "Purge driver: %(drv)s"
-msgstr "Deinstalliere Treiber: %(drv)s"
-
-#: ../usr/lib/ddm/broadcom.py:326
-msgid "Done removing Broadcom drivers"
-msgstr "Entfernen der Broadcom Treiber beendet"
-
-#: ../usr/lib/ddm/xorg.py:81
-#, python-format
-msgid "Used graphics driver: %(module)s"
-msgstr "Verwende Grafikkartentreiber (Modul): %(module)s"
-
-#: ../usr/lib/ddm/xorg.py:103
-msgid "No xorg.conf - create minimal xorg.conf"
-msgstr "Keine xorg.conf vorhanden - Erstelle eine minimal xorg.conf"
-
-#: ../usr/lib/ddm/xorg.py:123
-msgid "New xorg.conf written"
-msgstr "Neue xorg.conf geschrieben"
-
-#: ../usr/lib/ddm/xorg.py:129
-msgid "New section appended to xorg.conf"
-msgstr "Erstelle neue Sektion in der xorg.conf"
-
-#: ../usr/lib/ddm/via.py:47
-#, python-format
-msgid "Via card found: %(card)s"
-msgstr "Via Karte gefunden: %(card)s"
-
-#: ../usr/lib/ddm/via.py:53
-#, python-format
-msgid "Via driver found: %(drv)s (%(status)s)"
-msgstr "Via Treiber gefunden: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/via.py:104
-msgid "Chrome display driver"
-msgstr "Chrome Display Treiber"
-
-#: ../usr/lib/ddm/intel.py:48
-#, python-format
-msgid "Intel card found: %(card)s"
-msgstr "Intel Karte gefunden: %(card)s"
-
-#: ../usr/lib/ddm/intel.py:54
-#, python-format
-msgid "Intel driver found: %(drv)s (%(status)s)"
-msgstr "Intel Treiber gefunden: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/ddm.py:72
-msgid "Graphics"
-msgstr "Grafik"
-
-#: ../usr/lib/ddm/ddm.py:73
-msgid "Wireless"
-msgstr "WLAN"
-
-#: ../usr/lib/ddm/ddm.py:74
-msgid "Kernel"
-msgstr "Kernel"
-
-#: ../usr/lib/ddm/ddm.py:75
-msgid "Hardware"
+#: ../usr/lib/ddm/ddm.py:189 ../debian/ddm/usr/lib/ddm/ddm.py:189
+#, fuzzy
+msgid "Hardware scan"
 msgstr "Hardware"
 
-#: ../usr/lib/ddm/ddm.py:76
-msgid "Activated driver"
-msgstr "Aktivierter Treiber ist"
-
-#: ../usr/lib/ddm/ddm.py:77
-msgid "Alternative drivers"
-msgstr "Alternative Treiber sind"
-
-#: ../usr/lib/ddm/ddm.py:116 ../usr/lib/ddm/ddm.py:147
-msgid "Current drivers are correct"
-msgstr "Die aktuell verwendeten Treiber entsprechen der Empfehlung"
-
-#: ../usr/lib/ddm/ddm.py:157
-msgid "PAE already installed"
-msgstr "PAE Adresserweiterung bereits installiert"
-
-#: ../usr/lib/ddm/ddm.py:159
-msgid "PAE support only for 32-bit systems"
-msgstr "PAE-Unterstützung ausschließlich für 32-bit Systeme"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Activate"
-msgstr "Aktiviert"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Driver"
-msgstr "Treiber"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Version"
-msgstr "Version"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Description"
-msgstr "Beschreibung"
-
-#: ../usr/lib/ddm/ddm.py:214
-msgid " (recommended)"
+#: ../usr/lib/ddm/ddm.py:193 ../debian/ddm/usr/lib/ddm/ddm.py:193
+msgid "There are no available drivers for your hardware:"
 msgstr ""
-"(wird Empfohlen, Achtung bei freien und unfreien Treibern. Häufig sind die "
-"freien Treiber ausreichend.)"
 
-#: ../usr/lib/ddm/ddm.py:259
-msgid "Unknown driver"
-msgstr "Treiber unbekannt"
-
-#: ../usr/lib/ddm/ddm.py:262
-msgid ""
-"Unknown driver found.\n"
-"\n"
-"Please remove before installing drivers with DDM."
+#: ../usr/lib/ddm/ddm.py:199 ../debian/ddm/usr/lib/ddm/ddm.py:199
+msgid "DDM did not find any supported hardware."
 msgstr ""
-"unbekannten Treiber gefunden.\n"
-"\n"
-"Bitte deinstalliere diesen, bevor weitere Treiber mit DDM installiert werden."
 
-#: ../usr/lib/ddm/ddm.py:307
-msgid "Driver activation"
-msgstr "Treiber Aktivierung"
-
-#: ../usr/lib/ddm/ddm.py:307
-#, python-format
-msgid ""
-"Are you sure you want to install the following driver:\n"
-"\n"
-"%(drv)s"
+#: ../usr/lib/ddm/ddm.py:247 ../debian/ddm/usr/lib/ddm/ddm.py:247
+msgid "Saved"
 msgstr ""
-"Bist Du dir sicher, dass dieser Treiber installiert werden soll:\n"
-"\n"
-"%(drv)s"
 
-#: ../usr/lib/ddm/ddm.py:312 ../usr/lib/ddm/ddm.py:452
-msgid "Locked"
-msgstr "gesperrt"
-
-#: ../usr/lib/ddm/ddm.py:312
-#, python-format
-msgid ""
-"Could not get lock on %(file)s.\n"
-"\n"
-"Close any programs locking the file and try again."
+#: ../usr/lib/ddm/ddm.py:248 ../debian/ddm/usr/lib/ddm/ddm.py:248
+msgid "You will need to restart your system."
 msgstr ""
-"Kann die Dateien nicht sperren %(file)s.\n"
-"\n"
-"Beende alle Programme und wiederhole den Vorgang."
 
-#: ../usr/lib/ddm/ddm.py:390
-msgid "Driver installed"
-msgstr "Treiber installiert"
-
-#: ../usr/lib/ddm/ddm.py:390
-#, python-format
-msgid ""
-"Driver installed: %(drv)s\n"
-"\n"
-"Drivers will be used on next boot.\n"
-"Do you want to reboot now?"
-msgstr ""
-"Treiber wurde installiert: %(drv)s\n"
-"\n"
-"Dieser wird aber erst nach einem Neustart verwendet.\n"
-"Neustart jetzt durchführen?"
-
-#: ../usr/lib/ddm/ddm.py:452
-#, python-format
-msgid ""
-"Could not get lock on %(file)s.\n"
-"\n"
-"Close any programs locking the file and restart DDM."
-msgstr ""
-"Kann diese Dateien nicht sperren: %(file)s.\n"
-"\n"
-"Schließe alle Programme und starte DDM neu."
-
-#: ../usr/lib/ddm/ddm.py:485
-msgid "Checking your hardware..."
-msgstr "Hardware wird überprüft..."
-
-#: ../usr/lib/ddm/ddm.py:550
-msgid "Start automatic driver install"
-msgstr "Starte die automatische Treiberinstallation"
-
-#: ../usr/lib/ddm/pae.py:43
-#, python-format
-msgid "Installed PAE: %(pae)s"
-msgstr "PAE installiert: %(pae)s"
-
-#: ../usr/lib/ddm/pae.py:49
-msgid "Multi-core support for 32-bit systems"
-msgstr "Mehrkern Unterstützung für 32-bit Systeme"
-
-#: ../usr/lib/ddm/pae.py:59
-#, python-format
-msgid "Multi-core already installed: %(package)s"
-msgstr "Mehrkern Unterstützung ist schon installiert: %(package)s"
-
-#: ../usr/lib/ddm/pae.py:60 ../usr/lib/ddm/pae.py:73
+#: ../usr/lib/ddm/ddm.py:426 ../debian/ddm/usr/lib/ddm/ddm.py:426
 msgid "PAE capable system"
 msgstr "PAE fähiges System"
 
-#: ../usr/lib/ddm/pae.py:66
-msgid "Multi-core system running single-core kernel found"
-msgstr "Mehrkern System läuft auf Einkern-Kernel -Single-Core-"
-
-#: ../usr/lib/ddm/pae.py:70
-msgid "PAE not installed"
-msgstr "PAE nicht installiert"
-
-#: ../usr/lib/ddm/pae.py:79
-msgid "PAE kernel cannot be installed: single-core system"
-msgstr "PAE Kernel kann nicht installiert werden: Einkernprozessor System"
-
-#: ../usr/lib/ddm/pae.py:95
-msgid "Done installing PAE"
-msgstr "Erledigt, PAE wurde installiert"
-
-#: ../usr/lib/ddm/pae.py:109
-#, python-format
-msgid "PAE package to remove: %(package)s"
-msgstr "PAE Pakete werden entfernt: %(package)s"
-
-#: ../usr/lib/ddm/pae.py:112
-msgid "Done removing PAE"
-msgstr "Erledigt, PAE entfernt"
-
-#: ../usr/lib/ddm/pae.py:114
-msgid "Cannot remove PAE when running PAE"
-msgstr "Kann PAE nicht entfernen, wenn PAE noch läuft"
-
-#: ../usr/lib/ddm/nvidia.py:57
-msgid "Update apt"
-msgstr "Aktualisiere apt (Advanced Package Tool)"
-
-#: ../usr/lib/ddm/nvidia.py:60
-msgid "Install nvidia-detect"
-msgstr "Installiere das Paket nvidia-detect"
-
-#: ../usr/lib/ddm/nvidia.py:68
-msgid "Cannot install nvidia-detect: abort"
-msgstr "Kann nvidia-detect nicht installieren: Abbruch"
-
-#: ../usr/lib/ddm/nvidia.py:92
-#, fuzzy, python-format
-msgid "Nvidia card found: %(card)s"
-msgstr "Via Karte gefunden: %(card)s"
-
-#: ../usr/lib/ddm/nvidia.py:101
-#, python-format
-msgid "Nvidia driver found: %(drv)s (%(status)s)"
-msgstr "Nvidia Treiber gefunden: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/nvidia.py:166
-msgid "Removing Nvidia drivers"
-msgstr "Entferne Nvidia Treiber"
-
-#: ../usr/lib/ddm/nvidia.py:191
-msgid "Nvidia display driver"
-msgstr "Nvidia Display Treiber"
-
-#: ../usr/lib/ddm/nvidia.py:195
-msgid "Nouveau display driver"
-msgstr "Nouveau Display Treiber"
-
-#: ../usr/lib/ddm/main.py:67
-#, python-format
-msgid "Write debug information to file: %(path)s"
-msgstr "Schreibe Debug-Information in diese Datei : %(path)s"
-
-#: ../usr/lib/ddm/main.py:71
-#, python-format
-msgid "Machine info: %(info)s"
-msgstr "Systeminformationen: %(info)s"
-
-#: ../usr/lib/ddm/main.py:73
-#, python-format
-msgid "DDM version: %(version)s"
-msgstr "DDM Version: %(version)s"
-
-#: ../usr/lib/ddm/main.py:78
-msgid "apt-listbugs is installed and might interfere with driver installation"
+#: ../usr/lib/ddm/ddm.py:512 ../debian/ddm/usr/lib/ddm/ddm.py:512
+msgid ""
+"There was an error during the installation.\n"
+"Please, run 'sudo apt-get -f install' in a terminal.\n"
+"Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
-"Bitte die Ausgabe von apt-listbugs vor der Treiberinstallation beachten"
 
-#: ../usr/lib/ddm/main.py:108 ../usr/lib/ddm/main.py:110
-msgid "Please enter your password"
-msgstr "Bitte gib Dein Passwort ein"
+#: ../usr/lib/ddm/ddm.py:521 ../debian/ddm/usr/lib/ddm/ddm.py:521
+msgid "The software has been successfully installed."
+msgstr ""
 
-#: ../usr/lib/ddm/main.py:116
+#: ../usr/lib/ddm/main.py:27 ../debian/ddm/usr/lib/ddm/main.py:27
 #, fuzzy
-msgid "DDM - Kernel"
-msgstr "DDM - Internet"
-
-#: ../usr/lib/ddm/main.py:117
 msgid ""
-"You do not have the latest kernel installed.\n"
-"\n"
-"Use the Update Manager to update your system."
-msgstr ""
-
-#: ../usr/lib/ddm/main.py:121
-msgid "DDM - Live environment"
-msgstr "DDM - Live Umgebung"
-
-#: ../usr/lib/ddm/main.py:122
-msgid ""
-"DDM cannot run in a live environment\n"
-"\n"
-"To force start, use the --force argument"
+"Device Driver Manager cannot be started in a live environment\n"
+"You can use the --force argument to start DDM in a live environment"
 msgstr ""
 "DDM kann nicht in der Live-Umgebung starten\n"
 "\n"
 "Um den Start zu erzwingen, benutze die Option --force "
 
-#: ../usr/lib/ddm/main.py:126
-msgid "DDM - Debian based"
-msgstr "DDM - für auf Debian-basierte Distributionen"
+#: ../usr/lib/ddm/main.py:77 ../debian/ddm/usr/lib/ddm/main.py:77
+msgid "Unexpected error"
+msgstr ""
 
-#: ../usr/lib/ddm/main.py:127
+#: ../usr/lib/ddm/main.py:78 ../debian/ddm/usr/lib/ddm/main.py:78
 msgid ""
-"Cannot determine the base distribution (debian or ubuntu)\n"
-"\n"
-"To force start, use the --force argument"
+"Device Driver Manager has failed with the following unexpected error.\n"
+"Please submit a bug report!"
 msgstr ""
-"Kann die Basis-Distribution (Debian oder Ubuntu) nicht bestimmen\n"
-"\n"
-"Um den Start zu erzwingen, benutze die Option --force "
 
-#: ../usr/lib/ddm/main.py:131
-msgid "DDM - Internet"
-msgstr "DDM - Internet"
+#~ msgid "Driver"
+#~ msgstr "Treiber"
 
-#: ../usr/lib/ddm/main.py:132
-msgid ""
-"You do not seem to have an internet connection\n"
-"\n"
-"To force start, use the --force argument"
-msgstr ""
-"Anscheinend ist keine Internet-Verbindung verfügbar\n"
-"\n"
-"Um den Start zu erzwingen, benutze die Option --force "
+#~ msgid "ATI card found: %(card)s"
+#~ msgstr "ATI Karte gefunden: %(card)s"
 
-#: ../usr/share/applications/ddm.desktop.in.h:1
-msgid "Device Driver Manager"
-msgstr ""
+#~ msgid "ATI chip serie found: %(serie)s"
+#~ msgstr "ATI Karte der Chipserie gefunden: %(serie)s"
+
+#~ msgid "ATI driver found: %(drv)s (%(status)s)"
+#~ msgstr "ATI Treiber gefunden: %(drv)s (%(status)s)"
+
+#~ msgid "Driver not installable: %(drv)s"
+#~ msgstr "Treiber nicht installierbar: %(drv)s"
+
+#~ msgid "ATI chip serie not supported: %(serie)d"
+#~ msgstr "ATI Karte dieser Chipserie wird nicht unterstützt: %(serie)d"
+
+#~ msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
+#~ msgstr "Kein Treiber gefunden, für: %(card)s (%(man)s:%(serie)s)"
+
+#~ msgid "Install driver: %(drv)s"
+#~ msgstr "installiere Treiber: %(drv)s"
+
+#~ msgid "Switch to module: %(module)s"
+#~ msgstr "Wechsle zu Modul: %(module)s"
+
+#~ msgid "Driver installed: %(drv)s"
+#~ msgstr "Treiber installiert: %(drv)s"
+
+#~ msgid "Removing ATI drivers"
+#~ msgstr "Entferne ATI Treiber"
+
+#~ msgid "Driver removed: %(drv)s"
+#~ msgstr "Treiber wurde deinstalliert: %(drv)s"
+
+#~ msgid "ATI display driver"
+#~ msgstr "ATI Display Treiber"
+
+#~ msgid "Intel display driver"
+#~ msgstr "Intel Display Treiber"
+
+#~ msgid "Radeon display driver"
+#~ msgstr "Radeon Display Treiber"
+
+#~ msgid "Framebuffer display driver"
+#~ msgstr "Framebuffer Display Treiber"
+
+#~ msgid "Vesa display driver"
+#~ msgstr "Vesa Display Treiber"
+
+#~ msgid "Broadcom chip serie found: %(chip)s"
+#~ msgstr "Broadcom der Chipserie gefunden: %(chip)s"
+
+#~ msgid "Used wireless driver: %(drv)s"
+#~ msgstr "Verwendeter WLAN-Treiber: %(drv)s"
+
+#~ msgid "Broadcom found: %(broadcom)s"
+#~ msgstr "Broadcom gefunden: %(broadcom)s"
+
+#~ msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
+#~ msgstr ""
+#~ "Broadcom-Chipsatz oder Ethernet-Controller nicht unterstützt : "
+#~ "%(broadcom)s"
+
+#~ msgid "Broadcom chipset not found: %(chip)s"
+#~ msgstr "Broadcom-Chipsatz nicht gefunden: %(chip)s"
+
+#~ msgid "Broadcom pci ID not found: %(id)s"
+#~ msgstr "Broadcom pci ID nicht gefunden: %(id)s"
+
+#~ msgid "Linux header name to install: %(header)s"
+#~ msgstr "Linux Header für Kernel zu installieren: %(header)s"
+
+#~ msgid "Download package: %(package)s"
+#~ msgstr "Lade die erforderlichen Pakete herunter: %(package)s"
+
+#~ msgid "Download package: %(drv)s"
+#~ msgstr "Lade die Treiber-Pakete herunter: %(drv)s"
+
+#~ msgid "Install downloaded packages"
+#~ msgstr "Installiere die heruntergeladenen Pakete"
+
+#~ msgid "Reconfigure package: %(package)s"
+#~ msgstr "Konfigure die Pakete erneut: %(package)s"
+
+#~ msgid "Purge driver: %(drv)s"
+#~ msgstr "Deinstalliere Treiber: %(drv)s"
+
+#~ msgid "Done removing Broadcom drivers"
+#~ msgstr "Entfernen der Broadcom Treiber beendet"
+
+#~ msgid "Used graphics driver: %(module)s"
+#~ msgstr "Verwende Grafikkartentreiber (Modul): %(module)s"
+
+#~ msgid "No xorg.conf - create minimal xorg.conf"
+#~ msgstr "Keine xorg.conf vorhanden - Erstelle eine minimal xorg.conf"
+
+#~ msgid "New xorg.conf written"
+#~ msgstr "Neue xorg.conf geschrieben"
+
+#~ msgid "New section appended to xorg.conf"
+#~ msgstr "Erstelle neue Sektion in der xorg.conf"
+
+#~ msgid "Via card found: %(card)s"
+#~ msgstr "Via Karte gefunden: %(card)s"
+
+#~ msgid "Via driver found: %(drv)s (%(status)s)"
+#~ msgstr "Via Treiber gefunden: %(drv)s (%(status)s)"
+
+#~ msgid "Chrome display driver"
+#~ msgstr "Chrome Display Treiber"
+
+#~ msgid "Intel card found: %(card)s"
+#~ msgstr "Intel Karte gefunden: %(card)s"
+
+#~ msgid "Intel driver found: %(drv)s (%(status)s)"
+#~ msgstr "Intel Treiber gefunden: %(drv)s (%(status)s)"
+
+#~ msgid "Graphics"
+#~ msgstr "Grafik"
+
+#~ msgid "Wireless"
+#~ msgstr "WLAN"
+
+#~ msgid "Kernel"
+#~ msgstr "Kernel"
+
+#~ msgid "Hardware"
+#~ msgstr "Hardware"
+
+#~ msgid "Activated driver"
+#~ msgstr "Aktivierter Treiber ist"
+
+#~ msgid "Alternative drivers"
+#~ msgstr "Alternative Treiber sind"
+
+#~ msgid "Current drivers are correct"
+#~ msgstr "Die aktuell verwendeten Treiber entsprechen der Empfehlung"
+
+#~ msgid "PAE already installed"
+#~ msgstr "PAE Adresserweiterung bereits installiert"
+
+#~ msgid "PAE support only for 32-bit systems"
+#~ msgstr "PAE-Unterstützung ausschließlich für 32-bit Systeme"
+
+#~ msgid "Activate"
+#~ msgstr "Aktiviert"
+
+#~ msgid "Version"
+#~ msgstr "Version"
+
+#~ msgid "Description"
+#~ msgstr "Beschreibung"
+
+#~ msgid " (recommended)"
+#~ msgstr ""
+#~ "(wird Empfohlen, Achtung bei freien und unfreien Treibern. Häufig sind "
+#~ "die freien Treiber ausreichend.)"
+
+#~ msgid "Unknown driver"
+#~ msgstr "Treiber unbekannt"
+
+#~ msgid ""
+#~ "Unknown driver found.\n"
+#~ "\n"
+#~ "Please remove before installing drivers with DDM."
+#~ msgstr ""
+#~ "unbekannten Treiber gefunden.\n"
+#~ "\n"
+#~ "Bitte deinstalliere diesen, bevor weitere Treiber mit DDM installiert "
+#~ "werden."
+
+#~ msgid "Driver activation"
+#~ msgstr "Treiber Aktivierung"
+
+#~ msgid ""
+#~ "Are you sure you want to install the following driver:\n"
+#~ "\n"
+#~ "%(drv)s"
+#~ msgstr ""
+#~ "Bist Du dir sicher, dass dieser Treiber installiert werden soll:\n"
+#~ "\n"
+#~ "%(drv)s"
+
+#~ msgid "Locked"
+#~ msgstr "gesperrt"
+
+#~ msgid ""
+#~ "Could not get lock on %(file)s.\n"
+#~ "\n"
+#~ "Close any programs locking the file and try again."
+#~ msgstr ""
+#~ "Kann die Dateien nicht sperren %(file)s.\n"
+#~ "\n"
+#~ "Beende alle Programme und wiederhole den Vorgang."
+
+#~ msgid "Driver installed"
+#~ msgstr "Treiber installiert"
+
+#~ msgid ""
+#~ "Driver installed: %(drv)s\n"
+#~ "\n"
+#~ "Drivers will be used on next boot.\n"
+#~ "Do you want to reboot now?"
+#~ msgstr ""
+#~ "Treiber wurde installiert: %(drv)s\n"
+#~ "\n"
+#~ "Dieser wird aber erst nach einem Neustart verwendet.\n"
+#~ "Neustart jetzt durchführen?"
+
+#~ msgid ""
+#~ "Could not get lock on %(file)s.\n"
+#~ "\n"
+#~ "Close any programs locking the file and restart DDM."
+#~ msgstr ""
+#~ "Kann diese Dateien nicht sperren: %(file)s.\n"
+#~ "\n"
+#~ "Schließe alle Programme und starte DDM neu."
+
+#~ msgid "Checking your hardware..."
+#~ msgstr "Hardware wird überprüft..."
+
+#~ msgid "Start automatic driver install"
+#~ msgstr "Starte die automatische Treiberinstallation"
+
+#~ msgid "Installed PAE: %(pae)s"
+#~ msgstr "PAE installiert: %(pae)s"
+
+#~ msgid "Multi-core support for 32-bit systems"
+#~ msgstr "Mehrkern Unterstützung für 32-bit Systeme"
+
+#~ msgid "Multi-core already installed: %(package)s"
+#~ msgstr "Mehrkern Unterstützung ist schon installiert: %(package)s"
+
+#~ msgid "Multi-core system running single-core kernel found"
+#~ msgstr "Mehrkern System läuft auf Einkern-Kernel -Single-Core-"
+
+#~ msgid "PAE not installed"
+#~ msgstr "PAE nicht installiert"
+
+#~ msgid "PAE kernel cannot be installed: single-core system"
+#~ msgstr "PAE Kernel kann nicht installiert werden: Einkernprozessor System"
+
+#~ msgid "Done installing PAE"
+#~ msgstr "Erledigt, PAE wurde installiert"
+
+#~ msgid "PAE package to remove: %(package)s"
+#~ msgstr "PAE Pakete werden entfernt: %(package)s"
+
+#~ msgid "Done removing PAE"
+#~ msgstr "Erledigt, PAE entfernt"
+
+#~ msgid "Cannot remove PAE when running PAE"
+#~ msgstr "Kann PAE nicht entfernen, wenn PAE noch läuft"
+
+#~ msgid "Update apt"
+#~ msgstr "Aktualisiere apt (Advanced Package Tool)"
+
+#~ msgid "Install nvidia-detect"
+#~ msgstr "Installiere das Paket nvidia-detect"
+
+#~ msgid "Cannot install nvidia-detect: abort"
+#~ msgstr "Kann nvidia-detect nicht installieren: Abbruch"
+
+#, fuzzy
+#~ msgid "Nvidia card found: %(card)s"
+#~ msgstr "Via Karte gefunden: %(card)s"
+
+#~ msgid "Nvidia driver found: %(drv)s (%(status)s)"
+#~ msgstr "Nvidia Treiber gefunden: %(drv)s (%(status)s)"
+
+#~ msgid "Removing Nvidia drivers"
+#~ msgstr "Entferne Nvidia Treiber"
+
+#~ msgid "Nvidia display driver"
+#~ msgstr "Nvidia Display Treiber"
+
+#~ msgid "Nouveau display driver"
+#~ msgstr "Nouveau Display Treiber"
+
+#~ msgid "Write debug information to file: %(path)s"
+#~ msgstr "Schreibe Debug-Information in diese Datei : %(path)s"
+
+#~ msgid "Machine info: %(info)s"
+#~ msgstr "Systeminformationen: %(info)s"
+
+#~ msgid "DDM version: %(version)s"
+#~ msgstr "DDM Version: %(version)s"
+
+#~ msgid ""
+#~ "apt-listbugs is installed and might interfere with driver installation"
+#~ msgstr ""
+#~ "Bitte die Ausgabe von apt-listbugs vor der Treiberinstallation beachten"
+
+#~ msgid "Please enter your password"
+#~ msgstr "Bitte gib Dein Passwort ein"
+
+#, fuzzy
+#~ msgid "DDM - Kernel"
+#~ msgstr "DDM - Internet"
+
+#~ msgid "DDM - Live environment"
+#~ msgstr "DDM - Live Umgebung"
+
+#~ msgid ""
+#~ "DDM cannot run in a live environment\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "DDM kann nicht in der Live-Umgebung starten\n"
+#~ "\n"
+#~ "Um den Start zu erzwingen, benutze die Option --force "
+
+#~ msgid "DDM - Debian based"
+#~ msgstr "DDM - für auf Debian-basierte Distributionen"
+
+#~ msgid ""
+#~ "Cannot determine the base distribution (debian or ubuntu)\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "Kann die Basis-Distribution (Debian oder Ubuntu) nicht bestimmen\n"
+#~ "\n"
+#~ "Um den Start zu erzwingen, benutze die Option --force "
+
+#~ msgid "DDM - Internet"
+#~ msgstr "DDM - Internet"
+
+#~ msgid ""
+#~ "You do not seem to have an internet connection\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "Anscheinend ist keine Internet-Verbindung verfügbar\n"
+#~ "\n"
+#~ "Um den Start zu erzwingen, benutze die Option --force "
 
 #~ msgid "Configure ATI..."
 #~ msgstr "Konfiguriere ATI..."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ddm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-03 16:41+0100\n"
+"POT-Creation-Date: 2014-12-22 12:27+0100\n"
 "PO-Revision-Date: 2013-12-28 11:43+0100\n"
 "Last-Translator: Schoelje <schoelje@solydxk.com>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -20,490 +20,437 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /home/toor/DATA\n"
 
-#: ../usr/lib/ddm/ati.py:73
-#, python-format
-msgid "ATI card found: %(card)s"
-msgstr "Nalezena karta ATI: %(card)s"
+#: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:26
+#: ../debian/ddm/usr/lib/ddm/ddm.py:46 ../debian/ddm/usr/lib/ddm/main.py:26
+#: ../usr/share/applications/ddm.desktop.in.h:1
+#: ../debian/ddm/usr/share/applications/ddm.desktop.in.h:1
+msgid "Device Driver Manager"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:78
-#, python-format
-msgid "ATI chip serie found: %(serie)s"
-msgstr "Nalezen čip ATI série: %(serie)s"
+#: ../usr/lib/ddm/ddm.py:47 ../debian/ddm/usr/lib/ddm/ddm.py:47
+msgid "Save"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:87
-#, python-format
-msgid "ATI driver found: %(drv)s (%(status)s)"
-msgstr "Nalezen ovladač ATI: %(drv)s (%(status)s)"
+#: ../usr/lib/ddm/ddm.py:48 ../debian/ddm/usr/lib/ddm/ddm.py:48
+msgid "Help"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:90 ../usr/lib/ddm/via.py:56
-#: ../usr/lib/ddm/intel.py:57 ../usr/lib/ddm/nvidia.py:104
-#, python-format
-msgid "Driver not installable: %(drv)s"
-msgstr "Ovladač: %(drv)s nelze nainstalovat"
+#: ../usr/lib/ddm/ddm.py:49 ../debian/ddm/usr/lib/ddm/ddm.py:49
+msgid "Quit"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:92
-#, python-format
-msgid "ATI chip serie not supported: %(serie)d"
-msgstr "Čip ATI série: %(serie)d není podporován"
+#: ../usr/lib/ddm/ddm.py:103 ../debian/ddm/usr/lib/ddm/ddm.py:103
+msgid "No internet connection"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:94
-#, python-format
-msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
-msgstr "Pro: %(card)s (%(man)s:%(serie)s) nenalezen ovladač"
+#: ../usr/lib/ddm/ddm.py:104 ../debian/ddm/usr/lib/ddm/ddm.py:104
+msgid ""
+"You need an internet connection to install the additional software.\n"
+"Please, connect to the internet and try again."
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:107 ../usr/lib/ddm/via.py:68
-#: ../usr/lib/ddm/intel.py:69 ../usr/lib/ddm/nvidia.py:118
-#, python-format
-msgid "Install driver: %(drv)s"
-msgstr "Instalovat ovladač: %(drv)s"
+#: ../usr/lib/ddm/ddm.py:154 ../debian/ddm/usr/lib/ddm/ddm.py:154
+msgid "Install"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:121 ../usr/lib/ddm/nvidia.py:144
-#, python-format
-msgid "Switch to module: %(module)s"
-msgstr "Přepnout na modul: %(module)s"
+#: ../usr/lib/ddm/ddm.py:154 ../debian/ddm/usr/lib/ddm/ddm.py:154
+msgid "Device"
+msgstr ""
 
-#: ../usr/lib/ddm/ati.py:127 ../usr/lib/ddm/via.py:77
-#: ../usr/lib/ddm/intel.py:78 ../usr/lib/ddm/nvidia.py:154
-#, python-format
-msgid "Driver installed: %(drv)s"
-msgstr "Nainstalován ovladač: %(drv)s"
-
-#: ../usr/lib/ddm/ati.py:138
-msgid "Removing ATI drivers"
-msgstr "Odebrání ovladačů ATI"
-
-#: ../usr/lib/ddm/ati.py:152 ../usr/lib/ddm/via.py:96
-#: ../usr/lib/ddm/intel.py:97 ../usr/lib/ddm/nvidia.py:183
-#, python-format
-msgid "Driver removed: %(drv)s"
-msgstr "Odebrán ovladač: %(drv)s"
-
-#: ../usr/lib/ddm/ati.py:160
-msgid "ATI display driver"
-msgstr "ATI ovladač displeje"
-
-#: ../usr/lib/ddm/ati.py:162 ../usr/lib/ddm/intel.py:105
-#: ../usr/lib/ddm/nvidia.py:193
-msgid "Intel display driver"
-msgstr "Intel ovladač displeje"
-
-#: ../usr/lib/ddm/ati.py:164
-msgid "Radeon display driver"
-msgstr "Radeon ovladač displeje"
-
-#: ../usr/lib/ddm/ati.py:166 ../usr/lib/ddm/via.py:106
-#: ../usr/lib/ddm/intel.py:107 ../usr/lib/ddm/nvidia.py:197
-msgid "Framebuffer display driver"
-msgstr "Framebuffer ovladač displeje"
-
-#: ../usr/lib/ddm/ati.py:168 ../usr/lib/ddm/via.py:108
-#: ../usr/lib/ddm/intel.py:109 ../usr/lib/ddm/nvidia.py:199
-msgid "Vesa display driver"
-msgstr "Vesa ovladač displeje"
-
-#: ../usr/lib/ddm/broadcom.py:89
-#, python-format
-msgid "Broadcom chip serie found: %(chip)s"
-msgstr "Nalezen čip série Broadcom: %(chip)s"
-
-#: ../usr/lib/ddm/broadcom.py:158
-#, python-format
-msgid "Used wireless driver: %(drv)s"
-msgstr "Použit WiFi ovladač: %(drv)s"
-
-#: ../usr/lib/ddm/broadcom.py:179
-#, python-format
-msgid "Broadcom found: %(broadcom)s"
-msgstr "Nalezen Broadcom: %(broadcom)s"
-
-#: ../usr/lib/ddm/broadcom.py:202
-#, python-format
-msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
-msgstr "Čipset Broadcom nebo řadič ethernet není podporován: %(broadcom)s"
-
-#: ../usr/lib/ddm/broadcom.py:204
-#, python-format
-msgid "Broadcom chipset not found: %(chip)s"
-msgstr "Čipset Broadcom nenalezen: %(chip)s"
-
-#: ../usr/lib/ddm/broadcom.py:207
-#, python-format
-msgid "Broadcom pci ID not found: %(id)s"
-msgstr "Broadcom pci ID nenalezeno: %(id)s"
-
-#: ../usr/lib/ddm/broadcom.py:216
-#, python-format
-msgid "Linux header name to install: %(header)s"
-msgstr "Linux název hlavičky k instalaci: %(header)s"
-
-#: ../usr/lib/ddm/broadcom.py:220
-#, python-format
-msgid "Download package: %(package)s"
-msgstr "Stahnout balíček: %(package)s"
-
-#: ../usr/lib/ddm/broadcom.py:228
-#, python-format
-msgid "Download package: %(drv)s"
-msgstr "Stahnout balíček: %(drv)s"
-
-#: ../usr/lib/ddm/broadcom.py:265
-msgid "Install downloaded packages"
-msgstr "Instalovat stažený balíček"
-
-#: ../usr/lib/ddm/broadcom.py:273
-#, python-format
-msgid "Reconfigure package: %(package)s"
-msgstr "Překonfigurovat balíček: %(package)s"
-
-#: ../usr/lib/ddm/broadcom.py:316
-#, python-format
-msgid "Purge driver: %(drv)s"
-msgstr "Odstranit ovladač: %(drv)s"
-
-#: ../usr/lib/ddm/broadcom.py:326
-msgid "Done removing Broadcom drivers"
-msgstr "Broadcom ovladače odebrány"
-
-#: ../usr/lib/ddm/xorg.py:81
-#, python-format
-msgid "Used graphics driver: %(module)s"
-msgstr "Použit grafický ovladač: %(module)s"
-
-#: ../usr/lib/ddm/xorg.py:103
-msgid "No xorg.conf - create minimal xorg.conf"
-msgstr "Chybí xorg.conf - vytvořte minimální xorg.conf"
-
-#: ../usr/lib/ddm/xorg.py:123
-msgid "New xorg.conf written"
-msgstr "Nový xorg.conf uložen"
-
-#: ../usr/lib/ddm/xorg.py:129
-msgid "New section appended to xorg.conf"
-msgstr "Nová sekce připojena do xorg.conf"
-
-#: ../usr/lib/ddm/via.py:47
-#, python-format
-msgid "Via card found: %(card)s"
-msgstr "Nalezena karta Via: %(card)s"
-
-#: ../usr/lib/ddm/via.py:53
-#, python-format
-msgid "Via driver found: %(drv)s (%(status)s)"
-msgstr "Nalezen ovladač Via: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/via.py:104
-msgid "Chrome display driver"
-msgstr "ovladač displeje"
-
-#: ../usr/lib/ddm/intel.py:48
-#, python-format
-msgid "Intel card found: %(card)s"
-msgstr "Nalezena karta Intel: %(card)s"
-
-#: ../usr/lib/ddm/intel.py:54
-#, python-format
-msgid "Intel driver found: %(drv)s (%(status)s)"
-msgstr "Nalezen ovladač Intel: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/ddm.py:72
-msgid "Graphics"
-msgstr "Grafiky"
-
-#: ../usr/lib/ddm/ddm.py:73
-msgid "Wireless"
-msgstr "WiFi"
-
-#: ../usr/lib/ddm/ddm.py:74
-msgid "Kernel"
-msgstr "Kernel"
-
-#: ../usr/lib/ddm/ddm.py:75
-msgid "Hardware"
+#: ../usr/lib/ddm/ddm.py:189 ../debian/ddm/usr/lib/ddm/ddm.py:189
+#, fuzzy
+msgid "Hardware scan"
 msgstr "Hardware"
 
-#: ../usr/lib/ddm/ddm.py:76
-msgid "Activated driver"
-msgstr "Ovladač aktivován"
-
-#: ../usr/lib/ddm/ddm.py:77
-msgid "Alternative drivers"
-msgstr "Alternativní ovladače"
-
-#: ../usr/lib/ddm/ddm.py:116 ../usr/lib/ddm/ddm.py:147
-msgid "Current drivers are correct"
-msgstr "Současné ovladače jsou vpořádku"
-
-#: ../usr/lib/ddm/ddm.py:157
-msgid "PAE already installed"
-msgstr "PAE je již nainstalováno"
-
-#: ../usr/lib/ddm/ddm.py:159
-msgid "PAE support only for 32-bit systems"
-msgstr "PAE podporuje pouze 32-bitové systémy"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Activate"
-msgstr "Aktivace"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Driver"
-msgstr "Ovladač"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Version"
-msgstr "Verze"
-
-#: ../usr/lib/ddm/ddm.py:199
-msgid "Description"
-msgstr "Popis"
-
-#: ../usr/lib/ddm/ddm.py:214
-msgid " (recommended)"
-msgstr " (doporučeno)"
-
-#: ../usr/lib/ddm/ddm.py:259
-msgid "Unknown driver"
-msgstr "Neznámý ovladač"
-
-#: ../usr/lib/ddm/ddm.py:262
-msgid ""
-"Unknown driver found.\n"
-"\n"
-"Please remove before installing drivers with DDM."
+#: ../usr/lib/ddm/ddm.py:193 ../debian/ddm/usr/lib/ddm/ddm.py:193
+msgid "There are no available drivers for your hardware:"
 msgstr ""
-"Nalezen neznámý ovladač.\n"
-"\n"
-"Odeberte prosím před instalací ovladačů pomocí DDM."
 
-#: ../usr/lib/ddm/ddm.py:307
-msgid "Driver activation"
-msgstr "Aktivace ovladače"
-
-#: ../usr/lib/ddm/ddm.py:307
-#, python-format
-msgid ""
-"Are you sure you want to install the following driver:\n"
-"\n"
-"%(drv)s"
+#: ../usr/lib/ddm/ddm.py:199 ../debian/ddm/usr/lib/ddm/ddm.py:199
+msgid "DDM did not find any supported hardware."
 msgstr ""
-"Jste si jistí, že chcete nainstalovat následující ovladač:\n"
-"\n"
-"%(drv)s ?"
 
-#: ../usr/lib/ddm/ddm.py:312 ../usr/lib/ddm/ddm.py:452
-msgid "Locked"
-msgstr "Uzamčeno"
-
-#: ../usr/lib/ddm/ddm.py:312
-#, python-format
-msgid ""
-"Could not get lock on %(file)s.\n"
-"\n"
-"Close any programs locking the file and try again."
+#: ../usr/lib/ddm/ddm.py:247 ../debian/ddm/usr/lib/ddm/ddm.py:247
+msgid "Saved"
 msgstr ""
-"Nelze uzamknout %(file)s.\n"
-"\n"
-"Ukončete programy, které soubor uzamykají a zkuste to znovu."
 
-#: ../usr/lib/ddm/ddm.py:390
-msgid "Driver installed"
-msgstr "Ovladač nainstalován"
-
-#: ../usr/lib/ddm/ddm.py:390
-#, python-format
-msgid ""
-"Driver installed: %(drv)s\n"
-"\n"
-"Drivers will be used on next boot.\n"
-"Do you want to reboot now?"
+#: ../usr/lib/ddm/ddm.py:248 ../debian/ddm/usr/lib/ddm/ddm.py:248
+msgid "You will need to restart your system."
 msgstr ""
-"Nainstalován ovladač: %(drv)s\n"
-"\n"
-"Ovladače budou spuštěny po příštím restartu.\n"
-"Chcete restartovat počítač nyní?"
 
-#: ../usr/lib/ddm/ddm.py:452
-#, python-format
-msgid ""
-"Could not get lock on %(file)s.\n"
-"\n"
-"Close any programs locking the file and restart DDM."
-msgstr ""
-"Nelze uzamknout %(file)s.\n"
-"\n"
-"Ukončete programy, které soubor uzamykají a restartujte DDM."
-
-#: ../usr/lib/ddm/ddm.py:485
-msgid "Checking your hardware..."
-msgstr "Prověřování vašeho hardware..."
-
-#: ../usr/lib/ddm/ddm.py:550
-msgid "Start automatic driver install"
-msgstr "Start automatické instalace ovladače"
-
-#: ../usr/lib/ddm/pae.py:43
-#, python-format
-msgid "Installed PAE: %(pae)s"
-msgstr "Nainstalováno PAE: %(pae)s"
-
-#: ../usr/lib/ddm/pae.py:49
-msgid "Multi-core support for 32-bit systems"
-msgstr "Podpora více jader pro 32-bitové systémy"
-
-#: ../usr/lib/ddm/pae.py:59
-#, python-format
-msgid "Multi-core already installed: %(package)s"
-msgstr "Podpora více jader je již nainstalována: %(package)s"
-
-#: ../usr/lib/ddm/pae.py:60 ../usr/lib/ddm/pae.py:73
+#: ../usr/lib/ddm/ddm.py:426 ../debian/ddm/usr/lib/ddm/ddm.py:426
 msgid "PAE capable system"
 msgstr "Systém podporující PAE"
 
-#: ../usr/lib/ddm/pae.py:66
-msgid "Multi-core system running single-core kernel found"
-msgstr "Zjištěn běh jednojádrového linuxového jádra na vícejádrovém systému"
-
-#: ../usr/lib/ddm/pae.py:70
-msgid "PAE not installed"
-msgstr "PAE není nainstalováno"
-
-#: ../usr/lib/ddm/pae.py:79
-msgid "PAE kernel cannot be installed: single-core system"
-msgstr "PAE linuxové jádro nelze nainstalovat: jednojádrový systém"
-
-#: ../usr/lib/ddm/pae.py:95
-msgid "Done installing PAE"
-msgstr "Instalace PAE dokončena"
-
-#: ../usr/lib/ddm/pae.py:109
-#, python-format
-msgid "PAE package to remove: %(package)s"
-msgstr "Balíček pro odebrání PAE: %(package)s"
-
-#: ../usr/lib/ddm/pae.py:112
-msgid "Done removing PAE"
-msgstr "Odinstalování PAE hotovo"
-
-#: ../usr/lib/ddm/pae.py:114
-msgid "Cannot remove PAE when running PAE"
-msgstr "PAE nelze odebrat, pokud PAE běží"
-
-#: ../usr/lib/ddm/nvidia.py:57
-msgid "Update apt"
-msgstr "Aktualizace apt"
-
-#: ../usr/lib/ddm/nvidia.py:60
-msgid "Install nvidia-detect"
-msgstr "Instalace nvidia-detect"
-
-#: ../usr/lib/ddm/nvidia.py:68
-msgid "Cannot install nvidia-detect: abort"
-msgstr "nvidia-detect nelze nainstalovat: přerušeno"
-
-#: ../usr/lib/ddm/nvidia.py:92
-#, python-format
-msgid "Nvidia card found: %(card)s"
-msgstr "Nalezena karta Nvidia: %(card)s"
-
-#: ../usr/lib/ddm/nvidia.py:101
-#, python-format
-msgid "Nvidia driver found: %(drv)s (%(status)s)"
-msgstr "Nalezen ovladač Nvidia: %(drv)s (%(status)s)"
-
-#: ../usr/lib/ddm/nvidia.py:166
-msgid "Removing Nvidia drivers"
-msgstr "Odebrání Nvidia ovladačů"
-
-#: ../usr/lib/ddm/nvidia.py:191
-msgid "Nvidia display driver"
-msgstr "Nvidia ovladač displeje"
-
-#: ../usr/lib/ddm/nvidia.py:195
-msgid "Nouveau display driver"
-msgstr "Nouveau ovladač displeje"
-
-#: ../usr/lib/ddm/main.py:67
-#, python-format
-msgid "Write debug information to file: %(path)s"
-msgstr "Zápis ladících informací do souboru: %(path)s"
-
-#: ../usr/lib/ddm/main.py:71
-#, python-format
-msgid "Machine info: %(info)s"
-msgstr "Informace o stroji: %(info)s"
-
-#: ../usr/lib/ddm/main.py:73
-#, python-format
-msgid "DDM version: %(version)s"
-msgstr "Verze DDM: %(version)s"
-
-#: ../usr/lib/ddm/main.py:78
-msgid "apt-listbugs is installed and might interfere with driver installation"
-msgstr "apt-listbugs je nainstalován a může kolidovat s instalací ovladače"
-
-#: ../usr/lib/ddm/main.py:108 ../usr/lib/ddm/main.py:110
-msgid "Please enter your password"
-msgstr "Vložte prosím svoje heslo"
-
-#: ../usr/lib/ddm/main.py:116
-msgid "DDM - Kernel"
-msgstr "DDM - Linuxové jádro"
-
-#: ../usr/lib/ddm/main.py:117
+#: ../usr/lib/ddm/ddm.py:512 ../debian/ddm/usr/lib/ddm/ddm.py:512
 msgid ""
-"You do not have the latest kernel installed.\n"
-"\n"
-"Use the Update Manager to update your system."
+"There was an error during the installation.\n"
+"Please, run 'sudo apt-get -f install' in a terminal.\n"
+"Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
-"Nemáte nainstalovánu poslední verzi linuxového jádra.\n"
-"\n"
-"Použijte Update Manager a aktualizujte svůj systém."
 
-#: ../usr/lib/ddm/main.py:121
-msgid "DDM - Live environment"
-msgstr "DDM - Živé prostředí"
+#: ../usr/lib/ddm/ddm.py:521 ../debian/ddm/usr/lib/ddm/ddm.py:521
+msgid "The software has been successfully installed."
+msgstr ""
 
-#: ../usr/lib/ddm/main.py:122
+#: ../usr/lib/ddm/main.py:27 ../debian/ddm/usr/lib/ddm/main.py:27
+#, fuzzy
 msgid ""
-"DDM cannot run in a live environment\n"
-"\n"
-"To force start, use the --force argument"
+"Device Driver Manager cannot be started in a live environment\n"
+"You can use the --force argument to start DDM in a live environment"
 msgstr ""
 "DDM nemůže běžet v živém prostředí\n"
 "\n"
 "Pro vynucení spuštění použijte argument --force"
 
-#: ../usr/lib/ddm/main.py:126
-msgid "DDM - Debian based"
-msgstr "DDM - Založeno na Debianu"
+#: ../usr/lib/ddm/main.py:77 ../debian/ddm/usr/lib/ddm/main.py:77
+msgid "Unexpected error"
+msgstr ""
 
-#: ../usr/lib/ddm/main.py:127
+#: ../usr/lib/ddm/main.py:78 ../debian/ddm/usr/lib/ddm/main.py:78
 msgid ""
-"Cannot determine the base distribution (debian or ubuntu)\n"
-"\n"
-"To force start, use the --force argument"
+"Device Driver Manager has failed with the following unexpected error.\n"
+"Please submit a bug report!"
 msgstr ""
-"Nelze určit výchozí distribuci (debian nebo ubuntu)\n"
-"\n"
-"Pro vynucení spuštění použijte argument --force"
 
-#: ../usr/lib/ddm/main.py:131
-msgid "DDM - Internet"
-msgstr "DDM - Internet"
+#~ msgid "Driver"
+#~ msgstr "Ovladač"
 
-#: ../usr/lib/ddm/main.py:132
-msgid ""
-"You do not seem to have an internet connection\n"
-"\n"
-"To force start, use the --force argument"
-msgstr ""
-"Vypadá to, že nemáte připojení k internetu\n"
-"\n"
-"Pro vynucení spuštění použijte argument --force"
+#~ msgid "ATI card found: %(card)s"
+#~ msgstr "Nalezena karta ATI: %(card)s"
 
-#: ../usr/share/applications/ddm.desktop.in.h:1
-msgid "Device Driver Manager"
-msgstr ""
+#~ msgid "ATI chip serie found: %(serie)s"
+#~ msgstr "Nalezen čip ATI série: %(serie)s"
+
+#~ msgid "ATI driver found: %(drv)s (%(status)s)"
+#~ msgstr "Nalezen ovladač ATI: %(drv)s (%(status)s)"
+
+#~ msgid "Driver not installable: %(drv)s"
+#~ msgstr "Ovladač: %(drv)s nelze nainstalovat"
+
+#~ msgid "ATI chip serie not supported: %(serie)d"
+#~ msgstr "Čip ATI série: %(serie)d není podporován"
+
+#~ msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
+#~ msgstr "Pro: %(card)s (%(man)s:%(serie)s) nenalezen ovladač"
+
+#~ msgid "Install driver: %(drv)s"
+#~ msgstr "Instalovat ovladač: %(drv)s"
+
+#~ msgid "Switch to module: %(module)s"
+#~ msgstr "Přepnout na modul: %(module)s"
+
+#~ msgid "Driver installed: %(drv)s"
+#~ msgstr "Nainstalován ovladač: %(drv)s"
+
+#~ msgid "Removing ATI drivers"
+#~ msgstr "Odebrání ovladačů ATI"
+
+#~ msgid "Driver removed: %(drv)s"
+#~ msgstr "Odebrán ovladač: %(drv)s"
+
+#~ msgid "ATI display driver"
+#~ msgstr "ATI ovladač displeje"
+
+#~ msgid "Intel display driver"
+#~ msgstr "Intel ovladač displeje"
+
+#~ msgid "Radeon display driver"
+#~ msgstr "Radeon ovladač displeje"
+
+#~ msgid "Framebuffer display driver"
+#~ msgstr "Framebuffer ovladač displeje"
+
+#~ msgid "Vesa display driver"
+#~ msgstr "Vesa ovladač displeje"
+
+#~ msgid "Broadcom chip serie found: %(chip)s"
+#~ msgstr "Nalezen čip série Broadcom: %(chip)s"
+
+#~ msgid "Used wireless driver: %(drv)s"
+#~ msgstr "Použit WiFi ovladač: %(drv)s"
+
+#~ msgid "Broadcom found: %(broadcom)s"
+#~ msgstr "Nalezen Broadcom: %(broadcom)s"
+
+#~ msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
+#~ msgstr "Čipset Broadcom nebo řadič ethernet není podporován: %(broadcom)s"
+
+#~ msgid "Broadcom chipset not found: %(chip)s"
+#~ msgstr "Čipset Broadcom nenalezen: %(chip)s"
+
+#~ msgid "Broadcom pci ID not found: %(id)s"
+#~ msgstr "Broadcom pci ID nenalezeno: %(id)s"
+
+#~ msgid "Linux header name to install: %(header)s"
+#~ msgstr "Linux název hlavičky k instalaci: %(header)s"
+
+#~ msgid "Download package: %(package)s"
+#~ msgstr "Stahnout balíček: %(package)s"
+
+#~ msgid "Download package: %(drv)s"
+#~ msgstr "Stahnout balíček: %(drv)s"
+
+#~ msgid "Install downloaded packages"
+#~ msgstr "Instalovat stažený balíček"
+
+#~ msgid "Reconfigure package: %(package)s"
+#~ msgstr "Překonfigurovat balíček: %(package)s"
+
+#~ msgid "Purge driver: %(drv)s"
+#~ msgstr "Odstranit ovladač: %(drv)s"
+
+#~ msgid "Done removing Broadcom drivers"
+#~ msgstr "Broadcom ovladače odebrány"
+
+#~ msgid "Used graphics driver: %(module)s"
+#~ msgstr "Použit grafický ovladač: %(module)s"
+
+#~ msgid "No xorg.conf - create minimal xorg.conf"
+#~ msgstr "Chybí xorg.conf - vytvořte minimální xorg.conf"
+
+#~ msgid "New xorg.conf written"
+#~ msgstr "Nový xorg.conf uložen"
+
+#~ msgid "New section appended to xorg.conf"
+#~ msgstr "Nová sekce připojena do xorg.conf"
+
+#~ msgid "Via card found: %(card)s"
+#~ msgstr "Nalezena karta Via: %(card)s"
+
+#~ msgid "Via driver found: %(drv)s (%(status)s)"
+#~ msgstr "Nalezen ovladač Via: %(drv)s (%(status)s)"
+
+#~ msgid "Chrome display driver"
+#~ msgstr "ovladač displeje"
+
+#~ msgid "Intel card found: %(card)s"
+#~ msgstr "Nalezena karta Intel: %(card)s"
+
+#~ msgid "Intel driver found: %(drv)s (%(status)s)"
+#~ msgstr "Nalezen ovladač Intel: %(drv)s (%(status)s)"
+
+#~ msgid "Graphics"
+#~ msgstr "Grafiky"
+
+#~ msgid "Wireless"
+#~ msgstr "WiFi"
+
+#~ msgid "Kernel"
+#~ msgstr "Kernel"
+
+#~ msgid "Hardware"
+#~ msgstr "Hardware"
+
+#~ msgid "Activated driver"
+#~ msgstr "Ovladač aktivován"
+
+#~ msgid "Alternative drivers"
+#~ msgstr "Alternativní ovladače"
+
+#~ msgid "Current drivers are correct"
+#~ msgstr "Současné ovladače jsou vpořádku"
+
+#~ msgid "PAE already installed"
+#~ msgstr "PAE je již nainstalováno"
+
+#~ msgid "PAE support only for 32-bit systems"
+#~ msgstr "PAE podporuje pouze 32-bitové systémy"
+
+#~ msgid "Activate"
+#~ msgstr "Aktivace"
+
+#~ msgid "Version"
+#~ msgstr "Verze"
+
+#~ msgid "Description"
+#~ msgstr "Popis"
+
+#~ msgid " (recommended)"
+#~ msgstr " (doporučeno)"
+
+#~ msgid "Unknown driver"
+#~ msgstr "Neznámý ovladač"
+
+#~ msgid ""
+#~ "Unknown driver found.\n"
+#~ "\n"
+#~ "Please remove before installing drivers with DDM."
+#~ msgstr ""
+#~ "Nalezen neznámý ovladač.\n"
+#~ "\n"
+#~ "Odeberte prosím před instalací ovladačů pomocí DDM."
+
+#~ msgid "Driver activation"
+#~ msgstr "Aktivace ovladače"
+
+#~ msgid ""
+#~ "Are you sure you want to install the following driver:\n"
+#~ "\n"
+#~ "%(drv)s"
+#~ msgstr ""
+#~ "Jste si jistí, že chcete nainstalovat následující ovladač:\n"
+#~ "\n"
+#~ "%(drv)s ?"
+
+#~ msgid "Locked"
+#~ msgstr "Uzamčeno"
+
+#~ msgid ""
+#~ "Could not get lock on %(file)s.\n"
+#~ "\n"
+#~ "Close any programs locking the file and try again."
+#~ msgstr ""
+#~ "Nelze uzamknout %(file)s.\n"
+#~ "\n"
+#~ "Ukončete programy, které soubor uzamykají a zkuste to znovu."
+
+#~ msgid "Driver installed"
+#~ msgstr "Ovladač nainstalován"
+
+#~ msgid ""
+#~ "Driver installed: %(drv)s\n"
+#~ "\n"
+#~ "Drivers will be used on next boot.\n"
+#~ "Do you want to reboot now?"
+#~ msgstr ""
+#~ "Nainstalován ovladač: %(drv)s\n"
+#~ "\n"
+#~ "Ovladače budou spuštěny po příštím restartu.\n"
+#~ "Chcete restartovat počítač nyní?"
+
+#~ msgid ""
+#~ "Could not get lock on %(file)s.\n"
+#~ "\n"
+#~ "Close any programs locking the file and restart DDM."
+#~ msgstr ""
+#~ "Nelze uzamknout %(file)s.\n"
+#~ "\n"
+#~ "Ukončete programy, které soubor uzamykají a restartujte DDM."
+
+#~ msgid "Checking your hardware..."
+#~ msgstr "Prověřování vašeho hardware..."
+
+#~ msgid "Start automatic driver install"
+#~ msgstr "Start automatické instalace ovladače"
+
+#~ msgid "Installed PAE: %(pae)s"
+#~ msgstr "Nainstalováno PAE: %(pae)s"
+
+#~ msgid "Multi-core support for 32-bit systems"
+#~ msgstr "Podpora více jader pro 32-bitové systémy"
+
+#~ msgid "Multi-core already installed: %(package)s"
+#~ msgstr "Podpora více jader je již nainstalována: %(package)s"
+
+#~ msgid "Multi-core system running single-core kernel found"
+#~ msgstr "Zjištěn běh jednojádrového linuxového jádra na vícejádrovém systému"
+
+#~ msgid "PAE not installed"
+#~ msgstr "PAE není nainstalováno"
+
+#~ msgid "PAE kernel cannot be installed: single-core system"
+#~ msgstr "PAE linuxové jádro nelze nainstalovat: jednojádrový systém"
+
+#~ msgid "Done installing PAE"
+#~ msgstr "Instalace PAE dokončena"
+
+#~ msgid "PAE package to remove: %(package)s"
+#~ msgstr "Balíček pro odebrání PAE: %(package)s"
+
+#~ msgid "Done removing PAE"
+#~ msgstr "Odinstalování PAE hotovo"
+
+#~ msgid "Cannot remove PAE when running PAE"
+#~ msgstr "PAE nelze odebrat, pokud PAE běží"
+
+#~ msgid "Update apt"
+#~ msgstr "Aktualizace apt"
+
+#~ msgid "Install nvidia-detect"
+#~ msgstr "Instalace nvidia-detect"
+
+#~ msgid "Cannot install nvidia-detect: abort"
+#~ msgstr "nvidia-detect nelze nainstalovat: přerušeno"
+
+#~ msgid "Nvidia card found: %(card)s"
+#~ msgstr "Nalezena karta Nvidia: %(card)s"
+
+#~ msgid "Nvidia driver found: %(drv)s (%(status)s)"
+#~ msgstr "Nalezen ovladač Nvidia: %(drv)s (%(status)s)"
+
+#~ msgid "Removing Nvidia drivers"
+#~ msgstr "Odebrání Nvidia ovladačů"
+
+#~ msgid "Nvidia display driver"
+#~ msgstr "Nvidia ovladač displeje"
+
+#~ msgid "Nouveau display driver"
+#~ msgstr "Nouveau ovladač displeje"
+
+#~ msgid "Write debug information to file: %(path)s"
+#~ msgstr "Zápis ladících informací do souboru: %(path)s"
+
+#~ msgid "Machine info: %(info)s"
+#~ msgstr "Informace o stroji: %(info)s"
+
+#~ msgid "DDM version: %(version)s"
+#~ msgstr "Verze DDM: %(version)s"
+
+#~ msgid ""
+#~ "apt-listbugs is installed and might interfere with driver installation"
+#~ msgstr "apt-listbugs je nainstalován a může kolidovat s instalací ovladače"
+
+#~ msgid "Please enter your password"
+#~ msgstr "Vložte prosím svoje heslo"
+
+#~ msgid "DDM - Kernel"
+#~ msgstr "DDM - Linuxové jádro"
+
+#~ msgid ""
+#~ "You do not have the latest kernel installed.\n"
+#~ "\n"
+#~ "Use the Update Manager to update your system."
+#~ msgstr ""
+#~ "Nemáte nainstalovánu poslední verzi linuxového jádra.\n"
+#~ "\n"
+#~ "Použijte Update Manager a aktualizujte svůj systém."
+
+#~ msgid "DDM - Live environment"
+#~ msgstr "DDM - Živé prostředí"
+
+#~ msgid ""
+#~ "DDM cannot run in a live environment\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "DDM nemůže běžet v živém prostředí\n"
+#~ "\n"
+#~ "Pro vynucení spuštění použijte argument --force"
+
+#~ msgid "DDM - Debian based"
+#~ msgstr "DDM - Založeno na Debianu"
+
+#~ msgid ""
+#~ "Cannot determine the base distribution (debian or ubuntu)\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "Nelze určit výchozí distribuci (debian nebo ubuntu)\n"
+#~ "\n"
+#~ "Pro vynucení spuštění použijte argument --force"
+
+#~ msgid "DDM - Internet"
+#~ msgstr "DDM - Internet"
+
+#~ msgid ""
+#~ "You do not seem to have an internet connection\n"
+#~ "\n"
+#~ "To force start, use the --force argument"
+#~ msgstr ""
+#~ "Vypadá to, že nemáte připojení k internetu\n"
+#~ "\n"
+#~ "Pro vynucení spuštění použijte argument --force"
 
 #~ msgid "Install aborted: not in repository: %(repo)s"
 #~ msgstr "Instalace ukončena: v repozitáři chybí balíček: %(repo)s"

@@ -1,8 +1,14 @@
+ddm (1.9.0) debian; urgency=low
+
+  * Total re-write to simplify use and maintenance
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Thu, 18 Dec 2014 13:00:00 +0100
+
 ddm (1.0.8) debian; urgency=low
 
   * Improved translation handling
 
- -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sun, 02 Nov 2014 11:00:00 +0200
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sun, 02 Nov 2014 11:00:00 +0100
 
 ddm (1.0.7) debian; urgency=low
 
