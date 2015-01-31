@@ -1,5 +1,4 @@
 #!/usr/bin/python -OO
-#-*- coding: utf-8 -*-
 
 import sys
 sys.path.insert(1, '/usr/lib/ddm')
@@ -16,7 +15,7 @@ except getopt.GetoptError:
 
 force = False
 for opt, arg in opts:
-    print((">> opt = {} / arg = {}".format(opt, arg)))
+    #print((">> opt = {} / arg = {}".format(opt, arg)))
     if opt in ('-f', '--force'):
         force = True
 

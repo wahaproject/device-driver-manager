@@ -100,6 +100,7 @@ function install_fglrx {
   preseed
   
   # Install the packages
+  apt-get update
   apt-get install -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree amd-opencl-icd 2>&1 | tee -a $LOG_FILE
   apt-get install -y --force-yes $REINST $DRIVER 2>&1 | tee -a $LOG_FILE
   

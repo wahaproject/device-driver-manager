@@ -22,19 +22,20 @@ echo "Running the script install-pae" | tee -a $LOG_FILE
 echo "Start at (m/d/y):" $(date +"%m/%d/%Y %H:%M:%S") | tee -a $LOG_FILE
 echo "===================================" | tee -a $LOG_FILE
 
-NRCPUS=`cat /proc/cpuinfo | grep processor | wc -l`
+MACHINE=`uname -m`
 RELEASE=`uname -r`
 
 # Install PAE when more than one CPU and not running on 64-bit system
-if [ $NRCPUS -gt 1 ] && [[ ! "$RELEASE" =~ "amd64" ]]; then
+if [ $MACHINE == "i686" ]; then
   if [ "$1" == "purge" ]; then
     if [[ "$RELEASE" =~ "pae" ]]; then
       echo "ERROR: Cannot remove PAE kernel when PAE is booted" | tee -a $LOG_FILE
     else
-      apt-get purge -y --force-yes linux-headers-686-pae linux-image-686-pae 2>&1 | tee -a $LOG_FILE
+      apt-get purge -y --force-yes $(dpkg-query -W -f='${Package}\n' *-pae) 2>&1 | tee -a $LOG_FILE
       echo "PAE kernel successfully removed" | tee -a $LOG_FILE
     fi
   else
+    apt-get update
     apt-get install -y --force-yes linux-headers-686-pae linux-image-686-pae 2>&1 | tee -a $LOG_FILE
     echo "PAE kernel successfully installed" | tee -a $LOG_FILE
   fi

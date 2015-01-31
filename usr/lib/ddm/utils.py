@@ -1,5 +1,4 @@
 #! /usr/bin/env python3
-#-*- coding: utf-8 -*-
 
 import subprocess
 import urllib.request
@@ -97,7 +96,7 @@ def runningInVirtualBox():
 
 # Check if is 64-bit system
 def isAmd64():
-    machine = getoutput("uname -m")
+    machine = getoutput("uname -m")[0]
     if machine == "x86_64":
         return True
     return False
@@ -107,8 +106,11 @@ def getPackageVersion(package, candidate=False):
     cmd = "env LANG=C bash -c 'apt-cache policy %s | grep \"Installed:\"'" % package
     if candidate:
         cmd = "env LANG=C bash -c 'apt-cache policy %s | grep \"Candidate:\"'" % package
-    lst = getoutput(cmd, realTime=False)[0].strip().split(' ')
-    return lst[-1]
+    lst = getoutput(cmd)[0].strip().split(' ')
+    version = lst[-1]
+    if 'none' in version:
+        version = ''
+    return version
 
 
 # Need to initiate threads for Gtk

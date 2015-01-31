@@ -5,17 +5,17 @@
   <object class="GtkImage" id="imgHelp">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-info</property>
+    <property name="icon_name">system-help</property>
   </object>
   <object class="GtkImage" id="imgInstall">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-save</property>
+    <property name="icon_name">document-save</property>
   </object>
   <object class="GtkImage" id="imgQuit">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-quit</property>
+    <property name="icon_name">application-exit</property>
   </object>
   <object class="GtkWindow" id="ddmWindow">
     <property name="width_request">600</property>

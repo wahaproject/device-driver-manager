@@ -102,6 +102,7 @@ function install_broadcom {
     cd $DLDIR
     
     # Download the packages
+    apt-get update
     apt-get download $DRIVER 2>&1 | tee -a $LOG_FILE
     
     # Check if packages were downloaded

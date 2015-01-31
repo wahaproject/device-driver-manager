@@ -1,5 +1,4 @@
 #! /usr/bin/env python3
-#-*- coding: utf-8 -*-
 
 # from gi.repository import Gtk, GdkPixbuf, GObject, Pango, Gdk, GLib
 from gi.repository import Gtk, GObject, GLib
@@ -17,6 +16,8 @@ from logger import Logger
 
 # i18n: http://docs.python.org/2/library/gettext.html
 gettext.install("ddm", "/usr/share/locale")
+
+_ = gettext.gettext
 
 # Need to initiate threads for Gtk
 GObject.threads_init()
@@ -44,7 +45,7 @@ class DDM(object):
         self.pbDDM = go("pbDDM")
 
         self.window.set_title(_("Device Driver Manager"))
-        self.btnSave.set_label(_("Save"))
+        self.btnSave.set_label(_("Install"))
         self.btnHelp.set_label(_("Help"))
         self.btnQuit.set_label(_("Quit"))
 
@@ -59,6 +60,7 @@ class DDM(object):
         self.logFile = '/var/log/ddm.log'
         self.log = Logger(self.logFile, addLogTime=False, maxSizeKB=5120)
         self.tvDDMHandler = TreeViewHandler(self.tvDDM)
+        self.tvDDMHandler.connect('checkbox-toggled', self.tv_checkbox_toggled)
 
         # Connect builder signals and show window
         self.builder.connect_signals(self)
@@ -159,6 +161,20 @@ class DDM(object):
         self.get_broadcom()
         self.get_pae()
 
+    # This method is fired by the TreeView.checkbox-toggled event
+    def tv_checkbox_toggled(self, obj, path, colNr, toggleValue):
+        path = int(path)
+        model = self.tvDDM.get_model()
+        itr = model.get_iter(path)
+        driver = model[itr][2].lower()
+
+        if 'pae' in driver and not toggleValue and self.paeBooted:
+            title = _("Remove kernel")
+            msg = _("You cannot remove a booted kernel.\nPlease, boot another kernel and try again.")
+            self.log.write(msg, 'tv_checkbox_toggled')
+            MessageDialogSafe(title, msg, Gtk.MessageType.WARNING, self.window).show()
+            model[itr][0] = True
+
     def fill_treeview_ddm(self):
         # Fill a list with supported hardware
         self.get_supported_hardware()
@@ -173,17 +189,6 @@ class DDM(object):
 
         # Fill treeview
         self.tvDDMHandler.fillTreeview(contentList=showHw, columnTypesList=columnTypes, firstItemIsColName=True, fontSize=12000)
-
-        # Disable checkbox if pae kernel is now booted
-        if self.paeBooted:
-            model = self.tvDDM.get_model()
-            itr = model.get_iter_first()
-            while itr is not None:
-                if 'pae' in model.get_value(itr, 2).lower():
-                    model[itr][0].set_sensitive(False)
-                    break
-                # Get the next in line
-                itr = model.iter_next(itr)
 
         # Show message if nothing is found or hardware is not supported
         title = _("Hardware scan")
@@ -397,19 +402,15 @@ class DDM(object):
                         self.hardware.append([selected, logo, shortDevice, driver, manufacturerId, device[1]])
 
     def get_pae(self):
-        try:
-            nrCpus = int(getoutput('cat /proc/cpuinfo | grep processor | wc -l')[0])
-        except:
-            nrCpus = 1
-
+        machine = getoutput('uname -m')[0]
         release = getoutput('uname -r')[0]
 
         # TESTING - Uncomment the following line for testing:
         #release = '3.16.0-4-586
 
-        self.log.write("PAE check: cpus={} / release={}".format(nrCpus, release), 'get_pae')
+        self.log.write("PAE check: machine={} / release={}".format(machine, release), 'get_pae')
 
-        if nrCpus > 1 and not 'amd64' in release:
+        if machine == 'i686':
             # Check if PAE is installed and running
             selected = False
             if 'pae' in release:
@@ -424,7 +425,7 @@ class DDM(object):
 
             # Fill self.hardware
             paeDescription = _("PAE capable system")
-            self.hardware.append([selected, logo, paeDescription, 'pae', '', ''])
+            self.hardware.append([selected, logo, paeDescription, '', 'pae', ''])
 
     def get_lspci_info(self, manufacturerId, filterString=''):
         deviceArray = []
@@ -472,7 +473,10 @@ class DDM(object):
         if logPath is not None:
             # Search for "depth" in each line and check the used module
             f = open(logPath, 'r')
-            log = f.read()
+            # Getting error on .read():
+            # "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x80"
+            # Replace with .read(20)
+            log = f.read(20)
             f.close()
             matchObj = re.search('([a-zA-Z]*)\(\d+\):\s+depth.*framebuffer', log, flags=re.IGNORECASE)
             if matchObj:

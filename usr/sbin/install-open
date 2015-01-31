@@ -25,30 +25,28 @@ function purge_proprietary_drivers {
   rm /etc/X11/xorg.conf 2>/dev/null
   rm /etc/modprobe.d/nvidia* 2>/dev/null
   rm /etc/modprobe.d/blacklist-nouveau.conf 2>/dev/null
-  apt-get purge -y --force-yes nvidia-driver* 2>&1 | tee -a $LOG_FILE
-  apt-get purge -y --force-yes nvidia-legacy* 2>&1 | tee -a $LOG_FILE
+  # Leave nvidia-detect and nvidia-installer-cleanup
+  apt-get purge -y --force-yes $(apt-show-versions | grep nvidia | grep -v detect | grep -v cleanup | cut -d':' -f1) 2>&1 | tee -a $LOG_FILE
+  apt-get purge -y --force-yes $(apt-show-versions | grep fglrx | cut -d':' -f1) 2>&1 | tee -a $LOG_FILE
   apt-get purge -y --force-yes bumblebee* 2>&1 | tee -a $LOG_FILE
   apt-get purge -y --force-yes primus* 2>&1 | tee -a $LOG_FILE
-  apt-get purge -y --force-yes libgl1-nvidia* 2>&1 | tee -a $LOG_FILE
-  apt-get purge -y --force-yes fglrx* 2>&1 | tee -a $LOG_FILE
-  apt-get purge -y --force-yes libgl1-fglrx* 2>&1 | tee -a $LOG_FILE
-  apt-get purge -y --force-yes libfglrx* 2>&1 | tee -a $LOG_FILE
   
-  echo "Propietary drivers successfully removed" | tee -a $LOG_FILE
+  echo "Propietary drivers removed" | tee -a $LOG_FILE
 }
 
 function install_open {
-  # Cleanup first
-  purge_proprietary_drivers
-  
   # Make sure you have the most used drivers installed 
   # These are installed by default on SolydXK
   DRIVER="xserver-xorg-video-nouveau xserver-xorg-video-vesa xserver-xorg-video-intel xserver-xorg-video-fbdev xserver-xorg-video-radeon xserver-xorg-video-ati xserver-xorg-video-nouveau"
   
   # Install the packages
+  apt-get update
   apt-get install -y --force-yes $DRIVER 2>&1 | tee -a $LOG_FILE
   
-  echo "Open drivers successfully installed" | tee -a $LOG_FILE
+  echo "Open drivers installed" | tee -a $LOG_FILE
+  
+  # Now cleanup
+  purge_proprietary_drivers
 }
 
 # Install the open drivers

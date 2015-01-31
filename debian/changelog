@@ -1,4 +1,10 @@
-ddm (1.9.0) debian; urgency=low
+ddm (2.0.2) debian; urgency=low
+
+  * Improved Bumblebee support
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Tue, 20 Jan 2015 22:00:00 +0100
+
+ddm (2.0.0) debian; urgency=low
 
   * Total re-write to simplify use and maintenance
 

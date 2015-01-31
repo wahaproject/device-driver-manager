@@ -42,6 +42,15 @@ CANDIDATE=`env LANG=C apt-cache policy $DRIVER | grep Candidate | awk '{print $2
 INSTALLED=`env LANG=C apt-cache policy $DRIVER | grep Installed | awk '{print $2}' | tr -d ' '`
 ARCHITECTURE=$(uname -m)
 
+# Check for Optimus
+OPTIMUS=$(lspci -vnn | grep '\''[030[02]\]' | wc -l)
+if [ $OPTIMUS -eq 2 ]; then
+  DRIVER='bumblebee-nvidia'
+  CANDIDATE=`env LANG=C apt-cache policy $DRIVER | grep Candidate | awk '{print $2}' | tr -d ' '`
+  INSTALLED=`env LANG=C apt-cache policy $DRIVER | grep Installed | awk '{print $2}' | tr -d ' '`
+fi
+
+
 if [ "$DRIVER" == "" ] || [ "$CANDIDATE" == "" ]; then
   exit
 fi
@@ -68,13 +77,9 @@ function install_nvidia {
       DRIVER="$DRIVER libgl1-nvidia-legacy-304xx-glx-i386"
     fi
   else
-    if [[ "$DRIVER" =~ "bumblebee" ]]; then
+    if [ "$DRIVER" == "bumblebee-nvidia" ]; then
       # Bumblebee drivers
-      DRIVER="$DRIVER primus"
-      if [ "$ARCHITECTURE" == "x86_64" ]; then
-	# Additional 32-bit drivers for 64-bit systems
-	DRIVER="$DRIVER primus-libs:i386 primus-libs-ia32:i386"
-      fi
+      DRIVER="$DRIVER primus-libs-ia32:i386"
     else
       if [ "$ARCHITECTURE" == "x86_64" ]; then
 	# Additional 32-bit drivers for 64-bit systems
@@ -100,18 +105,19 @@ function install_nvidia {
   preseed
   
   # Install the packages
+  apt-get update
   apt-get install -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree 2>&1 | tee -a $LOG_FILE
   apt-get install -y --force-yes $REINST $DRIVER 2>&1 | tee -a $LOG_FILE;
   
   # Configure
-  if [[ "$DRIVER" =~ "bumblebee" ]]; then
+  if [[ "$DRIVER" =~ "bumblebee-nvidia" ]]; then
     if [ "$USER" != "" ] && [ "$USER" != "root" ]; then
       groupadd bumblebee
       groupadd video
       usermod -a -G bumblebee,video $USER
-      if [ -f /etc/bumblebee/bumblebee.conf ]; then
-	sed -i 's/KernelDriver=nvidia/KernelDriver=nvidia-current/' /etc/bumblebee/bumblebee.conf
-      fi
+      #if [ -f /etc/bumblebee/bumblebee.conf ]; then
+	#sed -i -e 's/KernelDriver=nvidia\s*$/KernelDriver=nvidia-current/' /etc/bumblebee/bumblebee.conf
+      #fi
       service bumblebeed restart
     else
       echo "ERROR: Could not configure Bumblebee for user: $USER" | tee -a $LOG_FILE
