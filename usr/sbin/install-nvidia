@@ -8,9 +8,13 @@ LOG_FILE2=/var/log/ddm.log.1
 if [ -f $LOG_FILE ]; then
   LOG_SIZE_KB=$(ls -s $LOG_FILE | awk '{print $1}')
   if [ $LOG_SIZE_KB -gt $MAX_SIZE_KB ]; then
-    rm $LOG_FILE2
-    mv $LOG_FILE $LOG_FILE2
+    mv -f $LOG_FILE $LOG_FILE2
   fi
+fi
+
+# If not running in terminal, use GUI frontend
+if [ ! -t 1 ]; then
+  export DEBIAN_FRONTEND=gnome
 fi
 
 # Start the log
@@ -21,9 +25,9 @@ echo "===================================" | tee -a $LOG_FILE
 
 # Bumblebee: https://wiki.debian.org/Bumblebee
 
-# If 'purge' is passed as an argument, install-nouveau is called to cleanup the system
+# If 'purge' is passed as an argument, install-open is called to cleanup the system
 if [ "$1" == "purge" ]; then
-  install-nouveau
+  install-open
   exit
 fi
 
@@ -43,7 +47,7 @@ INSTALLED=`env LANG=C apt-cache policy $DRIVER | grep Installed | awk '{print $2
 ARCHITECTURE=$(uname -m)
 
 # Check for Optimus
-OPTIMUS=$(lspci -vnn | grep '\''[030[02]\]' | wc -l)
+OPTIMUS=$(lspci -vnn | grep '\[030[02]\]' | wc -l)
 if [ $OPTIMUS -eq 2 ]; then
   DRIVER='bumblebee-nvidia'
   CANDIDATE=`env LANG=C apt-cache policy $DRIVER | grep Candidate | awk '{print $2}' | tr -d ' '`
@@ -106,6 +110,7 @@ function install_nvidia {
   
   # Install the packages
   apt-get update
+  echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG_FILE
   apt-get install -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree 2>&1 | tee -a $LOG_FILE
   apt-get install -y --force-yes $REINST $DRIVER 2>&1 | tee -a $LOG_FILE;
   

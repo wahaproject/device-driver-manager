@@ -1,3 +1,10 @@
+ddm (2.0.3) debian; urgency=low
+
+  * Debugging for older ATI cards
+  * Improved graphical card detection
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Mon, 02 Feb 2015 11:00:00 +0100
+
 ddm (2.0.2) debian; urgency=low
 
   * Improved Bumblebee support

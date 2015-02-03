@@ -271,8 +271,11 @@ class DDM(object):
 
         # TESTING - Uncomment the following line for testing:
         #deviceArray = [['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]', '68e0']]
+        #deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] RV710 [Radeon HD 4350/4550]', '68e0']]
+        #deviceArray = [['Advanced Micro Devices [AMD/ATI] RS880 [Radeon HD 4290]', '68e0']]
 
         if deviceArray:
+            self.log.write("Device(s): {}".format(deviceArray), 'get_ati')
             # Check if fglrx is loaded
             # If it is: checkbox is selected
             loadedDrv = self.get_loaded_graphical_driver()
@@ -293,9 +296,13 @@ class DDM(object):
                     driver = 'fglrx'
 
                     # Check the series
-                    if series >= 1000 and series < startSeries:
-                        # Too old: use open Radeon drivers
-                        driver = 'radeon'
+                    #if series >= 1000 and series < startSeries:
+                        ## Too old: use open Radeon drivers
+                        #driver = 'radeon'
+
+                    # Don't show older ATI cards
+                    if series < startSeries:
+                        break
 
                     self.log.write("ATI driver to use: {}".format(driver), 'get_ati')
 
@@ -305,7 +312,7 @@ class DDM(object):
                         selected = True
 
                     # Fill self.hardware
-                    self.hardware.append([selected, logo, shortDevice, driver, manufacturerId, device[1]])
+                    self.hardware.append([selected, logo, shortDevice, driver, device[1], device[2]])
                 else:
                     self.notSupported.append(device[0])
 
@@ -314,9 +321,17 @@ class DDM(object):
         deviceArray = self.get_lspci_info(manufacturerId, 'VGA')
 
         # TESTING - Uncomment the following line for testing:
-        #deviceArray = [['NVIDIA Corporation GT218 [GeForce G210M]', '0a74']]
+        #deviceArray = [['NVIDIA Corporation GT218 [GeForce G210M]', '10de', '0a74']]
+        # Optimus test
+        #deviceArray = [['Intel Corporation Haswell-ULT Integrated Graphics Controller', '8086', '0a16'], \
+        #['NVIDIA Corporation GK107M [GeForce GT 750M]', '10de', '0fe4']]
 
         if deviceArray:
+            optimus = False
+            devices = []
+
+            self.log.write("Device(s): {}".format(deviceArray), 'get_nvidia')
+
             # Check if nvidia is loaded
             # If it is: checkbox is selected
             loadedDrv = self.get_loaded_graphical_driver()
@@ -327,28 +342,42 @@ class DDM(object):
 
             # Fill the hardware array
             for device in deviceArray:
+                if device[1] == '8086':
+                    optimus = True
+                else:
+                    devices.append(device)
+
+            for device in devices:
                 self.log.write("Nvidia device found: {}".format(device[0]), 'get_nvidia')
-                shortDevice = self.shorten_long_string(device[0], 50)
-                driver = 'nvidia'
+                optimusString = ""
+                if optimus:
+                    optimusString = "(Optimus) "
+                shortDevice = "{0}{1}".format(optimusString, self.shorten_long_string(device[0], 50))
 
                 # Check if the available driver is already loaded
                 selected = False
-                if loadedDrv == driver:
+                if optimus:
+                    if loadedDrv == 'nvidia' or loadedDrv == 'intel':
+                        bbversion = getPackageVersion("bumblebee-nvidia")
+                        self.log.write("bumblebee-nvidia version: {}".format(bbversion), 'get_nvidia')
+                        if bbversion != '':
+                            selected = True
+                elif loadedDrv == 'nvidia':
                     selected = True
 
-                nvidiaDetect = getoutput("nvidia-detect | grep nvidia- | tr -d ' '")
-                if nvidiaDetect:
-                    driver = nvidiaDetect[0]
-
-                # Check for hybrid card
-                intelArray = self.get_lspci_info('8086', 'VGA')
-                if intelArray:
-                    driver = 'bumblebee'
+                driver = ""
+                if optimus:
+                    driver = "bumblebee-nvidia"
+                else:
+                    nvidiaDetect = getoutput("nvidia-detect | grep nvidia- | tr -d ' '")
+                    if nvidiaDetect:
+                        driver = nvidiaDetect[0]
 
                 self.log.write("Nvidia driver to use: {}".format(driver), 'get_nvidia')
 
                 # Fill self.hardware
-                self.hardware.append([selected, logo, shortDevice, driver, manufacturerId, device[1]])
+                if driver != "":
+                    self.hardware.append([selected, logo, shortDevice, driver, device[1], device[2]])
 
     def get_broadcom(self):
         ## Hardware list (device ids)
@@ -368,6 +397,7 @@ class DDM(object):
         #deviceArray = [['Broadcom Corporation BCM4312 802.11a/b/g', '4312']]
 
         if deviceArray:
+            self.log.write("Device(s): {}".format(deviceArray), 'get_broadcom')
             # Check if broadcom is loaded
             # If it is: checkbox is selected
             loadedDrv = self.get_loaded_wireless_driver()
@@ -382,8 +412,8 @@ class DDM(object):
                 shortDevice = self.shorten_long_string(device[0], 50)
                 driver = ''
                 for did in deviceIds:
-                    #print(("{} in {}".format(device[1], did[1])))
-                    if device[1] in did[1]:
+                    #print(("{} in {}".format(device[2], did[1])))
+                    if device[2] in did[1]:
                         driver = did[0]
                         break
 
@@ -399,7 +429,7 @@ class DDM(object):
                             selected = True
 
                         # Fill self.hardware
-                        self.hardware.append([selected, logo, shortDevice, driver, manufacturerId, device[1]])
+                        self.hardware.append([selected, logo, shortDevice, driver, device[1], device[2]])
 
     def get_pae(self):
         machine = getoutput('uname -m')[0]
@@ -429,13 +459,29 @@ class DDM(object):
 
     def get_lspci_info(self, manufacturerId, filterString=''):
         deviceArray = []
-        if filterString != '':
-            filterString = " | grep {}".format(filterString)
-        output = getoutput("lspci -nn -d {}:{}".format(manufacturerId, filterString))
+        output = []
+
+        # Check for Optimus
+        if manufacturerId == '10de':
+            output = getoutput("lspci -vnn | grep '\[030[02]\]'")
+            # Testing
+            #output = ['00:02.0 VGA compatible controller [0300]: Intel Corporation Haswell-ULT Integrated Graphics Controller [8086:0a16] (rev 09) (prog-if 00 [VGA controller])', \
+            #          '01:00.0 3D controller [0302]: NVIDIA Corporation GK107M [GeForce GT 750M] [10de:0fe4] (rev a1)']
+
+        # Optimus will return 2 devices
+        # If there are less than 2 devices, do regular check
+        if len(output) < 2:
+            if filterString != '':
+                filterString = " | grep {}".format(filterString)
+            output = getoutput("lspci -nn -d {}:{}".format(manufacturerId, filterString))
+
+        if output:
+            self.log.write("lspci output = {}".format(output), 'get_lspci_info')
+
         for line in output:
-            matchObj = re.search(':\W(.*)\W\[.+:(.+)\]', line)
+            matchObj = re.search(':\W(.*)\W\[(.+):(.+)\]', line)
             if matchObj:
-                deviceArray.append([matchObj.group(1), matchObj.group(2)])
+                deviceArray.append([matchObj.group(1), matchObj.group(2), matchObj.group(3)])
         return deviceArray
 
     def shorten_long_string(self, longString, charLen, breakOnWord=True):
@@ -459,28 +505,25 @@ class DDM(object):
     # Return graphics module used by X.org
     # TODO: is lsmod an alternative?
     def get_loaded_graphical_driver(self):
-        # find the most recent X.org log
+        # sort on the most recent X.org log
         module = ''
         logDir = '/var/log/'
         logPath = None
-        maxTime = 0
-        for f in glob(os.path.join(logDir, 'Xorg.*.log')):
-            mtime = os.stat(f).st_mtime
-            if mtime > maxTime:
-                maxTime = mtime
-                logPath = f
+        logs = glob(os.path.join(logDir, 'Xorg.*.log*'))
+        logs.sort()
 
-        if logPath is not None:
+        for logPath in logs:
             # Search for "depth" in each line and check the used module
-            f = open(logPath, 'r')
-            # Getting error on .read():
-            # "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x80"
-            # Replace with .read(20)
-            log = f.read(20)
+            # Sometimes these logs are saved as binary: open as read-only binary
+            # When opening as ascii, read() will throw error: "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x80"
+            f = open(logPath, 'rb')
+            # ignore utf-8 binary read errors
+            log = f.read().decode("utf-8", "ignore")
             f.close()
             matchObj = re.search('([a-zA-Z]*)\(\d+\):\s+depth.*framebuffer', log, flags=re.IGNORECASE)
             if matchObj:
                 module = matchObj.group(1).lower()
+                break
 
         return module
 
