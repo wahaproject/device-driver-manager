@@ -67,7 +67,7 @@ def uncaught_excepthook(*args):
         import traceback
         from dialogs import ErrorDialog
         MessageDialog(_('Unexpected error'),
-                    _('<b>The installer has failed with the following unexpected error. Please submit a bug report!</b>'),
+                    _('<b>DDM has failed with the following unexpected error. Please submit a bug report!</b>'),
                     '<tt>' + '\n'.join(traceback.format_exception(*args)) + '</tt>', Gtk.MessageType.WARNING).show()
     sys.exit(1)
 

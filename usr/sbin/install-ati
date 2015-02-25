@@ -118,8 +118,8 @@ function install_fglrx {
   # Install the packages
   apt-get update
   echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG_FILE
-  apt-get install -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree amd-opencl-icd 2>&1 | tee -a $LOG_FILE
-  apt-get install -y --force-yes $REINST $DRIVER 2>&1 | tee -a $LOG_FILE
+  apt-get install --reinstall -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree amd-opencl-icd 2>&1 | tee -a $LOG_FILE
+  apt-get install --reinstall -y --force-yes $REINST $DRIVER 2>&1 | tee -a $LOG_FILE
   
   # Configure
   if ! $RADEON; then

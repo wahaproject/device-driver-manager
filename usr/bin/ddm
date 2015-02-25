@@ -10,24 +10,39 @@ function ddm_help {
   echo "-nvidia         install Nvidia drivers."
   echo "-broadcom       install Broadcom drivers."
   echo "-pae            install PAE kernel for 32-bit systems."
+  echo "-fixbumblebee   fix bumblebee when bumblebee broke after installation."
   echo "==============================================================="
+}
+
+function done_msg {
+  echo
+  echo "Done - please, reboot your system."
 }
 
 case $1 in
     -open)
         sudo install-open
+        done_msg
         ;;
     -ati)
         sudo install-ati
+        done_msg
         ;;
     -nvidia)
         sudo install-nvidia
+        done_msg
         ;;
     -broadcom)
         sudo install-broadcom
+        done_msg
         ;;
     -pae)
         sudo install-pae
+        done_msg
+        ;;
+    -fixbumblebee)
+        sudo fixbumblebee
+        done_msg
         ;;
     -h)
         ddm_help
@@ -47,5 +62,3 @@ case $1 in
 	  gksudo --message "<b>$MSG</b>" "$CMD"
 	fi
 esac
-
-

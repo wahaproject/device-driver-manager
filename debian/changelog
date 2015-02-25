@@ -1,3 +1,23 @@
+ddm (2.0.6) debian; urgency=low
+
+  * Adapt nvidia settings for Bumblebee
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sun, 22 Feb 2015 18:00:00 +0100
+
+ddm (2.0.5) debian; urgency=low
+
+  * Change automatic python dependencies so that it installs on Wheezy
+  * Lowered gtk+ version for Wheezy
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sat, 21 Feb 2015 13:00:00 +0100
+
+ddm (2.0.4) debian; urgency=low
+
+  * Force reinstall of packages in case of repair
+  * Cleanup after Bumblebee installation
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Fri, 20 Feb 2015 10:00:00 +0100
+
 ddm (2.0.3) debian; urgency=low
 
   * Debugging for older ATI cards

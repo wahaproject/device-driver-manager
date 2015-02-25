@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Log file for traceback
+MAX_SIZE_KB=5120
+LOG_SIZE_KB=0
+LOG_FILE=/var/log/ddm.log
+LOG_FILE2=/var/log/ddm.log.1
+if [ -f $LOG_FILE ]; then
+  LOG_SIZE_KB=$(ls -s $LOG_FILE | awk '{print $1}')
+  if [ $LOG_SIZE_KB -gt $MAX_SIZE_KB ]; then
+    mv -f $LOG_FILE $LOG_FILE2
+  fi
+fi
+
+# purge nvidia-xconfig and move xorg.conf away
+apt-get purge -y --force-yes nvidia-xconfig 2>&1 | tee -a $LOG_FILE
+mv -f /etc/X11/xorg.conf /etc/X11/xorg.conf.ddm 2>&1 | tee -a $LOG_FILE

@@ -111,8 +111,8 @@ function install_nvidia {
   # Install the packages
   apt-get update
   echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG_FILE
-  apt-get install -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree 2>&1 | tee -a $LOG_FILE
-  apt-get install -y --force-yes $REINST $DRIVER 2>&1 | tee -a $LOG_FILE;
+  apt-get install --reinstall -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree 2>&1 | tee -a $LOG_FILE
+  apt-get install --reinstall -y --force-yes $REINST $DRIVER 2>&1 | tee -a $LOG_FILE
   
   # Configure
   if [[ "$DRIVER" =~ "bumblebee-nvidia" ]]; then
@@ -124,6 +124,13 @@ function install_nvidia {
 	#sed -i -e 's/KernelDriver=nvidia\s*$/KernelDriver=nvidia-current/' /etc/bumblebee/bumblebee.conf
       #fi
       service bumblebeed restart
+      # Adapt nvidia settings
+      if [ -f /usr/lib/nvidia/current/nvidia-settings.desktop ]; then
+        sed -i 's/Exec=nvidia-settings/Exec=optirun -b none nvidia-settings -c :8/' /usr/lib/nvidia/current/nvidia-settings.desktop
+      fi
+      # purge nvidia-xconfig and move xorg.conf away
+      apt-get purge -y --force-yes nvidia-xconfig 2>&1 | tee -a $LOG_FILE
+      mv -f /etc/X11/xorg.conf /etc/X11/xorg.conf.ddm 2>&1 | tee -a $LOG_FILE
     else
       echo "ERROR: Could not configure Bumblebee for user: $USER" | tee -a $LOG_FILE
     fi

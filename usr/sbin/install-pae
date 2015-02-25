@@ -42,7 +42,7 @@ if [ $MACHINE == "i686" ]; then
   else
     apt-get update
     echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG_FILE
-    apt-get install -y --force-yes linux-headers-686-pae linux-image-686-pae 2>&1 | tee -a $LOG_FILE
+    apt-get install --reinstall -y --force-yes linux-headers-686-pae linux-image-686-pae 2>&1 | tee -a $LOG_FILE
     echo "PAE kernel successfully installed" | tee -a $LOG_FILE
   fi
 else

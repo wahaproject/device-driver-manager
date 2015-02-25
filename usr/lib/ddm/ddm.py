@@ -16,7 +16,6 @@ from logger import Logger
 
 # i18n: http://docs.python.org/2/library/gettext.html
 gettext.install("ddm", "/usr/share/locale")
-
 _ = gettext.gettext
 
 # Need to initiate threads for Gtk
