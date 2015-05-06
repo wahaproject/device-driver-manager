@@ -1,3 +1,16 @@
+ddm (2.0.8) debian; urgency=low
+
+  * Added X-XFCE-SettingsDialog;X-XFCE-HardwareSettings; to launcher
+  * French translation
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 06 May 2015 15:00:00 +0100
+
+ddm (2.0.7) debian; urgency=low
+
+  * Fix gettext bug
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 29 Apr 2015 18:00:00 +0100
+
 ddm (2.0.6) debian; urgency=low
 
   * Adapt nvidia settings for Bumblebee

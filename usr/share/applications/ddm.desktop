@@ -1,11 +1,13 @@
 [Desktop Entry]
-Categories=Settings;
+Categories=Settings;X-XFCE-SettingsDialog;X-XFCE-HardwareSettings;
 Comment=Device Driver Manager
+Comment[fr]=Device Driver Manager
 Comment[nl]=Device Driver Manager
 Encoding=UTF-8
 Exec=ddm
 Icon=ddm
 Name=Device Driver Manager
+Name[fr]=Device Driver Manager
 Name[nl]=Device Driver Manager
 StartupNotify=false
 Terminal=false
