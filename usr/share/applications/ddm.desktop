@@ -1,6 +1,7 @@
 [Desktop Entry]
 Categories=Settings;X-XFCE-SettingsDialog;X-XFCE-HardwareSettings;
 Comment=Device Driver Manager
+Comment[ar]=مدير تعريف الأجهزة
 Comment[ca]=Device Driver Manager
 Comment[fr]=Device Driver Manager
 Comment[nl]=Device Driver Manager
@@ -8,6 +9,7 @@ Encoding=UTF-8
 Exec=ddm
 Icon=ddm
 Name=Device Driver Manager
+Name[ar]=مدير تعريف الأجهزة
 Name[ca]=Device Driver Manager
 Name[fr]=Device Driver Manager
 Name[nl]=Device Driver Manager
