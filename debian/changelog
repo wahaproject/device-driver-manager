@@ -176,7 +176,7 @@ ddm (0.8.2) debian; urgency=low
   * Loaded Broadcom driver not detected correctly
   * Added Italian and Polish translations
 
- -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Di, 23 Jul 2013 19:30:00 +0100
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Tue, 23 Jul 2013 19:30:00 +0100
 
 ddm (0.8.1) debian; urgency=low
 
