@@ -1,0 +1,19 @@
+[Desktop Entry]
+Type=Service
+Icon=ddm
+Exec=ddm
+
+X-KDE-ServiceTypes=SystemSettingsExternalApp
+X-KDE-System-Settings-Parent-Category=hardware
+X-KDE-System-Settings-Parent-Category-V2=hardware
+X-KDE-ParentApp=ddm
+Categories=Qt;KDE;X-KDE-settings-hardware;
+
+Name=Device Driver Manager
+Name[ca]=Device Driver Manager
+Name[fr]=Device Driver Manager
+Name[nl]=Device Driver Manager
+Comment=Device Driver Manager
+Comment[ca]=Device Driver Manager
+Comment[fr]=Device Driver Manager
+Comment[nl]=Device Driver Manager

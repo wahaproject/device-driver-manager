@@ -1,3 +1,9 @@
+ddm (2.0.9) debian; urgency=low
+
+  * Added KCM launcher for System Settings
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Fri, 08 May 2015 17:00:00 +0100
+
 ddm (2.0.8) debian; urgency=low
 
   * Added X-XFCE-SettingsDialog;X-XFCE-HardwareSettings; to launcher

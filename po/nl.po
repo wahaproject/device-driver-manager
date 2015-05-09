@@ -1,84 +1,88 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# root <arjenbalfoort@solydxk.com>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: ddm 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-20 10:16+0100\n"
-"PO-Revision-Date: 2014-06-27 19:07+0100\n"
-"Last-Translator: Schoelje <schoelje@solydxk.com>\n"
-"Language-Team: SolydXK <admin@solydxk.com>\n"
-"Language: nl_NL\n"
+"POT-Creation-Date: 2015-05-08 17:18+0200\n"
+"PO-Revision-Date: 2015-05-08 17:31+0200\n"
+"Last-Translator: root <arjenbalfoort@solydxk.com>\n"
+"Language-Team: none\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.5.4\n"
 
 #: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:26
+#: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
 msgstr "Device Driver Manager"
 
 #: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:155
 msgid "Install"
-msgstr ""
+msgstr "Installeer"
 
 #: ../usr/lib/ddm/ddm.py:48
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #: ../usr/lib/ddm/ddm.py:49
 msgid "Quit"
-msgstr ""
+msgstr "Afsluiten"
 
 #: ../usr/lib/ddm/ddm.py:104
 msgid "No internet connection"
-msgstr ""
+msgstr "Geen internetverbinding"
 
 #: ../usr/lib/ddm/ddm.py:105
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
+"U hebt een internetverbinding nodig om de extra software te installeren.\n"
+"Maak verbinding met het internet en probeer het opnieuw."
 
 #: ../usr/lib/ddm/ddm.py:155
 msgid "Device"
-msgstr ""
+msgstr "Apparaat"
 
 #: ../usr/lib/ddm/ddm.py:171
 msgid "Remove kernel"
-msgstr ""
+msgstr "Verwijder kernel"
 
 #: ../usr/lib/ddm/ddm.py:172
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
+"U kunt de kernel die nu gestart is niet verwijderen.\n"
+"Boot een andere kernel en probeer het nogmaals."
 
 #: ../usr/lib/ddm/ddm.py:193
-#, fuzzy
 msgid "Hardware scan"
-msgstr "Hardware"
+msgstr "Hardware scan"
 
 #: ../usr/lib/ddm/ddm.py:197
 msgid "There are no available drivers for your hardware:"
-msgstr ""
+msgstr "Er zijn geen beschikbare drivers voor uw hardware:"
 
 #: ../usr/lib/ddm/ddm.py:203
 msgid "DDM did not find any supported hardware."
-msgstr ""
+msgstr "DDM heeft ondersteunde hardware gevonden."
 
 #: ../usr/lib/ddm/ddm.py:251
 msgid "Saved"
-msgstr ""
+msgstr "Bewaard"
 
 #: ../usr/lib/ddm/ddm.py:252
 msgid "You will need to restart your system."
-msgstr ""
+msgstr "U dient uw systeem te herstarten."
 
 #: ../usr/lib/ddm/ddm.py:456
 msgid "PAE capable system"
@@ -90,30 +94,33 @@ msgid ""
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
+"Er is een fout opgetreden tijdens de installatie.\n"
+"Voer de volgende opdracht uit in een terminal: 'sudo apt-get -f install'.\n"
+"Bezoek ons forum wanneer u hulp nodig heeft: http://forums.solydxk.com"
 
 #: ../usr/lib/ddm/ddm.py:567
 msgid "The software has been successfully installed."
-msgstr ""
+msgstr "De software is succesvol geïnstalleerd."
 
 #: ../usr/lib/ddm/main.py:27
-#, fuzzy
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
 msgstr ""
-"DDM kan niet in een live omgeving gestart worden\n"
-"\n"
-"Om toch te starten, gebruik het --force argument"
+"Update Manager kan niet gestart worden in een live omgeving\n"
+"In een live omgeving kunt u met het --force argument starten."
 
 #: ../usr/lib/ddm/main.py:69
 msgid "Unexpected error"
-msgstr ""
+msgstr "Onverwachte fout"
 
 #: ../usr/lib/ddm/main.py:70
 msgid ""
 "<b>DDM has failed with the following unexpected error. Please submit a bug "
 "report!</b>"
 msgstr ""
+"<b>De installatie is mislukt met de volgende onverwachte fout. Gelieve een "
+"bug verslag in te dienen!</b>"
 
 #~ msgid "Driver"
 #~ msgstr "Driver"
