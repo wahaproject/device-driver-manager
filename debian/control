@@ -18,6 +18,7 @@ Depends: ${misc:Depends}
   , gir1.2-webkit-3.0
   , gir1.2-gtk-3.0
   , nvidia-detect
+  , apt-show-versions
   , xserver-xorg-video-intel
   , xserver-xorg-video-fbdev
   , xserver-xorg-video-radeon
