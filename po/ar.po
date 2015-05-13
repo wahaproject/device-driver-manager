@@ -28,7 +28,7 @@ msgstr "مدير تعريف الأجهزة"
 
 #: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:155
 msgid "Install"
-msgstr "تثبيت"
+msgstr "التثبيت"
 
 #: ../usr/lib/ddm/ddm.py:48
 msgid "Help"
@@ -40,19 +40,19 @@ msgstr "خروج"
 
 #: ../usr/lib/ddm/ddm.py:104
 msgid "No internet connection"
-msgstr "لا يوجد اتصال بالانترنت"
+msgstr "لا يوجد اتصال بالإنترنت"
 
 #: ../usr/lib/ddm/ddm.py:105
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
-"تحتاج لإتصال بالانترنت لتنزيل البرامج الإضافية.\n"
-"فضلا, اتّصل بالانترنت وحاول مرة أخرى."
+"تحتاج لاتصال بالإنترنت لتثبيت البرامج الإضافية.\n"
+"من فضلك، اتّصل بالإنترنت وحاول مرة أخرى."
 
 #: ../usr/lib/ddm/ddm.py:155
 msgid "Device"
-msgstr "جهاز"
+msgstr "الجهاز"
 
 #: ../usr/lib/ddm/ddm.py:171
 msgid "Remove kernel"
@@ -63,8 +63,8 @@ msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
-"لا يمكنك إزالة نواة قيد الإقلاع حاليا.\n"
-"من فضلك، أقلع بالنواة أخرى وأعد المحاولة."
+"لا يمكنك إزالة النواة المستخدمة حاليا.\n"
+"من فضلك، حاول بعد إعادة التشغيل بنواة أخرى."
 
 #: ../usr/lib/ddm/ddm.py:193
 msgid "Hardware scan"
@@ -72,11 +72,11 @@ msgstr "تفحص الأجهزة"
 
 #: ../usr/lib/ddm/ddm.py:197
 msgid "There are no available drivers for your hardware:"
-msgstr "لا توجد تعريفات متوفرة لجهازك:"
+msgstr "لا توجد تعريفات متوفرة لعتادك:"
 
 #: ../usr/lib/ddm/ddm.py:203
 msgid "DDM did not find any supported hardware."
-msgstr "لم يعثر مدير التعريفات على أي جهاز مدعوم."
+msgstr "لم يعثر مدير التعريف على أي عتاد مدعوم."
 
 #: ../usr/lib/ddm/ddm.py:251
 msgid "Saved"
@@ -88,7 +88,7 @@ msgstr "ستحتاج لإعادة تشغيل نظامك."
 
 #: ../usr/lib/ddm/ddm.py:456
 msgid "PAE capable system"
-msgstr "النظام متوافق مع PAE"
+msgstr "النظام يدعم PAE"
 
 #: ../usr/lib/ddm/ddm.py:558
 msgid ""
@@ -109,7 +109,7 @@ msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
 msgstr ""
-"لا يمكن تشغيل مدير تعريفات الأجهزة في بيئة حية\n"
+"لا يمكن تشغيل مدير تعريف الأجهزة في بيئة حية\n"
 "يمكنك استخدام المعامل --force لبدء DDM في بيئة حية"
 
 #: ../usr/lib/ddm/main.py:69
@@ -121,4 +121,4 @@ msgid ""
 "<b>DDM has failed with the following unexpected error. Please submit a bug "
 "report!</b>"
 msgstr ""
-"<b>فشل DDM في مع الخطأ غير المتوقع التالي. فضلا أرسل تقريرا عن علّة!</b>"
+"<b>واجه DDM خطأ غير متوقع، من فضلك أرسل تقريرا عن وجود علّة!</b>"
