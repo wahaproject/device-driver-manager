@@ -517,7 +517,7 @@ class DDM(object):
             # When opening as ascii, read() will throw error: "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x80"
             f = open(logPath, 'rb')
             # ignore utf-8 binary read errors
-            log = f.read().decode("utf-8", "ignore")
+            log = f.read(20).decode("utf-8", "ignore")
             f.close()
             matchObj = re.search('([a-zA-Z]*)\(\d+\):\s+depth.*framebuffer', log, flags=re.IGNORECASE)
             if matchObj:
