@@ -2,7 +2,6 @@
 
 # from gi.repository import Gtk, GdkPixbuf, GObject, Pango, Gdk, GLib
 from gi.repository import Gtk, GObject, GLib
-import gettext
 from os.path import join, abspath, dirname, basename, exists
 from utils import ExecuteThreadedCommands, hasInternetConnection, \
                   getoutput, getPackageVersion
@@ -14,9 +13,10 @@ from treeview import TreeViewHandler
 from queue import Queue
 from logger import Logger
 
-# i18n: http://docs.python.org/2/library/gettext.html
-gettext.install("ddm", "/usr/share/locale")
-#_ = gettext.gettext
+# i18n: http://docs.python.org/3/library/gettext.html
+import gettext
+from gettext import gettext as _
+gettext.textdomain('ddm')
 
 # Need to initiate threads for Gtk
 GObject.threads_init()

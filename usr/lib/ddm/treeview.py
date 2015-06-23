@@ -1,13 +1,7 @@
 #! /usr/bin/env python3
 
 import os
-#import gettext
 from gi.repository import Gtk, GObject, GdkPixbuf
-
-# i18n: http://docs.python.org/2/library/gettext.html
-#t = gettext.translation("solydxk-conky", "/usr/share/locale")
-#_ = t.lgettext
-
 
 # Treeview needs subclassing of gobject
 # http://www.pygtk.org/articles/subclassing-gobject/sub-classing-gobject-in-python.htm

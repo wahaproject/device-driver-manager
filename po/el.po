@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ddm 0.8.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-08 17:18+0200\n"
+"POT-Creation-Date: 2015-06-22 13:37+0200\n"
 "PO-Revision-Date: 2013-10-03 10:45+0100\n"
 "Last-Translator: Schoelje <schoelje@solydxk.com>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:26
+#: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:31
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
@@ -96,7 +96,7 @@ msgstr ""
 msgid "The software has been successfully installed."
 msgstr ""
 
-#: ../usr/lib/ddm/main.py:27
+#: ../usr/lib/ddm/main.py:32
 #, fuzzy
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
@@ -106,11 +106,11 @@ msgstr ""
 "\n"
 "Για εξαναγκασμό εκκίνησης, χρησιμοποίησε την επιλογή --force"
 
-#: ../usr/lib/ddm/main.py:69
+#: ../usr/lib/ddm/main.py:74
 msgid "Unexpected error"
 msgstr ""
 
-#: ../usr/lib/ddm/main.py:70
+#: ../usr/lib/ddm/main.py:75
 msgid ""
 "<b>DDM has failed with the following unexpected error. Please submit a bug "
 "report!</b>"

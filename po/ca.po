@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDM 201406\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-08 17:18+0200\n"
+"POT-Creation-Date: 2015-06-22 13:37+0200\n"
 "PO-Revision-Date: 2015-05-08 17:32+0200\n"
 "Last-Translator: root <arjenbalfoort@solydxk.com>\n"
 "Language-Team: none\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Virtaal 0.7.1\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:26
+#: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:31
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
@@ -95,7 +95,7 @@ msgstr ""
 msgid "The software has been successfully installed."
 msgstr ""
 
-#: ../usr/lib/ddm/main.py:27
+#: ../usr/lib/ddm/main.py:32
 #, fuzzy
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
@@ -104,11 +104,11 @@ msgstr ""
 "DDM no pot funcionar en un entorn autònom\n"
 "Per forçar l'arrencada, useu l'argument '--force'"
 
-#: ../usr/lib/ddm/main.py:69
+#: ../usr/lib/ddm/main.py:74
 msgid "Unexpected error"
 msgstr ""
 
-#: ../usr/lib/ddm/main.py:70
+#: ../usr/lib/ddm/main.py:75
 msgid ""
 "<b>DDM has failed with the following unexpected error. Please submit a bug "
 "report!</b>"
