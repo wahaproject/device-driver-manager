@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ddm 2.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-22 13:37+0200\n"
+"POT-Creation-Date: 2015-06-25 12:22+0200\n"
 "PO-Revision-Date: 2015-05-05 12:23+0100\n"
 "Last-Translator: Jocelyn <anechampenois@solydxk.com>\n"
 "Language-Team: solyd-fr <admin@solydxk.com>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr "Device Driver Manager"
 
-#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:155
+#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:158
 msgid "Install"
 msgstr "Installation "
 
@@ -37,11 +37,11 @@ msgstr "Aide"
 msgid "Quit"
 msgstr "Quitter"
 
-#: ../usr/lib/ddm/ddm.py:104
+#: ../usr/lib/ddm/ddm.py:107
 msgid "No internet connection"
 msgstr "Pas de connexion internet"
 
-#: ../usr/lib/ddm/ddm.py:105
+#: ../usr/lib/ddm/ddm.py:108
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
@@ -50,15 +50,15 @@ msgstr ""
 "supplémentaire.\n"
 "Merci de vous connecter et de réessayer."
 
-#: ../usr/lib/ddm/ddm.py:155
+#: ../usr/lib/ddm/ddm.py:158
 msgid "Device"
 msgstr "Périphérique"
 
-#: ../usr/lib/ddm/ddm.py:171
+#: ../usr/lib/ddm/ddm.py:174
 msgid "Remove kernel"
 msgstr "Désinstaller le noyau"
 
-#: ../usr/lib/ddm/ddm.py:172
+#: ../usr/lib/ddm/ddm.py:175
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -66,31 +66,31 @@ msgstr ""
 "Impossible de supprimer le noyau utilisé actuellement.\n"
 "Merci de réessayer après redémarrage avec un autre noyau."
 
-#: ../usr/lib/ddm/ddm.py:193
+#: ../usr/lib/ddm/ddm.py:196
 msgid "Hardware scan"
 msgstr "Analyse du matériel"
 
-#: ../usr/lib/ddm/ddm.py:197
+#: ../usr/lib/ddm/ddm.py:200
 msgid "There are no available drivers for your hardware:"
 msgstr "Il n'y a pas de pilote disponible pour votre matériel:"
 
-#: ../usr/lib/ddm/ddm.py:203
+#: ../usr/lib/ddm/ddm.py:206
 msgid "DDM did not find any supported hardware."
 msgstr "DDM n'a trouvé aucun matériel supporté."
 
-#: ../usr/lib/ddm/ddm.py:251
+#: ../usr/lib/ddm/ddm.py:254
 msgid "Saved"
 msgstr "Enregistré"
 
-#: ../usr/lib/ddm/ddm.py:252
+#: ../usr/lib/ddm/ddm.py:255
 msgid "You will need to restart your system."
 msgstr "Vous devez redémarrer votre système."
 
-#: ../usr/lib/ddm/ddm.py:456
+#: ../usr/lib/ddm/ddm.py:459
 msgid "PAE capable system"
 msgstr "Système compatible PAE"
 
-#: ../usr/lib/ddm/ddm.py:558
+#: ../usr/lib/ddm/ddm.py:570
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -100,7 +100,7 @@ msgstr ""
 "Ouvrez un terminal et exécutez 'sudo apt-get -f install'.\n"
 "Visitez notre forum pour toute aide: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:567
+#: ../usr/lib/ddm/ddm.py:579
 msgid "The software has been successfully installed."
 msgstr "Le programme a été installé avec succès."
 

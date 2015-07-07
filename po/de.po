@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-22 13:37+0200\n"
+"POT-Creation-Date: 2015-06-25 12:22+0200\n"
 "PO-Revision-Date: 2013-12-24 16:09+0100\n"
 "Last-Translator: Phi <phissica@gmail.com>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:155
+#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:158
 msgid "Install"
 msgstr ""
 
@@ -36,63 +36,63 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:104
+#: ../usr/lib/ddm/ddm.py:107
 msgid "No internet connection"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:105
+#: ../usr/lib/ddm/ddm.py:108
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:155
+#: ../usr/lib/ddm/ddm.py:158
 msgid "Device"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:171
+#: ../usr/lib/ddm/ddm.py:174
 msgid "Remove kernel"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:172
+#: ../usr/lib/ddm/ddm.py:175
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:193
+#: ../usr/lib/ddm/ddm.py:196
 #, fuzzy
 msgid "Hardware scan"
 msgstr "Hardware"
 
-#: ../usr/lib/ddm/ddm.py:197
+#: ../usr/lib/ddm/ddm.py:200
 msgid "There are no available drivers for your hardware:"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:203
+#: ../usr/lib/ddm/ddm.py:206
 msgid "DDM did not find any supported hardware."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:251
+#: ../usr/lib/ddm/ddm.py:254
 msgid "Saved"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:252
+#: ../usr/lib/ddm/ddm.py:255
 msgid "You will need to restart your system."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:456
+#: ../usr/lib/ddm/ddm.py:459
 msgid "PAE capable system"
 msgstr "PAE fähiges System"
 
-#: ../usr/lib/ddm/ddm.py:558
+#: ../usr/lib/ddm/ddm.py:570
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:567
+#: ../usr/lib/ddm/ddm.py:579
 msgid "The software has been successfully installed."
 msgstr ""
 

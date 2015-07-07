@@ -68,6 +68,9 @@ class DDM(object):
         # Fill treeview
         self.fill_treeview_ddm()
 
+        self.get_loaded_graphical_driver()
+        self.get_loaded_wireless_driver()
+
     # ===============================================
     # Main window functions
     # ===============================================
@@ -506,22 +509,26 @@ class DDM(object):
     def get_loaded_graphical_driver(self):
         # sort on the most recent X.org log
         module = ''
+        log = ''
         logDir = '/var/log/'
         logPath = None
         logs = glob(os.path.join(logDir, 'Xorg.*.log*'))
         logs.sort()
 
         for logPath in logs:
+            #print((">> logPath={}".format(logPath)))
             # Search for "depth" in each line and check the used module
             # Sometimes these logs are saved as binary: open as read-only binary
             # When opening as ascii, read() will throw error: "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x80"
-            f = open(logPath, 'rb')
-            # ignore utf-8 binary read errors
-            log = f.read(20).decode("utf-8", "ignore")
-            f.close()
+            with open(logPath, 'rb') as f:
+                # replace utf-8 binary read errors (with ?)
+                log = f.read().decode(encoding='utf-8', errors='replace')
+                #print((log))
+
             matchObj = re.search('([a-zA-Z]*)\(\d+\):\s+depth.*framebuffer', log, flags=re.IGNORECASE)
             if matchObj:
                 module = matchObj.group(1).lower()
+                #print((">> module={}".format(module)))
                 break
 
         return module
@@ -531,18 +538,21 @@ class DDM(object):
         driver = ''
         logDir = '/var/log/'
         for logPath in glob(os.path.join(logDir, 'syslog*')):
-            if driver is None and not 'gz' in logPath:
+            if driver == '' and not 'gz' in logPath:
+                #print((">> logPath={}".format(logPath)))
                 # Open the log file
                 lines = []
                 with open(logPath) as f:
                     lines = list(f.read().splitlines())
 
                 for line in reversed(lines):
+                    #print((">> line={}".format(line)))
                     # First check for Network Manager entry
                     # Search for wlan0 in each line and get the listed driver
                     matchObj = re.search('\(wlan\d\):.*driver:\s*\'([a-zA-Z0-9\-]*)', line, flags=re.IGNORECASE)
                     if matchObj:
                         driver = matchObj.group(1)
+                        #print((">> driver1={}".format(driver)))
                         break
                     else:
                         # Wicd
@@ -550,7 +560,9 @@ class DDM(object):
                         matchObj = re.search('ieee.*implement', line, flags=re.IGNORECASE)
                         if matchObj:
                             driver = matchObj.group(0)
+                            #print((">> driver2={}".format(driver)))
                             break
+
         return driver
 
     def show_message(self, cmdOutput, onlyOnError=False):
