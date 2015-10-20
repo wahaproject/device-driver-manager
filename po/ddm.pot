@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-20 16:56+0200\n"
+"POT-Creation-Date: 2015-10-20 17:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,8 +133,8 @@ msgstr ""
 
 #: en/help.html+html.body.div.p:14
 msgid ""
-"The Device Driver can only install drivers which are available in the "
-"repositories. Make sure you have an internet connection if you want to "
+"The Device Driver Manager can only install drivers which are available in "
+"the repositories. Make sure you have an internet connection if you want to "
 "install the drivers."
 msgstr ""
 
@@ -156,8 +156,8 @@ msgstr ""
 msgid ""
 "This will install the fglrx drivers for your ATI graphical card. ATI cards "
 "from version HD 5000 and up are supported by the fglrx drivers. Versions "
-"between 1000 and 5000 will use the Radeon drivers. If you want to remove "
-"these drivers, you can run the install-nouveau command (see below)."
+"between 1000 and 5000 will use the Radeon drivers. Use the \"-p\" argument "
+"to remove the drivers from your system."
 msgstr ""
 
 #: en/help.html+html.body.div.h3:24
@@ -168,8 +168,7 @@ msgstr ""
 msgid ""
 "This will select the right drivers for your Nvidia graphical card. It will "
 "select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
-"Intel). If you want to remove these drivers, you can run the install-open "
-"command (see below)."
+"Intel). Use the \"-p\" argument to remove the drivers from your system."
 msgstr ""
 
 #: en/help.html+html.body.div.h3:27
@@ -204,15 +203,23 @@ msgid ""
 "kernel."
 msgstr ""
 
-#: en/help.html+html.body.div.h2:36
+#: en/help.html+html.body.div.h3:36
+msgid "# install-driver fixbumblebee"
+msgstr ""
+
+#: en/help.html+html.body.div.p:37
+msgid "This will try to fix a Bumblebee install."
+msgstr ""
+
+#: en/help.html+html.body.div.h2:39
 msgid "Log"
 msgstr ""
 
-#: en/help.html+html.body.div.h3:37
+#: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"
 msgstr ""
 
-#: en/help.html+html.body.div.p:38
+#: en/help.html+html.body.div.p:41
 msgid ""
 "Please, attach your log file when you post an issue on our forum: <a href="
 "\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
