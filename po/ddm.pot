@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-27 12:17+0200\n"
+"POT-Creation-Date: 2015-10-20 16:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,18 +79,18 @@ msgstr ""
 msgid "You will need to restart your system."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:459
+#: ../usr/lib/ddm/ddm.py:468
 msgid "PAE capable system"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:570
+#: ../usr/lib/ddm/ddm.py:579
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:579
+#: ../usr/lib/ddm/ddm.py:588
 msgid "The software has been successfully installed."
 msgstr ""
 
@@ -108,4 +108,112 @@ msgstr ""
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
+msgstr ""
+
+#: en/help.html+html.body.h1:8
+msgid "Device Driver Manager Help"
+msgstr ""
+
+#: en/help.html+html.body.div.h2:10
+msgid "Description"
+msgstr ""
+
+#: en/help.html+html.body.div.p:11
+msgid ""
+"The Device Driver Manager is a tool to help users installing third-party "
+"hardware drivers. Currently Nvidia, ATI and Broadcom drivers can be "
+"installed and allows to install the PAE kernel for multi-core 32-bit "
+"systems. The Device Driver Manager will only list those devices that are "
+"supported. It will not list any other devices then mentioned above."
+msgstr ""
+
+#: en/help.html+html.body.div.h2:13
+msgid "Important"
+msgstr ""
+
+#: en/help.html+html.body.div.p:14
+msgid ""
+"The Device Driver can only install drivers which are available in the "
+"repositories. Make sure you have an internet connection if you want to "
+"install the drivers."
+msgstr ""
+
+#: en/help.html+html.body.div.h2:16
+msgid "Commands"
+msgstr ""
+
+#: en/help.html+html.body.div.p:17
+msgid ""
+"If you prefer to install the drivers by terminal, you can use the following "
+"commands:"
+msgstr ""
+
+#: en/help.html+html.body.div.h3:21
+msgid "# install-driver ati"
+msgstr ""
+
+#: en/help.html+html.body.div.p:22
+msgid ""
+"This will install the fglrx drivers for your ATI graphical card. ATI cards "
+"from version HD 5000 and up are supported by the fglrx drivers. Versions "
+"between 1000 and 5000 will use the Radeon drivers. If you want to remove "
+"these drivers, you can run the install-nouveau command (see below)."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:24
+msgid "# install-driver nvidia"
+msgstr ""
+
+#: en/help.html+html.body.div.p:25
+msgid ""
+"This will select the right drivers for your Nvidia graphical card. It will "
+"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
+"Intel). If you want to remove these drivers, you can run the install-open "
+"command (see below)."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:27
+msgid "# install-driver open"
+msgstr ""
+
+#: en/help.html+html.body.div.p:28
+msgid ""
+"You can use this command if you want to revert back to the open Nouveau "
+"drivers. It will remove any proprietary drivers from your system."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:30
+msgid "# install-driver broadcom"
+msgstr ""
+
+#: en/help.html+html.body.div.p:31
+msgid ""
+"This command will install the right driver for your wireless Broadcom "
+"adapter. Use the \"-p\" argument to remove the drivers from your system."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:33
+msgid "# install-driver pae"
+msgstr ""
+
+#: en/help.html+html.body.div.p:34
+msgid ""
+"This will install the PAE kernel on multi-processor systems running a 32-bit "
+"OS.\tUse the \"-p\" argument to remove the PAE kernel from your system. Note "
+"that you cannot remove the kernel when you are currently booted into that "
+"kernel."
+msgstr ""
+
+#: en/help.html+html.body.div.h2:36
+msgid "Log"
+msgstr ""
+
+#: en/help.html+html.body.div.h3:37
+msgid "File: /var/log/ddm.log"
+msgstr ""
+
+#: en/help.html+html.body.div.p:38
+msgid ""
+"Please, attach your log file when you post an issue on our forum: <a href="
+"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
 msgstr ""
