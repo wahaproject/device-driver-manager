@@ -8,7 +8,7 @@ from utils import ExecuteThreadedCommands, hasInternetConnection, \
 import os
 import re
 from glob import glob
-from dialogs import MessageDialogSafe
+from dialogs import MessageDialog, WarningDialog, ErrorDialog
 from treeview import TreeViewHandler
 from queue import Queue
 from logger import Logger
@@ -77,7 +77,7 @@ class DDM(object):
 
     def on_btnSave_clicked(self, widget):
         # Save selected hardware
-        command = ''
+        arguments = []
         model = self.tvDDM.get_model()
         itr = model.get_iter_first()
         while itr is not None:
@@ -101,39 +101,38 @@ class DDM(object):
             self.log.write("{}: {} ({})".format(action, device, manufacturerId), 'on_btnSave_clicked')
 
             # Install/purge selected driver
-            if action == 'install':
-                # Check if there is an internet connection
-                if not hasInternetConnection():
-                    title = _("No internet connection")
-                    msg = _("You need an internet connection to install the additional software.\n"
-                            "Please, connect to the internet and try again.")
-                    MessageDialogSafe(title, msg, Gtk.MessageType.WARNING, self.window).show()
-                    break
+            option = ""
+            if action == 'install' and hasInternetConnection():
+                option = "-i"
+            elif action == 'purge':
+                option = "-p"
+            else:
+                title = _("No internet connection")
+                msg = _("You need an internet connection to install the additional software.\n"
+                        "Please, connect to the internet and try again.")
+                WarningDialog(title, msg)
+                break
 
+            if option:
+                driver = ''
                 # Run the manufacturer specific bash script
                 if manufacturerId == '1002':
-                    command += 'install-ati; '
+                    driver = 'ati'
                 elif manufacturerId == '10de':
-                    command += 'install-nvidia; '
+                    driver = 'nvidia '
                 elif manufacturerId == '14e4':
-                    command += 'install-broadcom; '
+                    driver = 'broadcom '
                 elif 'pae' in manufacturerId:
-                    command += 'install-pae; '
-
-            elif action == 'purge':
-                if 'pae' in manufacturerId:
-                    command += 'install-pae purge; '
-                elif manufacturerId == '14e4':
-                    command += 'install-broadcom purge; '
-                else:
-                    # Install the default open driver (includes cleanup propietary drivers and configuration)
-                    command += 'install-open; '
+                    driver = 'pae '
+                if driver:
+                    arguments.append("{} {}".format(option, driver))
 
             # Get the next in line
             itr = model.iter_next(itr)
 
         # Execute the command
-        if command != '':
+        if arguments:
+            command = "ddm {}".format(" ".join(arguments))
             self.log.write("Command to execute: {}".format(command), 'on_btnSave_clicked')
             self.exec_command(command)
 
@@ -174,7 +173,7 @@ class DDM(object):
             title = _("Remove kernel")
             msg = _("You cannot remove a booted kernel.\nPlease, boot another kernel and try again.")
             self.log.write(msg, 'tv_checkbox_toggled')
-            MessageDialogSafe(title, msg, Gtk.MessageType.WARNING, self.window).show()
+            WarningDialog(title, msg)
             model[itr][0] = True
 
     def fill_treeview_ddm(self):
@@ -200,12 +199,12 @@ class DDM(object):
             msg = _("There are no available drivers for your hardware:")
             msg = "{}\n\n{}".format(msg, '\n'.join(self.notSupported))
             self.log.write(msg, 'fill_treeview_ddm')
-            MessageDialogSafe(title, msg, Gtk.MessageType.WARNING, self.window).show()
+            WarningDialog(title, msg)
         elif len(self.hardware) < 2:
             self.set_buttons_state(False)
             msg = _("DDM did not find any supported hardware.")
             self.log.write(msg, 'fill_treeview_ddm')
-            MessageDialogSafe(title, msg, Gtk.MessageType.INFO, self.window).show()
+            MessageDialog(title, msg)
 
     def exec_command(self, command):
         try:
@@ -220,7 +219,7 @@ class DDM(object):
             GLib.timeout_add(250, self.check_thread, name)
 
         except Exception as detail:
-            MessageDialogSafe(self.btnSave.get_label(), detail, Gtk.MessageType.ERROR, self.window).show()
+            ErrorDialog(self.btnSave.get_label(), detail)
 
     def set_buttons_state(self, enable):
         if not enable:
@@ -253,7 +252,7 @@ class DDM(object):
 
         title = _("Saved")
         msg = _("You will need to restart your system.")
-        MessageDialogSafe(title, msg, Gtk.MessageType.INFO, self.window).show()
+        MessageDialog(title, msg)
 
         return False
 
@@ -381,22 +380,31 @@ class DDM(object):
                 if driver != "":
                     self.hardware.append([selected, logo, shortDevice, driver, device[1], device[2]])
 
+    def get_broadcom_ids(self, driver_name):
+        driver_name = driver_name.upper()
+        ids = getoutput("cat /usr/bin/install-driver | grep '{}=' | cut -d'=' -f 2".format(driver_name))
+        if len(ids) > 0:
+            return ids[0].split('|')
+        return []
+
     def get_broadcom(self):
         ## Hardware list (device ids)
         ## http://linuxwireless.org/en/users/Drivers/b43
-        deviceIds = []
-        deviceIds.append(['b43', '|4307|4311|4312|4315|4318|4319|4320|4321|4324|4331|4350|4353|4357|a8d6|a8d8|432c|'])
-        deviceIds.append(['b43legacy', '|4301|4306|4325|'])
-        deviceIds.append(['wldebian', '4313|4328|4329|432a|432b|432d|4358|4359|435a|a99d|'])
-        deviceIds.append(['brcmdebian', '|576|4727|'])
-        deviceIds.append(['unknown', '|4322|4360|4365|43b1|'])
+        deviceIds = {}
+        deviceIds['b43'] = self.get_broadcom_ids('b43')
+        deviceIds['b43legacy'] = self.get_broadcom_ids('b43legacy')
+        deviceIds['wldebian'] = self.get_broadcom_ids('wldebian')
+        deviceIds['brcmdebian'] = self.get_broadcom_ids('brcmdebian')
+        deviceIds['unknown'] = self.get_broadcom_ids('unknown')
+
+        #print(("deviceIds = {}".format(deviceIds)))
 
         manufacturerId = '14e4'
 
         deviceArray = self.get_lspci_info(manufacturerId)
 
         # TESTING - Uncomment the following line for testing:
-        #deviceArray = [['Broadcom Corporation BCM4312 802.11a/b/g', '4312']]
+        #deviceArray = [['Broadcom Corporation BCM43142 802.11a/b/g', manufacturerId, '4365']]
 
         if deviceArray:
             self.log.write("Device(s): {}".format(deviceArray), 'get_broadcom')
@@ -413,10 +421,10 @@ class DDM(object):
                 self.log.write("Broadcom device found: {}".format(device[0]), 'get_broadcom')
                 shortDevice = self.shorten_long_string(device[0], 50)
                 driver = ''
-                for did in deviceIds:
-                    #print(("{} in {}".format(device[2], did[1])))
-                    if device[2] in did[1]:
-                        driver = did[0]
+                for key, did in list(deviceIds.items()):
+                    #print(("{}:{} in {}:{}".format(device[0], device[2], key, did)))
+                    if device[2] in did:
+                        driver = key
                         break
 
                 if driver != '':
@@ -574,9 +582,9 @@ class DDM(object):
             if int(cmdOutput) != 255:
                 if int(cmdOutput) > 1:
                     # There was an error
-                    MessageDialogSafe(self.btnSave.get_label(), msg, Gtk.MessageType.ERROR, self.window).show()
+                    ErrorDialog(self.btnSave.get_label(), msg)
                 elif not onlyOnError:
                     msg = _("The software has been successfully installed.")
-                    MessageDialogSafe(self.btnSave.get_label(), msg, Gtk.MessageType.INFO, self.window).show()
+                    MessageDialog(self.btnSave.get_label(), msg)
         except:
-            MessageDialogSafe(self.btnSave.get_label(), cmdOutput, Gtk.MessageType.INFO, self.window).show()
+            ErrorDialog(self.btnSave.get_label(), cmdOutput)

@@ -1,24 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Abdelkarim Guettaf <gkraim@gmail.com>, 2015.
 #
+# Translators:
+# Abdelkarim Guettaf <gkraim@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-25 12:22+0200\n"
-"PO-Revision-Date: 2015-05-09 13:30+0100\n"
-"Last-Translator: Abdelkarim Guettaf <gkraim@gmail.com>\n"
-"Language-Team: Arabic <wahaproject@gmail.com>\n"
-"Language: \n"
+"POT-Creation-Date: 2015-10-21 10:56+0200\n"
+"PO-Revision-Date: 2015-09-28 10:39+0000\n"
+"Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
+"Language-Team: Arabic (http://www.transifex.com/solydxk/device-driver-"
+"manager/language/ar/)\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural= n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:31
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr "مدير تعريف الأجهزة"
 
-#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:157
 msgid "Install"
 msgstr "التثبيت"
 
@@ -38,11 +38,11 @@ msgstr "مساعدة"
 msgid "Quit"
 msgstr "خروج"
 
-#: ../usr/lib/ddm/ddm.py:107
+#: ../usr/lib/ddm/ddm.py:110
 msgid "No internet connection"
 msgstr "لا يوجد اتصال بالإنترنت"
 
-#: ../usr/lib/ddm/ddm.py:108
+#: ../usr/lib/ddm/ddm.py:111
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
@@ -50,15 +50,15 @@ msgstr ""
 "تحتاج لاتصال بالإنترنت لتثبيت البرامج الإضافية.\n"
 "من فضلك، اتّصل بالإنترنت وحاول مرة أخرى."
 
-#: ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:157
 msgid "Device"
 msgstr "الجهاز"
 
-#: ../usr/lib/ddm/ddm.py:174
+#: ../usr/lib/ddm/ddm.py:173
 msgid "Remove kernel"
 msgstr "إزالة النواة"
 
-#: ../usr/lib/ddm/ddm.py:175
+#: ../usr/lib/ddm/ddm.py:174
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -66,31 +66,31 @@ msgstr ""
 "لا يمكنك إزالة النواة المستخدمة حاليا.\n"
 "من فضلك، حاول بعد إعادة التشغيل بنواة أخرى."
 
-#: ../usr/lib/ddm/ddm.py:196
+#: ../usr/lib/ddm/ddm.py:195
 msgid "Hardware scan"
 msgstr "تفحص الأجهزة"
 
-#: ../usr/lib/ddm/ddm.py:200
+#: ../usr/lib/ddm/ddm.py:199
 msgid "There are no available drivers for your hardware:"
 msgstr "لا توجد تعريفات متوفرة لعتادك:"
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:205
 msgid "DDM did not find any supported hardware."
 msgstr "لم يعثر مدير التعريف على أي عتاد مدعوم."
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:253
 msgid "Saved"
 msgstr "حُفِظ"
 
-#: ../usr/lib/ddm/ddm.py:255
+#: ../usr/lib/ddm/ddm.py:254
 msgid "You will need to restart your system."
 msgstr "ستحتاج لإعادة تشغيل نظامك."
 
-#: ../usr/lib/ddm/ddm.py:459
+#: ../usr/lib/ddm/ddm.py:467
 msgid "PAE capable system"
 msgstr "النظام يدعم PAE"
 
-#: ../usr/lib/ddm/ddm.py:570
+#: ../usr/lib/ddm/ddm.py:578
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -100,7 +100,7 @@ msgstr ""
 "من فضلك، شغّل 'sudo apt-get -f install' في الطرفية.\n"
 "يمكنك زيارة منتدانا للحصول على الدعم: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:579
+#: ../usr/lib/ddm/ddm.py:587
 msgid "The software has been successfully installed."
 msgstr "تم تثبيت البرنامج بنجاح."
 
@@ -118,6 +118,122 @@ msgstr "خطأ غير متوقع"
 
 #: ../usr/lib/ddm/main.py:75
 msgid ""
-"<b>DDM has failed with the following unexpected error. Please submit a bug "
-"report!</b>"
-msgstr "<b>واجه DDM خطأ غير متوقع، من فضلك أرسل تقريرا عن وجود علّة!</b>"
+"DDM has failed with the following unexpected error. Please submit a bug "
+"report!"
+msgstr ""
+
+#: en/help.html+html.body.h1:8
+#, fuzzy
+#| msgid "Device Driver Manager"
+msgid "Device Driver Manager Help"
+msgstr "مدير تعريف الأجهزة"
+
+#: en/help.html+html.body.div.h2:10
+msgid "Description"
+msgstr ""
+
+#: en/help.html+html.body.div.p:11
+msgid ""
+"The Device Driver Manager is a tool to help users installing third-party "
+"hardware drivers. Currently Nvidia, ATI and Broadcom drivers can be "
+"installed and allows to install the PAE kernel for multi-core 32-bit "
+"systems. The Device Driver Manager will only list those devices that are "
+"supported. It will not list any other devices then mentioned above."
+msgstr ""
+
+#: en/help.html+html.body.div.h2:13
+msgid "Important"
+msgstr ""
+
+#: en/help.html+html.body.div.p:14
+msgid ""
+"The Device Driver Manager can only install drivers which are available in "
+"the repositories. Make sure you have an internet connection if you want to "
+"install the drivers."
+msgstr ""
+
+#: en/help.html+html.body.div.h2:16
+msgid "Commands"
+msgstr ""
+
+#: en/help.html+html.body.div.p:17
+msgid ""
+"If you prefer to install the drivers by terminal, you can use the following "
+"commands:"
+msgstr ""
+
+#: en/help.html+html.body.div.h3:21
+msgid "# ddm -i ati"
+msgstr ""
+
+#: en/help.html+html.body.div.p:22
+msgid ""
+"This will install the fglrx drivers for your ATI graphical card. ATI cards "
+"from version HD 5000 and up are supported by the fglrx drivers. Versions "
+"between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
+"remove the drivers from your system."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:24
+msgid "# ddm -i nvidia"
+msgstr ""
+
+#: en/help.html+html.body.div.p:25
+msgid ""
+"This will select the right drivers for your Nvidia graphical card. It will "
+"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
+"Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:27
+msgid "# ddm -i open"
+msgstr ""
+
+#: en/help.html+html.body.div.p:28
+msgid ""
+"You can use this command if you want to revert back to the open Nouveau "
+"drivers. It will remove any proprietary drivers from your system."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:30
+msgid "# ddm -i broadcom"
+msgstr ""
+
+#: en/help.html+html.body.div.p:31
+msgid ""
+"This command will install the right driver for your wireless Broadcom "
+"adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:33
+msgid "# ddm -i pae"
+msgstr ""
+
+#: en/help.html+html.body.div.p:34
+msgid ""
+"This will install the PAE kernel on multi-processor systems running a 32-bit "
+"OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
+"you cannot remove the kernel when you are currently booted into that kernel."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:36
+msgid "# ddm -i fixbumblebee"
+msgstr ""
+
+#: en/help.html+html.body.div.p:37
+msgid "This will try to fix a Bumblebee install."
+msgstr ""
+
+#: en/help.html+html.body.div.h2:39
+msgid "Log"
+msgstr ""
+
+#: en/help.html+html.body.div.h3:40
+msgid "File: /var/log/ddm.log"
+msgstr ""
+
+#: en/help.html+html.body.div.p:41
+msgid ""
+"Please, attach your log file when you post an issue on our forum: <a href="
+"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
+msgstr ""

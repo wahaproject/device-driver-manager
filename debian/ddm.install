@@ -1,2 +1,8 @@
 usr
 po/mo/*  usr/share/locale/
+
+usr
+po/mo/*  usr/share/locale/
+po/link          usr/share/ddm/html/
+po/en            usr/share/ddm/html/
+po/translated/*  usr/share/ddm/html/

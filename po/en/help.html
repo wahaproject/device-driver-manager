@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link href="../link/general.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="background"></div>
+	<h1>Device Driver Manager Help</h1>
+	<div class="main">
+		<h2>Description</h2>
+		<p>The Device Driver Manager is a tool to help users installing third-party hardware drivers. Currently Nvidia, ATI and Broadcom drivers can be installed and allows to install the PAE kernel for multi-core 32-bit systems. The Device Driver Manager will only list those devices that are supported. It will not list any other devices then mentioned above.</p>
+
+		<h2>Important</h2>
+		<p>The Device Driver Manager can only install drivers which are available in the repositories. Make sure you have an internet connection if you want to install the drivers.</p>
+
+		<h2>Commands</h2>
+		<p>If you prefer to install the drivers by terminal, you can use the following commands:</p>
+
+		<p>&nbsp;</p>
+
+		<h3># ddm -i ati</h3>
+		<p>This will install the fglrx drivers for your ATI graphical card. ATI cards from version HD 5000 and up are supported by the fglrx drivers. Versions between 1000 and 5000 will use the Radeon drivers. Use "ddm -p ati" to remove the drivers from your system.</p>
+
+		<h3># ddm -i nvidia</h3>
+		<p>This will select the right drivers for your Nvidia graphical card. It will select the Bumblebee drivers in case you have a hybrid card (both Nvidia and Intel). Use "ddm -p nvidia" to remove the drivers from your system.</p>
+
+		<h3># ddm -i open</h3>
+		<p>You can use this command if you want to revert back to the open Nouveau drivers. It will remove any proprietary drivers from your system.</p>
+
+		<h3># ddm -i broadcom</h3>
+		<p>This command will install the right driver for your wireless Broadcom adapter. Use "ddm -p broadcom" to remove the drivers from your system.</p>
+
+		<h3># ddm -i pae</h3>
+		<p>This will install the PAE kernel on multi-processor systems running a 32-bit OS. Use "ddm -p pae" to remove the PAE kernel from your system. Note that you cannot remove the kernel when you are currently booted into that kernel.</p>
+
+		<h3># ddm -i fixbumblebee</h3>
+		<p>This will try to fix a Bumblebee install.</p>
+
+		<h2>Log</h2>
+		<h3>File: /var/log/ddm.log</h3>
+		<p>Please, attach your log file when you post an issue on our forum: <a href="http://forums.solydxk.com" target="_blank">http://forums.solydxk.com</a></p>
+    </div>
+  </body>
+</html>

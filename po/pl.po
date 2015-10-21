@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ddm 0.7.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-25 12:22+0200\n"
+"POT-Creation-Date: 2015-10-21 10:56+0200\n"
 "PO-Revision-Date: 2013-06-20 07:00+0100\n"
 "Last-Translator: Schoelje <schoelje@solydxk.com>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:157
 msgid "Install"
 msgstr ""
 
@@ -37,63 +37,63 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:107
+#: ../usr/lib/ddm/ddm.py:110
 msgid "No internet connection"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:108
+#: ../usr/lib/ddm/ddm.py:111
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:157
 msgid "Device"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:174
+#: ../usr/lib/ddm/ddm.py:173
 msgid "Remove kernel"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:175
+#: ../usr/lib/ddm/ddm.py:174
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:196
+#: ../usr/lib/ddm/ddm.py:195
 #, fuzzy
 msgid "Hardware scan"
 msgstr "Sprzęt"
 
-#: ../usr/lib/ddm/ddm.py:200
+#: ../usr/lib/ddm/ddm.py:199
 msgid "There are no available drivers for your hardware:"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:205
 msgid "DDM did not find any supported hardware."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:253
 msgid "Saved"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:255
+#: ../usr/lib/ddm/ddm.py:254
 msgid "You will need to restart your system."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:459
+#: ../usr/lib/ddm/ddm.py:467
 msgid "PAE capable system"
 msgstr "System umożliwiający PAE"
 
-#: ../usr/lib/ddm/ddm.py:570
+#: ../usr/lib/ddm/ddm.py:578
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:579
+#: ../usr/lib/ddm/ddm.py:587
 msgid "The software has been successfully installed."
 msgstr ""
 
@@ -113,9 +113,155 @@ msgstr ""
 
 #: ../usr/lib/ddm/main.py:75
 msgid ""
-"<b>DDM has failed with the following unexpected error. Please submit a bug "
-"report!</b>"
+"DDM has failed with the following unexpected error. Please submit a bug "
+"report!"
 msgstr ""
+
+#: en/help.html+html.body.h1:8
+msgid "Device Driver Manager Help"
+msgstr ""
+
+#: en/help.html+html.body.div.h2:10
+msgid "Description"
+msgstr "Opis"
+
+#: en/help.html+html.body.div.p:11
+msgid ""
+"The Device Driver Manager is a tool to help users installing third-party "
+"hardware drivers. Currently Nvidia, ATI and Broadcom drivers can be "
+"installed and allows to install the PAE kernel for multi-core 32-bit "
+"systems. The Device Driver Manager will only list those devices that are "
+"supported. It will not list any other devices then mentioned above."
+msgstr ""
+
+#: en/help.html+html.body.div.h2:13
+msgid "Important"
+msgstr ""
+
+#: en/help.html+html.body.div.p:14
+msgid ""
+"The Device Driver Manager can only install drivers which are available in "
+"the repositories. Make sure you have an internet connection if you want to "
+"install the drivers."
+msgstr ""
+
+#: en/help.html+html.body.div.h2:16
+msgid "Commands"
+msgstr ""
+
+#: en/help.html+html.body.div.p:17
+msgid ""
+"If you prefer to install the drivers by terminal, you can use the following "
+"commands:"
+msgstr ""
+
+#: en/help.html+html.body.div.h3:21
+#, fuzzy
+#| msgid "Install driver: %(drv)s"
+msgid "# ddm -i ati"
+msgstr "Instaluj sterownik: %(drv)s"
+
+#: en/help.html+html.body.div.p:22
+msgid ""
+"This will install the fglrx drivers for your ATI graphical card. ATI cards "
+"from version HD 5000 and up are supported by the fglrx drivers. Versions "
+"between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
+"remove the drivers from your system."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:24
+#, fuzzy
+#| msgid "Install driver: %(drv)s"
+msgid "# ddm -i nvidia"
+msgstr "Instaluj sterownik: %(drv)s"
+
+#: en/help.html+html.body.div.p:25
+msgid ""
+"This will select the right drivers for your Nvidia graphical card. It will "
+"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
+"Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:27
+#, fuzzy
+#| msgid "Install driver: %(drv)s"
+msgid "# ddm -i open"
+msgstr "Instaluj sterownik: %(drv)s"
+
+#: en/help.html+html.body.div.p:28
+msgid ""
+"You can use this command if you want to revert back to the open Nouveau "
+"drivers. It will remove any proprietary drivers from your system."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:30
+#, fuzzy
+#| msgid "Install driver: %(drv)s"
+msgid "# ddm -i broadcom"
+msgstr "Instaluj sterownik: %(drv)s"
+
+#: en/help.html+html.body.div.p:31
+msgid ""
+"This command will install the right driver for your wireless Broadcom "
+"adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:33
+#, fuzzy
+#| msgid "Install driver: %(drv)s"
+msgid "# ddm -i pae"
+msgstr "Instaluj sterownik: %(drv)s"
+
+#: en/help.html+html.body.div.p:34
+msgid ""
+"This will install the PAE kernel on multi-processor systems running a 32-bit "
+"OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
+"you cannot remove the kernel when you are currently booted into that kernel."
+msgstr ""
+
+#: en/help.html+html.body.div.h3:36
+#, fuzzy
+#| msgid "Install driver: %(drv)s"
+msgid "# ddm -i fixbumblebee"
+msgstr "Instaluj sterownik: %(drv)s"
+
+#: en/help.html+html.body.div.p:37
+msgid "This will try to fix a Bumblebee install."
+msgstr ""
+
+#: en/help.html+html.body.div.h2:39
+msgid "Log"
+msgstr ""
+
+#: en/help.html+html.body.div.h3:40
+msgid "File: /var/log/ddm.log"
+msgstr ""
+
+#: en/help.html+html.body.div.p:41
+msgid ""
+"Please, attach your log file when you post an issue on our forum: <a href="
+"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Install driver: %(drv)s"
+#~ msgid "# install-driver ati"
+#~ msgstr "Instaluj sterownik: %(drv)s"
+
+#, fuzzy
+#~| msgid "Install driver: %(drv)s"
+#~ msgid "# install-driver nvidia"
+#~ msgstr "Instaluj sterownik: %(drv)s"
+
+#, fuzzy
+#~| msgid "Install driver: %(drv)s"
+#~ msgid "# install-driver open"
+#~ msgstr "Instaluj sterownik: %(drv)s"
+
+#, fuzzy
+#~| msgid "Install driver: %(drv)s"
+#~ msgid "# install-driver pae"
+#~ msgstr "Instaluj sterownik: %(drv)s"
 
 #~ msgid "Driver"
 #~ msgstr "Sterownik"
@@ -137,9 +283,6 @@ msgstr ""
 
 #~ msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
 #~ msgstr "Brak sterownika dla: %(card)s (%(man)s:%(serie)s)"
-
-#~ msgid "Install driver: %(drv)s"
-#~ msgstr "Instaluj sterownik: %(drv)s"
 
 #~ msgid "Switch to module: %(module)s"
 #~ msgstr "Zmień na moduł: %(module)s"
@@ -266,9 +409,6 @@ msgstr ""
 
 #~ msgid "Version"
 #~ msgstr "Wersja"
-
-#~ msgid "Description"
-#~ msgstr "Opis"
 
 #~ msgid " (recommended)"
 #~ msgstr "(zalecany)"

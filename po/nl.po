@@ -1,22 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# root <arjenbalfoort@solydxk.com>, 2015.
+#
+# Translators:
+# Arjen Balfoort <schoelje@solydxk.com>, 2015
+# root <arjenbalfoort@solydxk.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: ddm 0.7.0\n"
+"Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-25 12:22+0200\n"
-"PO-Revision-Date: 2015-06-22 16:49+0200\n"
-"Last-Translator: root <arjenbalfoort@solydxk.com>\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2015-10-21 10:56+0200\n"
+"PO-Revision-Date: 2015-10-21 08:46+0000\n"
+"Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
+"Language-Team: Dutch (http://www.transifex.com/solydxk/device-driver-manager/"
+"language/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:31
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
@@ -24,7 +26,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr "Device Driver Manager"
 
-#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:157
 msgid "Install"
 msgstr "Installeer"
 
@@ -36,11 +38,11 @@ msgstr "Help"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: ../usr/lib/ddm/ddm.py:107
+#: ../usr/lib/ddm/ddm.py:110
 msgid "No internet connection"
 msgstr "Geen internetverbinding"
 
-#: ../usr/lib/ddm/ddm.py:108
+#: ../usr/lib/ddm/ddm.py:111
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
@@ -48,15 +50,15 @@ msgstr ""
 "U hebt een internetverbinding nodig om de extra software te installeren.\n"
 "Maak verbinding met het internet en probeer het opnieuw."
 
-#: ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:157
 msgid "Device"
 msgstr "Apparaat"
 
-#: ../usr/lib/ddm/ddm.py:174
+#: ../usr/lib/ddm/ddm.py:173
 msgid "Remove kernel"
 msgstr "Verwijder kernel"
 
-#: ../usr/lib/ddm/ddm.py:175
+#: ../usr/lib/ddm/ddm.py:174
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -64,31 +66,31 @@ msgstr ""
 "U kunt de kernel die nu gestart is niet verwijderen.\n"
 "Boot een andere kernel en probeer het nogmaals."
 
-#: ../usr/lib/ddm/ddm.py:196
+#: ../usr/lib/ddm/ddm.py:195
 msgid "Hardware scan"
 msgstr "Hardware scan"
 
-#: ../usr/lib/ddm/ddm.py:200
+#: ../usr/lib/ddm/ddm.py:199
 msgid "There are no available drivers for your hardware:"
 msgstr "Er zijn geen beschikbare drivers voor uw hardware:"
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:205
 msgid "DDM did not find any supported hardware."
 msgstr "DDM heeft geen ondersteunde hardware gevonden."
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:253
 msgid "Saved"
 msgstr "Bewaard"
 
-#: ../usr/lib/ddm/ddm.py:255
+#: ../usr/lib/ddm/ddm.py:254
 msgid "You will need to restart your system."
 msgstr "U dient uw systeem te herstarten."
 
-#: ../usr/lib/ddm/ddm.py:459
+#: ../usr/lib/ddm/ddm.py:467
 msgid "PAE capable system"
 msgstr "Systeem geschikt voor PAE"
 
-#: ../usr/lib/ddm/ddm.py:570
+#: ../usr/lib/ddm/ddm.py:578
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -98,7 +100,7 @@ msgstr ""
 "Voer de volgende opdracht uit in een terminal: 'sudo apt-get -f install'.\n"
 "Bezoek ons forum wanneer u hulp nodig heeft: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:579
+#: ../usr/lib/ddm/ddm.py:587
 msgid "The software has been successfully installed."
 msgstr "De software is succesvol geïnstalleerd."
 
@@ -116,547 +118,154 @@ msgstr "Onverwachte fout"
 
 #: ../usr/lib/ddm/main.py:75
 msgid ""
-"<b>DDM has failed with the following unexpected error. Please submit a bug "
-"report!</b>"
+"DDM has failed with the following unexpected error. Please submit a bug "
+"report!"
 msgstr ""
-"<b>De installatie is mislukt met de volgende onverwachte fout. Gelieve een "
-"bug verslag in te dienen!</b>"
-
-#~ msgid "Driver"
-#~ msgstr "Driver"
-
-#~ msgid "ATI card found: %(card)s"
-#~ msgstr "ATI kaart gevonden: %(card)s"
-
-#~ msgid "ATI chip serie found: %(serie)s"
-#~ msgstr "ATI chip serie gevonden: %(serie)s"
-
-#~ msgid "ATI driver found: %(drv)s (%(status)s)"
-#~ msgstr "ATI driver gevonden: %(drv)s (%(status)s)"
-
-#~ msgid "Driver not installable: %(drv)s"
-#~ msgstr "Driver kan niet geïnstalleerd worden: %(drv)s"
-
-#~ msgid "ATI chip serie not supported: %(serie)d"
-#~ msgstr "ATI chip serie niet ondersteund: %(serie)d"
-
-#~ msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
-#~ msgstr "Geen driver gevonden voor: %(card)s (%(man)s:%(serie)s)"
-
-#~ msgid "Install driver: %(drv)s"
-#~ msgstr "Installeer driver: %(drv)s"
-
-#~ msgid "Switch to module: %(module)s"
-#~ msgstr "Omschakelen naar module: %(module)s"
-
-#~ msgid "Driver installed: %(drv)s"
-#~ msgstr "Geïnstalleerde driver: %(drv)s"
-
-#~ msgid "Removing ATI drivers"
-#~ msgstr "ATI drivers verwijderen"
-
-#~ msgid "Driver removed: %(drv)s"
-#~ msgstr "Driver verwijderd: %(drv)s"
-
-#~ msgid "ATI display driver"
-#~ msgstr "ATI beeldscherm driver"
-
-#~ msgid "Intel display driver"
-#~ msgstr "Intel beeldscherm driver"
-
-#~ msgid "Radeon display driver"
-#~ msgstr "Radeon beeldscherm driver"
-
-#~ msgid "Framebuffer display driver"
-#~ msgstr "Framebuffer beeldscherm driver"
-
-#~ msgid "Vesa display driver"
-#~ msgstr "Vesa beeldscherm driver"
-
-#~ msgid "Broadcom chip serie found: %(chip)s"
-#~ msgstr "Broadcom chip serie gevonden: %(chip)s"
-
-#~ msgid "Used wireless driver: %(drv)s"
-#~ msgstr "Gebruikte draadloze driver: %(drv)s"
-
-#~ msgid "Broadcom found: %(broadcom)s"
-#~ msgstr "Broadcom gevonden: %(broadcom)s"
-
-#~ msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
-#~ msgstr ""
-#~ "Broadcom chipset niet ondersteund of ethernet verbinding: %(broadcom)s"
-
-#~ msgid "Broadcom chipset not found: %(chip)s"
-#~ msgstr "Broadcom chipset niet gevonden: %(chip)s"
-
-#~ msgid "Broadcom pci ID not found: %(id)s"
-#~ msgstr "Broadcom pci ID niet gevonden: %(id)s"
-
-#~ msgid "Linux header name to install: %(header)s"
-#~ msgstr "Installeer Linux header: %(header)s"
-
-#~ msgid "Download package: %(package)s"
-#~ msgstr "Download pakket: %(package)s"
-
-#~ msgid "Download package: %(drv)s"
-#~ msgstr "Download pakket: %(drv)s"
-
-#~ msgid "Install downloaded packages"
-#~ msgstr "Installeer gedownloade pakketten"
-
-#~ msgid "Reconfigure package: %(package)s"
-#~ msgstr "Herconfigureer pakket: %(package)s"
-
-#~ msgid "Purge driver: %(drv)s"
-#~ msgstr "Verwijder driver: %(drv)s"
-
-#~ msgid "Done removing Broadcom drivers"
-#~ msgstr "Broadcom drivers verwijderd"
-
-#~ msgid "Used graphics driver: %(module)s"
-#~ msgstr "Gebruikte beeldscherm driver: %(module)s"
-
-#~ msgid "No xorg.conf - create minimal xorg.conf"
-#~ msgstr "Geen xorg.conf - maak minimale xorg.conf"
-
-#~ msgid "New xorg.conf written"
-#~ msgstr "Nieuwe xorg.conf geschreven"
-
-#~ msgid "New section appended to xorg.conf"
-#~ msgstr "Nieuwe sectie aan xorg.conf toegevoegd"
-
-#~ msgid "Via card found: %(card)s"
-#~ msgstr "Via kaart gevonden: %(card)s"
-
-#~ msgid "Via driver found: %(drv)s (%(status)s)"
-#~ msgstr "Via driver gevonden: %(drv)s (%(status)s)"
-
-#~ msgid "Chrome display driver"
-#~ msgstr "Chrome beeldscherm driver"
-
-#~ msgid "Intel card found: %(card)s"
-#~ msgstr "Intel kaart gevonden: %(card)s"
-
-#~ msgid "Intel driver found: %(drv)s (%(status)s)"
-#~ msgstr "Intel driver gevonden: %(drv)s (%(status)s)"
-
-#~ msgid "Graphics"
-#~ msgstr "Grafisch"
-
-#~ msgid "Wireless"
-#~ msgstr "Draadloos"
-
-#~ msgid "Kernel"
-#~ msgstr "Kernel"
-
-#~ msgid "Hardware"
-#~ msgstr "Hardware"
-
-#~ msgid "Activated driver"
-#~ msgstr "Geactiveerde driver"
-
-#~ msgid "Alternative drivers"
-#~ msgstr "Alternatieve drivers"
-
-#~ msgid "Current drivers are correct"
-#~ msgstr "Huidige drivers zijn correct"
-
-#~ msgid "PAE already installed"
-#~ msgstr "PAE reeds geïnstalleerd"
-
-#~ msgid "PAE support only for 32-bit systems"
-#~ msgstr "PAE ondersteuning alleen voor 32-bits systemen"
-
-#~ msgid "Activate"
-#~ msgstr "Activeer"
-
-#~ msgid "Version"
-#~ msgstr "Versie"
-
-#~ msgid "Description"
-#~ msgstr "Omschrijving"
-
-#~ msgid " (recommended)"
-#~ msgstr " (aanbevolen)"
-
-#~ msgid "Unknown driver"
-#~ msgstr "Onbekende driver"
-
-#~ msgid ""
-#~ "Unknown driver found.\n"
-#~ "\n"
-#~ "Please remove before installing drivers with DDM."
-#~ msgstr ""
-#~ "Onbekende driver gevonden.\n"
-#~ "\n"
-#~ "Verwijder deze alvorens drivers te installeren met DDM."
-
-#~ msgid "Driver activation"
-#~ msgstr "Driver activatie"
-
-#~ msgid ""
-#~ "Are you sure you want to install the following driver:\n"
-#~ "\n"
-#~ "%(drv)s"
-#~ msgstr ""
-#~ "Weet u het zeker dat u de volgende driver wilt installeren:\n"
-#~ "\n"
-#~ "%(drv)s"
-
-#~ msgid "Locked"
-#~ msgstr "Vergrendeld"
-
-#~ msgid ""
-#~ "Could not get lock on %(file)s.\n"
-#~ "\n"
-#~ "Close any programs locking the file and try again."
-#~ msgstr ""
-#~ "Kon %(file)s niet vergrendelen.\n"
-#~ "\n"
-#~ "Sluit alle programma's die het bestand vergrendelen en probeer opnieuw."
-
-#~ msgid "Driver installed"
-#~ msgstr "Driver geïnstalleerd"
-
-#~ msgid ""
-#~ "Driver installed: %(drv)s\n"
-#~ "\n"
-#~ "Drivers will be used on next boot.\n"
-#~ "Do you want to reboot now?"
-#~ msgstr ""
-#~ "Driver geïnstalleerd: %(drv)s\n"
-#~ "\n"
-#~ "Drivers worden gebruikt na herstart.\n"
-#~ "Wilt u nu herstarten?"
-
-#~ msgid ""
-#~ "Could not get lock on %(file)s.\n"
-#~ "\n"
-#~ "Close any programs locking the file and restart DDM."
-#~ msgstr ""
-#~ "Kon %(file)s niet vergrendelen.\n"
-#~ "\n"
-#~ "Sluit alle programma's die het bestand vergrendelen en herstart DDM."
-
-#~ msgid "Checking your hardware..."
-#~ msgstr "Uw hardware wordt gecontroleerd..."
-
-#~ msgid "Start automatic driver install"
-#~ msgstr "Start automatische driver installatie"
-
-#~ msgid "Installed PAE: %(pae)s"
-#~ msgstr "Geïnstalleerde PAE: %(pae)s"
-
-#~ msgid "Multi-core support for 32-bit systems"
-#~ msgstr "Ondersteuning voor 32-bits multi-core systemen"
-
-#~ msgid "Multi-core already installed: %(package)s"
-#~ msgstr "Multi-core reeds geïnstalleerd: %(package)s"
-
-#~ msgid "Multi-core system running single-core kernel found"
-#~ msgstr "Multi-core systeem met single-core kernel gevonden"
-
-#~ msgid "PAE not installed"
-#~ msgstr "PAE niet geïnstalleerd"
-
-#~ msgid "PAE kernel cannot be installed: single-core system"
-#~ msgstr "PAE kernel kan niet worden geïnstalleerd: single-core systeem"
-
-#~ msgid "Done installing PAE"
-#~ msgstr "PAE geïnstalleerd"
-
-#~ msgid "PAE package to remove: %(package)s"
-#~ msgstr "Verwijder PAE pakket: %(package)s"
-
-#~ msgid "Done removing PAE"
-#~ msgstr "PAE verwijderd"
-
-#~ msgid "Cannot remove PAE when running PAE"
-#~ msgstr "Kan PAE niet verwijderen als PAE gestart is"
-
-#~ msgid "Update apt"
-#~ msgstr "Update apt"
-
-#~ msgid "Install nvidia-detect"
-#~ msgstr "Installeer nvidia-detect"
-
-#~ msgid "Cannot install nvidia-detect: abort"
-#~ msgstr "nvidia-detect kan niet geïnstalleerd worden: afbreken"
-
-#~ msgid "Nvidia card found: %(card)s"
-#~ msgstr "Nvidia kaart gevonden: %(card)s"
-
-#~ msgid "Nvidia driver found: %(drv)s (%(status)s)"
-#~ msgstr "Nvidia driver gevonden: %(drv)s (%(status)s)"
-
-#~ msgid "Removing Nvidia drivers"
-#~ msgstr "Verwijder Nvidia drivers"
-
-#~ msgid "Nvidia display driver"
-#~ msgstr "Nvidia beeldscherm driver"
-
-#~ msgid "Nouveau display driver"
-#~ msgstr "Nouveau beeldscherm driver"
-
-#~ msgid "Write debug information to file: %(path)s"
-#~ msgstr "Schrijf debug informatie naar bestand: %(path)s"
-
-#~ msgid "Machine info: %(info)s"
-#~ msgstr "Machine informatie: %(info)s"
-
-#~ msgid "DDM version: %(version)s"
-#~ msgstr "DDM versie: %(version)s"
-
-#~ msgid ""
-#~ "apt-listbugs is installed and might interfere with driver installation"
-#~ msgstr ""
-#~ "apt-listbugs is geïnstalleerd en kan de driver installatie bemoeilijken"
-
-#~ msgid "Please enter your password"
-#~ msgstr "Vul uw wachtwoord in"
-
-#~ msgid "DDM - Kernel"
-#~ msgstr "DDM - Kernel"
-
-#~ msgid ""
-#~ "You do not have the latest kernel installed.\n"
-#~ "\n"
-#~ "Use the Update Manager to update your system."
-#~ msgstr ""
-#~ "De nieuwste kernel is niet geïnstalleerd.\n"
-#~ "\n"
-#~ "Gebruik de Update Manager om uw systeem te updaten."
-
-#~ msgid "DDM - Live environment"
-#~ msgstr "DDM - Live omgeving"
-
-#~ msgid ""
-#~ "DDM cannot run in a live environment\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "DDM kan niet in een live omgeving gestart worden\n"
-#~ "\n"
-#~ "Om toch te starten, gebruik het --force argument"
-
-#~ msgid "DDM - Debian based"
-#~ msgstr "DDM - Debian gebaseerd"
-
-#~ msgid ""
-#~ "Cannot determine the base distribution (debian or ubuntu)\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "De basisdistributie kan niet herleid worden (debian of ubuntu)\n"
-#~ "\n"
-#~ "Om toch te starten, gebruik het --force argument"
-
-#~ msgid "DDM - Internet"
-#~ msgstr "DDM - Internet"
-
-#~ msgid ""
-#~ "You do not seem to have an internet connection\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "U schijnt geen internetverbinding te hebben\n"
-#~ "\n"
-#~ "Om toch te starten, gebruik het --force argument"
-
-#~ msgid "Install aborted: not in repository: %(repo)s"
-#~ msgstr "Installatie afgebroken: niet in repository: %(repo)s"
-
-#~ msgid "Configure ATI..."
-#~ msgstr "Configureer ATI..."
-
-#~ msgid "Found module for driver %(drv)s: %(module)s"
-#~ msgstr "Module gevonden voor driver %(drv)s: %(module)s"
-
-#~ msgid "Remove package: %(package)s"
-#~ msgstr "Pakket verwijderen: %(package)s"
-
-#~ msgid "Broadcom chip set found: %(chip)s"
-#~ msgstr "Broadcom chipset gevonden: %(chip)s"
-
-#~ msgid "Download package dependency: %(dep)s"
-#~ msgstr "Download afhankelijk pakket: %(dep)s"
-
-#~ msgid "Modprobe b44, b43, b43legacy, ssb, brcmsmac"
-#~ msgstr "Modprobe b44, b43, b43legacy, ssb, brcmsmac"
-
-#~ msgid "Remove downloaded debs"
-#~ msgstr "Verwijder gedownloade debs"
-
-#~ msgid "Blacklist b43, brcmsmac, bcma, ssb"
-#~ msgstr "Blacklist b43, brcmsmac, bcma, ssb"
-
-#~ msgid "Modprobe wl"
-#~ msgstr "Modprobe wl"
-
-#~ msgid "Modprobe b43legacy"
-#~ msgstr "Modprobe b43legacy"
-
-#~ msgid "Modprobe b43"
-#~ msgstr "Modprobe b43"
-
-#~ msgid "Modprobe brcmsmac"
-#~ msgstr "Modprobe brcmsmac"
-
-#~ msgid "Done installing Broadcom drivers"
-#~ msgstr "Broadcom drivers geïnstalleerd"
-
-#~ msgid "No Broadcom chip set found"
-#~ msgstr "Geen Broadcom chipset gevonden"
-
-#~ msgid "Remove : %(file)s"
-#~ msgstr "Verwijder: %(file)s"
-
-#~ msgid "Check loaded driver / available driver: %(ldrv)s / %(adrv)s"
-#~ msgstr "Controleer gelade driver / beschikbare driver: %(ldrv)s / %(adrv)s"
-
-#~ msgid "Select current driver in list: %(drv)s"
-#~ msgstr "Selecteer huidige driver in lijst: %(drv)s"
-
-#~ msgid "Manufacturer image path: %(path)s"
-#~ msgstr "Pad naar fabrikantafbeelding: %(path)s"
-
-#~ msgid "Driver to install: %(drv)s"
-#~ msgstr "Installeer driver: %(drv)s"
-
-#~ msgid "Used drivers: %(drv)s"
-#~ msgstr "Gebruikte drivers: %(drv)s"
-
-#~ msgid "Command to execute: %(cmd)s"
-#~ msgstr "Opdracht uitvoeren: %(cmd)s"
-
-#~ msgid "Search for extensions: %(ext)s"
-#~ msgstr "Zoek naar extensies: %(ext)s"
-
-#~ msgid "File with extension found: %(path)s"
-#~ msgstr "Bestand niet gevonden met extensie: %(path)s"
-
-#~ msgid "File found: %(path)s"
-#~ msgstr "Bestand gevonden: %(path)s"
-
-#~ msgid "Resolution added: %(res)s"
-#~ msgstr "Resolutie toegevoegd: %(res)s"
-
-#~ msgid "Package is installed: %(package)s"
-#~ msgstr "Pakket geïnstalleerd: %(package)s"
-
-#~ msgid "Package not installed: %(package)s"
-#~ msgstr "Pakket niet geïnstalleerd: %(package)s"
-
-#~ msgid "Package not found: %(package)s"
-#~ msgstr "Pakket niet gevonden: %(package)s"
-
-#~ msgid "Could not get status info for package: %(package)s"
-#~ msgstr "Statusinformatie niet beschikbaar voor pakket: %(package)s"
-
-#~ msgid "Remove package: %(drv)s"
-#~ msgstr "Verwijder pakket: %(drv)s"
-
-#~ msgid "Startup command: %(cmd)s"
-#~ msgstr "Startopdracht: %(cmd)s"
-
-#~ msgid "Configure Nvidia..."
-#~ msgstr "Configureer Nvidia..."
-
-#~ msgid "Is package installed: %(package)s"
-#~ msgstr "Is pakket geïnstalleerd: %(package)s"
-
-#~ msgid "Remove drivers before reinstallation: %(drv)s"
-#~ msgstr "Verwijder drivers voor herinstallatie: %(drv)s"
-
-#~ msgid "Install drivers: %(drv)s"
-#~ msgstr "Installeer drivers: %(drv)s"
-
-#~ msgid "Already a PAE system or AMD64"
-#~ msgstr "Reeds een PAE systeem of AMD64"
-
-#~ msgid "Distribution: %(dist)s"
-#~ msgstr "Distributie: %(dist)s"
-
-#~ msgid "Single-core kernel found: %(kernel)s"
-#~ msgstr "Single-core kernel gevonden: %(kernel)s"
-
-#~ msgid "PAE skipped: 64-bit system"
-#~ msgstr "PAE overgeslagen: 64-bit systeem"
-
-#~ msgid "PAE kernel install command: %(cmd)s"
-#~ msgstr "PAE kernel installatieopdracht: %(cmd)s"
-
-#~ msgid "Not running pae, continue removal"
-#~ msgstr "PAE niet gestart, ga door met verwijderen"
-
-#~ msgid "Create list store eval string: %(eval)s"
-#~ msgstr "Maak list store eval string: %(eval)s"
-
-#~ msgid "Clear existing list store"
-#~ msgstr "Maak bestaande list store leeg"
-
-#~ msgid "First item is column name (multi-column list): %(iscolname)s"
-#~ msgstr "Eerste item is kolomnaam (multi-kolom lijst): %(iscolname)s"
-
-#~ msgid "First item is column name (single-column list): %(iscolname)s"
-#~ msgstr "Eerste item is kolomnaam (enkele-kolom lijst): %(iscolname)s"
-
-#~ msgid "Create column names: %(cols)s"
-#~ msgstr "Maak kolomnamen: %(cols)s"
-
-#~ msgid "First item is column name: skip first item"
-#~ msgstr "Eerste item is kolomnaam: sla eerste item over"
-
-#~ msgid "Add data to list store: %(data)s"
-#~ msgstr "Voeg data toe aan list store: %(data)s"
-
-#~ msgid "Add data to top of list store: %(totop)s"
-#~ msgstr "Voeg data bovenaan toe aan list store: %(totop)s"
-
-#~ msgid "Add data to bottom of list store: %(tobottom)s"
-#~ msgstr "Voeg data onderaan to aan list store: %(tobottom)s"
-
-#~ msgid "Last visible column nr: %(colnr)d"
-#~ msgstr "Laatste zichtbare kolomnr: %(colnr)d"
-
-#~ msgid "Hide column nr: %(colnr)d"
-#~ msgstr "Verberg kolomnr: %(colnr)d"
-
-#~ msgid "Create column: %(col)s"
-#~ msgstr "Maak kolom: %(col)s"
-
-#~ msgid "Check box found: add toggle function"
-#~ msgstr "Selectievakje gevonden: voeg schakelfunctie toe"
-
-#~ msgid "Last column fills treeview: %(colnr)d"
-#~ msgstr "Laatste kolom vult treeview: %(colnr)d"
-
-#~ msgid "Column added: %(col)s"
-#~ msgstr "Kolom toegevoegd: %(col)s"
-
-#~ msgid "Column already exists: %(col)s"
-#~ msgstr "Kolom bestaat reeds: %(col)s"
-
-#~ msgid "Add Liststore to Treeview"
-#~ msgstr "Voeg Liststore toe aan Treeview"
-
-#~ msgid "Scrolled to selected row: %(row)d"
-#~ msgstr "Naar geselecteerde rij gescrold: %(row)d"
-
-#~ msgid "Modules for %(manufacturer)s: %(modules)s"
-#~ msgstr "Modules voor %(manufacturer)s: %(modules)s"
-
-#~ msgid "Blacklist %(module)s in: %(path)s"
-#~ msgstr "Blacklist %(module)s in: %(path)s"
-
-#~ msgid "Uncomment blacklist %(module)s in: %(path)s"
-#~ msgstr "Heractiveer blacklist %(module)s in: %(path)s"
-
-#~ msgid "Remove blacklist %(module)s from: %(path)s"
-#~ msgstr "Verwijder blacklist %(module)s van: %(path)s"
-
-#~ msgid "Blacklist %(module)s found in: %(path)s"
-#~ msgstr "Blacklist %(module)s gevonden in: %(path)s"
-
-#~ msgid "Commented blacklist %(module)s found in: %(path)s"
-#~ msgstr "Uitgezette blacklist %(module)s gevonden in: %(path)s"
+"DDM is mislukt met de volgende onverwachte fout. Gelieve een bug verslag in "
+"te dienen!"
+
+#: en/help.html+html.body.h1:8
+msgid "Device Driver Manager Help"
+msgstr "Device Driver Manager Help"
+
+#: en/help.html+html.body.div.h2:10
+msgid "Description"
+msgstr "Beschrijving"
+
+#: en/help.html+html.body.div.p:11
+msgid ""
+"The Device Driver Manager is a tool to help users installing third-party "
+"hardware drivers. Currently Nvidia, ATI and Broadcom drivers can be "
+"installed and allows to install the PAE kernel for multi-core 32-bit "
+"systems. The Device Driver Manager will only list those devices that are "
+"supported. It will not list any other devices then mentioned above."
+msgstr ""
+"De Device Driver Manager is een hulpmiddel om gebruikers te helpen om "
+"drivers van hardware leveranciers te installeren. Momenteel kunnen Nvidia, "
+"ATI en Broadcom drivers worden geïnstalleerd en maakt het mogelijk om de PAE "
+"kernel voor multi-core 32-bit systemen te installeren. De Device Driver "
+"Manager toont alleen die hardware die ondersteund wordt. Het zal niet die "
+"apparaten tonen anders dan hierboven vermeld."
+
+#: en/help.html+html.body.div.h2:13
+msgid "Important"
+msgstr "Belangrijk"
+
+#: en/help.html+html.body.div.p:14
+msgid ""
+"The Device Driver Manager can only install drivers which are available in "
+"the repositories. Make sure you have an internet connection if you want to "
+"install the drivers."
+msgstr ""
+"De Device Driver Manager kan alleen drivers installeren die beschikbaar zijn "
+"in de repository's. Zorg ervoor dat u een internetverbinding hebt wanneer u "
+"de drivers wilt installeren."
+
+#: en/help.html+html.body.div.h2:16
+msgid "Commands"
+msgstr "Commando's"
+
+#: en/help.html+html.body.div.p:17
+msgid ""
+"If you prefer to install the drivers by terminal, you can use the following "
+"commands:"
+msgstr ""
+"Als u bij voorkeur de terminal gebruikt om de drivers te installeren, kunt u "
+"gebruik maken van de volgende commando's:"
+
+#: en/help.html+html.body.div.h3:21
+msgid "# ddm -i ati"
+msgstr "# ddm -i ati"
+
+#: en/help.html+html.body.div.p:22
+msgid ""
+"This will install the fglrx drivers for your ATI graphical card. ATI cards "
+"from version HD 5000 and up are supported by the fglrx drivers. Versions "
+"between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
+"remove the drivers from your system."
+msgstr ""
+"Dit zal de fglrx drivers voor de ATI grafische kaart installeren. ATI "
+"kaarten vanaf versie HD 5000 en hoger worden ondersteund door de fglrx "
+"drivers. Versies tussen 1000 en 5000 zullen de Radeon drivers te gebruiken. "
+"Gebruik \"ddm -p ati\" om de drivers te verwijderen van uw systeem."
+
+#: en/help.html+html.body.div.h3:24
+msgid "# ddm -i nvidia"
+msgstr "# ddm -i nvidia"
+
+#: en/help.html+html.body.div.p:25
+msgid ""
+"This will select the right drivers for your Nvidia graphical card. It will "
+"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
+"Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
+msgstr ""
+"Dit zal de juiste drivers voor de Nvidia grafische kaart selecteren. Het zal "
+"de Bumblebee drivers selecteren in het geval u een hybride-kaart (zowel "
+"Nvidia en Intel) heeft. Gebruik \"ddm -p nvidia\" om de drivers van uw "
+"systeem te verwijderen."
+
+#: en/help.html+html.body.div.h3:27
+msgid "# ddm -i open"
+msgstr "# ddm -i open"
+
+#: en/help.html+html.body.div.p:28
+msgid ""
+"You can use this command if you want to revert back to the open Nouveau "
+"drivers. It will remove any proprietary drivers from your system."
+msgstr ""
+"U kunt dit commando gebruiken wanneer u terug wilt gaan naar de open Nouveau "
+"drivers. Het zal ieder driver die niet open source is van uw systeem te "
+"verwijderen."
+
+#: en/help.html+html.body.div.h3:30
+msgid "# ddm -i broadcom"
+msgstr "# ddm -i broadcom"
+
+#: en/help.html+html.body.div.p:31
+msgid ""
+"This command will install the right driver for your wireless Broadcom "
+"adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
+msgstr ""
+"Dit commando zal de juiste driver voor uw draadloze Broadcom adapter "
+"installeren. Gebruik \"ddm -p broadcom\" om de drivers van uw systeem te "
+"verwijderen."
+
+#: en/help.html+html.body.div.h3:33
+msgid "# ddm -i pae"
+msgstr "# ddm -i pae"
+
+#: en/help.html+html.body.div.p:34
+msgid ""
+"This will install the PAE kernel on multi-processor systems running a 32-bit "
+"OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
+"you cannot remove the kernel when you are currently booted into that kernel."
+msgstr ""
+"Dit zal de PAE kernel op multi-processor systemen met een 32-bits "
+"besturingssysteem installeren. Gebruik \"ddm -p pae\" om de PAE kernel van "
+"uw systeem te verwijderen. Let op dat u de kernel niet kunt verwijderen "
+"wanneer u momenteel in die kernel bent opgestart."
+
+#: en/help.html+html.body.div.h3:36
+msgid "# ddm -i fixbumblebee"
+msgstr "# ddm -i fixbumblebee"
+
+#: en/help.html+html.body.div.p:37
+msgid "This will try to fix a Bumblebee install."
+msgstr "Dit zal uw Bumblebee installatie proberen te herstellen."
+
+#: en/help.html+html.body.div.h2:39
+msgid "Log"
+msgstr "Log"
+
+#: en/help.html+html.body.div.h3:40
+msgid "File: /var/log/ddm.log"
+msgstr "Bestand: /var/log/ddm.log"
+
+#: en/help.html+html.body.div.p:41
+msgid ""
+"Please, attach your log file when you post an issue on our forum: <a href="
+"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
+msgstr ""
+"Voeg uw log bestand toe wanneer u een probleem met DDM wilt posten op ons "
+"forum: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://forums."
+"solydxk.com</a>"

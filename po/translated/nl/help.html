@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link href="../link/general.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="background"></div>
+	<h1>Device Driver Manager Help</h1>
+	<div class="main">
+		<h2>Beschrijving</h2>
+		<p>De Device Driver Manager is een hulpmiddel om gebruikers te helpen om
+drivers van hardware leveranciers te installeren. Momenteel kunnen Nvidia,
+ATI en Broadcom drivers worden geïnstalleerd en maakt het mogelijk om de PAE
+kernel voor multi-core 32-bit systemen te installeren. De Device Driver
+Manager toont alleen die hardware die ondersteund wordt. Het zal niet die
+apparaten tonen anders dan hierboven vermeld.</p>
+
+		<h2>Belangrijk</h2>
+		<p>De Device Driver Manager kan alleen drivers installeren die beschikbaar zijn
+in de repository's. Zorg ervoor dat u een internetverbinding hebt wanneer u
+de drivers wilt installeren.</p>
+
+		<h2>Commando's</h2>
+		<p>Als u bij voorkeur de terminal gebruikt om de drivers te installeren, kunt u
+gebruik maken van de volgende commando's:</p>
+
+		<p>&nbsp;</p>
+
+		<h3># ddm -i ati</h3>
+		<p>Dit zal de fglrx drivers voor de ATI grafische kaart installeren. ATI
+kaarten vanaf versie HD 5000 en hoger worden ondersteund door de fglrx
+drivers. Versies tussen 1000 en 5000 zullen de Radeon drivers te
+gebruiken. Gebruik "ddm -p ati" om de drivers te verwijderen van uw systeem.</p>
+
+		<h3># ddm -i nvidia</h3>
+		<p>Dit zal de juiste drivers voor de Nvidia grafische kaart selecteren. Het zal
+de Bumblebee drivers selecteren in het geval u een hybride-kaart (zowel
+Nvidia en Intel) heeft. Gebruik "ddm -p nvidia" om de drivers van uw systeem
+te verwijderen.</p>
+
+		<h3># ddm -i open</h3>
+		<p>U kunt dit commando gebruiken wanneer u terug wilt gaan naar de open Nouveau
+drivers. Het zal ieder driver die niet open source is van uw systeem te
+verwijderen.</p>
+
+		<h3># ddm -i broadcom</h3>
+		<p>Dit commando zal de juiste driver voor uw draadloze Broadcom adapter
+installeren. Gebruik "ddm -p broadcom" om de drivers van uw systeem te
+verwijderen.</p>
+
+		<h3># ddm -i pae</h3>
+		<p>Dit zal de PAE kernel op multi-processor systemen met een 32-bits
+besturingssysteem installeren. Gebruik "ddm -p pae" om de PAE kernel van uw
+systeem te verwijderen. Let op dat u de kernel niet kunt verwijderen wanneer
+u momenteel in die kernel bent opgestart.</p>
+
+		<h3># ddm -i fixbumblebee</h3>
+		<p>Dit zal uw Bumblebee installatie proberen te herstellen.</p>
+
+		<h2>Log</h2>
+		<h3>Bestand: /var/log/ddm.log</h3>
+		<p>Voeg uw log bestand toe wanneer u een probleem met DDM wilt posten op ons
+forum: <a href="http://forums.solydxk.com"
+target="_blank">http://forums.solydxk.com</a></p>
+    </div>
+  </body>
+</html>

@@ -2,7 +2,7 @@
 
 import sys
 sys.path.insert(1, '/usr/lib/ddm')
-from dialogs import MessageDialog
+from dialogs import MessageDialog, ErrorDialog
 from gi.repository import Gtk
 from ddm import DDM
 import os
@@ -45,7 +45,7 @@ def isRunningLive():
 
 # Do not run in live environment
 if isRunningLive():
-    MessageDialog(title, msg, Gtk.MessageType.WARNING).show()
+    MessageDialog(title, msg)
     sys.exit()
 
 
@@ -55,9 +55,10 @@ def uncaught_excepthook(*args):
         from pprint import pprint
         from types import BuiltinFunctionType, ClassType, ModuleType, TypeType
         tb = sys.last_traceback
-        while tb.tb_next: tb = tb.tb_next
+        while tb.tb_next:
+            tb = tb.tb_next
         print(('\nDumping locals() ...'))
-        pprint({k:v for k,v in tb.tb_frame.f_locals.items()
+        pprint({k: v for k, v in list(tb.tb_frame.f_locals.items())
                     if not k.startswith('_') and
                        not isinstance(v, (BuiltinFunctionType,
                                           ClassType, ModuleType, TypeType))})
@@ -70,10 +71,9 @@ def uncaught_excepthook(*args):
             pdb.pm()
     else:
         import traceback
-        from dialogs import ErrorDialog
-        MessageDialog(_('Unexpected error'),
+        ErrorDialog(_('Unexpected error'),
                     "<b>{}</b>".format(_('DDM has failed with the following unexpected error. Please submit a bug report!')),
-                    '<tt>' + '\n'.join(traceback.format_exception(*args)) + '</tt>', Gtk.MessageType.WARNING).show()
+                    '<tt>' + '\n'.join(traceback.format_exception(*args)) + '</tt>')
     sys.exit(1)
 
 sys.excepthook = uncaught_excepthook

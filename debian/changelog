@@ -1,3 +1,16 @@
+ddm (2.1.7) debian; urgency=low
+
+  * Updated Broadcom drivers list
+  * Use ddm in terminal to install/purge drivers (ddm -h for help)
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 21 Oct 2015 11:00:00 +0100
+
+ddm (2.1.5) debian; urgency=low
+
+  * Updated translations
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Mon, 19 Oct 2015 07:30:00 +0100
+
 ddm (2.1.4) debian; urgency=low
 
   * Check live session on /lib/live/mount instead of /lib/live
