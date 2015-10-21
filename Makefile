@@ -10,4 +10,5 @@ clean:
 
 build:
 	# build i18n
+	tx pull -a
 	(cd po && $(MAKE))

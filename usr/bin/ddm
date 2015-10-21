@@ -4,11 +4,10 @@
 # 0 - All's well
 # 1 - Not root
 # 2 - Wrong parameters
-# 3 - Device not found
-# 4 - No driver available
-# 5 - Driver not in repository
-# 6 - Download error
-# 7 - Cannot purge driver
+# 3 - No driver available
+# 4 - Driver not in repository
+# 5 - Download error
+# 6 - Cannot purge driver
 
 # Broadcom hardware list (device ids)
 # Update URL: http://linuxwireless.org/en/users/Drivers/b43
@@ -46,10 +45,10 @@ function usage() {
   echo "============================================================"
   echo "The following options are allowed:"
   echo
-  echo "-i <argument>    Install given driver (one per option)"
+  echo "-i <argument>    Install given driver"
   echo "   arguments: ati, nvidia, broadcom, open, pae, fixbumblebee"
   echo
-  echo "-p <argument>    Purge given driver (one per option)"
+  echo "-p <argument>    Purge given driver"
   echo "   arguments: ati, nvidia, broadcom, pae"
   echo
   echo "------------------------------------------------------------"
@@ -77,7 +76,7 @@ function install_fglrx {
   INSTALLED=`env LANG=C apt-cache policy $DRIVER | grep Installed | awk '{print $2}' | tr -d ' '`
 
   if [ "$CANDIDATE" == "" ]; then
-    exit 5
+    exit 4
   fi
 
   echo "Need driver: $DRIVER ($CANDIDATE)" | tee -a $LOG
@@ -186,7 +185,7 @@ function install_broadcom {
     CNT=`ls -1 *.deb 2>/dev/null | wc -l`
     if [ $CNT -eq 0 ]; then
       echo "No packages were downloaded - exiting" | tee -a $LOG
-      exit 6
+      exit 5
     fi
     
     # Remove modules
@@ -251,7 +250,7 @@ function install_nvidia {
 
 
   if [ "$DRIVER" == "" ] || [ "$CANDIDATE" == "" ]; then
-    exit 4
+    exit 3
   fi
 
   echo "Need driver: $DRIVER ($CANDIDATE)" | tee -a $LOG
@@ -433,9 +432,9 @@ for DRV in $PURGE; do
     broadcom)
       # If 'purge' is passed as an argument, purge Broadcom
       echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-      apt-get purge -y --force-yes firmware-b43* 2>&1 | tee -a $LOG
+      #apt-get purge -y --force-yes firmware-b43* 2>&1 | tee -a $LOG
       apt-get purge -y --force-yes broadcom-sta-dkms 2>&1 | tee -a $LOG
-      apt-get purge -y --force-yes firmware-brcm80211 2>&1 | tee -a $LOG
+      #apt-get purge -y --force-yes firmware-brcm80211 2>&1 | tee -a $LOG
       rm '/etc/modprobe.d/blacklist-broadcom.conf' 2>/dev/null
       ;;
     open)
@@ -444,7 +443,7 @@ for DRV in $PURGE; do
       RELEASE=`uname -r`
       if [[ "$RELEASE" =~ "pae" ]]; then
 	echo "ERROR: Cannot remove PAE kernel when PAE is booted" | tee -a $LOG
-	exit 7
+	exit 6
       else
 	echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
 	apt-get purge -y --force-yes $(dpkg-query -W -f='${Package}\n' *-pae) 2>&1 | tee -a $LOG
@@ -478,7 +477,7 @@ for DRV in $INSTALL; do
 
       if [ "$DEVICEIDS" == "" ]; then
 	echo "No ATI card found - exiting" | tee -a $LOG
-	exit 3
+	exit 0
       fi
 
       CARD=`lspci | grep VGA`
@@ -515,7 +514,7 @@ for DRV in $INSTALL; do
 
       if [ "$DRIVER" == "" ]; then
 	echo "No driver for this card: $CARD" | tee -a $LOG
-	exit 4
+	exit 3
       fi
 
       # Install the AMD/Ati drivers
@@ -529,7 +528,7 @@ for DRV in $INSTALL; do
 
       if [ "$DEVICEIDS" == "" ]; then
 	echo "No Nvidia card found - exiting" | tee -a $LOG
-	exit 3
+	exit 0
       fi
 
       # Install the Nvidia drivers
@@ -539,9 +538,10 @@ for DRV in $INSTALL; do
       # Get device ids for Broadcom
       BCID='14e4'
       DEVICEIDS=$(lspci -n -d $BCID: | awk '{print $3}' | cut -d':' -f 2)
+      
       if [ "$DEVICEIDS" == "" ]; then
 	echo "No Broadcom device found - exiting" | tee -a $LOG
-	exit 3
+	exit 0
       fi
 
       # Install the Broadcom drivers

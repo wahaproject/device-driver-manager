@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# Arjen Balfoort <schoelje@solydxk.com>, 2015
 # Davide Favaro <belzebu87@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-21 10:56+0200\n"
-"PO-Revision-Date: 2015-09-28 20:24+0000\n"
+"POT-Creation-Date: 2015-10-21 14:54+0200\n"
+"PO-Revision-Date: 2015-10-21 10:16+0000\n"
 "Last-Translator: Davide Favaro <belzebu87@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/solydxk/device-driver-"
 "manager/language/it/)\n"
@@ -25,7 +26,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr "Device Driver Manager"
 
-#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:157
+#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:158
 msgid "Install"
 msgstr "Installa"
 
@@ -37,11 +38,11 @@ msgstr "Aiuto"
 msgid "Quit"
 msgstr "Esci"
 
-#: ../usr/lib/ddm/ddm.py:110
+#: ../usr/lib/ddm/ddm.py:130
 msgid "No internet connection"
 msgstr "Nessuna connessione internet"
 
-#: ../usr/lib/ddm/ddm.py:111
+#: ../usr/lib/ddm/ddm.py:131
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
@@ -49,15 +50,15 @@ msgstr ""
 "Una connessione internet è necessaria per installare software aggiuntivo. "
 "Connettersi ad internet e riprovare."
 
-#: ../usr/lib/ddm/ddm.py:157
+#: ../usr/lib/ddm/ddm.py:158
 msgid "Device"
 msgstr "Dispositivi"
 
-#: ../usr/lib/ddm/ddm.py:173
+#: ../usr/lib/ddm/ddm.py:174
 msgid "Remove kernel"
 msgstr "Rimuovi kernel"
 
-#: ../usr/lib/ddm/ddm.py:174
+#: ../usr/lib/ddm/ddm.py:175
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -65,31 +66,50 @@ msgstr ""
 "Impossibile rimuovere il kernel in esecuzione.\n"
 "Riavviare con un altro kernel e riprovare"
 
-#: ../usr/lib/ddm/ddm.py:195
+#: ../usr/lib/ddm/ddm.py:196
 msgid "Hardware scan"
 msgstr "Analisi hardware"
 
-#: ../usr/lib/ddm/ddm.py:199
+#: ../usr/lib/ddm/ddm.py:200
 msgid "There are no available drivers for your hardware:"
 msgstr "Nessun driver compatibile con questo dispositivo hardware"
 
-#: ../usr/lib/ddm/ddm.py:205
+#: ../usr/lib/ddm/ddm.py:206
 msgid "DDM did not find any supported hardware."
 msgstr "DDM non ha trovato nessun hardware supportato"
 
-#: ../usr/lib/ddm/ddm.py:253
-msgid "Saved"
-msgstr "Salvato"
-
-#: ../usr/lib/ddm/ddm.py:254
-msgid "You will need to restart your system."
-msgstr "È necessario riavviare il sistema"
-
-#: ../usr/lib/ddm/ddm.py:467
+#: ../usr/lib/ddm/ddm.py:465
 msgid "PAE capable system"
 msgstr "Sistema con supporto PAE"
 
-#: ../usr/lib/ddm/ddm.py:578
+#: ../usr/lib/ddm/ddm.py:580
+msgid "Run as root."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:582
+msgid "Wrong arguments passed to ddm."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:584
+msgid "There are no driver available."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:586
+msgid "The driver cannot be found in repository."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:588
+#, fuzzy
+msgid ""
+"Download error.\n"
+"Check your internet connection."
+msgstr "Nessuna connessione internet"
+
+#: ../usr/lib/ddm/ddm.py:590
+msgid "DDM cannot purge the driver."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:592
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -99,9 +119,13 @@ msgstr ""
 "Aprire un terminale ed eseguire 'sudo apt-get -f install'.\n"
 "Visitare il forum per ottenere supporto: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:587
+#: ../usr/lib/ddm/ddm.py:597
 msgid "The software has been successfully installed."
 msgstr "Software installato correttamente"
+
+#: ../usr/lib/ddm/ddm.py:598
+msgid "You will need to restart your system."
+msgstr "È necessario riavviare il sistema"
 
 #: ../usr/lib/ddm/main.py:32
 msgid ""
@@ -125,14 +149,12 @@ msgstr ""
 "inviare una segnalazione del bug!"
 
 #: en/help.html+html.body.h1:8
-#, fuzzy
-#| msgid "Device Driver Manager"
 msgid "Device Driver Manager Help"
-msgstr "Device Driver Manager"
+msgstr "Device Driver Manager - Aiuto"
 
 #: en/help.html+html.body.div.h2:10
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #: en/help.html+html.body.div.p:11
 msgid ""
@@ -142,10 +164,16 @@ msgid ""
 "systems. The Device Driver Manager will only list those devices that are "
 "supported. It will not list any other devices then mentioned above."
 msgstr ""
+"Device Driver Manager è uno strumento di supporto per l'installazione di "
+"driver di terze parti. Al momento possono essere installati i driver per "
+"Nvidia, ATI e Broadcom oltre ad un kernel PAE per i sistemi multi core a "
+"32bit. Devide Driver Manager presenterà una lista con le sole componenti "
+"supportate. Non verranno mostrate altre periferiche oltre a quelle "
+"menzionate in precedenza."
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
-msgstr ""
+msgstr "Importante"
 
 #: en/help.html+html.body.div.p:14
 msgid ""
@@ -153,20 +181,25 @@ msgid ""
 "the repositories. Make sure you have an internet connection if you want to "
 "install the drivers."
 msgstr ""
+"Device Driver Manager offre supporto all'installazione di driver disponibili "
+"nei repositories. Assicurarsi di disporre di una connessione a internet per "
+"installare i driver."
 
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
-msgstr ""
+msgstr "Comandi"
 
 #: en/help.html+html.body.div.p:17
 msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
 msgstr ""
+"Se si preferisce l'installazione dei driver usando un terminale, i comandi "
+"da eseguire sono:"
 
 #: en/help.html+html.body.div.h3:21
 msgid "# ddm -i ati"
-msgstr ""
+msgstr "# ddm -i ati"
 
 #: en/help.html+html.body.div.p:22
 msgid ""
@@ -175,10 +208,15 @@ msgid ""
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
 msgstr ""
+"Procedendo verranno installati i driver fglrx per la scheda video ATI. Le "
+"schede video ATI dalla versione HD 5000 e successive sono supportate dai "
+"driver fglrx. Per le versioni tra la 1000 e la 5000 verrà usato il driver "
+"Radeon. Per eliminare i driver dal sistema, eseguire in un terminale \"ddm -"
+"p ati\"."
 
 #: en/help.html+html.body.div.h3:24
 msgid "# ddm -i nvidia"
-msgstr ""
+msgstr "# ddm -i nvidia"
 
 #: en/help.html+html.body.div.p:25
 msgid ""
@@ -186,30 +224,39 @@ msgid ""
 "select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
 "Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
 msgstr ""
+"Procedendo verranno installati i driver corretti per la scheda video Nvidia. "
+"Verrà selezionato il driver Bumblebee nel caso il sistema disponga di una "
+"scheda ibrida (Nvidia e Intel). Per eliminare i driver dal sistema, eseguire "
+"in un terminale \"ddm -p nvidia\"."
 
 #: en/help.html+html.body.div.h3:27
 msgid "# ddm -i open"
-msgstr ""
+msgstr "# ddm -i open"
 
 #: en/help.html+html.body.div.p:28
 msgid ""
 "You can use this command if you want to revert back to the open Nouveau "
 "drivers. It will remove any proprietary drivers from your system."
 msgstr ""
+"Usare questo comando per ritornare ai driver open Nouveau. Verranno rimossi "
+"i driver proprietari dal sistema."
 
 #: en/help.html+html.body.div.h3:30
 msgid "# ddm -i broadcom"
-msgstr ""
+msgstr "# ddm -i broadcom"
 
 #: en/help.html+html.body.div.p:31
 msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
 msgstr ""
+"Procedendo verranno installati i driver corretti per l'adattatore wireless "
+"Broadcom. Per eliminare i driver dal sistema, eseguire in un terminale \"ddm "
+"-p broadcom\"."
 
 #: en/help.html+html.body.div.h3:33
 msgid "# ddm -i pae"
-msgstr ""
+msgstr "# ddm -i pae"
 
 #: en/help.html+html.body.div.p:34
 msgid ""
@@ -217,25 +264,34 @@ msgid ""
 "OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
 "you cannot remove the kernel when you are currently booted into that kernel."
 msgstr ""
+"Procedendo verrà installato il kernel PAE per sistemi multi core a 32bit. "
+"Per rimuovere il kernel PAE dal sistema, eseguire in un terminale \"ddm -p "
+"pae\". Nota: non è possibile rimuovere il kernel attualmente in uso."
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
-msgstr ""
+msgstr "# ddm -i fixbumblebee"
 
 #: en/help.html+html.body.div.p:37
 msgid "This will try to fix a Bumblebee install."
-msgstr ""
+msgstr "Procedendo verrà tentato il ripristino dell'installazione di Bumblebee"
 
 #: en/help.html+html.body.div.h2:39
 msgid "Log"
-msgstr ""
+msgstr "Log"
 
 #: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"
-msgstr ""
+msgstr "File: /var/log/ddm.log"
 
 #: en/help.html+html.body.div.p:41
 msgid ""
 "Please, attach your log file when you post an issue on our forum: <a href="
 "\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
 msgstr ""
+"Si prega di allegare il log del processo per chiedere supporto sul forum: <a "
+"href=\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk."
+"com</a>1"
+
+#~ msgid "Saved"
+#~ msgstr "Salvato"

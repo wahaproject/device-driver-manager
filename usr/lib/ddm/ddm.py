@@ -102,16 +102,10 @@ class DDM(object):
 
             # Install/purge selected driver
             option = ""
-            if action == 'install' and hasInternetConnection():
+            if action == 'install':
                 option = "-i"
             elif action == 'purge':
                 option = "-p"
-            else:
-                title = _("No internet connection")
-                msg = _("You need an internet connection to install the additional software.\n"
-                        "Please, connect to the internet and try again.")
-                WarningDialog(title, msg)
-                break
 
             if option:
                 driver = ''
@@ -132,9 +126,16 @@ class DDM(object):
 
         # Execute the command
         if arguments:
-            command = "ddm {}".format(" ".join(arguments))
-            self.log.write("Command to execute: {}".format(command), 'on_btnSave_clicked')
-            self.exec_command(command)
+            if '-i' in arguments and not hasInternetConnection():
+                title = _("No internet connection")
+                msg = _("You need an internet connection to install the additional software.\n"
+                        "Please, connect to the internet and try again.")
+                WarningDialog(title, msg)
+            else:
+                command = "ddm {}".format(" ".join(arguments))
+                print(command)
+                self.log.write("Command to execute: {}".format(command), 'on_btnSave_clicked')
+                #self.exec_command(command)
 
     def on_btnQuit_clicked(self, widget):
         self.on_ddmWindow_destroy(widget)
@@ -237,7 +238,7 @@ class DDM(object):
                 ret = self.queue.get()
                 self.log.write("Queue returns: {}".format(ret), 'check_thread')
                 self.queue.task_done()
-                self.show_message(ret, True)
+                self.show_message(ret)
             return True
 
         # Thread is done
@@ -245,14 +246,10 @@ class DDM(object):
         if not self.queue.empty():
             ret = self.queue.get()
             self.queue.task_done()
-            self.show_message(ret, True)
+            self.show_message(ret)
         del self.threads[name]
 
         self.set_buttons_state(True)
-
-        title = _("Saved")
-        msg = _("You will need to restart your system.")
-        MessageDialog(title, msg)
 
         return False
 
@@ -271,9 +268,9 @@ class DDM(object):
         deviceArray = self.get_lspci_info(manufacturerId, 'VGA')
 
         # TESTING - Uncomment the following line for testing:
-        #deviceArray = [['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]', '68e0']]
-        #deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] RV710 [Radeon HD 4350/4550]', '68e0']]
-        #deviceArray = [['Advanced Micro Devices [AMD/ATI] RS880 [Radeon HD 4290]', '68e0']]
+        #deviceArray = [['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]', manufacturerId, '68e0']]
+        #deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] RV710 [Radeon HD 4350/4550]', manufacturerId, '68e0']]
+        #deviceArray = [['Advanced Micro Devices [AMD/ATI] RS880 [Radeon HD 4290]', manufacturerId, '68e0']]
 
         if deviceArray:
             self.log.write("Device(s): {}".format(deviceArray), 'get_ati')
@@ -322,10 +319,10 @@ class DDM(object):
         deviceArray = self.get_lspci_info(manufacturerId, 'VGA')
 
         # TESTING - Uncomment the following line for testing:
-        #deviceArray = [['NVIDIA Corporation GT218 [GeForce G210M]', '10de', '0a74']]
+        #deviceArray = [['NVIDIA Corporation GT218 [GeForce G210M]', manufacturerId, '0a74']]
         # Optimus test
         #deviceArray = [['Intel Corporation Haswell-ULT Integrated Graphics Controller', '8086', '0a16'], \
-        #['NVIDIA Corporation GK107M [GeForce GT 750M]', '10de', '0fe4']]
+        #['NVIDIA Corporation GK107M [GeForce GT 750M]', manufacturerId, '0fe4']]
 
         if deviceArray:
             optimus = False
@@ -382,7 +379,7 @@ class DDM(object):
 
     def get_broadcom_ids(self, driver_name):
         driver_name = driver_name.upper()
-        ids = getoutput("cat /usr/bin/install-driver | grep '{}=' | cut -d'=' -f 2".format(driver_name))
+        ids = getoutput("cat /usr/bin/ddm | grep '{}=' | cut -d'=' -f 2".format(driver_name))
         if len(ids) > 0:
             return ids[0].split('|')
         return []
@@ -445,8 +442,9 @@ class DDM(object):
         machine = getoutput('uname -m')[0]
         release = getoutput('uname -r')[0]
 
-        # TESTING - Uncomment the following line for testing:
-        #release = '3.16.0-4-586
+        # TESTING - Uncomment the following lines for testing:
+        #machine = 'i686'
+        #release = '3.16.0-4-586'
 
         self.log.write("PAE check: machine={} / release={}".format(machine, release), 'get_pae')
 
@@ -573,18 +571,31 @@ class DDM(object):
 
         return driver
 
-    def show_message(self, cmdOutput, onlyOnError=False):
+    def show_message(self, cmdOutput):
         try:
-            msg = _("There was an error during the installation.\n"
+            self.log.write("Command output: {}".format(cmdOutput), 'show_message')
+            ret = int(cmdOutput)
+            if ret > 1 and ret != 255:
+                if ret == 1:
+                    ErrorDialog(self.btnSave.get_label(), _("Run as root."))
+                elif ret == 2:
+                    ErrorDialog(self.btnSave.get_label(), _("Wrong arguments passed to ddm."))
+                elif ret == 3:
+                    ErrorDialog(self.btnSave.get_label(), _("There are no driver available."))
+                elif ret == 4:
+                    ErrorDialog(self.btnSave.get_label(), _("The driver cannot be found in repository."))
+                elif ret == 5:
+                    ErrorDialog(self.btnSave.get_label(), _("Download error.\nCheck your internet connection."))
+                elif ret == 6:
+                    ErrorDialog(self.btnSave.get_label(), _("DDM cannot purge the driver."))
+                else:
+                    msg = _("There was an error during the installation.\n"
                     "Please, run 'sudo apt-get -f install' in a terminal.\n"
                     "Visit our forum for support: http://forums.solydxk.com")
-            self.log.write("Command output: {}".format(cmdOutput), 'show_message')
-            if int(cmdOutput) != 255:
-                if int(cmdOutput) > 1:
-                    # There was an error
                     ErrorDialog(self.btnSave.get_label(), msg)
-                elif not onlyOnError:
-                    msg = _("The software has been successfully installed.")
-                    MessageDialog(self.btnSave.get_label(), msg)
+            else:
+                msg = _("The software has been successfully installed.")
+                msg_restart = _("You will need to restart your system.")
+                MessageDialog(self.btnSave.get_label(), "{}\n\n{}".format(msg, msg_restart))
         except:
             ErrorDialog(self.btnSave.get_label(), cmdOutput)

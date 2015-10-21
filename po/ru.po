@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Device Driver Manager 1.0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-21 10:56+0200\n"
+"POT-Creation-Date: 2015-10-21 14:54+0200\n"
 "PO-Revision-Date: 2014-06-26 09:56+0100\n"
 "Last-Translator: Igor Cheprasov <i-cheprasov@live.ru>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:157
+#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:158
 msgid "Install"
 msgstr ""
 
@@ -36,64 +36,86 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:110
+#: ../usr/lib/ddm/ddm.py:130
 msgid "No internet connection"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:111
+#: ../usr/lib/ddm/ddm.py:131
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:157
+#: ../usr/lib/ddm/ddm.py:158
 msgid "Device"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:173
+#: ../usr/lib/ddm/ddm.py:174
 msgid "Remove kernel"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:174
+#: ../usr/lib/ddm/ddm.py:175
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:195
+#: ../usr/lib/ddm/ddm.py:196
 #, fuzzy
 msgid "Hardware scan"
 msgstr "Аппаратное обеспечение"
 
-#: ../usr/lib/ddm/ddm.py:199
+#: ../usr/lib/ddm/ddm.py:200
 msgid "There are no available drivers for your hardware:"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:205
+#: ../usr/lib/ddm/ddm.py:206
 msgid "DDM did not find any supported hardware."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:253
-msgid "Saved"
-msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:254
-msgid "You will need to restart your system."
-msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:467
+#: ../usr/lib/ddm/ddm.py:465
 msgid "PAE capable system"
 msgstr "Система с поддержкой PAE"
 
-#: ../usr/lib/ddm/ddm.py:578
+#: ../usr/lib/ddm/ddm.py:580
+msgid "Run as root."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:582
+msgid "Wrong arguments passed to ddm."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:584
+msgid "There are no driver available."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:586
+msgid "The driver cannot be found in repository."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:588
+msgid ""
+"Download error.\n"
+"Check your internet connection."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:590
+msgid "DDM cannot purge the driver."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:592
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:587
+#: ../usr/lib/ddm/ddm.py:597
 msgid "The software has been successfully installed."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:598
+msgid "You will need to restart your system."
 msgstr ""
 
 #: ../usr/lib/ddm/main.py:32
