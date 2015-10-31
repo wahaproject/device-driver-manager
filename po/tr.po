@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ddm 0.7.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 12:18+0100\n"
+"POT-Creation-Date: 2015-10-31 17:33+0100\n"
 "PO-Revision-Date: 2013-12-26 18:07+0200\n"
 "Last-Translator: Taylan Tatlı <taylantatli90@gmail.com>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../usr/lib/ddm/ddm.py:51 ../usr/lib/ddm/main.py:29
+#: ../usr/lib/ddm/ddm.py:51 ../usr/lib/ddm/main.py:28
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
@@ -151,7 +151,15 @@ msgstr ""
 msgid "You will need to restart your system."
 msgstr ""
 
-#: ../usr/lib/ddm/main.py:30
+#: ../usr/lib/ddm/main.py:29
+msgid ""
+"Device Driver Manager helps to install proprietary drivers for your "
+"hardware.\n"
+"Only install proprietary drivers if you are sure you really need them.\n"
+"Usually open drivers are enough."
+msgstr ""
+
+#: ../usr/lib/ddm/main.py:51
 #, fuzzy
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
@@ -161,11 +169,11 @@ msgstr ""
 "\n"
 "Zorla başlatmak için,  --force değişkenini kullanın"
 
-#: ../usr/lib/ddm/main.py:71
+#: ../usr/lib/ddm/main.py:78
 msgid "Unexpected error"
 msgstr ""
 
-#: ../usr/lib/ddm/main.py:72
+#: ../usr/lib/ddm/main.py:79
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"

@@ -365,8 +365,8 @@ class DDM(object):
                         selected = True
 
                     # Fill self.hardware
-                    shortDevice = self.shorten_long_string(device[0], 50)
-                    self.hardware.append([selected, logo, shortDevice, driver, device[1], device[2]])
+                    #shortDevice = self.shorten_long_string(device[0], 100)
+                    self.hardware.append([selected, logo, device[0], driver, device[1], device[2]])
                 else:
                     self.notSupported.append(device[0])
 
@@ -406,7 +406,6 @@ class DDM(object):
                 optimusString = ""
                 if optimus:
                     optimusString = "(Optimus) "
-                shortDevice = "{0}{1}".format(optimusString, self.shorten_long_string(device[0], 50))
 
                 # Check if the available driver is already loaded
                 selected = False
@@ -434,7 +433,8 @@ class DDM(object):
 
                 # Fill self.hardware
                 if driver != "":
-                    self.hardware.append([selected, logo, shortDevice, driver, device[1], device[2]])
+                    #shortDevice = "{0}{1}".format(optimusString, self.shorten_long_string(device[0], 100))
+                    self.hardware.append([selected, logo, "{0}{1}".format(optimusString, device[0]), driver, device[1], device[2]])
 
     def get_broadcom_ids(self, driver_name):
         driver_name = driver_name.upper()
@@ -475,7 +475,6 @@ class DDM(object):
             # Fill the hardware array
             for device in deviceArray:
                 self.log.write("Broadcom device found: {}".format(device[0]), 'get_broadcom')
-                shortDevice = self.shorten_long_string(device[0], 50)
                 driver = ''
                 for key, did in list(deviceIds.items()):
                     #print(("{}:{} in {}:{}".format(device[0], device[2], key, did)))
@@ -495,7 +494,8 @@ class DDM(object):
                             selected = True
 
                         # Fill self.hardware
-                        self.hardware.append([selected, logo, shortDevice, driver, device[1], device[2]])
+                        #shortDevice = self.shorten_long_string(device[0], 100)
+                        self.hardware.append([selected, logo, device[0], driver, device[1], device[2]])
 
     def get_pae(self):
         machine = getoutput('uname -m')[0]

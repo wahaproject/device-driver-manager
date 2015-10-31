@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 12:18+0100\n"
-"PO-Revision-Date: 2015-10-31 10:24+0000\n"
+"POT-Creation-Date: 2015-10-31 17:33+0100\n"
+"PO-Revision-Date: 2015-10-31 11:28+0000\n"
 "Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
 "Language-Team: Italian (http://www.transifex.com/solydxk/device-driver-"
 "manager/language/it/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../usr/lib/ddm/ddm.py:51 ../usr/lib/ddm/main.py:29
+#: ../usr/lib/ddm/ddm.py:51 ../usr/lib/ddm/main.py:28
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
@@ -160,7 +160,15 @@ msgstr "Software installato correttamente"
 msgid "You will need to restart your system."
 msgstr "È necessario riavviare il sistema"
 
-#: ../usr/lib/ddm/main.py:30
+#: ../usr/lib/ddm/main.py:29
+msgid ""
+"Device Driver Manager helps to install proprietary drivers for your "
+"hardware.\n"
+"Only install proprietary drivers if you are sure you really need them.\n"
+"Usually open drivers are enough."
+msgstr ""
+
+#: ../usr/lib/ddm/main.py:51
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
@@ -169,11 +177,11 @@ msgstr ""
 "\n"
 "Per forzarne l'avvio, usare l'argomento --force"
 
-#: ../usr/lib/ddm/main.py:71
+#: ../usr/lib/ddm/main.py:78
 msgid "Unexpected error"
 msgstr "Errore inatteso"
 
-#: ../usr/lib/ddm/main.py:72
+#: ../usr/lib/ddm/main.py:79
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"

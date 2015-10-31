@@ -1,6 +1,8 @@
 #! /usr/bin/env python3
 
 from gi.repository import Gtk, GObject, GdkPixbuf
+from os.path import exists
+
 
 DIALOG_TYPES = {
     Gtk.MessageType.INFO: 'MessageDialog',
@@ -16,7 +18,7 @@ DIALOG_TYPES = {
 # Use safe=False when calling from a thread
 class Dialog(Gtk.MessageDialog):
     def __init__(self, style, buttons,
-                 title, text, text2=None, parent=None, safe=True):
+                 title, text, text2=None, parent=None, safe=True, icon=None):
         parent = parent or next((w for w in Gtk.Window.list_toplevels() if w.get_title()), None)
         Gtk.MessageDialog.__init__(self, parent,
                                    Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
@@ -24,6 +26,11 @@ class Dialog(Gtk.MessageDialog):
         self.set_position(Gtk.WindowPosition.CENTER)
         if parent is not None:
             self.set_icon(parent.get_icon())
+        elif icon is not None:
+            if exists(icon):
+                self.set_icon_from_file(icon)
+            else:
+                self.set_icon_name(icon)
         self.set_title(title)
         self.set_markup(text)
         self.desc = text[:30] + ' ...' if len(text) > 30 else text

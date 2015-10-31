@@ -18,13 +18,14 @@
     <property name="icon_name">application-exit</property>
   </object>
   <object class="GtkWindow" id="ddmWindow">
-    <property name="width_request">600</property>
-    <property name="height_request">300</property>
+    <property name="width_request">800</property>
+    <property name="height_request">400</property>
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Device Driver Manager</property>
     <property name="role">ddm</property>
     <property name="window_position">center-always</property>
     <property name="icon_name">ddm</property>
+    <property name="has_resize_grip">True</property>
     <signal name="destroy" handler="on_ddmWindow_destroy" swapped="no"/>
     <child>
       <object class="GtkBox" id="box1">

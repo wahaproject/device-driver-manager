@@ -2,7 +2,7 @@
 
 import sys
 sys.path.insert(1, '/usr/lib/ddm')
-from dialogs import MessageDialog, ErrorDialog
+from dialogs import MessageDialog, ErrorDialog, WarningDialog
 from gi.repository import Gtk
 from ddm import DDM
 import os
@@ -24,11 +24,16 @@ test = args.t
 force = args.f
 
 
+# Warn for the use of proprietary drivers
+title = _("Device Driver Manager")
+msg = _("Device Driver Manager helps to install proprietary drivers for your hardware.\n"
+        "Only install proprietary drivers if you are sure you really need them.\n"
+        "Usually open drivers are enough.")
+WarningDialog(title, msg, None, None, True, 'ddm')
+
+
 # Set variables
 scriptDir = os.path.dirname(os.path.realpath(__file__))
-title = _("Device Driver Manager")
-msg = _("Device Driver Manager cannot be started in a live environment\n"
-        "You can use the --force argument to start DDM in a live environment")
 
 
 def isRunningLive():
@@ -43,7 +48,9 @@ def isRunningLive():
 
 # Do not run in live environment
 if isRunningLive():
-    MessageDialog(title, msg)
+    msg = _("Device Driver Manager cannot be started in a live environment\n"
+            "You can use the --force argument to start DDM in a live environment")
+    MessageDialog(title, msg, None, None, True, 'ddm')
     sys.exit()
 
 
@@ -70,7 +77,7 @@ def uncaught_excepthook(*args):
         import traceback
         ErrorDialog(_('Unexpected error'),
                     "<b>{}</b>".format(_('DDM has failed with the following unexpected error. Please submit a bug report!')),
-                    '<tt>' + '\n'.join(traceback.format_exception(*args)) + '</tt>')
+                    '<tt>' + '\n'.join(traceback.format_exception(*args)) + '</tt>', None, None, True, 'ddm')
 
     sys.exit(1)
 
