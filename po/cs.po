@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ddm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 11:04+0100\n"
+"POT-Creation-Date: 2015-10-31 11:22+0100\n"
 "PO-Revision-Date: 2013-12-28 11:43+0100\n"
 "Last-Translator: Schoelje <schoelje@solydxk.com>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -50,10 +50,6 @@ msgstr ""
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
-msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:170
-msgid "Use Backport"
 msgstr ""
 
 #: ../usr/lib/ddm/ddm.py:171
@@ -126,8 +122,9 @@ msgid "DDM cannot purge the driver."
 msgstr ""
 
 #: ../usr/lib/ddm/ddm.py:640
-msgid "Card is not supported."
-msgstr ""
+#, fuzzy
+msgid "This card is not supported."
+msgstr "Čip ATI série: %(serie)d není podporován"
 
 #: ../usr/lib/ddm/ddm.py:642
 msgid ""
@@ -324,9 +321,6 @@ msgstr ""
 
 #~ msgid "Driver not installable: %(drv)s"
 #~ msgstr "Ovladač: %(drv)s nelze nainstalovat"
-
-#~ msgid "ATI chip serie not supported: %(serie)d"
-#~ msgstr "Čip ATI série: %(serie)d není podporován"
 
 #~ msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
 #~ msgstr "Pro: %(card)s (%(man)s:%(serie)s) nenalezen ovladač"

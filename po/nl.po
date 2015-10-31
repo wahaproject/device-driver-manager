@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 11:04+0100\n"
-"PO-Revision-Date: 2015-10-22 05:34+0000\n"
+"POT-Creation-Date: 2015-10-31 11:22+0100\n"
+"PO-Revision-Date: 2015-10-31 10:18+0000\n"
 "Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/solydxk/device-driver-manager/"
 "language/nl/)\n"
@@ -40,7 +40,7 @@ msgstr "Afsluiten"
 
 #: ../usr/lib/ddm/ddm.py:55
 msgid "Use Backports"
-msgstr ""
+msgstr "Gebruik Backports"
 
 #: ../usr/lib/ddm/ddm.py:163
 msgid "No internet connection"
@@ -54,10 +54,6 @@ msgstr ""
 "U hebt een internetverbinding nodig om de extra software te installeren.\n"
 "Maak verbinding met het internet en probeer het opnieuw."
 
-#: ../usr/lib/ddm/ddm.py:170
-msgid "Use Backport"
-msgstr ""
-
 #: ../usr/lib/ddm/ddm.py:171
 msgid ""
 "You have selected to install drivers from the backports repository whenever "
@@ -69,6 +65,13 @@ msgid ""
 "\n"
 "Are you sure you want to continue?"
 msgstr ""
+"U heeft ervoor gekozen om drivers uit de backports repository te installeren "
+"wanneer deze beschikbaar zijn.\n"
+"\n"
+"Hoewel u meer up-to-date software kunt gebruiken met behulp van de backports "
+"repository, introduceert u hiermee een groter breukrisico.\n"
+"\n"
+"Weet je zeker dat u door wilt gaan?"
 
 #: ../usr/lib/ddm/ddm.py:206
 msgid "Device"
@@ -131,8 +134,9 @@ msgid "DDM cannot purge the driver."
 msgstr "DDM kan de driver niet verwijderen."
 
 #: ../usr/lib/ddm/ddm.py:640
-msgid "Card is not supported."
-msgstr ""
+#, fuzzy
+msgid "This card is not supported."
+msgstr "Kaart wordt niet ondersteund."
 
 #: ../usr/lib/ddm/ddm.py:642
 msgid ""
@@ -317,3 +321,6 @@ msgstr ""
 "Voeg uw log bestand toe wanneer u een probleem met DDM wilt posten op ons "
 "forum: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://forums."
 "solydxk.com</a>"
+
+#~ msgid "Use Backport"
+#~ msgstr "Gebruik Backports"

@@ -167,11 +167,11 @@ class DDM(object):
             else:
                 # Warn for use of Backports
                 if self.chkBackports.get_active():
-                    answer = QuestionDialog(_("Use Backport"),
-                                            _("You have selected to install drivers from the backports repository whenever they are available.\n\n"
-                                              "Although you can run more up to date software using the backports repository,\n"
-                                              "you introduce a greater risk of breakage doing so.\n\n"
-                                              "Are you sure you want to continue?"))
+                    answer = QuestionDialog(self.chkBackports.get_label(),
+                            _("You have selected to install drivers from the backports repository whenever they are available.\n\n"
+                              "Although you can run more up to date software using the backports repository,\n"
+                              "you introduce a greater risk of breakage doing so.\n\n"
+                              "Are you sure you want to continue?"))
                     if not answer:
                         self.chkBackports.set_active(False)
                         return True
@@ -637,7 +637,7 @@ class DDM(object):
                 elif ret == 6:
                     ErrorDialog(self.btnSave.get_label(), _("DDM cannot purge the driver."))
                 elif ret == 7:
-                    ErrorDialog(self.btnSave.get_label(), _("Card is not supported."))
+                    ErrorDialog(self.btnSave.get_label(), _("This card is not supported."))
                 else:
                     msg = _("There was an error during the installation.\n"
                     "Please, run 'sudo apt-get -f install' in a terminal.\n"

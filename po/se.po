@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 11:04+0100\n"
+"POT-Creation-Date: 2015-10-31 11:22+0100\n"
 "PO-Revision-Date: 2014-08-23 12:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,10 +47,6 @@ msgstr ""
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
-msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:170
-msgid "Use Backport"
 msgstr ""
 
 #: ../usr/lib/ddm/ddm.py:171
@@ -123,8 +119,9 @@ msgid "DDM cannot purge the driver."
 msgstr ""
 
 #: ../usr/lib/ddm/ddm.py:640
-msgid "Card is not supported."
-msgstr ""
+#, fuzzy
+msgid "This card is not supported."
+msgstr "ATI chip serie är stöds inte: %(serie)d"
 
 #: ../usr/lib/ddm/ddm.py:642
 msgid ""
@@ -323,9 +320,6 @@ msgstr ""
 
 #~ msgid "Driver not installable: %(drv)s"
 #~ msgstr "Drivrutinen kan inte installeras: %(drv)s"
-
-#~ msgid "ATI chip serie not supported: %(serie)d"
-#~ msgstr "ATI chip serie är stöds inte: %(serie)d"
 
 #~ msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
 #~ msgstr "Ingen drivrutin funnen för: %(card)s (%(man)s:%(serie)s)"

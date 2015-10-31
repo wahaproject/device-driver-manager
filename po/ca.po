@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 11:04+0100\n"
-"PO-Revision-Date: 2015-10-22 19:14+0000\n"
-"Last-Translator: Eduard Selma <selma@tinet.cat>\n"
+"POT-Creation-Date: 2015-10-31 11:22+0100\n"
+"PO-Revision-Date: 2015-10-31 10:06+0000\n"
+"Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/solydxk/device-driver-"
 "manager/language/ca/)\n"
 "Language: ca\n"
@@ -53,10 +53,6 @@ msgid ""
 msgstr ""
 "Cal una connexió a Internet per instal·lar el programari addicional.\n"
 "Si us plau, connecteu-vos a Internet i torneu a provar-ho."
-
-#: ../usr/lib/ddm/ddm.py:170
-msgid "Use Backport"
-msgstr ""
 
 #: ../usr/lib/ddm/ddm.py:171
 msgid ""
@@ -131,7 +127,7 @@ msgid "DDM cannot purge the driver."
 msgstr "DDM no pot purgar el controlador. "
 
 #: ../usr/lib/ddm/ddm.py:640
-msgid "Card is not supported."
+msgid "This card is not supported."
 msgstr ""
 
 #: ../usr/lib/ddm/ddm.py:642
