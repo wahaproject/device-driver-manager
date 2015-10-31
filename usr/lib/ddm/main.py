@@ -6,24 +6,22 @@ from dialogs import MessageDialog, ErrorDialog
 from gi.repository import Gtk
 from ddm import DDM
 import os
-import getopt
+import argparse
+
 
 # i18n: http://docs.python.org/3/library/gettext.html
 import gettext
 from gettext import gettext as _
 gettext.textdomain('ddm')
 
-# Handle arguments
-try:
-    opts, args = getopt.getopt(sys.argv[1:], 'f', ['force'])
-except getopt.GetoptError:
-    sys.exit(2)
 
-force = False
-for opt, arg in opts:
-    #print((">> opt = {} / arg = {}".format(opt, arg)))
-    if opt in ('-f', '--force'):
-        force = True
+# Handle arguments
+parser = argparse.ArgumentParser(description="DDM")
+parser.add_argument('-t', action="store_true", help='Testing only: install drivers for pre-defined hardware')
+parser.add_argument('-f', action="store_true", help='Force DDM to start even in a live environment')
+args, extra = parser.parse_known_args()
+test = args.t
+force = args.f
 
 
 # Set variables
@@ -55,10 +53,9 @@ def uncaught_excepthook(*args):
         from pprint import pprint
         from types import BuiltinFunctionType, ClassType, ModuleType, TypeType
         tb = sys.last_traceback
-        while tb.tb_next:
-            tb = tb.tb_next
+        while tb.tb_next: tb = tb.tb_next
         print(('\nDumping locals() ...'))
-        pprint({k: v for k, v in list(tb.tb_frame.f_locals.items())
+        pprint({k:v for k,v in tb.tb_frame.f_locals.items()
                     if not k.startswith('_') and
                        not isinstance(v, (BuiltinFunctionType,
                                           ClassType, ModuleType, TypeType))})
@@ -74,6 +71,7 @@ def uncaught_excepthook(*args):
         ErrorDialog(_('Unexpected error'),
                     "<b>{}</b>".format(_('DDM has failed with the following unexpected error. Please submit a bug report!')),
                     '<tt>' + '\n'.join(traceback.format_exception(*args)) + '</tt>')
+
     sys.exit(1)
 
 sys.excepthook = uncaught_excepthook
@@ -82,7 +80,7 @@ sys.excepthook = uncaught_excepthook
 if __name__ == "__main__":
     # Create an instance of our GTK application
     try:
-        DDM()
+        DDM(test)
         Gtk.main()
     except KeyboardInterrupt:
         pass

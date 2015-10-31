@@ -38,9 +38,9 @@ class Dialog(Gtk.MessageDialog):
 
     def show(self):
         if self.safe:
-            self._do_show_dialog()
+            return self._do_show_dialog()
         else:
-            GObject.timeout_add(0, self._do_show_dialog)
+            return GObject.timeout_add(0, self._do_show_dialog)
 
     def _do_show_dialog(self):
         """ Show the dialog.

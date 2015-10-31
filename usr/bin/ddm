@@ -8,6 +8,7 @@
 # 4 - Driver not in repository
 # 5 - Download error
 # 6 - Cannot purge driver
+# 7 - Card not supported
 
 # Broadcom hardware list (device ids)
 # Update URL: http://linuxwireless.org/en/users/Drivers/b43
@@ -17,6 +18,104 @@ B43LEGACY='|4301|4306|4325|'
 WLDEBIAN='|0576|4311|4312|4313|4315|4328|4329|432a|432b|432c|432d|4331|4353|4357|4358|4359|4365|43a0|435a|4727|a99d|'
 BRCMDEBIAN='|a8d8|'
 UNKNOWN='|4360|43b1|'
+
+# -------------------------------------------------------------------------
+
+function usage() {
+  echo "======================================================================"
+  echo "Device Driver Manager Help:"
+  echo "======================================================================"
+  echo "The following options are allowed:"
+  echo
+  echo "-b           Use backported packages when available."
+  echo
+  echo "-i driver    Install given driver."
+  echo "             drivers: ati, nvidia, broadcom, open, pae, fixbumblebee"
+  echo
+  echo "-p driver    Purge given driver."
+  echo "             driver: ati, nvidia, broadcom, pae"
+  echo
+  echo "-t           For development testing only!"
+  echo "             This will install drivers for pre-defined hardware."
+  echo "             Use with -i."
+  echo
+  echo "----------------------------------------------------------------------"
+  echo "sudo ddm -i nvidia -i pae -p broadcom"
+  echo "sudo ddm -i \"nvidia pae\" -p broadcom"
+  echo "Both commands install nvidia and pae but purges broadcom."
+  echo "======================================================================"
+}
+
+function launch_gui() {
+  ARGS=$1
+  optimize='OO'; case "$*" in *--debug*) unset optimize; esac
+  MSG='Please enter your password'
+  CMD="python3 -tt${optimize} /usr/lib/ddm/main.py $ARGS"
+  if [ -e "/usr/bin/kdesudo" ]; then
+    kdesudo -i "ddm" -d --comment "<b>$MSG</b>" "$CMD"
+  else
+    gksudo --message "<b>$MSG</b>" "$CMD"
+  fi
+  exit 0
+}
+
+# -------------------------------------------------------------------------
+
+BACKPORTS=false
+PURGE=''
+INSTALL=''
+TEST=false
+while getopts ":bi:p:ht" opt; do
+  case $opt in
+    b)
+      # Backports
+      BACKPORTS=true
+      ;;
+    h)
+      usage
+      exit 0
+      ;;
+    i)
+      # Install
+      INSTALL="$INSTALL $OPTARG"
+      ;;
+    p)
+      # Purge
+      PURGE="$PURGE $OPTARG"
+      ;;
+    t)
+      # Testing
+      TEST=true
+      ;;
+    \?)
+      # Invalid option: start GUI
+      launch_gui $@
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." | tee -a $LOG
+      exit 2
+      ;;
+    *)
+      # Unknown error: start GUI
+      launch_gui $@
+      ;;
+  esac
+done
+
+# Is there anything to do?
+if [ "$INSTALL" == "" ]; then
+  TEST=false
+  if [ "$PURGE" == "" ]; then
+    # Started without anything to install or purge
+    launch_gui $@
+  fi
+fi
+
+# From here onward: be root
+if [ $UID -ne 0 ]; then
+  echo "Run as root"
+  exit 1
+fi
 
 # If not running in terminal, use GUI frontend
 if [ ! -t 1 ]; then
@@ -35,30 +134,29 @@ if [ -f $LOG ]; then
   fi
 fi 
 
+
 # =========================================================================
 # =============================== Functions ===============================
 # =========================================================================
 
-function usage() {
-  echo "============================================================"
-  echo "Device Driver Manager Help:"
-  echo "============================================================"
-  echo "The following options are allowed:"
-  echo
-  echo "-i <argument>    Install given driver"
-  echo "   arguments: ati, nvidia, broadcom, open, pae, fixbumblebee"
-  echo
-  echo "-p <argument>    Purge given driver"
-  echo "   arguments: ati, nvidia, broadcom, pae"
-  echo
-  echo "------------------------------------------------------------"
-  echo "sudo ddm -i nvidia -i pae -p broadcom"
-  echo "sudo ddm -i \"nvidia pae\" -p broadcom"
-  echo "Both commands install nvidia and pae but purges broadcom."
-  echo "============================================================"
+# Create string to install from backports when available
+function get_backports_string() {
+  PCK=$1
+  local BPSTR=''
+  BP=$(grep backports /etc/apt/sources.list | grep -v ^# | awk '{print $3}')
+  if [ "$BP" == "" ]; then
+    BP=$(grep backports /etc/apt/sources.list.d/*.list | grep -v ^# | awk '{print $3}')
+  fi
+  if [ "$BP" != "" ]; then
+    PCKCHK=$(apt-cache madison $PCK | grep "$BP")
+    if [ "$PCKCHK" != "" ]; then
+      BPSTR="-t $BP"
+    fi
+  fi
+  echo $BPSTR
 }
 
-# -------------------------------------------------------------------------
+# fglrx -------------------------------------------------------------------------
 
 function preseed_fglrx {
   echo 'libfglrx fglrx-driver/check-for-unsupported-gpu boolean false' | debconf-set-selections
@@ -80,11 +178,11 @@ function install_fglrx {
   fi
 
   echo "Need driver: $DRIVER ($CANDIDATE)" | tee -a $LOG
-
-  # Reinstall packages if driver is already installed
-  REINST=''
-  if [ "$INSTALLED" == "$CANDIDATE" ]; then
-    REINST='--reinstall';
+  
+  # Backport?
+  BP=''
+  if $BACKPORTS; then
+    BP=$(get_backports_string $DRIVER)
   fi
   
   # Add additional packages
@@ -100,12 +198,13 @@ function install_fglrx {
   
   # Preseed debconf answers
   preseed_fglrx
-  
+
   # Install the packages
   apt-get update
   echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
+  echo "Driver command = apt-get install --reinstall $BP -y --force-yes $DRIVER" | tee -a $LOG
   apt-get install --reinstall -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree amd-opencl-icd 2>&1 | tee -a $LOG
-  apt-get install --reinstall -y --force-yes $REINST $DRIVER 2>&1 | tee -a $LOG
+  apt-get install --reinstall $BP -y --force-yes $DRIVER 2>&1 | tee -a $LOG
   
   # Configure
   if ! $RADEON; then
@@ -115,7 +214,7 @@ function install_fglrx {
   echo "Fglrx driver successfully installed" | tee -a $LOG
 }
 
-# -------------------------------------------------------------------------
+# broadcom -------------------------------------------------------------------------
 
 function preseed_broadcom {
   echo 'b43-fwcutter b43-fwcutter/install-unconditional boolean true' | debconf-set-selections
@@ -177,8 +276,15 @@ function install_broadcom {
     if [ "$LIVEDEBS" != "" ] && [ "$DRIVER" == "broadcom-sta-dkms" ]; then
       cp -v $LIVEDEBS ./ | tee -a $LOG
     else
+      # Backport?
+      BP=''
+      if $BACKPORTS; then
+	BP=$(get_backports_string $DRIVER)
+      fi
       apt-get update
-      apt-get download $DRIVER 2>&1 | tee -a $LOG
+      echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
+      echo "Broadcom command = apt-get download $BP $DRIVER" | tee -a $LOG
+      apt-get download $BP $DRIVER 2>&1 | tee -a $LOG
     fi
     
     # Check if packages were downloaded
@@ -196,7 +302,6 @@ function install_broadcom {
     modprobe -rf brcmsmac
     
     # Install the downloaded packages
-    echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
     dpkg -i *.deb 2>&1 | tee -a $LOG
     
     # Remove download directory
@@ -219,7 +324,7 @@ function install_broadcom {
   fi
 }
 
-# -------------------------------------------------------------------------
+# nvidia -------------------------------------------------------------------------
 
 function preseed_nvidia {
   CANDIDATE=$1
@@ -237,6 +342,12 @@ function install_nvidia {
   USER=$(logname)
   ARCHITECTURE=$(uname -m)
   DRIVER=$(nvidia-detect | grep nvidia- | tr -d ' ')
+  
+  # Testing
+  if $TEST; then
+    DRIVER='nvidia-driver'
+  fi
+  
   CANDIDATE=`env LANG=C apt-cache policy $DRIVER | grep Candidate | awk '{print $2}' | tr -d ' '`
   INSTALLED=`env LANG=C apt-cache policy $DRIVER | grep Installed | awk '{print $2}' | tr -d ' '`
 
@@ -254,6 +365,12 @@ function install_nvidia {
   fi
 
   echo "Need driver: $DRIVER ($CANDIDATE)" | tee -a $LOG
+  
+  # Backport?
+  BP=''
+  if $BACKPORTS; then
+    BP=$(get_backports_string $DRIVER)
+  fi
   
   # Add additional packages
   if [[ "$DRIVER" =~ "legacy" ]]; then
@@ -281,20 +398,16 @@ function install_nvidia {
   # Configuration package
   DRIVER="$DRIVER nvidia-xconfig"
   
-  # Reinstall packages if already installed
-  REINST=''
-  if [ "$INSTALLED" == "$CANDIDATE" ]; then
-    REINST='--reinstall'
-  fi
-  
+ 
   # Preseed debconf answers
   preseed_nvidia $CANDIDATE
   
   # Install the packages
   apt-get update
   echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
+  echo "Nvidia command = apt-get install --reinstall $BP -y --force-yes $DRIVER" | tee -a $LOG
   apt-get install --reinstall -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree 2>&1 | tee -a $LOG
-  apt-get install --reinstall -y --force-yes $REINST $DRIVER 2>&1 | tee -a $LOG
+  apt-get install --reinstall $BP -y --force-yes $DRIVER 2>&1 | tee -a $LOG
   
   # Configure
   if [[ "$DRIVER" =~ "bumblebee-nvidia" ]]; then
@@ -323,7 +436,7 @@ function install_nvidia {
   echo "Nvidia driver successfully installed" | tee -a $LOG
 }
 
-# -------------------------------------------------------------------------
+# open -------------------------------------------------------------------------
 
 function purge_proprietary_drivers {
   rm /etc/X11/xorg.conf 2>/dev/null
@@ -345,6 +458,7 @@ function install_open {
   # Install the packages
   apt-get update
   echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
+  echo "Open command = apt-get install --reinstall -y --force-yes $DRIVER" | tee -a $LOG
   apt-get install --reinstall -y --force-yes $DRIVER 2>&1 | tee -a $LOG
   
   echo "Open drivers installed" | tee -a $LOG
@@ -353,66 +467,9 @@ function install_open {
   purge_proprietary_drivers
 }
 
-# -------------------------------------------------------------------------
-
-function launch_gui {
-  optimize='OO'; case "$*" in *--debug*) unset optimize; esac
-  MSG='Please enter your password'
-  CMD="python3 -tt${optimize} /usr/lib/ddm/main.py $@"
-  if [ -e "/usr/bin/kdesudo" ]; then
-    kdesudo -i "ddm" -d --comment "<b>$MSG</b>" "$CMD"
-  else
-    gksudo --message "<b>$MSG</b>" "$CMD"
-  fi
-  exit 0
-}
-
 # =========================================================================
 # =========================================================================
 # =========================================================================
-
-
-PURGE=''
-INSTALL=''
-while getopts ":i:p:h" opt; do
-  case $opt in
-    h)
-      usage
-      exit 0
-      ;;
-    i)
-      # Install
-      INSTALL="$INSTALL $OPTARG"
-      ;;
-    p)
-      # Purge
-      PURGE="$PURGE $OPTARG"
-      ;;
-    \?)
-      # Invalid option: start GUI
-      launch_gui
-      ;;
-    :)
-      echo "Option -$OPTARG requires an argument." | tee -a $LOG
-      exit 2
-      ;;
-    *)
-      # Unknown error: start GUI
-      launch_gui
-      ;;
-  esac
-done
-
-# Started without anything to install or purge
-if [ "$PURGE" == "" ] && [ "$INSTALL" == "" ]; then
-  launch_gui
-fi
-
-# Be root
-if [ $UID -ne 0 ]; then
-  echo "Run as root"
-  exit 1
-fi
 
 # Loop through drivers to purge
 for DRV in $PURGE; do
@@ -465,7 +522,7 @@ done
 for DRV in $INSTALL; do
   # Start the log
   echo "===================================" | tee -a $LOG
-  echo "Install drivers for: $ARG" | tee -a $LOG
+  echo "Install drivers for: $DRV" | tee -a $LOG
   echo "Start at (m/d/y):" $(date +"%m/%d/%Y %H:%M:%S") | tee -a $LOG
   echo "===================================" | tee -a $LOG
   
@@ -474,43 +531,65 @@ for DRV in $INSTALL; do
       # Get device ids for Ati
       BCID='1002'
       DEVICEIDS=$(lspci -n -d $BCID: | awk '{print $3}' | cut -d':' -f2)
+      
+      # Testing
+      if $TEST; then
+        DEVICEIDS='6649'
+      fi
 
       if [ "$DEVICEIDS" == "" ]; then
 	echo "No ATI card found - exiting" | tee -a $LOG
 	exit 0
       fi
 
-      CARD=`lspci | grep VGA`
-      CARD=${CARD#*: }
+      HWCARD=`lspci | grep VGA`
+      HWCARD=${HWCARD#*: }
       STARTSERIE=5000
       DRIVER=''
       RADEON=false
-
-      # Split the card string into separate words and check for the Radeon series
-      OLDIFS=$IFS
-      IFS=" "
-      set $CARD
-      i=0
-      for ITEM
-      do
-	# Is it a number?
-	ITEM=${ITEM:0:4}
-	if [[ "$ITEM" == ?(+|-)+([0-9]) ]]; then
-	  echo "$ITEM is number" | tee -a $LOG
-	  if [ $ITEM -ge $STARTSERIE ]; then
-	    DRIVER='fglrx-driver'
-	    echo "Radeon HD $ITEM needs driver $DRIVER" | tee -a $LOG
-	    break
-	  elif [ $ITEM -ge 1000 ] && [ $ITEM -lt $STARTSERIE ]; then
-	    DRIVER='xserver-xorg-video-radeon'
-	    RADEON=true
-	    echo "Radeon HD $ITEM needs driver $DRIVER" | tee -a $LOG
-	    break
-	  fi
-	fi
-	((i++))
-      done
-      IFS=$OLDIFS
+      
+      # Testing
+      if $TEST; then
+        HWCARD='00:02.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Bonaire [FirePro W5100]'
+      fi
+      
+      CARD=$(echo "$HWCARD" | egrep -i "radeon\s+[0-9a-z ]+|fire[a-z]+\s+[0-9a-z -]+")
+      if [ "$CARD" == "" ]; then
+	echo "$HWCARD is not supported" | tee -a $LOG
+	exit 7
+      fi
+      
+      if [ "$CARD" != "" ]; then
+        DRIVER='fglrx-driver'
+        if [[ "$CARD" =~ "HD" ]]; then
+	  # Split the card string into separate words and check for the Radeon series
+	  OLDIFS=$IFS
+	  IFS=" "
+	  set $CARD
+	  i=0
+	  for ITEM
+	  do
+	    # Is it a number?
+	    ITEM=${ITEM:0:4}
+	    if [[ "$ITEM" == ?(+|-)+([0-9]) ]]; then
+	      echo "$ITEM is number" | tee -a $LOG
+	      if [ $ITEM -ge $STARTSERIE ]; then
+		echo "Radeon HD $ITEM needs driver $DRIVER" | tee -a $LOG
+		break
+	      elif [ $ITEM -ge 1000 ] && [ $ITEM -lt $STARTSERIE ]; then
+		DRIVER='xserver-xorg-video-radeon'
+		RADEON=true
+		echo "Radeon HD $ITEM needs driver $DRIVER" | tee -a $LOG
+		break
+	      fi
+	    fi
+	    ((i++))
+	  done
+	  IFS=$OLDIFS
+        else
+	  echo "$CARD needs driver $DRIVER" | tee -a $LOG
+        fi
+      fi
 
       if [ "$DRIVER" == "" ]; then
 	echo "No driver for this card: $CARD" | tee -a $LOG
@@ -525,6 +604,11 @@ for DRV in $INSTALL; do
       # Get device ids for Nvidia
       BCID='10de'
       DEVICEIDS=$(lspci -n -d $BCID: | awk '{print $3}' | cut -d':' -f2)
+      
+      # Testing
+      if $TEST; then
+        DEVICEIDS='0a74'
+      fi
 
       if [ "$DEVICEIDS" == "" ]; then
 	echo "No Nvidia card found - exiting" | tee -a $LOG
@@ -538,6 +622,11 @@ for DRV in $INSTALL; do
       # Get device ids for Broadcom
       BCID='14e4'
       DEVICEIDS=$(lspci -n -d $BCID: | awk '{print $3}' | cut -d':' -f 2)
+      
+      # Testing
+      if $TEST; then
+        DEVICEIDS='4313'
+      fi
       
       if [ "$DEVICEIDS" == "" ]; then
 	echo "No Broadcom device found - exiting" | tee -a $LOG
@@ -553,6 +642,11 @@ for DRV in $INSTALL; do
       ;;
     pae)
       MACHINE=`uname -m`
+      
+      if $TEST; then
+        MACHINE='i686'
+      fi
+      
       # Install PAE when more than one CPU and not running on 64-bit system
       if [ $MACHINE == "i686" ]; then
 	apt-get update

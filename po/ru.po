@@ -1,146 +1,182 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Translators:
+# Ilinsky Mikhail <mail@milinsky.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Device Driver Manager 1.0.3\n"
+"Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-21 14:54+0200\n"
-"PO-Revision-Date: 2014-06-26 09:56+0100\n"
-"Last-Translator: Igor Cheprasov <i-cheprasov@live.ru>\n"
-"Language-Team: SolydXK <admin@solydxk.com>\n"
+"POT-Creation-Date: 2015-10-31 11:04+0100\n"
+"PO-Revision-Date: 2015-10-22 15:32+0000\n"
+"Last-Translator: Ilinsky Mikhail <mail@milinsky.com>\n"
+"Language-Team: Russian (http://www.transifex.com/solydxk/device-driver-"
+"manager/language/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
-"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:31
+#: ../usr/lib/ddm/ddm.py:51 ../usr/lib/ddm/main.py:29
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
-msgstr ""
+msgstr "Менеджер драйверов устройств"
 
-#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:206
 msgid "Install"
-msgstr ""
+msgstr "Установить"
 
-#: ../usr/lib/ddm/ddm.py:48
+#: ../usr/lib/ddm/ddm.py:53
 msgid "Help"
-msgstr ""
+msgstr "Помощь"
 
-#: ../usr/lib/ddm/ddm.py:49
+#: ../usr/lib/ddm/ddm.py:54
 msgid "Quit"
+msgstr "Выйти"
+
+#: ../usr/lib/ddm/ddm.py:55
+msgid "Use Backports"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:130
+#: ../usr/lib/ddm/ddm.py:163
 msgid "No internet connection"
-msgstr ""
+msgstr "Нет подключения к интернету"
 
-#: ../usr/lib/ddm/ddm.py:131
+#: ../usr/lib/ddm/ddm.py:164
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
+"Вам нужно подключение к интернету для установки дополнительного программного "
+"обеспечения.\n"
+"Пожалуйста, подключитесь к Интернету и повторите попытку"
 
-#: ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:170
+msgid "Use Backport"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:171
+msgid ""
+"You have selected to install drivers from the backports repository whenever "
+"they are available.\n"
+"\n"
+"Although you can run more up to date software using the backports "
+"repository,\n"
+"you introduce a greater risk of breakage doing so.\n"
+"\n"
+"Are you sure you want to continue?"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:206
 msgid "Device"
-msgstr ""
+msgstr "Устройство"
 
-#: ../usr/lib/ddm/ddm.py:174
+#: ../usr/lib/ddm/ddm.py:222
 msgid "Remove kernel"
-msgstr ""
+msgstr "Удалить ядра"
 
-#: ../usr/lib/ddm/ddm.py:175
+#: ../usr/lib/ddm/ddm.py:223
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
+"Вы не можете удалить запущенные ядра.\n"
+"Пожалуйста, загрузитесь с другого ядра и попробуйте снова."
 
-#: ../usr/lib/ddm/ddm.py:196
-#, fuzzy
+#: ../usr/lib/ddm/ddm.py:244
 msgid "Hardware scan"
-msgstr "Аппаратное обеспечение"
+msgstr "Сканирования оборудования"
 
-#: ../usr/lib/ddm/ddm.py:200
+#: ../usr/lib/ddm/ddm.py:248
 msgid "There are no available drivers for your hardware:"
-msgstr ""
+msgstr "Нет подходящих драйверов для Вашего оборудования."
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:254
 msgid "DDM did not find any supported hardware."
-msgstr ""
+msgstr "Менеджер драйверов не нашел поддерживаемого оборудования."
 
-#: ../usr/lib/ddm/ddm.py:465
+#: ../usr/lib/ddm/ddm.py:515
 msgid "PAE capable system"
 msgstr "Система с поддержкой PAE"
 
-#: ../usr/lib/ddm/ddm.py:580
+#: ../usr/lib/ddm/ddm.py:628
 msgid "Run as root."
-msgstr ""
+msgstr "Запустите с правами администратора."
 
-#: ../usr/lib/ddm/ddm.py:582
+#: ../usr/lib/ddm/ddm.py:630
 msgid "Wrong arguments passed to ddm."
-msgstr ""
+msgstr "Неправильные аргументы, передаваемые Менеджеру драйверов."
 
-#: ../usr/lib/ddm/ddm.py:584
+#: ../usr/lib/ddm/ddm.py:632
 msgid "There are no driver available."
-msgstr ""
+msgstr "Нет доступных драйверов."
 
-#: ../usr/lib/ddm/ddm.py:586
+#: ../usr/lib/ddm/ddm.py:634
 msgid "The driver cannot be found in repository."
-msgstr ""
+msgstr "Драйвер не найден в репозитории."
 
-#: ../usr/lib/ddm/ddm.py:588
+#: ../usr/lib/ddm/ddm.py:636
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr ""
+"Ошибка загрузки.\n"
+"Проверьте ваше интернет-соединение."
 
-#: ../usr/lib/ddm/ddm.py:590
+#: ../usr/lib/ddm/ddm.py:638
 msgid "DDM cannot purge the driver."
+msgstr "Не удается удалить драйвер."
+
+#: ../usr/lib/ddm/ddm.py:640
+msgid "Card is not supported."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:592
+#: ../usr/lib/ddm/ddm.py:642
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
+"Во время установки произошла ошибка.\n"
+"Пожалуйста, запустите 'sudo apt-get -f install' в терминале.\n"
+"Посетите наш форум поддержки: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:597
+#: ../usr/lib/ddm/ddm.py:647
 msgid "The software has been successfully installed."
-msgstr ""
+msgstr "Программное обеспечение было успешно установлено."
 
-#: ../usr/lib/ddm/ddm.py:598
+#: ../usr/lib/ddm/ddm.py:648
 msgid "You will need to restart your system."
-msgstr ""
+msgstr "Вам нужно будет перезагрузить систему."
 
-#: ../usr/lib/ddm/main.py:32
-#, fuzzy
+#: ../usr/lib/ddm/main.py:30
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
 msgstr ""
-"DDM не может работать в live-режиме.\n"
-"\n"
-"Для принудительного запуска используйте --force"
+"Менеджер драйверов не может быть запущена в live среде. \n"
+"Для принудительного запуска используйте --force."
 
-#: ../usr/lib/ddm/main.py:74
+#: ../usr/lib/ddm/main.py:71
 msgid "Unexpected error"
-msgstr ""
+msgstr "Неожиданная ошибка"
 
-#: ../usr/lib/ddm/main.py:75
+#: ../usr/lib/ddm/main.py:72
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
 msgstr ""
+"Менеджер Драйверов остановлен из-за неожиданной ошибки. Пожалуйста, "
+"отправьте отчет об ошибке"
 
 #: en/help.html+html.body.h1:8
 msgid "Device Driver Manager Help"
-msgstr ""
+msgstr "Менеджер Драйверов Устройств Помощь"
 
 #: en/help.html+html.body.div.h2:10
 msgid "Description"
@@ -154,10 +190,15 @@ msgid ""
 "systems. The Device Driver Manager will only list those devices that are "
 "supported. It will not list any other devices then mentioned above."
 msgstr ""
+"Менеджер Драйверов Устройств является инструментом, помогающий пользователям "
+"устанавливать сторонние драйверы оборудования. На данный момент возможна "
+"установка NVIDIA,  ATI и Broadcom драйверов, а так же установить pae-ядро "
+"для многоядерных 32-разрядных систем. В Менеджере Драйверов будет только "
+"список тех устройств, которые поддерживаются Вашим оборудованием. "
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
-msgstr ""
+msgstr "Важный"
 
 #: en/help.html+html.body.div.p:14
 msgid ""
@@ -165,22 +206,25 @@ msgid ""
 "the repositories. Make sure you have an internet connection if you want to "
 "install the drivers."
 msgstr ""
+"Менеджер Драйверов может установить драйвера, только которые доступны в "
+"репозиториях. Убедитесь, что у вас есть интернет соединение если вы хотите "
+"установить драйверы."
 
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
-msgstr ""
+msgstr "Команды"
 
 #: en/help.html+html.body.div.p:17
 msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
 msgstr ""
+"Если вы предпочитаете установить драйверы с помощью терминала, вы можете "
+"использовать следующие команды:"
 
 #: en/help.html+html.body.div.h3:21
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i ati"
-msgstr "Установить драйвер: %(drv)s"
+msgstr "# ddm -i ati"
 
 #: en/help.html+html.body.div.p:22
 msgid ""
@@ -189,12 +233,14 @@ msgid ""
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
 msgstr ""
+"Это установит fglrx драйвера для вашей графической карты ATI. ATI карты от "
+"версии HD 5000 и выше поддерживаются драйверами fglrx. Версии между 1000 и "
+"5000 будут использовать открытые драйверы Radeon. Используйте \"DDM -p ATI\" "
+"для удаления драйверов из системы."
 
 #: en/help.html+html.body.div.h3:24
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i nvidia"
-msgstr "Установить драйвер: %(drv)s"
+msgstr "# ddm -i nvidia"
 
 #: en/help.html+html.body.div.p:25
 msgid ""
@@ -202,36 +248,37 @@ msgid ""
 "select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
 "Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
 msgstr ""
+"Это позволит выбрать правильные драйверы для видеокарты NVIDIA. Он подберет "
+"Bumblebee  в случае, если у вас гибридная карта (как NVIDIA и Intel). "
+"Используйте \"ddm -p nvidia\" чтобы удалить драйвера из системы."
 
 #: en/help.html+html.body.div.h3:27
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i open"
-msgstr "Установить драйвер: %(drv)s"
+msgstr "# ddm -i open"
 
 #: en/help.html+html.body.div.p:28
 msgid ""
 "You can use this command if you want to revert back to the open Nouveau "
 "drivers. It will remove any proprietary drivers from your system."
 msgstr ""
+"Вы можете использовать эту команду, если вы хотите вернуться к открытым "
+"драйверам. Это удалит любые проприетарные драйвера из вашей системы"
 
 #: en/help.html+html.body.div.h3:30
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i broadcom"
-msgstr "Установить драйвер: %(drv)s"
+msgstr "# ddm -i broadcom"
 
 #: en/help.html+html.body.div.p:31
 msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
 msgstr ""
+"Эта команда установит нужный драйвер для вашего беспроводного адаптера "
+"Broadcom. Используйте \"ddm -p broadcom\" для удаления драйвера из системы."
 
 #: en/help.html+html.body.div.h3:33
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i pae"
-msgstr "Установить драйвер: %(drv)s"
+msgstr "# ddm -i pae"
 
 #: en/help.html+html.body.div.p:34
 msgid ""
@@ -239,385 +286,32 @@ msgid ""
 "OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
 "you cannot remove the kernel when you are currently booted into that kernel."
 msgstr ""
+"Это позволит установить pae-ядро для многопроцессорных систем под "
+"управлением 32-разрядной ОС. Использовать \"ddm -p pae\", чтобы удалить ядро "
+"pae из вашей системы. Обратите внимание, что нельзя удалить ядро, когда вы "
+"находитесь в сессии в настоящий момент запущенной в нем."
 
 #: en/help.html+html.body.div.h3:36
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i fixbumblebee"
-msgstr "Установить драйвер: %(drv)s"
+msgstr "# ddm -i fixbumblebee"
 
 #: en/help.html+html.body.div.p:37
 msgid "This will try to fix a Bumblebee install."
-msgstr ""
+msgstr "Это может исправить Bumblebee."
 
 #: en/help.html+html.body.div.h2:39
 msgid "Log"
-msgstr ""
+msgstr "Журнал"
 
 #: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"
-msgstr ""
+msgstr "File: /var/log/ddm.log"
 
 #: en/help.html+html.body.div.p:41
 msgid ""
 "Please, attach your log file when you post an issue on our forum: <a href="
 "\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver ati"
-#~ msgstr "Установить драйвер: %(drv)s"
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver nvidia"
-#~ msgstr "Установить драйвер: %(drv)s"
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver open"
-#~ msgstr "Установить драйвер: %(drv)s"
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver pae"
-#~ msgstr "Установить драйвер: %(drv)s"
-
-#~ msgid "Driver"
-#~ msgstr "Драйвер"
-
-#~ msgid "ATI card found: %(card)s"
-#~ msgstr "Найдена ATI карта: %(card)s"
-
-#~ msgid "ATI chip serie found: %(serie)s"
-#~ msgstr "Найден чип ATI: %(serie)s"
-
-#~ msgid "ATI driver found: %(drv)s (%(status)s)"
-#~ msgstr "Найден ATI драйвер: %(drv)s (%(status)s)"
-
-#~ msgid "Driver not installable: %(drv)s"
-#~ msgstr "Драйвер не может быть установлен: %(drv)s"
-
-#~ msgid "ATI chip serie not supported: %(serie)d"
-#~ msgstr "Не поддерживается чип ATI: %(serie)d"
-
-#~ msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
-#~ msgstr "Не найдено драйвера для: %(card)s (%(man)s:%(serie)s)"
-
-#~ msgid "Switch to module: %(module)s"
-#~ msgstr "Переключиться на модуль: %(module)s"
-
-#~ msgid "Driver installed: %(drv)s"
-#~ msgstr "Драйвер установлен: %(drv)s"
-
-#~ msgid "Removing ATI drivers"
-#~ msgstr "Удаление драйверов ATI"
-
-#~ msgid "Driver removed: %(drv)s"
-#~ msgstr "Драйвер удален: %(drv)s"
-
-#~ msgid "ATI display driver"
-#~ msgstr "Драйвер дисплея ATI"
-
-#~ msgid "Intel display driver"
-#~ msgstr "Драйвер дисплея Intel"
-
-#~ msgid "Radeon display driver"
-#~ msgstr "Драйвер дисплея Radeon"
-
-#~ msgid "Framebuffer display driver"
-#~ msgstr "Драйвер дисплея Framebuffer"
-
-#~ msgid "Vesa display driver"
-#~ msgstr "Драйвер дисплея Vesa"
-
-#~ msgid "Broadcom chip serie found: %(chip)s"
-#~ msgstr "Найден чип Broadcom: %(chip)s"
-
-#~ msgid "Used wireless driver: %(drv)s"
-#~ msgstr "Используемый драйвер Wi-Fi: %(drv)s"
-
-#~ msgid "Broadcom found: %(broadcom)s"
-#~ msgstr "Найден Broadcom: %(broadcom)s"
-
-#~ msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
-#~ msgstr ""
-#~ "Не поддерживается микросхема или ethernet-контроллер Broadcom: "
-#~ "%(broadcom)s"
-
-#~ msgid "Broadcom chipset not found: %(chip)s"
-#~ msgstr "Микросхема Broadcom не найдена: %(chip)s"
-
-#~ msgid "Broadcom pci ID not found: %(id)s"
-#~ msgstr "Broadcom pci ID не найден: %(id)s"
-
-#~ msgid "Linux header name to install: %(header)s"
-#~ msgstr "Название заголовочного файла Linux для установки: %(header)s"
-
-#~ msgid "Download package: %(package)s"
-#~ msgstr "Загрузка пакета: %(package)s"
-
-#~ msgid "Download package: %(drv)s"
-#~ msgstr "Загрузка пакета: %(drv)s"
-
-#~ msgid "Install downloaded packages"
-#~ msgstr "Установка загруженных пакетов"
-
-#~ msgid "Reconfigure package: %(package)s"
-#~ msgstr "Настройка пакета: %(package)s"
-
-#~ msgid "Purge driver: %(drv)s"
-#~ msgstr "Вычищение драйвера: %(drv)s"
-
-#~ msgid "Done removing Broadcom drivers"
-#~ msgstr "Удаление драйверов Broadcom завершено"
-
-#~ msgid "Used graphics driver: %(module)s"
-#~ msgstr "Используемый графический драйвер: %(module)s"
-
-#~ msgid "No xorg.conf - create minimal xorg.conf"
-#~ msgstr "Не найден xorg.conf - создан базовый xorg.conf"
-
-#~ msgid "New xorg.conf written"
-#~ msgstr "Новый xorg.conf сохранен"
-
-#~ msgid "New section appended to xorg.conf"
-#~ msgstr "Новый раздел добавлен в xorg.conf"
-
-#~ msgid "Via card found: %(card)s"
-#~ msgstr "Найдена карта Via: %(card)s"
-
-#~ msgid "Via driver found: %(drv)s (%(status)s)"
-#~ msgstr "Найден драйвер Via: %(drv)s (%(status)s)"
-
-#~ msgid "Chrome display driver"
-#~ msgstr "Драйвер дисплея Chrome"
-
-#~ msgid "Intel card found: %(card)s"
-#~ msgstr "Обнаружена карта Intel: %(card)s"
-
-#~ msgid "Intel driver found: %(drv)s (%(status)s)"
-#~ msgstr "Найден драйвер Intel: %(drv)s (%(status)s)"
-
-#~ msgid "Graphics"
-#~ msgstr "Графика"
-
-#~ msgid "Wireless"
-#~ msgstr "Wi-Fi"
-
-#~ msgid "Kernel"
-#~ msgstr "Ядро"
-
-#~ msgid "Hardware"
-#~ msgstr "Аппаратное обеспечение"
-
-#~ msgid "Activated driver"
-#~ msgstr "Активный драйвер"
-
-#~ msgid "Alternative drivers"
-#~ msgstr "Альтернативные драйверы"
-
-#~ msgid "Current drivers are correct"
-#~ msgstr "Настройка не требуется"
-
-#~ msgid "PAE already installed"
-#~ msgstr "PAE уже установлен"
-
-#~ msgid "PAE support only for 32-bit systems"
-#~ msgstr "PAE поддерживается только в 32-битных системах"
-
-#~ msgid "Activate"
-#~ msgstr "Активировать"
-
-#~ msgid "Version"
-#~ msgstr "Версия"
-
-#~ msgid " (recommended)"
-#~ msgstr " (рекомендуемый)"
-
-#~ msgid "Unknown driver"
-#~ msgstr "Неизвестный драйвер"
-
-#~ msgid ""
-#~ "Unknown driver found.\n"
-#~ "\n"
-#~ "Please remove before installing drivers with DDM."
-#~ msgstr ""
-#~ "Неизвестный драйвер найден.\n"
-#~ "\n"
-#~ "Пожалуйста, удалите перед установкой драйверов через DDM."
-
-#~ msgid "Driver activation"
-#~ msgstr "Активация драйвера"
-
-#~ msgid ""
-#~ "Are you sure you want to install the following driver:\n"
-#~ "\n"
-#~ "%(drv)s"
-#~ msgstr ""
-#~ "Вы уверены, что хотите установить следующий драйвер:\n"
-#~ "\n"
-#~ "%(drv)s"
-
-#~ msgid "Locked"
-#~ msgstr "Заблокировано"
-
-#~ msgid ""
-#~ "Could not get lock on %(file)s.\n"
-#~ "\n"
-#~ "Close any programs locking the file and try again."
-#~ msgstr ""
-#~ "Не удалось заблокировать %(file)s.\n"
-#~ "\n"
-#~ "Закройте приложения блокирующие файл и повторите попытку. "
-
-#~ msgid "Driver installed"
-#~ msgstr "Драйвер установлен"
-
-#~ msgid ""
-#~ "Driver installed: %(drv)s\n"
-#~ "\n"
-#~ "Drivers will be used on next boot.\n"
-#~ "Do you want to reboot now?"
-#~ msgstr ""
-#~ "Драйвер установлен: %(drv)s\n"
-#~ "\n"
-#~ "Драйвер будет задействован при следующей загрузке.\n"
-#~ "Перезагрузить сейчас?"
-
-#~ msgid ""
-#~ "Could not get lock on %(file)s.\n"
-#~ "\n"
-#~ "Close any programs locking the file and restart DDM."
-#~ msgstr ""
-#~ "Не удалось заблокировать %(file)s.\n"
-#~ "\n"
-#~ "Закройте приложения блокирующие файл и перезапустите DDM."
-
-#~ msgid "Checking your hardware..."
-#~ msgstr "Проверка аппаратного обеспечения..."
-
-#~ msgid "Start automatic driver install"
-#~ msgstr "Запуск автоматической установки драйвера"
-
-#~ msgid "Installed PAE: %(pae)s"
-#~ msgstr "PAE установлен: %(pae)s"
-
-#~ msgid "Multi-core support for 32-bit systems"
-#~ msgstr "Поддержка многоядерности в 32-битных системах"
-
-#~ msgid "Multi-core already installed: %(package)s"
-#~ msgstr "Поддержка многоядерности уже установлена: %(package)s"
-
-#~ msgid "Multi-core system running single-core kernel found"
-#~ msgstr "Запущено ядро без поддержки многоядерных систем"
-
-#~ msgid "PAE not installed"
-#~ msgstr "PAE не установлен"
-
-#~ msgid "PAE kernel cannot be installed: single-core system"
-#~ msgstr "PAE-ядро не может быть установлено: одноядерный процессор"
-
-#~ msgid "Done installing PAE"
-#~ msgstr "Установка PAE завершена"
-
-#~ msgid "PAE package to remove: %(package)s"
-#~ msgstr "Пакет PAE для удаления: %(package)s"
-
-#~ msgid "Done removing PAE"
-#~ msgstr "Удаление PAE завершено"
-
-#~ msgid "Cannot remove PAE when running PAE"
-#~ msgstr "Невозможно удалить PAE во время работы системы"
-
-#~ msgid "Update apt"
-#~ msgstr "Обновить apt"
-
-#~ msgid "Install nvidia-detect"
-#~ msgstr "Установить nvidia-detect"
-
-#~ msgid "Cannot install nvidia-detect: abort"
-#~ msgstr "Невозможно установить nvidia-detect: отмена"
-
-#~ msgid "Nvidia card found: %(card)s"
-#~ msgstr "Найдена карта Nvidia: %(card)s"
-
-#~ msgid "Nvidia driver found: %(drv)s (%(status)s)"
-#~ msgstr "Найден драйвер Nvidia: %(drv)s (%(status)s)"
-
-#~ msgid "Removing Nvidia drivers"
-#~ msgstr "Удаление драйверов Nvidia"
-
-#~ msgid "Nvidia display driver"
-#~ msgstr "Драйвер дисплея Nvidia"
-
-#~ msgid "Nouveau display driver"
-#~ msgstr "Драйвер дисплея Nouveau"
-
-#~ msgid "Write debug information to file: %(path)s"
-#~ msgstr "Записывать отладочную информацию в файл: %(path)s"
-
-#~ msgid "Machine info: %(info)s"
-#~ msgstr "Сведения о компьютере: %(info)s"
-
-#~ msgid "DDM version: %(version)s"
-#~ msgstr "Версия DDM: %(version)s"
-
-#~ msgid ""
-#~ "apt-listbugs is installed and might interfere with driver installation"
-#~ msgstr "apt-listbugs установлен и может помешать установке драйвера"
-
-#~ msgid "Please enter your password"
-#~ msgstr "Введите пароль"
-
-#~ msgid "DDM - Kernel"
-#~ msgstr "DDM - Ядро"
-
-#~ msgid ""
-#~ "You do not have the latest kernel installed.\n"
-#~ "\n"
-#~ "Use the Update Manager to update your system."
-#~ msgstr ""
-#~ "У Вас не установлена последняя версия ядра.\n"
-#~ "\n"
-#~ "Используйте Менеджер Обновлений для обновления системы."
-
-#~ msgid "DDM - Live environment"
-#~ msgstr "DDM - Live-режим"
-
-#~ msgid ""
-#~ "DDM cannot run in a live environment\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "DDM не может работать в live-режиме.\n"
-#~ "\n"
-#~ "Для принудительного запуска используйте --force"
-
-#~ msgid "DDM - Debian based"
-#~ msgstr "DDM - Debian-based"
-
-#~ msgid ""
-#~ "Cannot determine the base distribution (debian or ubuntu)\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "Не удается определить базовый дистрибутив (debian или ubuntu)\n"
-#~ "\n"
-#~ "Для принудительного запуска используйте --force"
-
-#~ msgid "DDM - Internet"
-#~ msgstr "DDM - Интернет"
-
-#~ msgid ""
-#~ "You do not seem to have an internet connection\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "Отсутствует Интернет-соединение\n"
-#~ "\n"
-#~ "Для принудительного запуска используйте --force"
-
-#~ msgid "Install aborted: not in repository: %(repo)s"
-#~ msgstr "Установка прервана: не в репозитории: %(repo)s"
+"Пожалуйста, прикрепите файл журнала, когда вы отправляете вопрос на нашем "
+"форуме: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://"
+"forums.solydxk.com</a>"

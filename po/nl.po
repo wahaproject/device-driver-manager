@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-21 14:54+0200\n"
-"PO-Revision-Date: 2015-10-21 08:46+0000\n"
+"POT-Creation-Date: 2015-10-31 11:04+0100\n"
+"PO-Revision-Date: 2015-10-22 05:34+0000\n"
 "Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/solydxk/device-driver-manager/"
 "language/nl/)\n"
@@ -20,29 +20,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:31
+#: ../usr/lib/ddm/ddm.py:51 ../usr/lib/ddm/main.py:29
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
 msgstr "Device Driver Manager"
 
-#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:206
 msgid "Install"
 msgstr "Installeer"
 
-#: ../usr/lib/ddm/ddm.py:48
+#: ../usr/lib/ddm/ddm.py:53
 msgid "Help"
 msgstr "Help"
 
-#: ../usr/lib/ddm/ddm.py:49
+#: ../usr/lib/ddm/ddm.py:54
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: ../usr/lib/ddm/ddm.py:130
+#: ../usr/lib/ddm/ddm.py:55
+msgid "Use Backports"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:163
 msgid "No internet connection"
 msgstr "Geen internetverbinding"
 
-#: ../usr/lib/ddm/ddm.py:131
+#: ../usr/lib/ddm/ddm.py:164
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
@@ -50,15 +54,31 @@ msgstr ""
 "U hebt een internetverbinding nodig om de extra software te installeren.\n"
 "Maak verbinding met het internet en probeer het opnieuw."
 
-#: ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:170
+msgid "Use Backport"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:171
+msgid ""
+"You have selected to install drivers from the backports repository whenever "
+"they are available.\n"
+"\n"
+"Although you can run more up to date software using the backports "
+"repository,\n"
+"you introduce a greater risk of breakage doing so.\n"
+"\n"
+"Are you sure you want to continue?"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:206
 msgid "Device"
 msgstr "Apparaat"
 
-#: ../usr/lib/ddm/ddm.py:174
+#: ../usr/lib/ddm/ddm.py:222
 msgid "Remove kernel"
 msgstr "Verwijder kernel"
 
-#: ../usr/lib/ddm/ddm.py:175
+#: ../usr/lib/ddm/ddm.py:223
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -66,50 +86,55 @@ msgstr ""
 "U kunt de kernel die nu gestart is niet verwijderen.\n"
 "Boot een andere kernel en probeer het nogmaals."
 
-#: ../usr/lib/ddm/ddm.py:196
+#: ../usr/lib/ddm/ddm.py:244
 msgid "Hardware scan"
 msgstr "Hardware scan"
 
-#: ../usr/lib/ddm/ddm.py:200
+#: ../usr/lib/ddm/ddm.py:248
 msgid "There are no available drivers for your hardware:"
 msgstr "Er zijn geen beschikbare drivers voor uw hardware:"
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:254
 msgid "DDM did not find any supported hardware."
 msgstr "DDM heeft geen ondersteunde hardware gevonden."
 
-#: ../usr/lib/ddm/ddm.py:465
+#: ../usr/lib/ddm/ddm.py:515
 msgid "PAE capable system"
 msgstr "Systeem geschikt voor PAE"
 
-#: ../usr/lib/ddm/ddm.py:580
+#: ../usr/lib/ddm/ddm.py:628
 msgid "Run as root."
-msgstr ""
+msgstr "Als root uitvoeren."
 
-#: ../usr/lib/ddm/ddm.py:582
+#: ../usr/lib/ddm/ddm.py:630
 msgid "Wrong arguments passed to ddm."
-msgstr ""
+msgstr "Verkeerde argumenten gebruikt voor ddm."
 
-#: ../usr/lib/ddm/ddm.py:584
+#: ../usr/lib/ddm/ddm.py:632
 msgid "There are no driver available."
-msgstr ""
+msgstr "Er zijn geen drivers beschikbaar."
 
-#: ../usr/lib/ddm/ddm.py:586
+#: ../usr/lib/ddm/ddm.py:634
 msgid "The driver cannot be found in repository."
-msgstr ""
+msgstr "De driver kan niet in de repository gevonden worden."
 
-#: ../usr/lib/ddm/ddm.py:588
-#, fuzzy
+#: ../usr/lib/ddm/ddm.py:636
 msgid ""
 "Download error.\n"
 "Check your internet connection."
-msgstr "Geen internetverbinding"
+msgstr ""
+"Download fout.\n"
+"Controleer uw internet connectie."
 
-#: ../usr/lib/ddm/ddm.py:590
+#: ../usr/lib/ddm/ddm.py:638
 msgid "DDM cannot purge the driver."
+msgstr "DDM kan de driver niet verwijderen."
+
+#: ../usr/lib/ddm/ddm.py:640
+msgid "Card is not supported."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:592
+#: ../usr/lib/ddm/ddm.py:642
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -119,15 +144,15 @@ msgstr ""
 "Voer de volgende opdracht uit in een terminal: 'sudo apt-get -f install'.\n"
 "Bezoek ons forum wanneer u hulp nodig heeft: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:597
+#: ../usr/lib/ddm/ddm.py:647
 msgid "The software has been successfully installed."
 msgstr "De software is succesvol geïnstalleerd."
 
-#: ../usr/lib/ddm/ddm.py:598
+#: ../usr/lib/ddm/ddm.py:648
 msgid "You will need to restart your system."
 msgstr "U dient uw systeem te herstarten."
 
-#: ../usr/lib/ddm/main.py:32
+#: ../usr/lib/ddm/main.py:30
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
@@ -135,11 +160,11 @@ msgstr ""
 "Update Manager kan niet gestart worden in een live omgeving\n"
 "In een live omgeving kunt u met het --force argument starten."
 
-#: ../usr/lib/ddm/main.py:74
+#: ../usr/lib/ddm/main.py:71
 msgid "Unexpected error"
 msgstr "Onverwachte fout"
 
-#: ../usr/lib/ddm/main.py:75
+#: ../usr/lib/ddm/main.py:72
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
@@ -292,6 +317,3 @@ msgstr ""
 "Voeg uw log bestand toe wanneer u een probleem met DDM wilt posten op ons "
 "forum: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://forums."
 "solydxk.com</a>"
-
-#~ msgid "Saved"
-#~ msgstr "Bewaard"

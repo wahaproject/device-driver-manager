@@ -4,11 +4,11 @@
 from gi.repository import Gtk, GObject, GLib
 from os.path import join, abspath, dirname, basename, exists
 from utils import ExecuteThreadedCommands, hasInternetConnection, \
-                  getoutput, getPackageVersion
+                  getoutput, getPackageVersion, has_backports
 import os
 import re
 from glob import glob
-from dialogs import MessageDialog, WarningDialog, ErrorDialog
+from dialogs import MessageDialog, WarningDialog, ErrorDialog, QuestionDialog
 from treeview import TreeViewHandler
 from queue import Queue
 from logger import Logger
@@ -25,7 +25,11 @@ GObject.threads_init()
 #class for the main window
 class DDM(object):
 
-    def __init__(self):
+    def __init__(self, test=False):
+        # Testing
+        self.test = test
+        # Set to true for testing Optimus
+        self.test_optimus = False
 
         # Load window and widgets
         self.scriptName = basename(__file__)
@@ -42,11 +46,13 @@ class DDM(object):
         self.btnHelp = go("btnHelp")
         self.btnQuit = go("btnQuit")
         self.pbDDM = go("pbDDM")
+        self.chkBackports = go("chkBackports")
 
         self.window.set_title(_("Device Driver Manager"))
         self.btnSave.set_label(_("Install"))
         self.btnHelp.set_label(_("Help"))
         self.btnQuit.set_label(_("Quit"))
+        self.chkBackports.set_label(_("Use Backports"))
 
         # Initiate variables
         self.queue = Queue(-1)
@@ -55,7 +61,8 @@ class DDM(object):
         self.loadedDrivers = []
         self.notSupported = []
         self.paeBooted = False
-        self.helpFile = join(self.scriptDir, "html/help.html")
+        self.htmlDir = join(self.mediaDir, "html")
+        self.helpFile = join(self.get_language_dir(), "help.html")
         self.logFile = '/var/log/ddm.log'
         self.log = Logger(self.logFile, addLogTime=False, maxSizeKB=5120)
         self.tvDDMHandler = TreeViewHandler(self.tvDDM)
@@ -68,8 +75,33 @@ class DDM(object):
         # Fill treeview
         self.fill_treeview_ddm()
 
+        # Check backports
+        if len(self.hardware) < 2 or not has_backports():
+            self.chkBackports.hide()
+
         self.get_loaded_graphical_driver()
         self.get_loaded_wireless_driver()
+
+    # ===============================================
+    # Language specific functions
+    # ===============================================
+
+    def get_language_dir(self):
+        # First test if full locale directory exists, e.g. html/pt_BR,
+        # otherwise perhaps at least the language is there, e.g. html/pt
+        lang = self.get_current_language()
+        path = os.path.join(self.htmlDir, lang)
+        if path != self.htmlDir:
+            if not os.path.isdir(path):
+                path = os.path.join(self.htmlDir, lang.split('_')[0].lower())
+                if not os.path.isdir(path):
+                    return os.path.join(self.htmlDir, 'en')
+            return path
+        # else, just return English slides
+        return os.path.join(self.htmlDir, 'en')
+
+    def get_current_language(self):
+        return os.environ.get('LANG', 'US').split('.')[0]
 
     # ===============================================
     # Main window functions
@@ -78,6 +110,7 @@ class DDM(object):
     def on_btnSave_clicked(self, widget):
         # Save selected hardware
         arguments = []
+
         model = self.tvDDM.get_model()
         itr = model.get_iter_first()
         while itr is not None:
@@ -132,10 +165,25 @@ class DDM(object):
                         "Please, connect to the internet and try again.")
                 WarningDialog(title, msg)
             else:
+                # Warn for use of Backports
+                if self.chkBackports.get_active():
+                    answer = QuestionDialog(_("Use Backport"),
+                                            _("You have selected to install drivers from the backports repository whenever they are available.\n\n"
+                                              "Although you can run more up to date software using the backports repository,\n"
+                                              "you introduce a greater risk of breakage doing so.\n\n"
+                                              "Are you sure you want to continue?"))
+                    if not answer:
+                        self.chkBackports.set_active(False)
+                        return True
+                    arguments.append("-b")
+
+                # Testing
+                if self.test:
+                    arguments.append("-t")
+
                 command = "ddm {}".format(" ".join(arguments))
-                print(command)
                 self.log.write("Command to execute: {}".format(command), 'on_btnSave_clicked')
-                #self.exec_command(command)
+                self.exec_command(command)
 
     def on_btnQuit_clicked(self, widget):
         self.on_ddmWindow_destroy(widget)
@@ -267,10 +315,12 @@ class DDM(object):
         startSeries = 5000
         deviceArray = self.get_lspci_info(manufacturerId, 'VGA')
 
-        # TESTING - Uncomment the following line for testing:
-        #deviceArray = [['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]', manufacturerId, '68e0']]
-        #deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] RV710 [Radeon HD 4350/4550]', manufacturerId, '68e0']]
-        #deviceArray = [['Advanced Micro Devices [AMD/ATI] RS880 [Radeon HD 4290]', manufacturerId, '68e0']]
+        if self.test:
+            #deviceArray = [['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]', manufacturerId, '68e0']]
+            #deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] RV710 [Radeon HD 4350/4550]', manufacturerId, '68e0']]
+            #deviceArray = [['Advanced Micro Devices [AMD/ATI] RS880 [Radeon HD 4290]', manufacturerId, '68e0']]
+            #deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] Tonga PRO [Radeon R9 285]', manufacturerId, '6939']]
+            deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] Bonaire [FirePro W5100]', manufacturerId, '6649']]
 
         if deviceArray:
             self.log.write("Device(s): {}".format(deviceArray), 'get_ati')
@@ -285,31 +335,28 @@ class DDM(object):
             # Fill the hardware array
             for device in deviceArray:
                 self.log.write("ATI device found: {}".format(device[0]), 'get_ati')
-                # Check if ATI series is above 5000
-                matchObj = re.search('HD\W([0-9]{4})', device[0])
+                # Check for supported cards
+                matchObj = re.search('radeon\s+[0-9a-z ]+|fire[a-z]+\s+[0-9a-z -]+', device[0], flags=re.IGNORECASE)
                 if matchObj:
-                    shortDevice = self.shorten_long_string(device[0], 50)
-                    series = int(matchObj.group(1))
-                    self.log.write("ATI HD series: {}".format(series), 'get_ati')
-                    driver = 'fglrx'
+                    if " hd " in matchObj.group(0).lower():
+                        # Check if ATI series is above 5000
+                        matchObjSeries = re.search('[0-9]{4}', matchObj.group(0))
+                        if matchObjSeries:
+                            series = int(matchObjSeries.group(0))
+                            # Don't show older ATI Radeon HD cards
+                            if series < startSeries:
+                                break
 
-                    # Check the series
-                    #if series >= 1000 and series < startSeries:
-                        ## Too old: use open Radeon drivers
-                        #driver = 'radeon'
-
-                    # Don't show older ATI cards
-                    if series < startSeries:
-                        break
-
-                    self.log.write("ATI driver to use: {}".format(driver), 'get_ati')
+                    self.log.write("ATI series: {}".format(matchObj.group(0)), 'get_ati')
 
                     # Check if the available driver is already loaded
                     selected = False
+                    driver = 'fglrx'
                     if loadedDrv == driver:
                         selected = True
 
                     # Fill self.hardware
+                    shortDevice = self.shorten_long_string(device[0], 50)
                     self.hardware.append([selected, logo, shortDevice, driver, device[1], device[2]])
                 else:
                     self.notSupported.append(device[0])
@@ -318,11 +365,11 @@ class DDM(object):
         manufacturerId = '10de'
         deviceArray = self.get_lspci_info(manufacturerId, 'VGA')
 
-        # TESTING - Uncomment the following line for testing:
-        #deviceArray = [['NVIDIA Corporation GT218 [GeForce G210M]', manufacturerId, '0a74']]
-        # Optimus test
-        #deviceArray = [['Intel Corporation Haswell-ULT Integrated Graphics Controller', '8086', '0a16'], \
-        #['NVIDIA Corporation GK107M [GeForce GT 750M]', manufacturerId, '0fe4']]
+        if self.test:
+            deviceArray = [['NVIDIA Corporation GT218 [GeForce G210M]', manufacturerId, '0a74']]
+            if self.test_optimus:
+                deviceArray = [['Intel Corporation Haswell-ULT Integrated Graphics Controller', '8086', '0a16'], \
+                                ['NVIDIA Corporation GK107M [GeForce GT 750M]', manufacturerId, '0fe4']]
 
         if deviceArray:
             optimus = False
@@ -367,9 +414,12 @@ class DDM(object):
                 if optimus:
                     driver = "bumblebee-nvidia"
                 else:
-                    nvidiaDetect = getoutput("nvidia-detect | grep nvidia- | tr -d ' '")
-                    if nvidiaDetect:
-                        driver = nvidiaDetect[0]
+                    if self.test:
+                        driver = 'nvidia-driver'
+                    else:
+                        nvidiaDetect = getoutput("nvidia-detect | grep nvidia- | tr -d ' '")
+                        if nvidiaDetect:
+                            driver = nvidiaDetect[0]
 
                 self.log.write("Nvidia driver to use: {}".format(driver), 'get_nvidia')
 
@@ -394,14 +444,14 @@ class DDM(object):
         deviceIds['brcmdebian'] = self.get_broadcom_ids('brcmdebian')
         deviceIds['unknown'] = self.get_broadcom_ids('unknown')
 
-        #print(("deviceIds = {}".format(deviceIds)))
+        self.log.write("Broadcom deviceIds = {}".format(deviceIds))
 
         manufacturerId = '14e4'
 
         deviceArray = self.get_lspci_info(manufacturerId)
 
-        # TESTING - Uncomment the following line for testing:
-        #deviceArray = [['Broadcom Corporation BCM43142 802.11a/b/g', manufacturerId, '4365']]
+        if self.test:
+            deviceArray = [['Broadcom Corporation BCM43142 802.11a/b/g', manufacturerId, '4365']]
 
         if deviceArray:
             self.log.write("Device(s): {}".format(deviceArray), 'get_broadcom')
@@ -442,9 +492,9 @@ class DDM(object):
         machine = getoutput('uname -m')[0]
         release = getoutput('uname -r')[0]
 
-        # TESTING - Uncomment the following lines for testing:
-        #machine = 'i686'
-        #release = '3.16.0-4-586'
+        if self.test:
+            machine = 'i686'
+            release = '3.16.0-4-586'
 
         self.log.write("PAE check: machine={} / release={}".format(machine, release), 'get_pae')
 
@@ -472,9 +522,10 @@ class DDM(object):
         # Check for Optimus
         if manufacturerId == '10de':
             output = getoutput("lspci -vnn | grep '\[030[02]\]'")
-            # Testing
-            #output = ['00:02.0 VGA compatible controller [0300]: Intel Corporation Haswell-ULT Integrated Graphics Controller [8086:0a16] (rev 09) (prog-if 00 [VGA controller])', \
-            #          '01:00.0 3D controller [0302]: NVIDIA Corporation GK107M [GeForce GT 750M] [10de:0fe4] (rev a1)']
+
+            if self.test_optimus:
+                output = ['00:02.0 VGA compatible controller [0300]: Intel Corporation Haswell-ULT Integrated Graphics Controller [8086:0a16] (rev 09) (prog-if 00 [VGA controller])', \
+                          '01:00.0 3D controller [0302]: NVIDIA Corporation GK107M [GeForce GT 750M] [10de:0fe4] (rev a1)']
 
         # Optimus will return 2 devices
         # If there are less than 2 devices, do regular check
@@ -522,7 +573,6 @@ class DDM(object):
         logs.sort()
 
         for logPath in logs:
-            #print((">> logPath={}".format(logPath)))
             # Search for "depth" in each line and check the used module
             # Sometimes these logs are saved as binary: open as read-only binary
             # When opening as ascii, read() will throw error: "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x80"
@@ -534,7 +584,7 @@ class DDM(object):
             matchObj = re.search('([a-zA-Z]*)\(\d+\):\s+depth.*framebuffer', log, flags=re.IGNORECASE)
             if matchObj:
                 module = matchObj.group(1).lower()
-                #print((">> module={}".format(module)))
+                self.log.write("Log module={}".format(module))
                 break
 
         return module
@@ -545,20 +595,18 @@ class DDM(object):
         logDir = '/var/log/'
         for logPath in glob(os.path.join(logDir, 'syslog*')):
             if driver == '' and not 'gz' in logPath:
-                #print((">> logPath={}".format(logPath)))
                 # Open the log file
                 lines = []
                 with open(logPath) as f:
                     lines = list(f.read().splitlines())
 
                 for line in reversed(lines):
-                    #print((">> line={}".format(line)))
                     # First check for Network Manager entry
                     # Search for wlan0 in each line and get the listed driver
                     matchObj = re.search('\(wlan\d\):.*driver:\s*\'([a-zA-Z0-9\-]*)', line, flags=re.IGNORECASE)
                     if matchObj:
                         driver = matchObj.group(1)
-                        #print((">> driver1={}".format(driver)))
+                        self.log.write("Network Manager driver={}".format(driver))
                         break
                     else:
                         # Wicd
@@ -566,7 +614,7 @@ class DDM(object):
                         matchObj = re.search('ieee.*implement', line, flags=re.IGNORECASE)
                         if matchObj:
                             driver = matchObj.group(0)
-                            #print((">> driver2={}".format(driver)))
+                            self.log.write("Wicd driver={}".format(driver))
                             break
 
         return driver
@@ -588,6 +636,8 @@ class DDM(object):
                     ErrorDialog(self.btnSave.get_label(), _("Download error.\nCheck your internet connection."))
                 elif ret == 6:
                     ErrorDialog(self.btnSave.get_label(), _("DDM cannot purge the driver."))
+                elif ret == 7:
+                    ErrorDialog(self.btnSave.get_label(), _("Card is not supported."))
                 else:
                     msg = _("There was an error during the installation.\n"
                     "Please, run 'sudo apt-get -f install' in a terminal.\n"

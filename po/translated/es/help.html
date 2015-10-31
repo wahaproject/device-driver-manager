@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link href="../link/general.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="background"></div>
+	<h1>Ayuda sobre el Administrador de Drivers</h1>
+	<div class="main">
+		<h2>Descripción</h2>
+		<p>El Administrador de Drivers es una herramienta para ayudar a los usuarios a
+instalar drivers para hardware de terceros. Actualmente, permite la
+instalación de drivers de Nvidia, ATI y Broadcom, y el kernel PAE para
+sistemas multi-núcleo de 32-bits. El Administrador de Drivers listará solo
+aquellos dispositivos soportados. No listará ningún otro dispositivo aparte
+de los mencionados anteriormente.</p>
+
+		<h2>Importante</h2>
+		<p>El Administrador de Drivers solo puede instalar drivers disponibles en los
+repositorios. Asegúrese de tener conexión a internet si quiere instalar los
+drivers.</p>
+
+		<h2>Comandos</h2>
+		<p>Si prefiere instalar los drivers a través de la terminal, puede utilizar los
+siguientes comandos:</p>
+
+		<p>&nbsp;</p>
+
+		<h3># ddm -i ati</h3>
+		<p>Esto instalará los drivers fglrx para su tarjeta gráfica ATI. Las tarjetas
+gráficas ATI a partir de la versión HD 5000 en adelante son soportadas por
+los drivers fglrx. Las versiones entre 1000 y 5000 utilizarán los drivers
+Radeon. Use "ddm -p ati" para quitar los drivers de su sistema.</p>
+
+		<h3># ddm -i nvidia</h3>
+		<p>Esto seleccionará los drivers apropiados para su tarjeta gráfica Nvidia. En
+caso de tener una tarjeta híbrida (Nvidia e Intel al mismo tiempo) se
+seleccionará el driver Bumblebee. Utilice "ddm -p nvidia" para quitar los
+drivers de su sistema.</p>
+
+		<h3># ddm -i open</h3>
+		<p>Puede utilizar este comando para volver a los drivers Nouveau. Ésto quitará
+cualquier driver propietario de su sistema.</p>
+
+		<h3># ddm -i broadcom</h3>
+		<p>Éste comando instalará los drivers apropiados para su adaptador wireless
+Broadcom. Utilice "ddm -p broadcom" para quitar los drivers de su sistema.</p>
+
+		<h3># ddm -i pae</h3>
+		<p>Ésto instalará el kernel PAE en sistemas multi-procesador que ejecuten un SO
+de 32-bits. Utilice "ddm -p pae" para quitar el kernel PAE de su
+sistema. Nótese que no podrá remover el kernel si éste fue iniciado con el
+sistema.</p>
+
+		<h3># ddm -i fixbumblebee</h3>
+		<p>Ésto intentará reparar una instalación de Bumblebee.</p>
+
+		<h2>Log</h2>
+		<h3>Archivo: /var/log/ddm.log</h3>
+		<p>Por favor, adjunte su archivo de log cuando postee un inconveniente en
+nuestro foro: <a href="http://forums.solydxk.com"
+target="_blank">http://forums.solydxk.com</a></p>
+    </div>
+  </body>
+</html>

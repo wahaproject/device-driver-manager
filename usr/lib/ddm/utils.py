@@ -102,6 +102,22 @@ def isAmd64():
     return False
 
 
+# Check for backports
+def has_backports():
+    try:
+        bp = getoutput("grep backports /etc/apt/sources.list | grep -v ^#")[0]
+    except:
+        bp = ''
+    if bp.strip() == "":
+        try:
+            bp = getoutput("grep backports /etc/apt/sources.list.d/*.list | grep -v ^#")[0]
+        except:
+            bp = ''
+    if bp.strip() != "":
+        return True
+    return False
+
+
 def getPackageVersion(package, candidate=False):
     cmd = "env LANG=C bash -c 'apt-cache policy %s | grep \"Installed:\"'" % package
     if candidate:

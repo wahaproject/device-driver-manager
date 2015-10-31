@@ -4,6 +4,7 @@ import os
 import pwd
 import logging
 import re
+import sys
 from shutil import move
 from gi.repository import Gtk
 from dialogs import MessageDialog
@@ -83,6 +84,8 @@ class Logger():
                 self.rtobjectWrite(message)
                 if showErrorDialog:
                     MessageDialog('Exception', message, Gtk.MessageType.ERROR, self.parent).show()
+            # Flush now
+            sys.stdout.flush()
 
     # Return messge to given object
     def rtobjectWrite(self, message):

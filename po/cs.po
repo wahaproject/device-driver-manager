@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ddm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-21 14:54+0200\n"
+"POT-Creation-Date: 2015-10-31 11:04+0100\n"
 "PO-Revision-Date: 2013-12-28 11:43+0100\n"
 "Last-Translator: Schoelje <schoelje@solydxk.com>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -20,107 +20,131 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /home/toor/DATA\n"
 
-#: ../usr/lib/ddm/ddm.py:46 ../usr/lib/ddm/main.py:31
+#: ../usr/lib/ddm/ddm.py:51 ../usr/lib/ddm/main.py:29
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:47 ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:206
 msgid "Install"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:48
+#: ../usr/lib/ddm/ddm.py:53
 msgid "Help"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:49
+#: ../usr/lib/ddm/ddm.py:54
 msgid "Quit"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:130
+#: ../usr/lib/ddm/ddm.py:55
+msgid "Use Backports"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:163
 msgid "No internet connection"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:131
+#: ../usr/lib/ddm/ddm.py:164
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:158
+#: ../usr/lib/ddm/ddm.py:170
+msgid "Use Backport"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:171
+msgid ""
+"You have selected to install drivers from the backports repository whenever "
+"they are available.\n"
+"\n"
+"Although you can run more up to date software using the backports "
+"repository,\n"
+"you introduce a greater risk of breakage doing so.\n"
+"\n"
+"Are you sure you want to continue?"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:206
 msgid "Device"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:174
+#: ../usr/lib/ddm/ddm.py:222
 msgid "Remove kernel"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:175
+#: ../usr/lib/ddm/ddm.py:223
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:196
+#: ../usr/lib/ddm/ddm.py:244
 #, fuzzy
 msgid "Hardware scan"
 msgstr "Hardware"
 
-#: ../usr/lib/ddm/ddm.py:200
+#: ../usr/lib/ddm/ddm.py:248
 msgid "There are no available drivers for your hardware:"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:254
 msgid "DDM did not find any supported hardware."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:465
+#: ../usr/lib/ddm/ddm.py:515
 msgid "PAE capable system"
 msgstr "Systém podporující PAE"
 
-#: ../usr/lib/ddm/ddm.py:580
+#: ../usr/lib/ddm/ddm.py:628
 msgid "Run as root."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:582
+#: ../usr/lib/ddm/ddm.py:630
 msgid "Wrong arguments passed to ddm."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:584
+#: ../usr/lib/ddm/ddm.py:632
 msgid "There are no driver available."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:586
+#: ../usr/lib/ddm/ddm.py:634
 msgid "The driver cannot be found in repository."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:588
+#: ../usr/lib/ddm/ddm.py:636
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:590
+#: ../usr/lib/ddm/ddm.py:638
 msgid "DDM cannot purge the driver."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:592
+#: ../usr/lib/ddm/ddm.py:640
+msgid "Card is not supported."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:642
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:597
+#: ../usr/lib/ddm/ddm.py:647
 msgid "The software has been successfully installed."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:598
+#: ../usr/lib/ddm/ddm.py:648
 msgid "You will need to restart your system."
 msgstr ""
 
-#: ../usr/lib/ddm/main.py:32
+#: ../usr/lib/ddm/main.py:30
 #, fuzzy
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
@@ -130,11 +154,11 @@ msgstr ""
 "\n"
 "Pro vynucení spuštění použijte argument --force"
 
-#: ../usr/lib/ddm/main.py:74
+#: ../usr/lib/ddm/main.py:71
 msgid "Unexpected error"
 msgstr ""
 
-#: ../usr/lib/ddm/main.py:75
+#: ../usr/lib/ddm/main.py:72
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"

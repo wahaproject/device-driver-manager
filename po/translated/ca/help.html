@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link href="../link/general.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="background"></div>
+	<h1>Ajuda del Device Driver Manager </h1>
+	<div class="main">
+		<h2>Descripció </h2>
+		<p>The Device Driver Manager és una eina per ajudar als usuaris a instal·lar
+controladors de dispositiu de tercers. Actualment es poden instal·lar
+controladors Nvidia, ATI i Broadcom; també permet instal·lar el kernel PAE
+per sistemes de 32 bits amb diversos nuclis. El Device Driver Manager només
+mostrarà els dispositius compatibles. No mostrarà altres dispositius que els
+abans esmentats.</p>
+
+		<h2>Important </h2>
+		<p>El Device Driver Manager només instal·larà controladors disponibles als
+dipòsits. Assegureu-vos que teniu connexió a Internet si voleu instal·lar
+els controladors. </p>
+
+		<h2>Ordres </h2>
+		<p>Si preferiu instal·lar els controladors des del terminal, podeu usar
+aquestes ordres: </p>
+
+		<p>&nbsp;</p>
+
+		<h3># ddm -i ati</h3>
+		<p>Això instal·larà els controladors fglrx per les targes gràfiques ATI. Les
+targes ATI a partir de la versió HD 5000 són compatibles amb els
+controladors fglrx. Les versions entre la 1000 i la 5000 poden usar els
+controladors Radeon. Useu "ddm -p ati" per eliminar els controladors del
+vostre sistema. </p>
+
+		<h3># ddm -i nvidia</h3>
+		<p>Això triarà els controladors correctes per a la vostra tarja gràfica
+Nvidia. També seleccionarà els controladors Bumblebee en el cas que tingueu
+una tarja híbrida (amb Nvidia i Intel). Useu "ddm -p nvidia" per eliminar
+els controladors del vostre sistema. </p>
+
+		<h3># ddm -i open</h3>
+		<p>Podeu usar aquesta ordre per a reinstal·lar els controladors lliures
+Nouveau. Això eliminarà els controladors propietaris del vostre sistema. </p>
+
+		<h3># ddm -i broadcom</h3>
+		<p>Aquesta ordre instal·larà el controlador adequat per al vostre adaptador
+sense fils Broadcom. Useu "ddm -p broadcom" per eliminar aquests
+controladors del vostre sistema. </p>
+
+		<h3># ddm -i pae</h3>
+		<p>Això instal·larà el nucli (kernel) PAE en sistemes multiprocessador amb
+S. O. de 32 bit. Useu "ddm -p pae" per eliminar el kernel PAE del vostre
+sistema. Tingueu en compte que no es pot eliminar el nucli que s'està
+executant en aquell moment. </p>
+
+		<h3># ddm -i fixbumblebee</h3>
+		<p>Això intentarà esmenar una instal·lació de Bumblebee. </p>
+
+		<h2>Registre </h2>
+		<h3>Fitxer: /var/log/ddm.log</h3>
+		<p>Si us plau, adjunteu el vostre fitxer de registre quan informeu d'un
+incident al nostre fòrum <a href="http://forums.solydxk.com"
+target="_blank">http://forums.solydxk.com</a> </p>
+    </div>
+  </body>
+</html>
