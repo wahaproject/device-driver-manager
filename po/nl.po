@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 11:22+0100\n"
-"PO-Revision-Date: 2015-10-31 10:18+0000\n"
+"POT-Creation-Date: 2015-10-31 12:18+0100\n"
+"PO-Revision-Date: 2015-10-31 10:25+0000\n"
 "Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/solydxk/device-driver-manager/"
 "language/nl/)\n"
@@ -101,27 +101,39 @@ msgstr "Er zijn geen beschikbare drivers voor uw hardware:"
 msgid "DDM did not find any supported hardware."
 msgstr "DDM heeft geen ondersteunde hardware gevonden."
 
-#: ../usr/lib/ddm/ddm.py:515
+#: ../usr/lib/ddm/ddm.py:353
+msgid "ATI FirePro/Gl card found"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:354
+msgid ""
+"Installing the proprietary driver for an ATI FirePro/Gl card may render your "
+"system unbootable.\n"
+"\n"
+"Proceed at your own risk."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:524
 msgid "PAE capable system"
 msgstr "Systeem geschikt voor PAE"
 
-#: ../usr/lib/ddm/ddm.py:628
+#: ../usr/lib/ddm/ddm.py:637
 msgid "Run as root."
 msgstr "Als root uitvoeren."
 
-#: ../usr/lib/ddm/ddm.py:630
+#: ../usr/lib/ddm/ddm.py:639
 msgid "Wrong arguments passed to ddm."
 msgstr "Verkeerde argumenten gebruikt voor ddm."
 
-#: ../usr/lib/ddm/ddm.py:632
+#: ../usr/lib/ddm/ddm.py:641
 msgid "There are no driver available."
 msgstr "Er zijn geen drivers beschikbaar."
 
-#: ../usr/lib/ddm/ddm.py:634
+#: ../usr/lib/ddm/ddm.py:643
 msgid "The driver cannot be found in repository."
 msgstr "De driver kan niet in de repository gevonden worden."
 
-#: ../usr/lib/ddm/ddm.py:636
+#: ../usr/lib/ddm/ddm.py:645
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -129,16 +141,15 @@ msgstr ""
 "Download fout.\n"
 "Controleer uw internet connectie."
 
-#: ../usr/lib/ddm/ddm.py:638
+#: ../usr/lib/ddm/ddm.py:647
 msgid "DDM cannot purge the driver."
 msgstr "DDM kan de driver niet verwijderen."
 
-#: ../usr/lib/ddm/ddm.py:640
-#, fuzzy
+#: ../usr/lib/ddm/ddm.py:649
 msgid "This card is not supported."
-msgstr "Kaart wordt niet ondersteund."
+msgstr "Deze kaart wordt niet ondersteund."
 
-#: ../usr/lib/ddm/ddm.py:642
+#: ../usr/lib/ddm/ddm.py:651
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -148,11 +159,11 @@ msgstr ""
 "Voer de volgende opdracht uit in een terminal: 'sudo apt-get -f install'.\n"
 "Bezoek ons forum wanneer u hulp nodig heeft: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:647
+#: ../usr/lib/ddm/ddm.py:656
 msgid "The software has been successfully installed."
 msgstr "De software is succesvol geïnstalleerd."
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:657
 msgid "You will need to restart your system."
 msgstr "U dient uw systeem te herstarten."
 
@@ -321,6 +332,3 @@ msgstr ""
 "Voeg uw log bestand toe wanneer u een probleem met DDM wilt posten op ons "
 "forum: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://forums."
 "solydxk.com</a>"
-
-#~ msgid "Use Backport"
-#~ msgstr "Gebruik Backports"

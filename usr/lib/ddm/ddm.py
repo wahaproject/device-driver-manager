@@ -216,9 +216,9 @@ class DDM(object):
         path = int(path)
         model = self.tvDDM.get_model()
         itr = model.get_iter(path)
-        driver = model[itr][2].lower()
+        description = model[itr][2].lower()
 
-        if 'pae' in driver and not toggleValue and self.paeBooted:
+        if 'pae' in description and not toggleValue and self.paeBooted:
             title = _("Remove kernel")
             msg = _("You cannot remove a booted kernel.\nPlease, boot another kernel and try again.")
             self.log.write(msg, 'tv_checkbox_toggled')
@@ -311,6 +311,9 @@ class DDM(object):
     # ===============================================
 
     def get_ati(self):
+        # Debian Wiki: https://wiki.debian.org/ATIProprietary
+        # Supported devices 14.9 (Jessie): http://support.amd.com/en-us/kb-articles/Pages/AMDCatalyst14-9LINReleaseNotes.aspx
+
         manufacturerId = '1002'
         startSeries = 5000
         deviceArray = self.get_lspci_info(manufacturerId, 'VGA')
@@ -346,6 +349,12 @@ class DDM(object):
                             # Don't show older ATI Radeon HD cards
                             if series < startSeries:
                                 break
+                    elif 'fire' in matchObj.group(0).lower():
+                        title = _("ATI FirePro/Gl card found")
+                        msg = _("Installing the proprietary driver for an ATI FirePro/Gl card may render your system unbootable.\n\n"
+                                "Proceed at your own risk.")
+                        self.log.write(msg, 'get_ati')
+                        WarningDialog(title, msg)
 
                     self.log.write("ATI series: {}".format(matchObj.group(0)), 'get_ati')
 

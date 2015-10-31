@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 11:22+0100\n"
+"POT-Creation-Date: 2015-10-31 12:18+0100\n"
 "PO-Revision-Date: 2015-09-28 10:39+0000\n"
 "Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
 "Language-Team: French (http://www.transifex.com/solydxk/device-driver-"
@@ -93,42 +93,54 @@ msgstr "Il n'y a pas de pilote disponible pour votre matériel:"
 msgid "DDM did not find any supported hardware."
 msgstr "DDM n'a trouvé aucun matériel supporté."
 
-#: ../usr/lib/ddm/ddm.py:515
+#: ../usr/lib/ddm/ddm.py:353
+msgid "ATI FirePro/Gl card found"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:354
+msgid ""
+"Installing the proprietary driver for an ATI FirePro/Gl card may render your "
+"system unbootable.\n"
+"\n"
+"Proceed at your own risk."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:524
 msgid "PAE capable system"
 msgstr "Système compatible PAE"
 
-#: ../usr/lib/ddm/ddm.py:628
+#: ../usr/lib/ddm/ddm.py:637
 msgid "Run as root."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:630
+#: ../usr/lib/ddm/ddm.py:639
 msgid "Wrong arguments passed to ddm."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:632
+#: ../usr/lib/ddm/ddm.py:641
 msgid "There are no driver available."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:634
+#: ../usr/lib/ddm/ddm.py:643
 msgid "The driver cannot be found in repository."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:636
+#: ../usr/lib/ddm/ddm.py:645
 #, fuzzy
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr "Pas de connexion internet"
 
-#: ../usr/lib/ddm/ddm.py:638
+#: ../usr/lib/ddm/ddm.py:647
 msgid "DDM cannot purge the driver."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:640
+#: ../usr/lib/ddm/ddm.py:649
 msgid "This card is not supported."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:642
+#: ../usr/lib/ddm/ddm.py:651
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -138,11 +150,11 @@ msgstr ""
 "Ouvrez un terminal et exécutez 'sudo apt-get -f install'.\n"
 "Visitez notre forum pour toute aide: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:647
+#: ../usr/lib/ddm/ddm.py:656
 msgid "The software has been successfully installed."
 msgstr "Le programme a été installé avec succès."
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:657
 msgid "You will need to restart your system."
 msgstr "Vous devez redémarrer votre système."
 

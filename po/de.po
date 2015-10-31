@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 11:22+0100\n"
-"PO-Revision-Date: 2015-10-31 10:06+0000\n"
+"POT-Creation-Date: 2015-10-31 12:18+0100\n"
+"PO-Revision-Date: 2015-10-31 10:24+0000\n"
 "Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
 "Language-Team: German (http://www.transifex.com/solydxk/device-driver-"
 "manager/language/de/)\n"
@@ -97,27 +97,39 @@ msgstr "Es sind keine Treiber für diese Hardware verfügbar."
 msgid "DDM did not find any supported hardware."
 msgstr "DDM konnte keine unterstützte Hardware finden."
 
-#: ../usr/lib/ddm/ddm.py:515
+#: ../usr/lib/ddm/ddm.py:353
+msgid "ATI FirePro/Gl card found"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:354
+msgid ""
+"Installing the proprietary driver for an ATI FirePro/Gl card may render your "
+"system unbootable.\n"
+"\n"
+"Proceed at your own risk."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:524
 msgid "PAE capable system"
 msgstr "PAE fähiges System"
 
-#: ../usr/lib/ddm/ddm.py:628
+#: ../usr/lib/ddm/ddm.py:637
 msgid "Run as root."
 msgstr "Als Administrator ausführen."
 
-#: ../usr/lib/ddm/ddm.py:630
+#: ../usr/lib/ddm/ddm.py:639
 msgid "Wrong arguments passed to ddm."
 msgstr "Ungültige Parameter an ddm übergeben."
 
-#: ../usr/lib/ddm/ddm.py:632
+#: ../usr/lib/ddm/ddm.py:641
 msgid "There are no driver available."
 msgstr "Es sind keine Treiber verfügbar."
 
-#: ../usr/lib/ddm/ddm.py:634
+#: ../usr/lib/ddm/ddm.py:643
 msgid "The driver cannot be found in repository."
 msgstr "Der Treiber kann im Repository nicht gefunden werden."
 
-#: ../usr/lib/ddm/ddm.py:636
+#: ../usr/lib/ddm/ddm.py:645
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -125,15 +137,15 @@ msgstr ""
 "Fehler beim Download.\n"
 "Bitte Internetverbindung überprüfen."
 
-#: ../usr/lib/ddm/ddm.py:638
+#: ../usr/lib/ddm/ddm.py:647
 msgid "DDM cannot purge the driver."
 msgstr "DDM kann den Treiber nicht vollständig entfernen."
 
-#: ../usr/lib/ddm/ddm.py:640
+#: ../usr/lib/ddm/ddm.py:649
 msgid "This card is not supported."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:642
+#: ../usr/lib/ddm/ddm.py:651
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -143,11 +155,11 @@ msgstr ""
 "Bitte 'sudo apt-get -f install' im Terminal ausführen.\n"
 "Falls Hilfe benötigt wird, besucht unser Forum http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:647
+#: ../usr/lib/ddm/ddm.py:656
 msgid "The software has been successfully installed."
 msgstr "Die Software wurde erfolgreich installiert."
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:657
 msgid "You will need to restart your system."
 msgstr "Das System muß neu gestartet werden."
 
