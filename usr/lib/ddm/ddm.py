@@ -63,7 +63,8 @@ class DDM(object):
         self.paeBooted = False
         self.htmlDir = join(self.mediaDir, "html")
         self.helpFile = join(self.get_language_dir(), "help.html")
-        self.logFile = '/var/log/ddm.log'
+        log = getoutput("cat /usr/bin/ddm | grep 'LOG=' | cut -d'=' -f 2")
+        self.logFile = log[0]
         self.log = Logger(self.logFile, addLogTime=False, maxSizeKB=5120)
         self.tvDDMHandler = TreeViewHandler(self.tvDDM)
         self.tvDDMHandler.connect('checkbox-toggled', self.tv_checkbox_toggled)
