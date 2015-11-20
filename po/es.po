@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 17:39+0100\n"
+"POT-Creation-Date: 2015-11-20 13:46+0100\n"
 "PO-Revision-Date: 2015-10-31 16:37+0000\n"
 "Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/solydxk/device-driver-"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr "Administrador de Drivers de Dispositivos"
 
-#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:211
 msgid "Install"
 msgstr "Instalar"
 
@@ -41,11 +41,11 @@ msgstr "Salir"
 msgid "Use Backports"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:163
+#: ../usr/lib/ddm/ddm.py:168
 msgid "No internet connection"
 msgstr "Sin conexión a Internet"
 
-#: ../usr/lib/ddm/ddm.py:164
+#: ../usr/lib/ddm/ddm.py:169
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
@@ -53,7 +53,7 @@ msgstr ""
 "Es necesaria una conexión a internet para instalar el software adicional. "
 "Conéctese a internet e intente de nuevo."
 
-#: ../usr/lib/ddm/ddm.py:171
+#: ../usr/lib/ddm/ddm.py:176
 msgid ""
 "You have selected to install drivers from the backports repository whenever "
 "they are available.\n"
@@ -65,15 +65,15 @@ msgid ""
 "Are you sure you want to continue?"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:211
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../usr/lib/ddm/ddm.py:222
+#: ../usr/lib/ddm/ddm.py:227
 msgid "Remove kernel"
 msgstr "Eliminar kernel"
 
-#: ../usr/lib/ddm/ddm.py:223
+#: ../usr/lib/ddm/ddm.py:228
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -81,23 +81,23 @@ msgstr ""
 "No se puede eliminar un kernel iniciado. Inicie con otro kernel e intente de "
 "nuevo."
 
-#: ../usr/lib/ddm/ddm.py:244
+#: ../usr/lib/ddm/ddm.py:249
 msgid "Hardware scan"
 msgstr "Escaneo de hardware"
 
-#: ../usr/lib/ddm/ddm.py:248
+#: ../usr/lib/ddm/ddm.py:253
 msgid "There are no available drivers for your hardware:"
 msgstr "No hay drivers disponibles para su hardware:"
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:259
 msgid "DDM did not find any supported hardware."
 msgstr "DDM no encontró ningún hardware soportado."
 
-#: ../usr/lib/ddm/ddm.py:353
+#: ../usr/lib/ddm/ddm.py:358
 msgid "ATI FirePro/Gl card found"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:354
+#: ../usr/lib/ddm/ddm.py:359
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
@@ -105,41 +105,41 @@ msgid ""
 "Proceed at your own risk."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:524
+#: ../usr/lib/ddm/ddm.py:529
 msgid "PAE capable system"
 msgstr "Sistema capaz PAE "
 
-#: ../usr/lib/ddm/ddm.py:637
+#: ../usr/lib/ddm/ddm.py:642
 msgid "Run as root."
 msgstr "Ejecutar como root."
 
-#: ../usr/lib/ddm/ddm.py:639
+#: ../usr/lib/ddm/ddm.py:644
 msgid "Wrong arguments passed to ddm."
 msgstr "Se han pasado argumentos incorrectos a ddm."
 
-#: ../usr/lib/ddm/ddm.py:641
+#: ../usr/lib/ddm/ddm.py:646
 msgid "There are no driver available."
 msgstr "No existe un driver disponible."
 
-#: ../usr/lib/ddm/ddm.py:643
+#: ../usr/lib/ddm/ddm.py:648
 msgid "The driver cannot be found in repository."
 msgstr "No se encuentra el driver en el repositorio."
 
-#: ../usr/lib/ddm/ddm.py:645
+#: ../usr/lib/ddm/ddm.py:650
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr "Error de descarga. Verifique su conexión a internet."
 
-#: ../usr/lib/ddm/ddm.py:647
+#: ../usr/lib/ddm/ddm.py:652
 msgid "DDM cannot purge the driver."
 msgstr "DDM no puede purgar el driver."
 
-#: ../usr/lib/ddm/ddm.py:649
+#: ../usr/lib/ddm/ddm.py:654
 msgid "This card is not supported."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:651
+#: ../usr/lib/ddm/ddm.py:656
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -149,11 +149,11 @@ msgstr ""
 "Ejecute 'sudo apt-get -f install' en la terminal.\n"
 "Visite nuestro foro para soporte: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:661
 msgid "The software has been successfully installed."
 msgstr "El software fue instalado con éxito."
 
-#: ../usr/lib/ddm/ddm.py:657
+#: ../usr/lib/ddm/ddm.py:662
 msgid "You will need to restart your system."
 msgstr "Será necesario reiniciar su sistema."
 

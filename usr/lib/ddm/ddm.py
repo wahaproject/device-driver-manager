@@ -2,7 +2,7 @@
 
 # from gi.repository import Gtk, GdkPixbuf, GObject, Pango, Gdk, GLib
 from gi.repository import Gtk, GObject, GLib
-from os.path import join, abspath, dirname, basename, exists
+from os.path import join, abspath, dirname, basename, isdir
 from utils import ExecuteThreadedCommands, hasInternetConnection, \
                   getoutput, getPackageVersion, has_backports
 import os
@@ -90,19 +90,23 @@ class DDM(object):
     def get_language_dir(self):
         # First test if full locale directory exists, e.g. html/pt_BR,
         # otherwise perhaps at least the language is there, e.g. html/pt
+        # and if that doesn't work, try html/pt_PT
         lang = self.get_current_language()
-        path = os.path.join(self.htmlDir, lang)
-        if path != self.htmlDir:
-            if not os.path.isdir(path):
-                path = os.path.join(self.htmlDir, lang.split('_')[0].lower())
-                if not os.path.isdir(path):
-                    return os.path.join(self.htmlDir, 'en')
-            return path
-        # else, just return English slides
-        return os.path.join(self.htmlDir, 'en')
+        path = join(self.htmlDir, lang)
+        if not isdir(path):
+            base_lang = lang.split('_')[0].lower()
+            path = join(self.htmlDir, base_lang)
+            if not isdir(path):
+                path = join(self.htmlDir, "{}_{}".format(base_lang, base_lang.upper()))
+                if not isdir(path):
+                    path = join(self.htmlDir, 'en')
+        return path
 
     def get_current_language(self):
-        return os.environ.get('LANG', 'US').split('.')[0]
+        lang = os.environ.get('LANG', 'US').split('.')[0]
+        if lang == '':
+            lang = 'en'
+        return lang
 
     # ===============================================
     # Main window functions
@@ -192,10 +196,10 @@ class DDM(object):
     def on_btnHelp_clicked(self, widget):
         # Open the help file as the real user (not root)
         logname = getoutput('logname')[0]
-        ff = '/opt/firefox/firefox'
-        if exists(ff):
+        try:
+            ff = getoutput('which firefox')[0]
             os.system("su {} -c \"{} {}\" &".format(logname, ff, self.helpFile))
-        else:
+        except:
             # If Firefox was removed, this might work
             os.system("su {} -c \"xdg-open {}\" &".format(logname, self.helpFile))
 

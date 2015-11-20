@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ddm 0.7.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 17:39+0100\n"
+"POT-Creation-Date: 2015-11-20 13:46+0100\n"
 "PO-Revision-Date: 2013-12-26 18:07+0200\n"
 "Last-Translator: Taylan Tatlı <taylantatli90@gmail.com>\n"
 "Language-Team: SolydXK <admin@solydxk.com>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:211
 msgid "Install"
 msgstr ""
 
@@ -40,17 +40,17 @@ msgstr ""
 msgid "Use Backports"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:163
+#: ../usr/lib/ddm/ddm.py:168
 msgid "No internet connection"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:164
+#: ../usr/lib/ddm/ddm.py:169
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:171
+#: ../usr/lib/ddm/ddm.py:176
 msgid ""
 "You have selected to install drivers from the backports repository whenever "
 "they are available.\n"
@@ -62,38 +62,38 @@ msgid ""
 "Are you sure you want to continue?"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:211
 msgid "Device"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:222
+#: ../usr/lib/ddm/ddm.py:227
 msgid "Remove kernel"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:223
+#: ../usr/lib/ddm/ddm.py:228
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:244
+#: ../usr/lib/ddm/ddm.py:249
 #, fuzzy
 msgid "Hardware scan"
 msgstr "Donanım"
 
-#: ../usr/lib/ddm/ddm.py:248
+#: ../usr/lib/ddm/ddm.py:253
 msgid "There are no available drivers for your hardware:"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:259
 msgid "DDM did not find any supported hardware."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:353
+#: ../usr/lib/ddm/ddm.py:358
 msgid "ATI FirePro/Gl card found"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:354
+#: ../usr/lib/ddm/ddm.py:359
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
@@ -101,53 +101,53 @@ msgid ""
 "Proceed at your own risk."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:524
+#: ../usr/lib/ddm/ddm.py:529
 msgid "PAE capable system"
 msgstr "PAE destekli sistem"
 
-#: ../usr/lib/ddm/ddm.py:637
+#: ../usr/lib/ddm/ddm.py:642
 msgid "Run as root."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:639
+#: ../usr/lib/ddm/ddm.py:644
 msgid "Wrong arguments passed to ddm."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:641
+#: ../usr/lib/ddm/ddm.py:646
 msgid "There are no driver available."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:643
+#: ../usr/lib/ddm/ddm.py:648
 msgid "The driver cannot be found in repository."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:645
+#: ../usr/lib/ddm/ddm.py:650
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:647
+#: ../usr/lib/ddm/ddm.py:652
 msgid "DDM cannot purge the driver."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:649
+#: ../usr/lib/ddm/ddm.py:654
 #, fuzzy
 msgid "This card is not supported."
 msgstr "ATI çip serisi desteklenmiyor: %(serie)d"
 
-#: ../usr/lib/ddm/ddm.py:651
+#: ../usr/lib/ddm/ddm.py:656
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:661
 msgid "The software has been successfully installed."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:657
+#: ../usr/lib/ddm/ddm.py:662
 msgid "You will need to restart your system."
 msgstr ""
 

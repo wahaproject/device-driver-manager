@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 17:39+0100\n"
+"POT-Creation-Date: 2015-11-20 13:46+0100\n"
 "PO-Revision-Date: 2015-09-28 10:39+0000\n"
 "Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/solydxk/device-driver-"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr "مدير تعريف الأجهزة"
 
-#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:211
 msgid "Install"
 msgstr "التثبيت"
 
@@ -42,11 +42,11 @@ msgstr "خروج"
 msgid "Use Backports"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:163
+#: ../usr/lib/ddm/ddm.py:168
 msgid "No internet connection"
 msgstr "لا يوجد اتصال بالإنترنت"
 
-#: ../usr/lib/ddm/ddm.py:164
+#: ../usr/lib/ddm/ddm.py:169
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
@@ -54,7 +54,7 @@ msgstr ""
 "تحتاج لاتصال بالإنترنت لتثبيت البرامج الإضافية.\n"
 "من فضلك، اتّصل بالإنترنت وحاول مرة أخرى."
 
-#: ../usr/lib/ddm/ddm.py:171
+#: ../usr/lib/ddm/ddm.py:176
 msgid ""
 "You have selected to install drivers from the backports repository whenever "
 "they are available.\n"
@@ -66,15 +66,15 @@ msgid ""
 "Are you sure you want to continue?"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:211
 msgid "Device"
 msgstr "الجهاز"
 
-#: ../usr/lib/ddm/ddm.py:222
+#: ../usr/lib/ddm/ddm.py:227
 msgid "Remove kernel"
 msgstr "إزالة النواة"
 
-#: ../usr/lib/ddm/ddm.py:223
+#: ../usr/lib/ddm/ddm.py:228
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -82,23 +82,23 @@ msgstr ""
 "لا يمكنك إزالة النواة المستخدمة حاليا.\n"
 "من فضلك، حاول بعد إعادة التشغيل بنواة أخرى."
 
-#: ../usr/lib/ddm/ddm.py:244
+#: ../usr/lib/ddm/ddm.py:249
 msgid "Hardware scan"
 msgstr "تفحص الأجهزة"
 
-#: ../usr/lib/ddm/ddm.py:248
+#: ../usr/lib/ddm/ddm.py:253
 msgid "There are no available drivers for your hardware:"
 msgstr "لا توجد تعريفات متوفرة لعتادك:"
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:259
 msgid "DDM did not find any supported hardware."
 msgstr "لم يعثر مدير التعريف على أي عتاد مدعوم."
 
-#: ../usr/lib/ddm/ddm.py:353
+#: ../usr/lib/ddm/ddm.py:358
 msgid "ATI FirePro/Gl card found"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:354
+#: ../usr/lib/ddm/ddm.py:359
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
@@ -106,42 +106,42 @@ msgid ""
 "Proceed at your own risk."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:524
+#: ../usr/lib/ddm/ddm.py:529
 msgid "PAE capable system"
 msgstr "النظام يدعم PAE"
 
-#: ../usr/lib/ddm/ddm.py:637
+#: ../usr/lib/ddm/ddm.py:642
 msgid "Run as root."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:639
+#: ../usr/lib/ddm/ddm.py:644
 msgid "Wrong arguments passed to ddm."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:641
+#: ../usr/lib/ddm/ddm.py:646
 msgid "There are no driver available."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:643
+#: ../usr/lib/ddm/ddm.py:648
 msgid "The driver cannot be found in repository."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:645
+#: ../usr/lib/ddm/ddm.py:650
 #, fuzzy
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr "لا يوجد اتصال بالإنترنت"
 
-#: ../usr/lib/ddm/ddm.py:647
+#: ../usr/lib/ddm/ddm.py:652
 msgid "DDM cannot purge the driver."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:649
+#: ../usr/lib/ddm/ddm.py:654
 msgid "This card is not supported."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:651
+#: ../usr/lib/ddm/ddm.py:656
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -151,11 +151,11 @@ msgstr ""
 "من فضلك، شغّل 'sudo apt-get -f install' في الطرفية.\n"
 "يمكنك زيارة منتدانا للحصول على الدعم: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:661
 msgid "The software has been successfully installed."
 msgstr "تم تثبيت البرنامج بنجاح."
 
-#: ../usr/lib/ddm/ddm.py:657
+#: ../usr/lib/ddm/ddm.py:662
 msgid "You will need to restart your system."
 msgstr "ستحتاج لإعادة تشغيل نظامك."
 

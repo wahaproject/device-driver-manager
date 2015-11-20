@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 17:39+0100\n"
-"PO-Revision-Date: 2015-10-31 16:37+0000\n"
-"Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
+"POT-Creation-Date: 2015-11-20 13:46+0100\n"
+"PO-Revision-Date: 2015-11-07 16:52+0000\n"
+"Last-Translator: Eduard Selma <selma@tinet.cat>\n"
 "Language-Team: Catalan (http://www.transifex.com/solydxk/device-driver-"
 "manager/language/ca/)\n"
 "Language: ca\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr "Device Driver Manager"
 
-#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:211
 msgid "Install"
 msgstr "Instal·la "
 
@@ -40,13 +40,13 @@ msgstr "Surt "
 
 #: ../usr/lib/ddm/ddm.py:55
 msgid "Use Backports"
-msgstr ""
+msgstr "Usa Backports "
 
-#: ../usr/lib/ddm/ddm.py:163
+#: ../usr/lib/ddm/ddm.py:168
 msgid "No internet connection"
 msgstr "No hi ha connexió a Internet "
 
-#: ../usr/lib/ddm/ddm.py:164
+#: ../usr/lib/ddm/ddm.py:169
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
@@ -54,7 +54,7 @@ msgstr ""
 "Cal una connexió a Internet per instal·lar el programari addicional.\n"
 "Si us plau, connecteu-vos a Internet i torneu a provar-ho."
 
-#: ../usr/lib/ddm/ddm.py:171
+#: ../usr/lib/ddm/ddm.py:176
 msgid ""
 "You have selected to install drivers from the backports repository whenever "
 "they are available.\n"
@@ -65,16 +65,24 @@ msgid ""
 "\n"
 "Are you sure you want to continue?"
 msgstr ""
+"Heu triat  instal·lar controladors del dipòsit backports si aquests estan a "
+"l'abast.\n"
+"\n"
+"Malgrat que podeu obtenir programari més actual usant el dipòsit  "
+"backports,\n"
+"hi ha més risc de tenir algun problema fent-ho.\n"
+"\n"
+"Esteu segurs de voler continuar?"
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:211
 msgid "Device"
 msgstr "Dispositiu "
 
-#: ../usr/lib/ddm/ddm.py:222
+#: ../usr/lib/ddm/ddm.py:227
 msgid "Remove kernel"
 msgstr "Elimina el kernel "
 
-#: ../usr/lib/ddm/ddm.py:223
+#: ../usr/lib/ddm/ddm.py:228
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -82,51 +90,55 @@ msgstr ""
 "No es pot eliminar un kernel actiu.\n"
 "Si us plau, engegueu amb un nou kernel i torneu a provar-ho. "
 
-#: ../usr/lib/ddm/ddm.py:244
+#: ../usr/lib/ddm/ddm.py:249
 msgid "Hardware scan"
 msgstr "Explora maquinari "
 
-#: ../usr/lib/ddm/ddm.py:248
+#: ../usr/lib/ddm/ddm.py:253
 msgid "There are no available drivers for your hardware:"
 msgstr "No hi ha controladors disponibles pel vostre maquinari: "
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:259
 msgid "DDM did not find any supported hardware."
 msgstr "DDM no ha trobat cap maquinari compatible. "
 
-#: ../usr/lib/ddm/ddm.py:353
+#: ../usr/lib/ddm/ddm.py:358
 msgid "ATI FirePro/Gl card found"
-msgstr ""
+msgstr "S'ha trobat una tarja ATI FirePro/Gl "
 
-#: ../usr/lib/ddm/ddm.py:354
+#: ../usr/lib/ddm/ddm.py:359
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
 "\n"
 "Proceed at your own risk."
 msgstr ""
+"Instal·lar el controlador propietari per a la tarja ATI FirePro/Gl pot "
+"deixar el vostre sistema sense possibilitat d'arrencar.\n"
+"\n"
+"Procediu sota la vostra responsabilitat."
 
-#: ../usr/lib/ddm/ddm.py:524
+#: ../usr/lib/ddm/ddm.py:529
 msgid "PAE capable system"
 msgstr "Sistema amb capacitat PAE "
 
-#: ../usr/lib/ddm/ddm.py:637
+#: ../usr/lib/ddm/ddm.py:642
 msgid "Run as root."
 msgstr "Executa com a usuari primari. "
 
-#: ../usr/lib/ddm/ddm.py:639
+#: ../usr/lib/ddm/ddm.py:644
 msgid "Wrong arguments passed to ddm."
 msgstr "S'han passat a DDM arguments erronis. "
 
-#: ../usr/lib/ddm/ddm.py:641
+#: ../usr/lib/ddm/ddm.py:646
 msgid "There are no driver available."
 msgstr "No hi ha cap controlador disponible. "
 
-#: ../usr/lib/ddm/ddm.py:643
+#: ../usr/lib/ddm/ddm.py:648
 msgid "The driver cannot be found in repository."
 msgstr "No es troba el controlador al dipòsit. "
 
-#: ../usr/lib/ddm/ddm.py:645
+#: ../usr/lib/ddm/ddm.py:650
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -134,15 +146,15 @@ msgstr ""
 "Error de descàrrega.\n"
 "Comproveu la connexió a Internet. "
 
-#: ../usr/lib/ddm/ddm.py:647
+#: ../usr/lib/ddm/ddm.py:652
 msgid "DDM cannot purge the driver."
 msgstr "DDM no pot purgar el controlador. "
 
-#: ../usr/lib/ddm/ddm.py:649
+#: ../usr/lib/ddm/ddm.py:654
 msgid "This card is not supported."
-msgstr ""
+msgstr "Aquesta tarja no està suportada. "
 
-#: ../usr/lib/ddm/ddm.py:651
+#: ../usr/lib/ddm/ddm.py:656
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -152,11 +164,11 @@ msgstr ""
 "Si us plau, executeu 'sudo apt-get -f install' en un terminal.\n"
 "Visiteu el nostre fòrum per obtenir suport: http://forums.solydyxk.com "
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:661
 msgid "The software has been successfully installed."
 msgstr "El programari s'ha instal·lat amb èxit. "
 
-#: ../usr/lib/ddm/ddm.py:657
+#: ../usr/lib/ddm/ddm.py:662
 msgid "You will need to restart your system."
 msgstr "Cal que reinicieu el vostre sistema. "
 
@@ -167,6 +179,11 @@ msgid ""
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
 msgstr ""
+"El Device Driver Manager us ajuda a instal·lar controladors propietaris per "
+"al vostre maquinari.\n"
+"Instal·leu controladors propietaris només si esteu segurs de necessitar-"
+"los.\n"
+"Sovint, amb els controladors lliures ja n'hi ha prou."
 
 #: ../usr/lib/ddm/main.py:51
 msgid ""

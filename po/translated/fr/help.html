@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link href="../link/general.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="background"></div>
+	<h1>Aide du gestionnaire de pilotes de périphériques</h1>
+	<div class="main">
+		<h2>Description</h2>
+		<p>Le gestionnaire de pilotes de périphériques est un outil destiné à aider les
+utilisateurs à installer des pilotes propriétaires.
+Actuellement les pilotes Nvidia, ATI et Broadcom peuvent être installés, de
+même que le noyau PAE pour les systèmes 32-bit multi-coeur. Le gestionnaire
+listera uniquement  les périphériques supportés.</p>
+
+		<h2>Important</h2>
+		<p>Le gestionnaire de pilotes de périphériques ne peut installer que les
+pilotes présents dans les dépôts. Assurez-vous d'avoir une connection
+internet fonctionnelle si vous voulez installer ces pilotes.</p>
+
+		<h2>Commandes</h2>
+		<p>Si vous préferez installer des pilotes via le terminal, vous pouvez utiliser
+les commandes suivantes:</p>
+
+		<p>&nbsp;</p>
+
+		<h3># ddm -i ati</h3>
+		<p>Ceci installera les pilotes fglrx pour votre carte graphique ATI. Les cartes
+ATI version HD 5000 et supérieures sont supportées par ces pilotes. Les
+version 1000 à 5000 utiliserons les pilotes Radeon. Utilisez la commande
+"ddm -p ati" pour supprimer les pilotes de votre système.</p>
+
+		<h3># ddm -i nvidia</h3>
+		<p>Ceci sélectionnera le bon pilote pour votre carte graphique Nvidia. Le
+pilote Bumblebee sera sélectionné si vous utilisez une carte hybride (à la
+fois Nvidia et intel). Utilisez la commande "ddm -p nvidia" pour supprimer
+ces pilotes de votre système.</p>
+
+		<h3># ddm -i open</h3>
+		<p>Vous pouvez utiliser cette commande si vous souhaitez revenir à
+l'utilisation des pilotes libres Nouveau. Tous les pilotes propriétaires
+seront supprimés de votre système. </p>
+
+		<h3># ddm -i broadcom</h3>
+		<p>Cette commande installera le bon pilote pour votre carte sans fil
+braodcom. Utilisez la commande "ddm -p broadcom" pour supprimer ce pilote de
+votre système.</p>
+
+		<h3># ddm -i pae</h3>
+		<p>Ceci installera le noyau PAE pour les systèmes multi-processeur exécutant un
+système d'exploitation 32-bit. Utilisez la commande "ddm -p pae" pour
+supprimer ce noyau de votre système. Vous ne pourrez cependant pas supprimer
+ce noyau si vous l'avez utilisé pour démarrer votre système et qu'il est en
+cours d'utilisation.</p>
+
+		<h3># ddm -i fixbumblebee</h3>
+		<p>This will try to fix a Bumblebee install.</p>
+
+		<h2>Log</h2>
+		<h3>Fichier: /var/log/ddm.log</h3>
+		<p>Merci de joindre un fichier de log lorsque vous postez une demande sur notre
+forum: <a href="http://forums.solydxk.com"
+target="_blank">http://forums.solydxk.com</a></p>
+    </div>
+  </body>
+</html>
