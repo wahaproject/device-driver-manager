@@ -5,19 +5,19 @@
   </head>
   <body>
     <div id="background"></div>
-	<h1>Hilfe zum Gerätetreibermanager</h1>
+	<h1>Hilfe zum Device Driver Manager</h1>
 	<div class="main">
 		<h2>Beschreibung</h2>
-		<p>Der Gerätetreibermanager ist ein Werkzeug, welches dem Nutzer bei der
-Installation von Hardwaretreibern von Dritthersteller unterstützt. Momentan
-können Treiber von Nvidia, ATI und Broadcom sowie der PAE Kernel für 32-bit
-Systeme installiert werden. Der Gerätetreibermanager listet nur unterstützte
-Geräte auf. Andere Treiber als oben erwähnt werden nicht angezeigt.</p>
+		<p>Der Device Driver Manager unterstützt den Nutzer bei der Installation von
+Hardwaretreibern von Drittherstellern. Momentan können Treiber von Nvidia,
+ATI und Broadcom sowie der PAE Kernel für 32-bit Systeme installiert
+werden. Der DDM listet nur unterstützte Geräte auf. Andere Treiber als oben
+erwähnt werden nicht angezeigt.</p>
 
 		<h2>Wichtig</h2>
-		<p>Der Gerätetreibermanager kann nur die Treiber installieren, die in den
-Repositorys vorhanden sind. Sollten Sie Treiber installieren wollen, sorgen
-Sie dafür, dass Sie eine Internetverbindung haben. </p>
+		<p>Der Device Driver Manager kann nur in den Paketquellen vorhandene Treiber
+installieren. Sollten Sie Treiber installieren wollen, sorgen Sie dafür,
+dass Sie eine Internetverbindung haben. </p>
 
 		<h2>Befehle</h2>
 		<p>Wenn Sie die Treiberinstallation im Terminal durchführen wollen, können Sie
@@ -26,37 +26,34 @@ die folgenden Befehle benutzen:</p>
 		<p>&nbsp;</p>
 
 		<h3># ddm -i ati</h3>
-		<p>Das wird die fglrx Treiber für Ihre ATI Grafikkarte installieren, ATI
-Grafikkarten der Versionen HD 5000 und später werden durch die fglrx Treiber
-unterstützt. Versionen zwischen 1000 und 5000 nutzen die Radeon
-Treiber. Benutzen Sie "ddm -p ati" um die Treiber von Ihrem System zu
-entfernen.</p>
+		<p>Dies wird die fglrx Treiber für Ihre ATI Grafikkarte der Versionen HD 5000
+und später installieren. Versionen zwischen 1000 und 5000 nutzen die
+quelloffenen Radeon Treiber. Benutzen Sie "ddm -p ati" um die Treiber von
+Ihrem System zu entfernen.</p>
 
 		<h3># ddm -i nvidia</h3>
-		<p>Das wird die passenden Treiber für Ihre Nvidia Grafikkarte wählen. Sollten
-Sie eine Hybridgrafikkarte besitzen (gleichzeit Nvidia und Intel) werden die
-Bumblebee Treiber ausgewählt. Benutzen Sie "ddm -p nividia" um die Treiber
-von Ihrem System zu entfernen.</p>
+		<p>Dies wird die passenden Treiber für Ihre Nvidia Grafikkarte wählen. Für
+Hybridgrafikkarten (gleichzeitig Nvidia und Intel) werden die Bumblebee
+Treiber ausgewählt. Benutzen Sie "ddm -p nividia" um die Treiber von Ihrem
+System zu entfernen.</p>
 
 		<h3># ddm -i open</h3>
-		<p>Sie können diesen Befehl benutzen, wenn Sie zu den offenen Nouveau Treiber
-zurückkehren wollen. Er wird sämtliche proprietären Treiber von Ihrem System
-entfernen.</p>
+		<p>Dieser Befehl ermöglicht die Rückkehr zum quelloffenen Nouveau-Treiber. Er
+wird sämtliche proprietären Treiber von Ihrem System entfernen.</p>
 
 		<h3># ddm -i broadcom</h3>
-		<p>Dieser Befehl wird die passenden Treiber für Ihre Broadcom W-LAN-Adapter
+		<p>Dieser Befehl wird die passenden Treiber für Ihren Broadcom W-LAN-Adapter
 installieren. Benutzen Sie "ddm -p broadcom" um die Treiber von Ihrem System
 zu entfernen.</p>
 
 		<h3># ddm -i pae</h3>
-		<p>Das wird den PAE Kernel auf einem Multi-Prozessor.System mit einem 32-bit
-Betriebssystem OS installieren. Benutzen Sie "ddm -p pae" um den PAE Kernel
-von Ihrem System zu entfernen. Beachten Sie, dass der Kernel nicht
-deinstalliert werden kann, wenn Sie Ihr Betriebssystem gleichzeitig mit
-diesem in diesen Kernel gestartet haben.</p>
+		<p>Dies wird den PAE Kernel für 32-bit Betriebssysteme auf
+Multi-Prozessor-Systemen installieren. Benutzen Sie "ddm -p pae" um den PAE
+Kernel von Ihrem System zu entfernen. Der Kernel kann nicht deinstalliert
+werden kann, während er in Benutzung ist.</p>
 
 		<h3># ddm -i fixbumblebee</h3>
-		<p>Das wird die Reparatur einer Bumblebee Installation versuchen.</p>
+		<p>Dies wird die Reparatur einer Bumblebee-Installation versuchen.</p>
 
 		<h2>Log</h2>
 		<h3>Datei: /var/log/ddm.log</h3>

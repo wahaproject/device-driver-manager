@@ -1,5 +1,9 @@
 #! /usr/bin/env python3 -OO
 
+# Make sure the right Gtk version is loaded
+import gi
+gi.require_version('Gtk', '3.0')
+
 import sys
 sys.path.insert(1, '/usr/lib/ddm')
 from dialogs import MessageDialog, ErrorDialog, WarningDialog

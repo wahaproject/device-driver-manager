@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link href="../link/general.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="background"></div>
+	<h1>Pomoc Menedżera Sterowników</h1>
+	<div class="main">
+		<h2>Opis</h2>
+		<p>Menedżer sterowników jest narzędziem pomagającym instalować sterowniki
+innych firm. Obecnie jest możliwa instalacja sterowników Nvidia, ATI i
+Broadcom oraz jądra z obsługą PAE dla wielordzeniowych systemów
+32-bitowych. Menedżer wyświetla jedynie listę instalowanych sterowników i
+żadne inne nie zostaną zainstalowane.</p>
+
+		<h2>Ważne</h2>
+		<p>Menedżer może zainstalować tylko sterowniki dostępne w
+repozytoriach. Upewnij się, że masz połączenie z siecią jeśli zamierzasz
+instalować sterowniki.</p>
+
+		<h2>Polecenia</h2>
+		<p>Jeśli wolisz instalować sterowniki w terminalu, możesz użyć następujących
+poleceń:</p>
+
+		<p>&nbsp;</p>
+
+		<h3># ddm -i ati</h3>
+		<p>Polecenie zainstaluje sterownik fglrx dla kart ATI. Karty ATI od wersji
+HD5000 są obsługiwane przez sterowniki fglrx. Wersje między 1000 a 5000
+używają sterowników Radeon. Użyj "ddm -p ati"  w celu usunięcia sterowników
+z systemu.</p>
+
+		<h3># ddm -i nvidia</h3>
+		<p>Polecenie spowoduje wybranie właściwych sterowników Nvidia. W przypadku kart
+hybrydowych(zarówno Nvidia, jak i Intel) zostaną wybrane sterowniki
+Bumblebee.
+W celu usunięcia sterowników z systemu użyj:  "ddm -p nvidia"</p>
+
+		<h3># ddm -i open</h3>
+		<p>Możesz użyć tego polecenia aby wrócić do otwartych sterowników
+Nouveau. Zostaną usunięte z systemu wszystkie sterowniki własnościowe.</p>
+
+		<h3># ddm -i broadcom</h3>
+		<p>Polecenie spowoduje instalację sterownika Broadcom dla urządzeń
+bezprzewodowych. Użycie "ddm -p broadcom"  spowoduje usunięcie sterowników.</p>
+
+		<h3># ddm -i pae</h3>
+		<p>Polecenie zainstaluje jądro z obsługa PAE w systemach wieloprocesorowych
+32-bitowych. Nota bene, usunięcie jądra jest niemożliwe po jego
+uruchomieniu.</p>
+
+		<h3># ddm -i fixbumblebee</h3>
+		<p>Polecenie konfigurujące instalację Bumblebee.</p>
+
+		<h2>Log</h2>
+		<h3>Plik: /var/log/ddm.log</h3>
+		<p>Proszę dołączyć plik logu wysyłając raport o błędzie na <a
+href="http://forums.solydxk.com"
+target="_blank">http://forums.solydxk.com</a></p>
+    </div>
+  </body>
+</html>

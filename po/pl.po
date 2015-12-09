@@ -1,57 +1,61 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Translators:
+# Wojciech Kolasinski <kolasinski@retsat1.com.pl>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: ddm 0.7.1\n"
+"Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-20 13:46+0100\n"
-"PO-Revision-Date: 2013-06-20 07:00+0100\n"
-"Last-Translator: Schoelje <schoelje@solydxk.com>\n"
-"Language-Team: SolydXK <admin@solydxk.com>\n"
-"Language: Polish\n"
+"POT-Creation-Date: 2015-12-07 10:57+0100\n"
+"PO-Revision-Date: 2015-12-06 17:57+0000\n"
+"Last-Translator: Wojciech Kolasinski <kolasinski@retsat1.com.pl>\n"
+"Language-Team: Polish (http://www.transifex.com/solydxk/device-driver-"
+"manager/language/pl/)\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: ../usr/lib/ddm/ddm.py:51 ../usr/lib/ddm/main.py:28
+#: ../usr/lib/ddm/ddm.py:55 ../usr/lib/ddm/main.py:32
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
-msgstr ""
+msgstr "Menedżer sterowników"
 
-#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:211
+#: ../usr/lib/ddm/ddm.py:56 ../usr/lib/ddm/ddm.py:215
 msgid "Install"
-msgstr ""
+msgstr "Instaluj"
 
-#: ../usr/lib/ddm/ddm.py:53
+#: ../usr/lib/ddm/ddm.py:57
 msgid "Help"
-msgstr ""
+msgstr "Pomoc"
 
-#: ../usr/lib/ddm/ddm.py:54
+#: ../usr/lib/ddm/ddm.py:58
 msgid "Quit"
-msgstr ""
+msgstr "Wyjdź"
 
-#: ../usr/lib/ddm/ddm.py:55
+#: ../usr/lib/ddm/ddm.py:59
 msgid "Use Backports"
-msgstr ""
+msgstr "Użyj \"backports\""
 
-#: ../usr/lib/ddm/ddm.py:168
+#: ../usr/lib/ddm/ddm.py:172
 msgid "No internet connection"
-msgstr ""
+msgstr "Brak sieci"
 
-#: ../usr/lib/ddm/ddm.py:169
+#: ../usr/lib/ddm/ddm.py:173
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
+"Połączenie sieciowe jest niezbędne do instalacji dodatkowego "
+"oprogramowania.\n"
+"Połącz się z siecią i spróbuj ponownie."
 
-#: ../usr/lib/ddm/ddm.py:176
+#: ../usr/lib/ddm/ddm.py:180
 msgid ""
 "You have selected to install drivers from the backports repository whenever "
 "they are available.\n"
@@ -62,127 +66,143 @@ msgid ""
 "\n"
 "Are you sure you want to continue?"
 msgstr ""
+"Wybrałeś instalację sterowników z repozytorium \"backports\" o ile są "
+"dostępne.\n"
+"Używając repozytorium \"backports\" możesz zainstalować bardziej aktualne "
+"oprogramowanie ale z większym ryzykiem uszkodzenia systemu.\n"
+"Czy nadal chcesz kontynuować?"
 
-#: ../usr/lib/ddm/ddm.py:211
+#: ../usr/lib/ddm/ddm.py:215
 msgid "Device"
-msgstr ""
+msgstr "Urządzenie"
 
-#: ../usr/lib/ddm/ddm.py:227
+#: ../usr/lib/ddm/ddm.py:231
 msgid "Remove kernel"
-msgstr ""
+msgstr "Usuń jądro"
 
-#: ../usr/lib/ddm/ddm.py:228
+#: ../usr/lib/ddm/ddm.py:232
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:249
-#, fuzzy
-msgid "Hardware scan"
-msgstr "Sprzęt"
+"Nie możesz usunąć załadowanego jądra.\n"
+"Wybierz inne jądro i spróbuj ponownie."
 
 #: ../usr/lib/ddm/ddm.py:253
+msgid "Hardware scan"
+msgstr "Skanowanie sprzętu"
+
+#: ../usr/lib/ddm/ddm.py:257
 msgid "There are no available drivers for your hardware:"
-msgstr ""
+msgstr "Nie ma dostępnych sterowników dla tego sprzętu."
 
-#: ../usr/lib/ddm/ddm.py:259
+#: ../usr/lib/ddm/ddm.py:263
 msgid "DDM did not find any supported hardware."
-msgstr ""
+msgstr "Menedżer sterowników nie znalazł żadnego wspieranego sprzętu."
 
-#: ../usr/lib/ddm/ddm.py:358
+#: ../usr/lib/ddm/ddm.py:362
 msgid "ATI FirePro/Gl card found"
-msgstr ""
+msgstr "Znaleziono kartę ATI FirePro/Gl"
 
-#: ../usr/lib/ddm/ddm.py:359
+#: ../usr/lib/ddm/ddm.py:363
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
 "\n"
 "Proceed at your own risk."
 msgstr ""
+"Instalowanie sterownika własnościowego dla karty ATI FirePro/G może uczynić "
+"system nieuruchamialnym.\n"
+"Kontynuuj na swoje ryzyko."
 
-#: ../usr/lib/ddm/ddm.py:529
+#: ../usr/lib/ddm/ddm.py:533
 msgid "PAE capable system"
 msgstr "System umożliwiający PAE"
 
-#: ../usr/lib/ddm/ddm.py:642
-msgid "Run as root."
-msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:644
-msgid "Wrong arguments passed to ddm."
-msgstr ""
-
 #: ../usr/lib/ddm/ddm.py:646
-msgid "There are no driver available."
-msgstr ""
+msgid "Run as root."
+msgstr "Uruchom jako administrator."
 
 #: ../usr/lib/ddm/ddm.py:648
-msgid "The driver cannot be found in repository."
-msgstr ""
+msgid "Wrong arguments passed to ddm."
+msgstr "Błędne argumenty przekazane do menedżera."
 
 #: ../usr/lib/ddm/ddm.py:650
+msgid "There are no driver available."
+msgstr "Brak dostępnych sterowników."
+
+#: ../usr/lib/ddm/ddm.py:652
+msgid "The driver cannot be found in repository."
+msgstr "Nie można znaleźć sterownika w repozytorium."
+
+#: ../usr/lib/ddm/ddm.py:654
 msgid ""
 "Download error.\n"
 "Check your internet connection."
-msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:652
-msgid "DDM cannot purge the driver."
-msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:654
-#, fuzzy
-msgid "This card is not supported."
-msgstr "Niewspierana seria chipu ATI: %(serie)d"
+msgstr "Błąd pobierania. Sprawdź połączenie sieciowe."
 
 #: ../usr/lib/ddm/ddm.py:656
+msgid "DDM cannot purge the driver."
+msgstr "Nie można usunąć  sterownika."
+
+#: ../usr/lib/ddm/ddm.py:658
+msgid "This card is not supported."
+msgstr "Niewspierany typ karty."
+
+#: ../usr/lib/ddm/ddm.py:660
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
+"Wystąpił błąd podczas instalacji.\n"
+"Uruchom  'sudo apt-get -f install' w terminalu.\n"
+"W celu uzyskania dalszej pomocy odwiedź http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:661
+#: ../usr/lib/ddm/ddm.py:665
 msgid "The software has been successfully installed."
-msgstr ""
+msgstr "Oprogramowanie poprawnie zainstalowanie."
 
-#: ../usr/lib/ddm/ddm.py:662
+#: ../usr/lib/ddm/ddm.py:666
 msgid "You will need to restart your system."
-msgstr ""
+msgstr "Należy zrestartować system."
 
-#: ../usr/lib/ddm/main.py:29
+#: ../usr/lib/ddm/main.py:33
 msgid ""
 "Device Driver Manager helps to install proprietary drivers for your "
 "hardware.\n"
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
 msgstr ""
+"Menedżer sterowników pomaga instalować sterowniki własnościowe dla tego "
+"sprzętu.\n"
+"Instaluj sterowniki własnościowe tylko wtedy gdy naprawdę są potrzebne.\n"
+"Zazwyczaj sterowniki o otwartym kodzie są wystarczające."
 
-#: ../usr/lib/ddm/main.py:51
-#, fuzzy
+#: ../usr/lib/ddm/main.py:55
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
 msgstr ""
-"DDM nie uruchamia się w środowisku live\n"
-"\n"
-"Aby wymusić start użyj argumentu --force"
+"Menedżer sterowników nie może być uruchamiany w środowisku \"live\"\n"
+"Można użyć argumentu --force  aby uruchomić menedżera(DDM) w środowisku "
+"\"live\""
 
-#: ../usr/lib/ddm/main.py:78
+#: ../usr/lib/ddm/main.py:82
 msgid "Unexpected error"
-msgstr ""
+msgstr "Niespodziewany błąd"
 
-#: ../usr/lib/ddm/main.py:79
+#: ../usr/lib/ddm/main.py:83
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
 msgstr ""
+"Menedżer sterowników zakończył działanie z powodu nieoczekiwanego błędu. "
+"Wyślij proszę raport o błędzie."
 
 #: en/help.html+html.body.h1:8
 msgid "Device Driver Manager Help"
-msgstr ""
+msgstr "Pomoc Menedżera Sterowników"
 
 #: en/help.html+html.body.div.h2:10
 msgid "Description"
@@ -196,10 +216,15 @@ msgid ""
 "systems. The Device Driver Manager will only list those devices that are "
 "supported. It will not list any other devices then mentioned above."
 msgstr ""
+"Menedżer sterowników jest narzędziem pomagającym instalować sterowniki "
+"innych firm. Obecnie jest możliwa instalacja sterowników Nvidia, ATI i "
+"Broadcom oraz jądra z obsługą PAE dla wielordzeniowych systemów 32-bitowych. "
+"Menedżer wyświetla jedynie listę instalowanych sterowników i żadne inne nie "
+"zostaną zainstalowane."
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
-msgstr ""
+msgstr "Ważne"
 
 #: en/help.html+html.body.div.p:14
 msgid ""
@@ -207,22 +232,25 @@ msgid ""
 "the repositories. Make sure you have an internet connection if you want to "
 "install the drivers."
 msgstr ""
+"Menedżer może zainstalować tylko sterowniki dostępne w repozytoriach. "
+"Upewnij się, że masz połączenie z siecią jeśli zamierzasz instalować "
+"sterowniki."
 
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
-msgstr ""
+msgstr "Polecenia"
 
 #: en/help.html+html.body.div.p:17
 msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
 msgstr ""
+"Jeśli wolisz instalować sterowniki w terminalu, możesz użyć następujących "
+"poleceń:"
 
 #: en/help.html+html.body.div.h3:21
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i ati"
-msgstr "Instaluj sterownik: %(drv)s"
+msgstr "# ddm -i ati"
 
 #: en/help.html+html.body.div.p:22
 msgid ""
@@ -231,12 +259,14 @@ msgid ""
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
 msgstr ""
+"Polecenie zainstaluje sterownik fglrx dla kart ATI. Karty ATI od wersji "
+"HD5000 są obsługiwane przez sterowniki fglrx. Wersje między 1000 a 5000 "
+"używają sterowników Radeon. Użyj \"ddm -p ati\"  w celu usunięcia "
+"sterowników z systemu."
 
 #: en/help.html+html.body.div.h3:24
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i nvidia"
-msgstr "Instaluj sterownik: %(drv)s"
+msgstr "# ddm -i nvidia"
 
 #: en/help.html+html.body.div.p:25
 msgid ""
@@ -244,36 +274,38 @@ msgid ""
 "select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
 "Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
 msgstr ""
+"Polecenie spowoduje wybranie właściwych sterowników Nvidia. W przypadku kart "
+"hybrydowych(zarówno Nvidia, jak i Intel) zostaną wybrane sterowniki "
+"Bumblebee.\n"
+"W celu usunięcia sterowników z systemu użyj:  \"ddm -p nvidia\""
 
 #: en/help.html+html.body.div.h3:27
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i open"
-msgstr "Instaluj sterownik: %(drv)s"
+msgstr "# ddm -i open"
 
 #: en/help.html+html.body.div.p:28
 msgid ""
 "You can use this command if you want to revert back to the open Nouveau "
 "drivers. It will remove any proprietary drivers from your system."
 msgstr ""
+"Możesz użyć tego polecenia aby wrócić do otwartych sterowników Nouveau. "
+"Zostaną usunięte z systemu wszystkie sterowniki własnościowe."
 
 #: en/help.html+html.body.div.h3:30
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i broadcom"
-msgstr "Instaluj sterownik: %(drv)s"
+msgstr "# ddm -i broadcom"
 
 #: en/help.html+html.body.div.p:31
 msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
 msgstr ""
+"Polecenie spowoduje instalację sterownika Broadcom dla urządzeń "
+"bezprzewodowych. Użycie \"ddm -p broadcom\"  spowoduje usunięcie sterowników."
 
 #: en/help.html+html.body.div.h3:33
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i pae"
-msgstr "Instaluj sterownik: %(drv)s"
+msgstr "# ddm -i pae"
 
 #: en/help.html+html.body.div.p:34
 msgid ""
@@ -281,570 +313,29 @@ msgid ""
 "OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
 "you cannot remove the kernel when you are currently booted into that kernel."
 msgstr ""
+"Polecenie zainstaluje jądro z obsługa PAE w systemach wieloprocesorowych 32-"
+"bitowych. Nota bene, usunięcie jądra jest niemożliwe po jego uruchomieniu."
 
 #: en/help.html+html.body.div.h3:36
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i fixbumblebee"
-msgstr "Instaluj sterownik: %(drv)s"
+msgstr "# ddm -i fixbumblebee"
 
 #: en/help.html+html.body.div.p:37
 msgid "This will try to fix a Bumblebee install."
-msgstr ""
+msgstr "Polecenie konfigurujące instalację Bumblebee."
 
 #: en/help.html+html.body.div.h2:39
 msgid "Log"
-msgstr ""
+msgstr "Log"
 
 #: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"
-msgstr ""
+msgstr "Plik: /var/log/ddm.log"
 
 #: en/help.html+html.body.div.p:41
 msgid ""
 "Please, attach your log file when you post an issue on our forum: <a href="
 "\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver ati"
-#~ msgstr "Instaluj sterownik: %(drv)s"
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver nvidia"
-#~ msgstr "Instaluj sterownik: %(drv)s"
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver open"
-#~ msgstr "Instaluj sterownik: %(drv)s"
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver pae"
-#~ msgstr "Instaluj sterownik: %(drv)s"
-
-#~ msgid "Driver"
-#~ msgstr "Sterownik"
-
-#~ msgid "ATI card found: %(card)s"
-#~ msgstr "Znaleziono kartę ATI: %(card)s"
-
-#~ msgid "ATI chip serie found: %(serie)s"
-#~ msgstr "Znaleziono nr serii  chipu ATI: %(serie)s"
-
-#~ msgid "ATI driver found: %(drv)s (%(status)s)"
-#~ msgstr "Znaleziono sterownik ATI: %(drv)s (%(status)s)"
-
-#~ msgid "Driver not installable: %(drv)s"
-#~ msgstr "Sterownik nieinstalowalny: %(drv)s"
-
-#~ msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
-#~ msgstr "Brak sterownika dla: %(card)s (%(man)s:%(serie)s)"
-
-#~ msgid "Switch to module: %(module)s"
-#~ msgstr "Zmień na moduł: %(module)s"
-
-#~ msgid "Driver installed: %(drv)s"
-#~ msgstr "Sterownik zainstalowany: %(drv)s"
-
-#~ msgid "Removing ATI drivers"
-#~ msgstr "Usuwanie sterownków ATI"
-
-#~ msgid "Driver removed: %(drv)s"
-#~ msgstr "Usunięty sterownik: %(drv)s"
-
-#~ msgid "ATI display driver"
-#~ msgstr "Sterownik graficzny ATI"
-
-#~ msgid "Intel display driver"
-#~ msgstr "Sterownik ekranowy Intel"
-
-#~ msgid "Radeon display driver"
-#~ msgstr "Sterownik graficzny Radeon"
-
-#~ msgid "Framebuffer display driver"
-#~ msgstr "Sterownik bufora ramki"
-
-#~ msgid "Vesa display driver"
-#~ msgstr "Sterownik graficzny Vesa"
-
-#~ msgid "Broadcom chip serie found: %(chip)s"
-#~ msgstr "Znaleziono czip Broadcom seria: %(chip)s"
-
-#~ msgid "Used wireless driver: %(drv)s"
-#~ msgstr "Użyty sterownik bezprzewodowy: %(drv)s"
-
-#~ msgid "Broadcom found: %(broadcom)s"
-#~ msgstr "Znaleziono Broadcom: %(broadcom)s"
-
-#~ msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
-#~ msgstr "Niewspierany chipset Broadcom lub kontroler ethernet:%(broadcom)s"
-
-#~ msgid "Broadcom chipset not found: %(chip)s"
-#~ msgstr "Nie znaleziono chipsetu Broadcom:%(chip)s"
-
-#~ msgid "Broadcom pci ID not found: %(id)s"
-#~ msgstr "Nie znaleziono PCI ID Broadcom: %(id)s"
-
-#~ msgid "Linux header name to install: %(header)s"
-#~ msgstr "Nazwa nagłówka linuxa do instalacji: %(header)s"
-
-#~ msgid "Download package: %(package)s"
-#~ msgstr "Pobierz pakiet: %(package)s"
-
-#~ msgid "Download package: %(drv)s"
-#~ msgstr "Pobierz pakiet: %(drv)s"
-
-#~ msgid "Install downloaded packages"
-#~ msgstr "Zainstaluj pobrane pakiety"
-
-#~ msgid "Reconfigure package: %(package)s"
-#~ msgstr "Rekonfiguruj pakiet: %(package)s"
-
-#~ msgid "Purge driver: %(drv)s"
-#~ msgstr "Usuń całkowicie: %(drv)s"
-
-#~ msgid "Done removing Broadcom drivers"
-#~ msgstr "Wykonane usuwanie sterowników Broadcom"
-
-#~ msgid "Used graphics driver: %(module)s"
-#~ msgstr "Sterownik graficzny: %(module)s"
-
-#~ msgid "No xorg.conf - create minimal xorg.conf"
-#~ msgstr "Brak xorg.conf - utworzony minimalny xorg.conf"
-
-#~ msgid "New xorg.conf written"
-#~ msgstr "Zapisany nowy xorg.conf"
-
-#~ msgid "New section appended to xorg.conf"
-#~ msgstr "Dodano nową sekcję do xorg.conf"
-
-#~ msgid "Via card found: %(card)s"
-#~ msgstr "Znaleziono kartę VIA: %(card)s"
-
-#~ msgid "Via driver found: %(drv)s (%(status)s)"
-#~ msgstr "Znaleziono sterownik Via: %(drv)s (%(status)s)"
-
-#~ msgid "Chrome display driver"
-#~ msgstr "Sterownik ekranowy Chrome"
-
-#~ msgid "Intel card found: %(card)s"
-#~ msgstr "Znaleziono kartę Intel: %(card)s"
-
-#~ msgid "Intel driver found: %(drv)s (%(status)s)"
-#~ msgstr "Znaleziono sterownik Intel: %(drv)s (%(status)s)"
-
-#~ msgid "Graphics"
-#~ msgstr "Grafika"
-
-#~ msgid "Wireless"
-#~ msgstr "Bezprzewodowy"
-
-#~ msgid "Kernel"
-#~ msgstr "Jądro"
-
-#~ msgid "Hardware"
-#~ msgstr "Sprzęt"
-
-#~ msgid "Activated driver"
-#~ msgstr "Sterownik aktywny"
-
-#~ msgid "Alternative drivers"
-#~ msgstr "Sterowniki alternatywne"
-
-#~ msgid "Current drivers are correct"
-#~ msgstr "Bieżący sterownik jest prawidłowy"
-
-#~ msgid "PAE already installed"
-#~ msgstr "PAE zainstalowano"
-
-#~ msgid "PAE support only for 32-bit systems"
-#~ msgstr "Wsparcie PAE tylko dla systemu 32 bitowego"
-
-#~ msgid "Activate"
-#~ msgstr "Aktywuj"
-
-#~ msgid "Version"
-#~ msgstr "Wersja"
-
-#~ msgid " (recommended)"
-#~ msgstr "(zalecany)"
-
-#~ msgid "Unknown driver"
-#~ msgstr "Nieznany sterownik"
-
-#~ msgid ""
-#~ "Unknown driver found.\n"
-#~ "\n"
-#~ "Please remove before installing drivers with DDM."
-#~ msgstr ""
-#~ "Nieznany sterownik.\n"
-#~ "\n"
-#~ "Usuń przed instalacją sterowników za pomocą DDM."
-
-#~ msgid "Driver activation"
-#~ msgstr "Aktywacja sterownika"
-
-#~ msgid ""
-#~ "Are you sure you want to install the following driver:\n"
-#~ "\n"
-#~ "%(drv)s"
-#~ msgstr ""
-#~ "Na pewno chcesz zainstalować ten sterownik:\n"
-#~ "\n"
-#~ "%(drv)s"
-
-#~ msgid "Locked"
-#~ msgstr "Zamknięty"
-
-#~ msgid ""
-#~ "Could not get lock on %(file)s.\n"
-#~ "\n"
-#~ "Close any programs locking the file and try again."
-#~ msgstr ""
-#~ "Inny program używa pliku: %(file)s.\n"
-#~ "\n"
-#~ "Zamknij programy używające plik i spróbuj powtórnie."
-
-#~ msgid "Driver installed"
-#~ msgstr "Sterownik zainstalowany"
-
-#~ msgid ""
-#~ "Driver installed: %(drv)s\n"
-#~ "\n"
-#~ "Drivers will be used on next boot.\n"
-#~ "Do you want to reboot now?"
-#~ msgstr ""
-#~ "Sterownik zainstalowany: %(drv)s\n"
-#~ "\n"
-#~ "Sterowniki będą użyte po ponownym uruchomieniu.\n"
-#~ "Czy chcesz uruchomić ponownie?"
-
-#~ msgid ""
-#~ "Could not get lock on %(file)s.\n"
-#~ "\n"
-#~ "Close any programs locking the file and restart DDM."
-#~ msgstr ""
-#~ "Inny program uzywa pliku %(file)s.\n"
-#~ "\n"
-#~ "Zamknij inne programy i zrestartuj DDM."
-
-#~ msgid "Checking your hardware..."
-#~ msgstr "Sprawdzanie sprzętu..."
-
-#~ msgid "Start automatic driver install"
-#~ msgstr "Start instalacji automatycznej"
-
-#~ msgid "Installed PAE: %(pae)s"
-#~ msgstr "Zainstalowane PAE: %(pae)s"
-
-#~ msgid "Multi-core support for 32-bit systems"
-#~ msgstr "Wsparcie wielordzeniowe dla systemu 32-bit"
-
-#~ msgid "Multi-core already installed: %(package)s"
-#~ msgstr "Wielordzeniowy zainstalowany: %(package)s"
-
-#~ msgid "Multi-core system running single-core kernel found"
-#~ msgstr "System wielordzeniowy i jednordzeniowe jądro"
-
-#~ msgid "PAE not installed"
-#~ msgstr "PAE niezainstalowane"
-
-#~ msgid "PAE kernel cannot be installed: single-core system"
-#~ msgstr "Nie można zainstalować jądra PAE - system jednordzeniowy"
-
-#~ msgid "Done installing PAE"
-#~ msgstr "Instalacja PAE zakończona"
-
-#~ msgid "PAE package to remove: %(package)s"
-#~ msgstr "Pakiet PAE do usunięcia: %(package)s"
-
-#~ msgid "Done removing PAE"
-#~ msgstr "Usunięto PAE"
-
-#~ msgid "Cannot remove PAE when running PAE"
-#~ msgstr "Nie można usunąc PAE - pakiet używany"
-
-#~ msgid "Update apt"
-#~ msgstr "Aktualizuj apt"
-
-#~ msgid "Install nvidia-detect"
-#~ msgstr "Instaluj nvidia-detect"
-
-#~ msgid "Cannot install nvidia-detect: abort"
-#~ msgstr "Nie można zainstalować nvidia-detect-zatrzymane"
-
-#, fuzzy
-#~ msgid "Nvidia card found: %(card)s"
-#~ msgstr "Znaleziono kartę VIA: %(card)s"
-
-#~ msgid "Nvidia driver found: %(drv)s (%(status)s)"
-#~ msgstr "Znaleziono sterownik Nvidia: %(drv)s (%(status)s)"
-
-#~ msgid "Removing Nvidia drivers"
-#~ msgstr "Usuń sterowniki Nvidia"
-
-#~ msgid "Nvidia display driver"
-#~ msgstr "Sterownik ekranowy Nvidia "
-
-#~ msgid "Nouveau display driver"
-#~ msgstr "Sterownik ekranowy Nouveau "
-
-#~ msgid "Write debug information to file: %(path)s"
-#~ msgstr "Zapisz info debugowania do pliku: %(path)s"
-
-#~ msgid "Machine info: %(info)s"
-#~ msgstr "Informacje o komputerze: %(info)s"
-
-#~ msgid "DDM version: %(version)s"
-#~ msgstr "Wersja DDM: %(version)s"
-
-#~ msgid ""
-#~ "apt-listbugs is installed and might interfere with driver installation"
-#~ msgstr "Zainstalowany apt-listbugs może ingerować w instalację sterownika"
-
-#~ msgid "Please enter your password"
-#~ msgstr "Proszę wpisać hasło"
-
-#, fuzzy
-#~ msgid "DDM - Kernel"
-#~ msgstr "DDM - Internet"
-
-#~ msgid "DDM - Live environment"
-#~ msgstr "DDM - środowisko live"
-
-#~ msgid ""
-#~ "DDM cannot run in a live environment\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "DDM nie uruchamia się w środowisku live\n"
-#~ "\n"
-#~ "Aby wymusić start użyj argumentu --force"
-
-#~ msgid "DDM - Debian based"
-#~ msgstr "DDM - oparte na Debianie"
-
-#~ msgid ""
-#~ "Cannot determine the base distribution (debian or ubuntu)\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "Nie można określić dystrybucji bazowej (debian czy ubuntu)\n"
-#~ "\n"
-#~ "Aby wymusić start użyj argumentu  --force"
-
-#~ msgid "DDM - Internet"
-#~ msgstr "DDM - Internet"
-
-#~ msgid ""
-#~ "You do not seem to have an internet connection\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "Zapewne nie masz połączenia z siecią\n"
-#~ "\n"
-#~ "Aby wymusić start użyj argumentu --force"
-
-#~ msgid "Configure ATI..."
-#~ msgstr "Konfiguracja ATI..."
-
-#~ msgid "Found module for driver %(drv)s: %(module)s"
-#~ msgstr "Znaleziono moduł sterownika %(drv)s: %(module)s"
-
-#~ msgid "Remove package: %(package)s"
-#~ msgstr "Usuń pakiet: %(package)s"
-
-#~ msgid "Install aborted: not in repository: %(repo)s"
-#~ msgstr "Instalacja przerwana-brak w repozytorium: %(repo)s"
-
-#~ msgid "Broadcom chip set found: %(chip)s"
-#~ msgstr "Znaleziono chipset Broadcom: %(chip)s"
-
-#~ msgid "Download package dependency: %(dep)s"
-#~ msgstr "Pobierz pakiety zależne: %(dep)s"
-
-#~ msgid "Modprobe b44, b43, b43legacy, ssb, brcmsmac"
-#~ msgstr "Modprobe b44, b43, b43legacy, ssb, brcmsmac"
-
-#~ msgid "Remove downloaded debs"
-#~ msgstr "Usuń pobrane .deb"
-
-#~ msgid "Blacklist b43, brcmsmac, bcma, ssb"
-#~ msgstr "Blacklist b43, brcmsmac, bcma, ssb"
-
-#~ msgid "Modprobe wl"
-#~ msgstr "Modprobe wl"
-
-#~ msgid "Modprobe b43legacy"
-#~ msgstr "Modprobe b43legacy"
-
-#~ msgid "Modprobe b43"
-#~ msgstr "Modprobe b43"
-
-#~ msgid "Modprobe brcmsmac"
-#~ msgstr "Modprobe b43"
-
-#~ msgid "Done installing Broadcom drivers"
-#~ msgstr "Instalacja sterowników Broadcom zakończona"
-
-#~ msgid "No Broadcom chip set found"
-#~ msgstr "Nie znaleziono chipsetu Broadcom"
-
-#~ msgid "Remove : %(file)s"
-#~ msgstr "Usuń:  %(file)s"
-
-#~ msgid "Check loaded driver / available driver: %(ldrv)s / %(adrv)s"
-#~ msgstr "Sprawdź załadowany/dostępny sterownik: %(ldrv)s / %(adrv)s"
-
-#~ msgid "Select current driver in list: %(drv)s"
-#~ msgstr "Wybierz sterownik z listy: %(drv)s"
-
-#~ msgid "Manufacturer image path: %(path)s"
-#~ msgstr "Ścieżka do logo producenta: %(path)s"
-
-#~ msgid "Driver to install: %(drv)s"
-#~ msgstr "Sterownik do instalacji: %(drv)s"
-
-#~ msgid "Used drivers: %(drv)s"
-#~ msgstr "Użyte sterowniki: %(drv)s"
-
-#~ msgid "Command to execute: %(cmd)s"
-#~ msgstr "Polecenie do wykonania: %(cmd)s"
-
-#~ msgid "Search for extensions: %(ext)s"
-#~ msgstr "Szukaj rozszerzeń: %(ext)s"
-
-#~ msgid "File with extension found: %(path)s"
-#~ msgstr "Znaleziono plik z rozszerzeniem: %(path)s"
-
-#~ msgid "File found: %(path)s"
-#~ msgstr "Znaleziono pli: %(path)s"
-
-#~ msgid "Resolution added: %(res)s"
-#~ msgstr "Dodano rozdzielczość: %(res)s"
-
-#~ msgid "Package is installed: %(package)s"
-#~ msgstr "Pakiet zainstalowany: %(package)s"
-
-#~ msgid "Package not installed: %(package)s"
-#~ msgstr "Pakiet niezainstalowany: %(package)s"
-
-#~ msgid "Package not found: %(package)s"
-#~ msgstr "Nie znaleziono pakietu: %(package)s"
-
-#~ msgid "Could not get status info for package: %(package)s"
-#~ msgstr "Nie można uzyskać info o statusie pakietu: %(package)s"
-
-#~ msgid "Remove package: %(drv)s"
-#~ msgstr "Usuń pakiet: %(drv)s"
-
-#~ msgid "Startup command: %(cmd)s"
-#~ msgstr "Polecenie startowe: %(cmd)s"
-
-#~ msgid "Configure Nvidia..."
-#~ msgstr "Konfiguracja Nvidia..."
-
-#~ msgid "Is package installed: %(package)s"
-#~ msgstr "Czy jest zainstalowany:  %(package)s"
-
-#~ msgid "Remove drivers before reinstallation: %(drv)s"
-#~ msgstr "Usuń sterowniki przed reinstalacją: %(drv)s"
-
-#~ msgid "Install drivers: %(drv)s"
-#~ msgstr "Instaluj sterowniki: %(drv)s"
-
-#~ msgid "Already a PAE system or AMD64"
-#~ msgstr "System PAE na AMD64"
-
-#~ msgid "Distribution: %(dist)s"
-#~ msgstr "Dystrybucja: %(dist)s"
-
-#~ msgid "Single-core kernel found: %(kernel)s"
-#~ msgstr "Znaleziono jądro jednordzeniowe: %(kernel)s"
-
-#~ msgid "PAE skipped: 64-bit system"
-#~ msgstr "PAE pominięte - system 64-bitowy"
-
-#~ msgid "PAE kernel install command: %(cmd)s"
-#~ msgstr "Polecenie instalacyjne jądra PAE: %(cmd)s"
-
-#~ msgid "Not running pae, continue removal"
-#~ msgstr "Kontynuuj usuwanie, PAE zatrzymane"
-
-#~ msgid "Create list store eval string: %(eval)s"
-#~ msgstr "Utwórz list store eval string: %(eval)s"
-
-#~ msgid "Clear existing list store"
-#~ msgstr "Wyczyść istniejącą list store"
-
-#~ msgid "First item is column name (multi-column list): %(iscolname)s"
-#~ msgstr ""
-#~ "Pierwsza pozycja jest nazwą kolumny (lista wielokolumnowa): %(iscolname)s"
-
-#~ msgid "First item is column name (single-column list): %(iscolname)s"
-#~ msgstr ""
-#~ "Pierwsza pozycja jest nazwą kolumny (lista jednokolumnowa): %(iscolname)s"
-
-#~ msgid "Create column names: %(cols)s"
-#~ msgstr "Utwórz nazwy kolumn: %(cols)s"
-
-#~ msgid "First item is column name: skip first item"
-#~ msgstr "Pierwsza pozycja jest nazwą kolumny - pomiń"
-
-#~ msgid "Add data to list store: %(data)s"
-#~ msgstr "Dodaj do gtk list store: %(data)s"
-
-#~ msgid "Add data to top of list store: %(totop)s"
-#~ msgstr "Dodaj na początek list store: %(totop)s"
-
-#~ msgid "Add data to bottom of list store: %(tobottom)s"
-#~ msgstr "Dodaj na koniec list store: %(tobottom)s"
-
-#~ msgid "Last visible column nr: %(colnr)d"
-#~ msgstr "Nr ostatniej widocznej kolumny: %(colnr)d"
-
-#~ msgid "Hide column nr: %(colnr)d"
-#~ msgstr "Ukryj kolumnę nr: %(colnr)d"
-
-#~ msgid "Create column: %(col)s"
-#~ msgstr "Utwórz kolumnę: %(col)s"
-
-#~ msgid "Check box found: add toggle function"
-#~ msgstr "Znaleziono pole wyboru - dodaj funkcję przełączania"
-
-#~ msgid "Last column fills treeview: %(colnr)d"
-#~ msgstr "Ostatnia kolumna wypełnia TreeView: %(colnr)d"
-
-#~ msgid "Column added: %(col)s"
-#~ msgstr "Dodano kolumnę: %(col)s"
-
-#~ msgid "Column already exists: %(col)s"
-#~ msgstr "Kolumna istnieje: %(col)s"
-
-#~ msgid "Add Liststore to Treeview"
-#~ msgstr "Dodaj Liststore do Treeview"
-
-#~ msgid "Scrolled to selected row: %(row)d"
-#~ msgstr "Przewinięte do wybranego wiersza: %(row)d"
-
-#~ msgid "Modules for %(manufacturer)s: %(modules)s"
-#~ msgstr "Moduły dla %(manufacturer)s: %(modules)s"
-
-#~ msgid "Blacklist %(module)s in: %(path)s"
-#~ msgstr "\"Blacklist\" %(module)s w: %(path)s"
-
-#~ msgid "Uncomment blacklist %(module)s in: %(path)s"
-#~ msgstr "Odznacz na \"blacklist\"%(module)s w: %(path)s"
-
-#~ msgid "Remove blacklist %(module)s from: %(path)s"
-#~ msgstr "Usuń \"blacklist\" %(module)s z: %(path)s"
-
-#~ msgid "Blacklist %(module)s found in: %(path)s"
-#~ msgstr "\"Blacklist\" %(module)s znaleziony: %(path)s"
-
-#~ msgid "Commented blacklist %(module)s found in: %(path)s"
-#~ msgstr "Zaznaczony \"blacklist\" moduł %(module)s w: %(path)s"
+"Proszę dołączyć plik logu wysyłając raport o błędzie na <a href=\"http://"
+"forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"

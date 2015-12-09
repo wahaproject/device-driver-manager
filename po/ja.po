@@ -1,56 +1,59 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Translators:
+# BALLOON a.k.a. Fu-sen., 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: ddm\n"
+"Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-20 13:46+0100\n"
-"PO-Revision-Date: 2014-06-26 09:36+0100\n"
-"Last-Translator: \n"
-"Language-Team: SolydXK <admin@solydxk.com>\n"
-"Language: Japanese\n"
+"POT-Creation-Date: 2015-12-07 10:57+0100\n"
+"PO-Revision-Date: 2015-11-28 02:15+0000\n"
+"Last-Translator: BALLOON a.k.a. Fu-sen.\n"
+"Language-Team: Japanese (http://www.transifex.com/solydxk/device-driver-"
+"manager/language/ja/)\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
-"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../usr/lib/ddm/ddm.py:51 ../usr/lib/ddm/main.py:28
+#: ../usr/lib/ddm/ddm.py:55 ../usr/lib/ddm/main.py:32
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
-msgstr ""
+msgstr "デバイスドライバーマネージャー"
 
-#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/ddm.py:211
+#: ../usr/lib/ddm/ddm.py:56 ../usr/lib/ddm/ddm.py:215
 msgid "Install"
-msgstr ""
+msgstr "インストール"
 
-#: ../usr/lib/ddm/ddm.py:53
+#: ../usr/lib/ddm/ddm.py:57
 msgid "Help"
-msgstr ""
+msgstr "ヘルプ"
 
-#: ../usr/lib/ddm/ddm.py:54
+#: ../usr/lib/ddm/ddm.py:58
 msgid "Quit"
-msgstr ""
+msgstr "終了"
 
-#: ../usr/lib/ddm/ddm.py:55
+#: ../usr/lib/ddm/ddm.py:59
 msgid "Use Backports"
-msgstr ""
+msgstr "Backports 使用"
 
-#: ../usr/lib/ddm/ddm.py:168
+#: ../usr/lib/ddm/ddm.py:172
 msgid "No internet connection"
-msgstr ""
+msgstr "インターネットに接続できません"
 
-#: ../usr/lib/ddm/ddm.py:169
+#: ../usr/lib/ddm/ddm.py:173
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
+"追加のソフトウェアをインストールするにはインターネット接続が必要です。\n"
+"インターネットの接続を行い、再度行って下さい。"
 
-#: ../usr/lib/ddm/ddm.py:176
+#: ../usr/lib/ddm/ddm.py:180
 msgid ""
 "You have selected to install drivers from the backports repository whenever "
 "they are available.\n"
@@ -61,127 +64,147 @@ msgid ""
 "\n"
 "Are you sure you want to continue?"
 msgstr ""
+"backports リボジトリから利用可能なドライバをインストールすることを選択しまし"
+"た。\n"
+"\n"
+"backports リポジトリを使用して、多くのソフトウェアを実行することができます"
+"が\n"
+"それは破損を含む大きなリスクがあります。\n"
+"\n"
+"本当に進めてもよろしいですか？"
 
-#: ../usr/lib/ddm/ddm.py:211
+#: ../usr/lib/ddm/ddm.py:215
 msgid "Device"
-msgstr ""
+msgstr "デバイス"
 
-#: ../usr/lib/ddm/ddm.py:227
+#: ../usr/lib/ddm/ddm.py:231
 msgid "Remove kernel"
-msgstr ""
+msgstr "カーネルの削除"
 
-#: ../usr/lib/ddm/ddm.py:228
+#: ../usr/lib/ddm/ddm.py:232
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:249
-#, fuzzy
-msgid "Hardware scan"
-msgstr "ハードウェア"
+"起動しているカーネルは削除する事ができません。\n"
+"他のカーネルで起動し、再度行って下さい。"
 
 #: ../usr/lib/ddm/ddm.py:253
+msgid "Hardware scan"
+msgstr "ハードウェアの検索"
+
+#: ../usr/lib/ddm/ddm.py:257
 msgid "There are no available drivers for your hardware:"
-msgstr ""
+msgstr "使用のハードウェアにあう使用可能なドライバが存在しません:"
 
-#: ../usr/lib/ddm/ddm.py:259
+#: ../usr/lib/ddm/ddm.py:263
 msgid "DDM did not find any supported hardware."
-msgstr ""
+msgstr "対応する任意のハードウェアを見つける事ができませんでした。"
 
-#: ../usr/lib/ddm/ddm.py:358
+#: ../usr/lib/ddm/ddm.py:362
 msgid "ATI FirePro/Gl card found"
-msgstr ""
+msgstr "ATI FirePro/Gl カードが見つかりました"
 
-#: ../usr/lib/ddm/ddm.py:359
+#: ../usr/lib/ddm/ddm.py:363
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
 "\n"
 "Proceed at your own risk."
 msgstr ""
+"ATI FirePro/GL カードのプロプライエタリドライバをインストールすると、システム"
+"が起動できなくなる可能性があります。\n"
+"\n"
+"ご自身の責任で行ってください。"
 
-#: ../usr/lib/ddm/ddm.py:529
+#: ../usr/lib/ddm/ddm.py:533
 msgid "PAE capable system"
 msgstr "PAE が使用できるシステム"
 
-#: ../usr/lib/ddm/ddm.py:642
-msgid "Run as root."
-msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:644
-msgid "Wrong arguments passed to ddm."
-msgstr ""
-
 #: ../usr/lib/ddm/ddm.py:646
-msgid "There are no driver available."
-msgstr ""
+msgid "Run as root."
+msgstr "root で実行"
 
 #: ../usr/lib/ddm/ddm.py:648
-msgid "The driver cannot be found in repository."
-msgstr ""
+msgid "Wrong arguments passed to ddm."
+msgstr "誤った引用を受け取りました。"
 
 #: ../usr/lib/ddm/ddm.py:650
+msgid "There are no driver available."
+msgstr "使用可能なドライバが存在しません。"
+
+#: ../usr/lib/ddm/ddm.py:652
+msgid "The driver cannot be found in repository."
+msgstr "リボジトリからドライバーを見つけることができませんでした。"
+
+#: ../usr/lib/ddm/ddm.py:654
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:652
-msgid "DDM cannot purge the driver."
-msgstr ""
-
-#: ../usr/lib/ddm/ddm.py:654
-#, fuzzy
-msgid "This card is not supported."
-msgstr "ATI チップシリーズはサポートされていません: %(serie)d"
+"ダウンロードエラー。\n"
+"インターネット接続を確認して下さい。"
 
 #: ../usr/lib/ddm/ddm.py:656
+msgid "DDM cannot purge the driver."
+msgstr "ドライバーを削除する事ができません。"
+
+#: ../usr/lib/ddm/ddm.py:658
+msgid "This card is not supported."
+msgstr "このカードは対応していません。"
+
+#: ../usr/lib/ddm/ddm.py:660
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
+"インストール中にエラーが発生しました。\n"
+"ターミナルより 'sudo apt-get -f install' を実行して下さい。\n"
+"サポートのため、フォーラムをご覧下さい: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:661
+#: ../usr/lib/ddm/ddm.py:665
 msgid "The software has been successfully installed."
-msgstr ""
+msgstr "ソフトウェアのインストールを行いました。"
 
-#: ../usr/lib/ddm/ddm.py:662
+#: ../usr/lib/ddm/ddm.py:666
 msgid "You will need to restart your system."
-msgstr ""
+msgstr "再起動を行う必要があります。"
 
-#: ../usr/lib/ddm/main.py:29
+#: ../usr/lib/ddm/main.py:33
 msgid ""
 "Device Driver Manager helps to install proprietary drivers for your "
 "hardware.\n"
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
 msgstr ""
+"デバイスドライバマネージャーは、ハードウェアに独自のドライバをインストールす"
+"るのに役立ちます。\n"
+"実際にそれらを必要と確信している場合にのみ、独自のドライバをインストールして"
+"下さい。\n"
+"通常はオープンなドライバで十分使用可能です。"
 
-#: ../usr/lib/ddm/main.py:51
-#, fuzzy
+#: ../usr/lib/ddm/main.py:55
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
 msgstr ""
-"DDM を Live environment で動作することができません\n"
-"\n"
-"強制開始する場合は --force を使用して下さい"
+"デバイスドライバマネージャーは、ライブ環境で起動することはできません\n"
+"ライブ環境で起動したい場合は --force 引数で使用することができます"
 
-#: ../usr/lib/ddm/main.py:78
+#: ../usr/lib/ddm/main.py:82
 msgid "Unexpected error"
-msgstr ""
+msgstr "予想外のエラー"
 
-#: ../usr/lib/ddm/main.py:79
+#: ../usr/lib/ddm/main.py:83
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
-msgstr ""
+msgstr "予期しないエラーで失敗しました。バグレポートを提出してください！"
 
 #: en/help.html+html.body.h1:8
 msgid "Device Driver Manager Help"
-msgstr ""
+msgstr "デバイスドライバーマネージャー ヘルプ"
 
 #: en/help.html+html.body.div.h2:10
 msgid "Description"
@@ -195,10 +218,15 @@ msgid ""
 "systems. The Device Driver Manager will only list those devices that are "
 "supported. It will not list any other devices then mentioned above."
 msgstr ""
+"デバイスドライバマネージャは、サードパーティ製のハードウェアドライバをインス"
+"トールするユーザーを支援するツールです。現在 Nvidia・ATI・Broadcom のドライバ"
+"がインストールされ、マルチコア32ビットシステム用のPAEカーネルをインストールす"
+"る事が可能です。デバイスドライバマネージャのみがサポートされているデバイスが"
+"一覧表示されます。前述する以外のデバイスは一覧に表示しません。"
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
-msgstr ""
+msgstr "重要"
 
 #: en/help.html+html.body.div.p:14
 msgid ""
@@ -206,22 +234,25 @@ msgid ""
 "the repositories. Make sure you have an internet connection if you want to "
 "install the drivers."
 msgstr ""
+"デバイスドライバマネージャーは、リポジトリから利用可能なドライバをインストー"
+"ルします。ドライバをインストールする場合は、インターネットに接続していること"
+"をご確認下さい。"
 
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
-msgstr ""
+msgstr "コマンド"
 
 #: en/help.html+html.body.div.p:17
 msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
 msgstr ""
+"ターミナルからドライバをインストールしたい場合は、次のコマンドで行う事ができ"
+"ます:"
 
 #: en/help.html+html.body.div.h3:21
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i ati"
-msgstr "ドライバーをインストール: %(drv)s"
+msgstr "# ddm -i ati"
 
 #: en/help.html+html.body.div.p:22
 msgid ""
@@ -230,12 +261,14 @@ msgid ""
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
 msgstr ""
+"これは ATI グラフィックカードの fglrx ドライバをインストールします。バージョ"
+"ン HD5000 以上の ATI カードは fglrx ドライバーによってサポートされています。 "
+"1000〜5000 のバージョンでは、Radeon ドライバを使用します。システムからドライ"
+"バを削除するには、\"ddm -p ati\" を使用して下さい。"
 
 #: en/help.html+html.body.div.h3:24
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i nvidia"
-msgstr "ドライバーをインストール: %(drv)s"
+msgstr "# ddm -i nvidia"
 
 #: en/help.html+html.body.div.p:25
 msgid ""
@@ -243,36 +276,38 @@ msgid ""
 "select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
 "Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
 msgstr ""
+"Nvidia グラフィックカードのドライバを選択します。それはハイブリッドカード"
+"（Nvidia・intel 両方）を持っている場合にはBumblebee ドライバを選択します。シ"
+"ステムからドライバを削除するには。\"ddm -p nvidia\" を使用して下さい。"
 
 #: en/help.html+html.body.div.h3:27
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i open"
-msgstr "ドライバーをインストール: %(drv)s"
+msgstr "# ddm -i open"
 
 #: en/help.html+html.body.div.p:28
 msgid ""
 "You can use this command if you want to revert back to the open Nouveau "
 "drivers. It will remove any proprietary drivers from your system."
 msgstr ""
+"Nouveau ドライバに戻したい場合は、次のコマンドを使用して下さい。システムから"
+"任意のプロプライエタリドライバを削除する事ができます。"
 
 #: en/help.html+html.body.div.h3:30
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i broadcom"
-msgstr "ドライバーをインストール: %(drv)s"
+msgstr "# ddm -i broadcom"
 
 #: en/help.html+html.body.div.p:31
 msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
 msgstr ""
+"このコマンドは、ワイヤレス Broadcom アダプタ用のドライバをインストールしま"
+"す。システムからドライバを削除するには、\"ddm -p broadcom\" を使用してくださ"
+"い。"
 
 #: en/help.html+html.body.div.h3:33
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i pae"
-msgstr "ドライバーをインストール: %(drv)s"
+msgstr "# ddm -i pae"
 
 #: en/help.html+html.body.div.p:34
 msgid ""
@@ -280,381 +315,31 @@ msgid ""
 "OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
 "you cannot remove the kernel when you are currently booted into that kernel."
 msgstr ""
+"32 ビット OS を実行しているマルチプロセッサシステム上で PAE カーネルをインス"
+"トールします。お使いのシステムから PAE カーネルを削除するには、\"ddm -p pae"
+"\" を使用して下さい。起動で使用しているカーネルは削除できないことにご注意下さ"
+"い。"
 
 #: en/help.html+html.body.div.h3:36
-#, fuzzy
-#| msgid "Install driver: %(drv)s"
 msgid "# ddm -i fixbumblebee"
-msgstr "ドライバーをインストール: %(drv)s"
+msgstr "# ddm -i fixbumblebee"
 
 #: en/help.html+html.body.div.p:37
 msgid "This will try to fix a Bumblebee install."
-msgstr ""
+msgstr "Bumblebee インストールの修正を試みます。"
 
 #: en/help.html+html.body.div.h2:39
 msgid "Log"
-msgstr ""
+msgstr "ログ"
 
 #: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"
-msgstr ""
+msgstr "ファイル: /var/log/ddm.log"
 
 #: en/help.html+html.body.div.p:41
 msgid ""
 "Please, attach your log file when you post an issue on our forum: <a href="
 "\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver ati"
-#~ msgstr "ドライバーをインストール: %(drv)s"
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver nvidia"
-#~ msgstr "ドライバーをインストール: %(drv)s"
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver open"
-#~ msgstr "ドライバーをインストール: %(drv)s"
-
-#, fuzzy
-#~| msgid "Install driver: %(drv)s"
-#~ msgid "# install-driver pae"
-#~ msgstr "ドライバーをインストール: %(drv)s"
-
-#~ msgid "Driver"
-#~ msgstr "ドライバー"
-
-#~ msgid "ATI card found: %(card)s"
-#~ msgstr "ATI カードが見つかりました: %(card)s"
-
-#~ msgid "ATI chip serie found: %(serie)s"
-#~ msgstr "ATI チップシリーズが見つかりました: %(serie)s"
-
-#~ msgid "ATI driver found: %(drv)s (%(status)s)"
-#~ msgstr "ATI ドライバーが見つかりました: %(drv)s (%(status)s)"
-
-#~ msgid "Driver not installable: %(drv)s"
-#~ msgstr "ドライバーはインストールされていません: %(drv)s"
-
-#~ msgid "No driver found for: %(card)s (%(man)s:%(serie)s)"
-#~ msgstr "ドライバーが見つかりません: %(card)s (%(man)s:%(serie)s)"
-
-#~ msgid "Switch to module: %(module)s"
-#~ msgstr "モジュールを切り替え: %(module)s"
-
-#~ msgid "Driver installed: %(drv)s"
-#~ msgstr "ドライバーをインストールしました: %(drv)s"
-
-#~ msgid "Removing ATI drivers"
-#~ msgstr "ATI ドライバーの削除"
-
-#~ msgid "Driver removed: %(drv)s"
-#~ msgstr "ドライバーを削除しました: %(drv)s"
-
-#~ msgid "ATI display driver"
-#~ msgstr "ATI ディスプレイドライバー"
-
-#~ msgid "Intel display driver"
-#~ msgstr "Intel ディスプレイドライバー"
-
-#~ msgid "Radeon display driver"
-#~ msgstr "Radeon ディスプレイドライバー"
-
-#~ msgid "Framebuffer display driver"
-#~ msgstr "フレームバッファディスプレイドライバー"
-
-#~ msgid "Vesa display driver"
-#~ msgstr "VESA ディスプレイドライバー"
-
-#~ msgid "Broadcom chip serie found: %(chip)s"
-#~ msgstr "Broadcom チップシリーズが見つかりました: %(chip)s"
-
-#~ msgid "Used wireless driver: %(drv)s"
-#~ msgstr "無線ドライバーを使用しました: %(drv)s"
-
-#~ msgid "Broadcom found: %(broadcom)s"
-#~ msgstr "Broadcom を見つけました: %(broadcom)s"
-
-#~ msgid "Broadcom chipset not supported or ethernet controller: %(broadcom)s"
-#~ msgstr ""
-#~ "Broadcom チップセットはサポートされていませんまたは有線 LAN コントローラで"
-#~ "す: %(broadcom)s"
-
-#~ msgid "Broadcom chipset not found: %(chip)s"
-#~ msgstr "Broadcom チップセットが見つかりません: %(chip)s"
-
-#~ msgid "Broadcom pci ID not found: %(id)s"
-#~ msgstr "Broadcom PCI ID が見つかりません: %(id)s"
-
-#~ msgid "Linux header name to install: %(header)s"
-#~ msgstr "Linux ヘッダーへインストール: %(header)s"
-
-#~ msgid "Download package: %(package)s"
-#~ msgstr "パッケージをダウンロード: %(package)s"
-
-#~ msgid "Download package: %(drv)s"
-#~ msgstr "パッケージをダウンロード: %(drv)s"
-
-#~ msgid "Install downloaded packages"
-#~ msgstr "ダウンロードしたパッケージのインストール"
-
-#~ msgid "Reconfigure package: %(package)s"
-#~ msgstr "パッケージの再設定: %(package)s"
-
-#~ msgid "Purge driver: %(drv)s"
-#~ msgstr "ドライバーの排除: %(drv)s"
-
-#~ msgid "Done removing Broadcom drivers"
-#~ msgstr "Broadcom ドライバーの削除を行いました"
-
-#~ msgid "Used graphics driver: %(module)s"
-#~ msgstr "使用しているグラフィックドライバー: %(module)s"
-
-#~ msgid "No xorg.conf - create minimal xorg.conf"
-#~ msgstr "xorg.conf なし - 最小限の xorg.conf を作成します"
-
-#~ msgid "New xorg.conf written"
-#~ msgstr "新たな xorg.conf の書き込み"
-
-#~ msgid "New section appended to xorg.conf"
-#~ msgstr "新しいセクションを xorg.conf に追加します"
-
-#~ msgid "Via card found: %(card)s"
-#~ msgstr "カードが見つかりました: %(card)s"
-
-#~ msgid "Via driver found: %(drv)s (%(status)s)"
-#~ msgstr "ドライバーが見つかりました: %(drv)s (%(status)s)"
-
-#~ msgid "Chrome display driver"
-#~ msgstr "Chrome ディスプレイドライバー"
-
-#~ msgid "Intel card found: %(card)s"
-#~ msgstr "Intel カードが見つかりました: %(card)s"
-
-#~ msgid "Intel driver found: %(drv)s (%(status)s)"
-#~ msgstr "Intel ドライバが見つかりました: %(drv)s (%(status)s)"
-
-#~ msgid "Graphics"
-#~ msgstr "グラフィック"
-
-#~ msgid "Wireless"
-#~ msgstr "無線"
-
-#~ msgid "Kernel"
-#~ msgstr "カーネル"
-
-#~ msgid "Hardware"
-#~ msgstr "ハードウェア"
-
-#~ msgid "Activated driver"
-#~ msgstr "稼働しているドライバー"
-
-#~ msgid "Alternative drivers"
-#~ msgstr "代わりのドライバー"
-
-#~ msgid "Current drivers are correct"
-#~ msgstr "現在のドライバーを修正"
-
-#~ msgid "PAE already installed"
-#~ msgstr "PAE はすでにインストールされています"
-
-#~ msgid "PAE support only for 32-bit systems"
-#~ msgstr "PAE 対応は 32 ビットシステムのみです"
-
-#~ msgid "Activate"
-#~ msgstr "稼働"
-
-#~ msgid "Version"
-#~ msgstr "バージョン"
-
-#~ msgid " (recommended)"
-#~ msgstr " (推奨)"
-
-#~ msgid "Unknown driver"
-#~ msgstr "不明なドライバー"
-
-#~ msgid ""
-#~ "Unknown driver found.\n"
-#~ "\n"
-#~ "Please remove before installing drivers with DDM."
-#~ msgstr ""
-#~ "不明なドライバーが見つかりました\n"
-#~ "\n"
-#~ "インストールの前に取り除いて下さい。"
-
-#~ msgid "Driver activation"
-#~ msgstr "ドライバーの有効化"
-
-#~ msgid ""
-#~ "Are you sure you want to install the following driver:\n"
-#~ "\n"
-#~ "%(drv)s"
-#~ msgstr ""
-#~ "以下のドライバーをインストールしますか？:\n"
-#~ "\n"
-#~ "%(drv)s"
-
-#~ msgid "Locked"
-#~ msgstr "ロック"
-
-#~ msgid ""
-#~ "Could not get lock on %(file)s.\n"
-#~ "\n"
-#~ "Close any programs locking the file and try again."
-#~ msgstr ""
-#~ "%(file)s がロックされています。\n"
-#~ "\n"
-#~ "ロックしているプログラムを閉じ、再度行って下さい。"
-
-#~ msgid "Driver installed"
-#~ msgstr "ドライバーをインストールしました"
-
-#~ msgid ""
-#~ "Driver installed: %(drv)s\n"
-#~ "\n"
-#~ "Drivers will be used on next boot.\n"
-#~ "Do you want to reboot now?"
-#~ msgstr ""
-#~ "ドライバーをインストールしました: %(drv)s\n"
-#~ "\n"
-#~ "ドライバーは再起動後有効になります。\n"
-#~ "再起動しますか？"
-
-#~ msgid ""
-#~ "Could not get lock on %(file)s.\n"
-#~ "\n"
-#~ "Close any programs locking the file and restart DDM."
-#~ msgstr ""
-#~ "%(file)s がロックされています。\n"
-#~ "\n"
-#~ "ロックしているプログラムを閉じ、DDM を再起動して下さい。"
-
-#~ msgid "Checking your hardware..."
-#~ msgstr "ハードウェアを確認中..."
-
-#~ msgid "Start automatic driver install"
-#~ msgstr "自動ドライバーインストールの開始"
-
-#~ msgid "Installed PAE: %(pae)s"
-#~ msgstr "PAE をインストールしました: %(pae)s"
-
-#~ msgid "Multi-core support for 32-bit systems"
-#~ msgstr "Multi-core の対応は 32 ビットシステムです"
-
-#~ msgid "Multi-core already installed: %(package)s"
-#~ msgstr "Multi-core すでにイントールされています: %(package)s"
-
-#~ msgid "PAE not installed"
-#~ msgstr "PAE をインストールできません"
-
-#~ msgid "PAE kernel cannot be installed: single-core system"
-#~ msgstr "PAR カーネルをインストールできません: シングルコアシステム"
-
-#~ msgid "Done installing PAE"
-#~ msgstr "PAE インストール完了"
-
-#~ msgid "PAE package to remove: %(package)s"
-#~ msgstr "PAE パッケージの削除: %(package)s"
-
-#~ msgid "Done removing PAE"
-#~ msgstr "PAE を削除しました"
-
-#~ msgid "Cannot remove PAE when running PAE"
-#~ msgstr "PAE で動作しているため、PAE を削除できません"
-
-#~ msgid "Update apt"
-#~ msgstr "apt の更新"
-
-#~ msgid "Install nvidia-detect"
-#~ msgstr "nvidia-detect インストール"
-
-#~ msgid "Cannot install nvidia-detect: abort"
-#~ msgstr "nvidia-detect をインストールできません: 中止"
-
-#~ msgid "Nvidia card found: %(card)s"
-#~ msgstr "Nvidia カードが見つかりました: %(card)s"
-
-#~ msgid "Nvidia driver found: %(drv)s (%(status)s)"
-#~ msgstr "Nvidia ドライバーが見つかりました: %(drv)s (%(status)s)"
-
-#~ msgid "Removing Nvidia drivers"
-#~ msgstr "Nvidia ドライバーの削除中"
-
-#~ msgid "Nvidia display driver"
-#~ msgstr "Nvidia ディスプレイドライバー"
-
-#~ msgid "Nouveau display driver"
-#~ msgstr "Nouveau ディスプレイドライバー"
-
-#~ msgid "Write debug information to file: %(path)s"
-#~ msgstr "デバック情報をファイルに書込: %(path)s"
-
-#~ msgid "Machine info: %(info)s"
-#~ msgstr "マシン情報: %(info)s"
-
-#~ msgid "DDM version: %(version)s"
-#~ msgstr "DDM バージョン: %(version)s"
-
-#~ msgid ""
-#~ "apt-listbugs is installed and might interfere with driver installation"
-#~ msgstr ""
-#~ "apt-listbug インストールされ、ドライバーインストールに影響があるかもしれま"
-#~ "せん"
-
-#~ msgid "Please enter your password"
-#~ msgstr "パスワードを入力して下さい"
-
-#~ msgid "DDM - Kernel"
-#~ msgstr "DDM - Kernel"
-
-#~ msgid ""
-#~ "You do not have the latest kernel installed.\n"
-#~ "\n"
-#~ "Use the Update Manager to update your system."
-#~ msgstr ""
-#~ "最新カーネルはインストールされていません\n"
-#~ "\n"
-#~ "アップデートマネージャーでシステムを更新して下さい。"
-
-#~ msgid "DDM - Live environment"
-#~ msgstr "DDM - Live environment"
-
-#~ msgid ""
-#~ "DDM cannot run in a live environment\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "DDM を Live environment で動作することができません\n"
-#~ "\n"
-#~ "強制開始する場合は --force を使用して下さい"
-
-#~ msgid "DDM - Debian based"
-#~ msgstr "DDM - Debian ベース"
-
-#~ msgid ""
-#~ "Cannot determine the base distribution (debian or ubuntu)\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "ディストリビューションベースを決定できません (Debian・Ubuntu)\n"
-#~ "\n"
-#~ "強制開始する場合は --force を使用して下さい"
-
-#~ msgid "DDM - Internet"
-#~ msgstr "DDM - インターネット"
-
-#~ msgid ""
-#~ "You do not seem to have an internet connection\n"
-#~ "\n"
-#~ "To force start, use the --force argument"
-#~ msgstr ""
-#~ "インターネットに接続していません\n"
-#~ "\n"
-#~ "強制開始する場合は --force を使用して下さい"
-
-#~ msgid "Install aborted: not in repository: %(repo)s"
-#~ msgstr "インストールを中断: リボジトリにありません: %(repo)s"
+"フォーラムに問題を投稿する場合は、ログファイルを添付して下さい: <a href="
+"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
