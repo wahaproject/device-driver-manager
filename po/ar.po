@@ -40,7 +40,7 @@ msgstr "خروج"
 
 #: ../usr/lib/ddm/ddm.py:59
 msgid "Use Backports"
-msgstr ""
+msgstr "استخدم مستودع باكبورتس"
 
 #: ../usr/lib/ddm/ddm.py:172
 msgid "No internet connection"
@@ -65,6 +65,12 @@ msgid ""
 "\n"
 "Are you sure you want to continue?"
 msgstr ""
+"لقد قمت بتحديد تثبيت التعريفات من مستودع باكبورتس متى توفرت.\n"
+"\n"
+"رغم أنه يمكنك تشغيل برامج أكثر حداثة باستخدام مستودع باكبورتس\n"
+"إلّا أنه قد تزيد من إحتمالية وقوع النظام بفعل ذلك.\n"
+"\n"
+"هل أنت متأكد من أنك تريد المتابعة؟"
 
 #: ../usr/lib/ddm/ddm.py:215
 msgid "Device"
@@ -96,7 +102,7 @@ msgstr "لم يعثر مدير التعريف على أي عتاد مدعوم."
 
 #: ../usr/lib/ddm/ddm.py:362
 msgid "ATI FirePro/Gl card found"
-msgstr ""
+msgstr "وجِدت بطاقة ATI FirePro/Gl"
 
 #: ../usr/lib/ddm/ddm.py:363
 msgid ""
@@ -105,6 +111,9 @@ msgid ""
 "\n"
 "Proceed at your own risk."
 msgstr ""
+"تثبيت التعريف المغلق الخاص ببطاقة ATI FirePro/Gl قد يجعل نظامك غير قابل للإقلاع.\n"
+"\n"
+"المتابعة على مسؤوليتك."
 
 #: ../usr/lib/ddm/ddm.py:533
 msgid "PAE capable system"
@@ -112,34 +121,35 @@ msgstr "النظام يدعم PAE"
 
 #: ../usr/lib/ddm/ddm.py:646
 msgid "Run as root."
-msgstr ""
+msgstr "شغِّل كجذر."
 
 #: ../usr/lib/ddm/ddm.py:648
 msgid "Wrong arguments passed to ddm."
-msgstr ""
+msgstr "معاملات خاطئة مرِّرت لـ ddm."
 
 #: ../usr/lib/ddm/ddm.py:650
 msgid "There are no driver available."
-msgstr ""
+msgstr ".لا يوجد أي تعريف متاح"
 
 #: ../usr/lib/ddm/ddm.py:652
 msgid "The driver cannot be found in repository."
-msgstr ""
+msgstr "تعذّر العثور على تعريف في المستودع"
 
 #: ../usr/lib/ddm/ddm.py:654
-#, fuzzy
 msgid ""
 "Download error.\n"
 "Check your internet connection."
-msgstr "لا يوجد اتصال بالإنترنت"
+msgstr ""
+"خطأ في التنزيل.\n"
+"تحقق من اتصال الإنترنت الخاص بك."
 
 #: ../usr/lib/ddm/ddm.py:656
 msgid "DDM cannot purge the driver."
-msgstr ""
+msgstr ".لا يمكن لبرنامج الإعداد إزالة التعريف"
 
 #: ../usr/lib/ddm/ddm.py:658
 msgid "This card is not supported."
-msgstr ""
+msgstr "هذه البطاقة غير مدعومة."
 
 #: ../usr/lib/ddm/ddm.py:660
 msgid ""
@@ -148,7 +158,7 @@ msgid ""
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
 "حدث خطأ أثناء التثبيت.\n"
-"من فضلك، شغّل 'sudo apt-get -f install' في الطرفية.\n"
+"من فضلك، شغّل 'sudo apt-get -f install' على الطرفية.\n"
 "يمكنك زيارة منتدانا للحصول على الدعم: http://forums.solydxk.com"
 
 #: ../usr/lib/ddm/ddm.py:665
@@ -166,6 +176,10 @@ msgid ""
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
 msgstr ""
+"يساعدك مدير تعريفات الأجهزة على تثبيت التعريف الخاص بالمصنع "
+"لعتادك.\n"
+"ثبّت التعريف الخاص بالمصنع فقط إذا كنت متأكد من حاجتك له.\n"
+"غالبا ما يكون التعريف المفتوح كافيا."
 
 #: ../usr/lib/ddm/main.py:55
 msgid ""
@@ -184,16 +198,15 @@ msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
 msgstr ""
+"فشل مدير تعريف الأجهزة مع الخطأ غير المتوقع التالي. يرجى تقديم تقرير عن وجود علّة!"
 
 #: en/help.html+html.body.h1:8
-#, fuzzy
-#| msgid "Device Driver Manager"
 msgid "Device Driver Manager Help"
-msgstr "مدير تعريف الأجهزة"
+msgstr "مساعدة مدير تعريف الأجهزة"
 
 #: en/help.html+html.body.div.h2:10
 msgid "Description"
-msgstr ""
+msgstr "الوصف"
 
 #: en/help.html+html.body.div.p:11
 msgid ""
@@ -201,12 +214,16 @@ msgid ""
 "hardware drivers. Currently Nvidia, ATI and Broadcom drivers can be "
 "installed and allows to install the PAE kernel for multi-core 32-bit "
 "systems. The Device Driver Manager will only list those devices that are "
-"supported. It will not list any other devices then mentioned above."
+"supported. It will not list any other devices than mentioned above."
 msgstr ""
+"مدير تعريف الأجهزة هو أداة تساعد المستخدمين على تثبيت تعريفات العتاد من جهات أخرى. "
+"حاليا يمكنك من تثبيت تعريفات Nvidia، ATI وBroadcom ويسمح بتثبيت نواة PAE "
+"للأنظمة متعددة الأنوية على معمارية 32 بت. سيقوم مدير تعريف الأجهزة بعرض الأجهزة المدعومة فقط."
+"لذا لن يدرج أية أجهزة أخرى غير المذكورة أعلاه."
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
-msgstr ""
+msgstr "هام"
 
 #: en/help.html+html.body.div.p:14
 msgid ""
@@ -215,19 +232,22 @@ msgid ""
 "install the drivers."
 msgstr ""
 
+"يمكن لمدير تعريف الأجهزة أن يثبت التعريفات المتوفرة بالمستودعات فقط. "
+"تأكد أن لديك اتصالا بالإنترنت إذا كنت تريد تثبيت التعريفات."
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
-msgstr ""
+msgstr "تعليمات"
 
 #: en/help.html+html.body.div.p:17
 msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
 msgstr ""
+"إذا كنت تفضل تثبيت التعريفات عبر الطرفية يمكنك استخدام التعليمات التالية:"
 
 #: en/help.html+html.body.div.h3:21
 msgid "# ddm -i ati"
-msgstr ""
+msgstr "# ddm -i ati"
 
 #: en/help.html+html.body.div.p:22
 msgid ""
@@ -236,10 +256,14 @@ msgid ""
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
 msgstr ""
+"هذا سيثبت تعريفات fglrx لبطاقة ATI الخاصة بك. بطاقات ATI "
+"من الإصدار HD 5000 فما فوق مدعومة من طرف تعريف fglrx. الإصدارات "
+"من 1000 إلى 5000 ستستخدم تعريفات Radeon. استخدم \"ddm -p ati\" لإزالة "
+"التعريف من نظامك."
 
 #: en/help.html+html.body.div.h3:24
 msgid "# ddm -i nvidia"
-msgstr ""
+msgstr "# ddm -i nvidia"
 
 #: en/help.html+html.body.div.p:25
 msgid ""
@@ -247,30 +271,37 @@ msgid ""
 "select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
 "Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
 msgstr ""
+"سيؤدي هذا إلى تحديد التعريف الصحيح لبطاقة الرسوميات أنفيديا الخاصة بك. "
+"وسيقوم بتحديد تعريف Bumblebee في حال ما إذا كانت لديك بطاقة رسومية هجينة "
+"(أنفيديا و إنتل معا). استخدم \"ddm -p nvidia\" لإزالة التعريف من نظامك."
 
 #: en/help.html+html.body.div.h3:27
 msgid "# ddm -i open"
-msgstr ""
+msgstr "# ddm -i open"
 
 #: en/help.html+html.body.div.p:28
 msgid ""
 "You can use this command if you want to revert back to the open Nouveau "
 "drivers. It will remove any proprietary drivers from your system."
 msgstr ""
+"يمكنك إستخدام هذه التعليمة إذا أردت العودة إلى التعريف المفتوح (Nouveau). "
+"هذا سيزيل أي تعريف خاص بالمصنع من نظامك."
 
 #: en/help.html+html.body.div.h3:30
 msgid "# ddm -i broadcom"
-msgstr ""
+msgstr "# ddm -i broadcom"
 
 #: en/help.html+html.body.div.p:31
 msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
 msgstr ""
+"هذا الأمر سيقوم بتثبيت التعريف المناسب لبطاقة الشبكة اللاسلكية Broadcom "
+"الخاصة بك. استخدم \"ddm -p broadcom\" لإزالة التعريف من نظامك."
 
 #: en/help.html+html.body.div.h3:33
 msgid "# ddm -i pae"
-msgstr ""
+msgstr "# ddm -i pae"
 
 #: en/help.html+html.body.div.p:34
 msgid ""
@@ -278,28 +309,30 @@ msgid ""
 "OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
 "you cannot remove the kernel when you are currently booted into that kernel."
 msgstr ""
+"سيقوم هذا بتثبيت نواة PAE للأنظمة متعددة الأنوية على معمارية 32 بت"
+"استخدم \"ddm -p pae\" لإزالة نواة PAE من نظامك. لاحظ أنه "
+"لا يمكن حذف هذه النواة إذا كنت حاليا قد أقلعت باستخدامها."
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
-msgstr ""
+msgstr "# ddm -i fixbumblebee"
 
 #: en/help.html+html.body.div.p:37
 msgid "This will try to fix a Bumblebee install."
-msgstr ""
+msgstr "هذا سيحاول إصلاح تثبيت Bumblebee"
 
 #: en/help.html+html.body.div.h2:39
 msgid "Log"
-msgstr ""
+msgstr "السّجل"
 
 #: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"
-msgstr ""
+msgstr "الملف: /var/log/ddm.log"
 
 #: en/help.html+html.body.div.p:41
 msgid ""
 "Please, attach your log file when you post an issue on our forum: <a href="
 "\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
 msgstr ""
-
-#~ msgid "Saved"
-#~ msgstr "حُفِظ"
+"يرجى إرفاق ملف السجل الخاص بك عند إضافة مشكلة على منتدانا: <a href="
+"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
