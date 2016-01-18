@@ -7,7 +7,7 @@ gi.require_version('Gtk', '3.0')
 import sys
 sys.path.insert(1, '/usr/lib/ddm')
 from dialogs import MessageDialog, ErrorDialog, WarningDialog
-from gi.repository import Gtk
+from gi.repository import Gtk, GObject
 from ddm import DDM
 import os
 import argparse
@@ -79,9 +79,10 @@ def uncaught_excepthook(*args):
             pdb.pm()
     else:
         import traceback
-        ErrorDialog(_('Unexpected error'),
-                    "<b>{}</b>".format(_('DDM has failed with the following unexpected error. Please submit a bug report!')),
-                    '<tt>' + '\n'.join(traceback.format_exception(*args)) + '</tt>', None, None, True, 'ddm')
+        details = '\n'.join(traceback.format_exception(*args)).replace('<', '').replace('>', '')
+        title = _('Unexpected error')
+        msg = _('DDM has failed with the following unexpected error. Please submit a bug report!')
+        ErrorDialog(title, "<b>%s</b>" % msg, "<tt>%s</tt>" % details, None, True, 'ddm')
 
     sys.exit(1)
 
@@ -91,6 +92,11 @@ sys.excepthook = uncaught_excepthook
 if __name__ == "__main__":
     # Create an instance of our GTK application
     try:
+        # Calling GObject.threads_init() is not needed for PyGObject 3.10.2+
+        # Check with print (sys.version)
+        # Debian Jessie: 3.4.2
+        GObject.threads_init()
+
         DDM(test)
         Gtk.main()
     except KeyboardInterrupt:

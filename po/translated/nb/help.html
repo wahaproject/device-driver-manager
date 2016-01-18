@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link href="../link/general.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="background"></div>
+	<h1>Hjelp for driverbehandler</h1>
+	<div class="main">
+		<h2>Beskrivelse</h2>
+		<p>Device Driver Manager er et verktøy til å hjelpe brukere å installere
+tredjeparts maskinvaredrivere.  For øyeblikket kan Nvidia, ATI og
+Broadcom-drivere bli installert. PAE-kjernen kan også installeres på 32-bit
+multi-kjernesystemer. Device Driver Manager vil kun liste disse støttede
+driverne. Det vil ikke liste andre enheter enn det som er nevnt ovenfor.</p>
+
+		<h2>Viktig</h2>
+		<p>Device Driver Manager kan kun installere drivere som er tilgjengelig i
+arkivet. Pass på at du har internettforbindelse hvis du vil  installere
+driverne.</p>
+
+		<h2>Kommandoer</h2>
+		<p>Hvis du foretrekker å installere driverne via en terminal, kan du bruke
+følgende kommandoer:</p>
+
+		<p>&nbsp;</p>
+
+		<h3># ddm -i ati</h3>
+		<p>Dette vi installere fglrx driveren for ATI grafikkkortet ditt. ATI kort fra
+versjon HD 5000 og oppover er støttet av fglrx driverne. Versjoner mellom
+1000 og 5000 vil bruke Radeon drivere. Bruk "ddm -p ati" for å fjerne
+drivere fra systemet ditt.</p>
+
+		<h3># ddm -i nvidia</h3>
+		<p>Dette vil velge de riktige driverne for ditt Nvidia-kort. Det vil velge
+Bumblebee-drivere dersom du har et hybrid-kort (både Nvidia og Intel). Bruk
+"ddm -p nvidia" for å fjerne driverne fra systemet.</p>
+
+		<h3># ddm -i open</h3>
+		<p>Du kan bruke denne kommandoen hvis du ønsker å tilbakestille systemet til de
+åpne Nouveau-driverne. Det vil fjerne alle proprietære driver fra systemet
+ditt.</p>
+
+		<h3># ddm -i broadcom</h3>
+		<p>Denne kommandoen vil installere den riktige driveren for ditt trådløse
+Broadcom-adapter. Bruk "ddm -p broadcom" for å fjerne driverne fra systemet
+ditt.</p>
+
+		<h3># ddm -i pae</h3>
+		<p>Dette vil installere PAE-kjernen på multi-prosessor systemer som kjører et
+32-bits OS. Bruk "ddm -p pae" for å fjerne PAE-kjernen fra systemet. Merk at
+du ikke kan fjerne kjernen når du har startet opp med denne.</p>
+
+		<h3># ddm -i fixbumblebee</h3>
+		<p>Dette vil prøve å fikse Bumblebee-installasjonen.</p>
+
+		<h2>Logg</h2>
+		<h3>Fil: /var/log/ddm.log</h3>
+		<p>Vær snill å legge ved logg-filen når du poster om et problem i forumet vårt:
+<a href="http://forums.solydxk.com"
+target="_blank">http://forums.solydxk.com</a></p>
+    </div>
+  </body>
+</html>

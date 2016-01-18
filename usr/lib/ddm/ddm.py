@@ -5,7 +5,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 
 # from gi.repository import Gtk, GdkPixbuf, GObject, Pango, Gdk, GLib
-from gi.repository import Gtk, GObject, GLib
+from gi.repository import Gtk, GObject
 from os.path import join, abspath, dirname, basename, isdir
 from utils import ExecuteThreadedCommands, hasInternetConnection, \
                   getoutput, getPackageVersion, has_backports
@@ -21,9 +21,6 @@ from logger import Logger
 import gettext
 from gettext import gettext as _
 gettext.textdomain('ddm')
-
-# Need to initiate threads for Gtk
-GObject.threads_init()
 
 
 #class for the main window
@@ -274,7 +271,7 @@ class DDM(object):
             t.daemon = True
             t.start()
             self.queue.join()
-            GLib.timeout_add(250, self.check_thread, name)
+            GObject.timeout_add(250, self.check_thread, name)
 
         except Exception as detail:
             ErrorDialog(self.btnSave.get_label(), detail)

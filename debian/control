@@ -6,10 +6,12 @@ Build-Depends: debhelper (>= 9)
   , python3 (>= 3.2)
   , po4a
   , intltool
+  , transifex-client
+  , translate-toolkit
 X-Python3-Version: >= 3.2
 Standards-Version: 3.9.6
-Vcs-Git: git://github.com/SolydXK/ddm.git
-Vcs-Browser: https://github.com/SolydXK/ddm
+Vcs-Git: git@github.com:SolydXK/device-driver-manager.git
+Vcs-Browser: https://github.com/SolydXK/device-driver-manager
 
 Package: ddm
 Architecture: all

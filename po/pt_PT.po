@@ -4,13 +4,13 @@
 #
 # Translators:
 # Luis Filipe Teixeira <lufilte@gmail.com>, 2015
-# Nuno Duarte <nuno.passiano@gmail.com>, 2015
+# Nuno Duarte <inactive+nuno.passiano@transifex.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 10:57+0100\n"
-"PO-Revision-Date: 2015-11-25 00:22+0000\n"
+"POT-Creation-Date: 2016-01-18 17:37+0100\n"
+"PO-Revision-Date: 2015-12-23 21:53+0000\n"
 "Last-Translator: Luis Filipe Teixeira <lufilte@gmail.com>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/solydxk/"
 "device-driver-manager/language/pt_PT/)\n"
@@ -20,41 +20,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../usr/lib/ddm/ddm.py:55 ../usr/lib/ddm/main.py:32
+#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/main.py:32
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
 msgstr "Gestor de Driver de Dispositivo"
 
-#: ../usr/lib/ddm/ddm.py:56 ../usr/lib/ddm/ddm.py:215
+#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:212
 msgid "Install"
 msgstr "Instalar"
 
-#: ../usr/lib/ddm/ddm.py:57
+#: ../usr/lib/ddm/ddm.py:54
 msgid "Help"
 msgstr "Ajuda"
 
-#: ../usr/lib/ddm/ddm.py:58
+#: ../usr/lib/ddm/ddm.py:55
 msgid "Quit"
 msgstr "Sair"
 
-#: ../usr/lib/ddm/ddm.py:59
+#: ../usr/lib/ddm/ddm.py:56
 msgid "Use Backports"
 msgstr "Usar Backports"
 
-#: ../usr/lib/ddm/ddm.py:172
+#: ../usr/lib/ddm/ddm.py:169
 msgid "No internet connection"
-msgstr "Não há conexão de Internet"
+msgstr "Não há ligação à Internet"
 
-#: ../usr/lib/ddm/ddm.py:173
+#: ../usr/lib/ddm/ddm.py:170
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
-"Você precisa de uma ligação de Internet para instalar o software adicional.\n"
+"Você precisa de uma ligação à Internet para instalar o software adicional.\n"
 "Por favor, ligue à Internet e tente novamente."
 
-#: ../usr/lib/ddm/ddm.py:180
+#: ../usr/lib/ddm/ddm.py:177
 msgid ""
 "You have selected to install drivers from the backports repository whenever "
 "they are available.\n"
@@ -65,48 +65,48 @@ msgid ""
 "\n"
 "Are you sure you want to continue?"
 msgstr ""
-"Você selecionou para instalar drivers a partir do repositório backports "
-"sempre que estiverem disponíveis.\n"
+"Você selecionou em instalar drivers a partir do repositório backports, "
+"sempre que estiver disponível.\n"
 "\n"
-"Embora você possa executar mais até data software usando o repositório "
+"Embora seja possível, executar mais software atualizado usando o repositório "
 "backports,\n"
 "você introduz um maior risco de quebra ao fazê-lo.\n"
 "\n"
 "Você tem certeza que quer continuar?"
 
-#: ../usr/lib/ddm/ddm.py:215
+#: ../usr/lib/ddm/ddm.py:212
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../usr/lib/ddm/ddm.py:231
+#: ../usr/lib/ddm/ddm.py:228
 msgid "Remove kernel"
 msgstr "Remover o kernel"
 
-#: ../usr/lib/ddm/ddm.py:232
+#: ../usr/lib/ddm/ddm.py:229
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
-"Você não pode remover um kernel inicializado.\n"
-"Por favor, inicializar outro kernel e tente novamente."
+"Você não pode remover um kernel iniciado.\n"
+"Por favor, iniciar outro kernel e tente novamente."
 
-#: ../usr/lib/ddm/ddm.py:253
+#: ../usr/lib/ddm/ddm.py:250
 msgid "Hardware scan"
 msgstr "Verificação de hardware"
 
-#: ../usr/lib/ddm/ddm.py:257
+#: ../usr/lib/ddm/ddm.py:254
 msgid "There are no available drivers for your hardware:"
 msgstr "Não há drivers disponíveis para o seu hardware:"
 
-#: ../usr/lib/ddm/ddm.py:263
+#: ../usr/lib/ddm/ddm.py:260
 msgid "DDM did not find any supported hardware."
-msgstr "DDM não encontrou qualquer hardware suportado."
+msgstr "GDD não encontrou qualquer hardware suportado."
 
-#: ../usr/lib/ddm/ddm.py:362
+#: ../usr/lib/ddm/ddm.py:359
 msgid "ATI FirePro/Gl card found"
 msgstr "Placa ATI FirePro/Gl foi encontrado"
 
-#: ../usr/lib/ddm/ddm.py:363
+#: ../usr/lib/ddm/ddm.py:360
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
@@ -118,43 +118,43 @@ msgstr ""
 "\n"
 "Prossiga por sua conta e risco."
 
-#: ../usr/lib/ddm/ddm.py:533
+#: ../usr/lib/ddm/ddm.py:530
 msgid "PAE capable system"
 msgstr "Sistema capaz PAE"
 
-#: ../usr/lib/ddm/ddm.py:646
+#: ../usr/lib/ddm/ddm.py:643
 msgid "Run as root."
 msgstr "Execute como root."
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:645
 msgid "Wrong arguments passed to ddm."
-msgstr "Argumentos errados passados para DDM."
+msgstr "Argumentos errados foram passados para o gdd."
 
-#: ../usr/lib/ddm/ddm.py:650
+#: ../usr/lib/ddm/ddm.py:647
 msgid "There are no driver available."
 msgstr "Não há nenhum driver disponível."
 
-#: ../usr/lib/ddm/ddm.py:652
+#: ../usr/lib/ddm/ddm.py:649
 msgid "The driver cannot be found in repository."
-msgstr "O driver não pode ser encontrada no repositório."
+msgstr "O driver não pode ser encontrado no repositório."
 
-#: ../usr/lib/ddm/ddm.py:654
+#: ../usr/lib/ddm/ddm.py:651
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr ""
 "Erro ao baixar.\n"
-"Verifique sua conexão de internet."
+"Verifique a sua ligação à internet."
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:653
 msgid "DDM cannot purge the driver."
-msgstr "DDM não pode limpar o driver."
+msgstr "O GDD não pode limpar o driver."
 
-#: ../usr/lib/ddm/ddm.py:658
+#: ../usr/lib/ddm/ddm.py:655
 msgid "This card is not supported."
 msgstr "Esta placa não é suportada."
 
-#: ../usr/lib/ddm/ddm.py:660
+#: ../usr/lib/ddm/ddm.py:657
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -164,11 +164,11 @@ msgstr ""
 "Por favor, execute 'sudo apt-get -f install' no terminal.\n"
 "Visite nosso fórum de suporte: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:665
+#: ../usr/lib/ddm/ddm.py:662
 msgid "The software has been successfully installed."
 msgstr "O software foi instalado com êxito."
 
-#: ../usr/lib/ddm/ddm.py:666
+#: ../usr/lib/ddm/ddm.py:663
 msgid "You will need to restart your system."
 msgstr "Você precisará reiniciar o sistema."
 
@@ -190,19 +190,19 @@ msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
 msgstr ""
-"O Gestor de Driver de dispositivo não pode ser iniciado num ambiente live\n"
-"Você pode usar o argumento --force para começar DDM num ambiente live"
+"O Gestor de Driver de Dispositivo não pode ser iniciado num ambiente live\n"
+"Você pode usar o argumento --force para começar o GDD num ambiente live"
 
-#: ../usr/lib/ddm/main.py:82
+#: ../usr/lib/ddm/main.py:83
 msgid "Unexpected error"
 msgstr "Erro inesperado"
 
-#: ../usr/lib/ddm/main.py:83
+#: ../usr/lib/ddm/main.py:84
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
 msgstr ""
-"DDM falhou com o seguinte erro inesperado. Por favor envie um relatório de "
+"O GDD falhou com o seguinte erro inesperado. Por favor envie um relatório de "
 "erro!"
 
 #: en/help.html+html.body.h1:8
@@ -239,7 +239,7 @@ msgid ""
 "install the drivers."
 msgstr ""
 "O Gestor de Driver de Dispositivo só pode instalar drivers que estão "
-"disponíveis nos repositórios. Verifique se você tem uma conexão com a "
+"disponíveis nos repositórios. Verifique se você tem uma ligação com a "
 "internet, se você quiser instalar os drivers."
 
 #: en/help.html+html.body.div.h2:16
@@ -306,8 +306,8 @@ msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
 msgstr ""
-"Este comando irá instalar o driver correto para seu adaptador Broadcom "
-"wireless. Use \"ddm -p broadcom\" para remover os drivers do seu sistema."
+"Este comando irá instalar o driver correto para seu adaptador wireless "
+"Broadcom. Use \"ddm -p broadcom\" para remover os drivers do seu sistema."
 
 #: en/help.html+html.body.div.h3:33
 msgid "# ddm -i pae"
@@ -320,9 +320,9 @@ msgid ""
 "you cannot remove the kernel when you are currently booted into that kernel."
 msgstr ""
 "Isto irá instalar o kernel PAE em sistemas com múltiplos processadores que "
-"executam um sistema operacional de 32-bit. Use \"ddm -p pae\" para remover o "
-"kernel PAE do seu sistema. Observe que você não pode remover o kernel quando "
-"você está atualmente inicializado nesse kernel."
+"executam um sistema operativo de 32-bit. Use \"ddm -p pae\" para remover o "
+"kernel PAE do seu sistema. Observe que você não pode remover o kernel, "
+"estando ele atualmente iniciado."
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
@@ -334,7 +334,7 @@ msgstr "Isso irá tentar corrigir a instalação Bumblebee."
 
 #: en/help.html+html.body.div.h2:39
 msgid "Log"
-msgstr "Registro"
+msgstr "Registo"
 
 #: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"

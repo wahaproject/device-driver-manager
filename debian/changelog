@@ -1,3 +1,15 @@
+ddm (2.2.3) debian; urgency=low
+
+  * Updated translations
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Mon, 18 Jan 2016 12:00:00 +0100
+
+ddm (2.2.2) debian; urgency=low
+
+  * Updated translations
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sat, 19 Dec 2015 11:00:00 +0100
+
 ddm (2.2.1) debian; urgency=low
 
   * Improved language detection of localized HTML files

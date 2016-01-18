@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 10:57+0100\n"
-"PO-Revision-Date: 2015-09-28 10:39+0000\n"
+"POT-Creation-Date: 2016-01-18 17:37+0100\n"
+"PO-Revision-Date: 2016-01-18 10:50+0000\n"
 "Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/solydxk/device-driver-"
 "manager/language/ar/)\n"
@@ -20,33 +20,33 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: ../usr/lib/ddm/ddm.py:55 ../usr/lib/ddm/main.py:32
+#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/main.py:32
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
 msgstr "مدير تعريف الأجهزة"
 
-#: ../usr/lib/ddm/ddm.py:56 ../usr/lib/ddm/ddm.py:215
+#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:212
 msgid "Install"
 msgstr "التثبيت"
 
-#: ../usr/lib/ddm/ddm.py:57
+#: ../usr/lib/ddm/ddm.py:54
 msgid "Help"
 msgstr "مساعدة"
 
-#: ../usr/lib/ddm/ddm.py:58
+#: ../usr/lib/ddm/ddm.py:55
 msgid "Quit"
 msgstr "خروج"
 
-#: ../usr/lib/ddm/ddm.py:59
+#: ../usr/lib/ddm/ddm.py:56
 msgid "Use Backports"
-msgstr ""
+msgstr "استخدم مستودع باكبورتس"
 
-#: ../usr/lib/ddm/ddm.py:172
+#: ../usr/lib/ddm/ddm.py:169
 msgid "No internet connection"
 msgstr "لا يوجد اتصال بالإنترنت"
 
-#: ../usr/lib/ddm/ddm.py:173
+#: ../usr/lib/ddm/ddm.py:170
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
@@ -54,7 +54,7 @@ msgstr ""
 "تحتاج لاتصال بالإنترنت لتثبيت البرامج الإضافية.\n"
 "من فضلك، اتّصل بالإنترنت وحاول مرة أخرى."
 
-#: ../usr/lib/ddm/ddm.py:180
+#: ../usr/lib/ddm/ddm.py:177
 msgid ""
 "You have selected to install drivers from the backports repository whenever "
 "they are available.\n"
@@ -65,16 +65,22 @@ msgid ""
 "\n"
 "Are you sure you want to continue?"
 msgstr ""
+"لقد قمت بتحديد تثبيت التعريفات من مستودع باكبورتس متى توفرت.\n"
+"\n"
+"رغم أنه يمكنك تشغيل برامج أكثر حداثة باستخدام مستودع باكبورتس\n"
+"إلّا أنه قد تزيد من إحتمالية وقوع النظام بفعل ذلك.\n"
+"\n"
+"هل أنت متأكد من أنك تريد المتابعة؟"
 
-#: ../usr/lib/ddm/ddm.py:215
+#: ../usr/lib/ddm/ddm.py:212
 msgid "Device"
 msgstr "الجهاز"
 
-#: ../usr/lib/ddm/ddm.py:231
+#: ../usr/lib/ddm/ddm.py:228
 msgid "Remove kernel"
 msgstr "إزالة النواة"
 
-#: ../usr/lib/ddm/ddm.py:232
+#: ../usr/lib/ddm/ddm.py:229
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -82,80 +88,85 @@ msgstr ""
 "لا يمكنك إزالة النواة المستخدمة حاليا.\n"
 "من فضلك، حاول بعد إعادة التشغيل بنواة أخرى."
 
-#: ../usr/lib/ddm/ddm.py:253
+#: ../usr/lib/ddm/ddm.py:250
 msgid "Hardware scan"
 msgstr "تفحص الأجهزة"
 
-#: ../usr/lib/ddm/ddm.py:257
+#: ../usr/lib/ddm/ddm.py:254
 msgid "There are no available drivers for your hardware:"
 msgstr "لا توجد تعريفات متوفرة لعتادك:"
 
-#: ../usr/lib/ddm/ddm.py:263
+#: ../usr/lib/ddm/ddm.py:260
 msgid "DDM did not find any supported hardware."
 msgstr "لم يعثر مدير التعريف على أي عتاد مدعوم."
 
-#: ../usr/lib/ddm/ddm.py:362
+#: ../usr/lib/ddm/ddm.py:359
 msgid "ATI FirePro/Gl card found"
-msgstr ""
+msgstr "وجِدت بطاقة ATI FirePro/Gl"
 
-#: ../usr/lib/ddm/ddm.py:363
+#: ../usr/lib/ddm/ddm.py:360
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
 "\n"
 "Proceed at your own risk."
 msgstr ""
+"تثبيت التعريف المغلق الخاص ببطاقة ATI FirePro/Gl قد يجعل نظامك غير قابل "
+"للإقلاع.\n"
+"\n"
+"المتابعة على مسؤوليتك."
 
-#: ../usr/lib/ddm/ddm.py:533
+#: ../usr/lib/ddm/ddm.py:530
 msgid "PAE capable system"
 msgstr "النظام يدعم PAE"
 
-#: ../usr/lib/ddm/ddm.py:646
+#: ../usr/lib/ddm/ddm.py:643
 msgid "Run as root."
-msgstr ""
+msgstr "شغِّل كجذر."
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:645
 msgid "Wrong arguments passed to ddm."
-msgstr ""
+msgstr "معاملات خاطئة مرِّرت لـ ddm."
 
-#: ../usr/lib/ddm/ddm.py:650
+#: ../usr/lib/ddm/ddm.py:647
 msgid "There are no driver available."
-msgstr ""
+msgstr ".لا يوجد أي تعريف متاح"
 
-#: ../usr/lib/ddm/ddm.py:652
+#: ../usr/lib/ddm/ddm.py:649
 msgid "The driver cannot be found in repository."
-msgstr ""
+msgstr "تعذّر العثور على تعريف في المستودع"
 
-#: ../usr/lib/ddm/ddm.py:654
-#, fuzzy
+#: ../usr/lib/ddm/ddm.py:651
 msgid ""
 "Download error.\n"
 "Check your internet connection."
-msgstr "لا يوجد اتصال بالإنترنت"
+msgstr ""
+"خطأ في التنزيل.\n"
+"تحقق من اتصال الإنترنت الخاص بك."
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:653
 msgid "DDM cannot purge the driver."
-msgstr ""
+msgstr ".لا يمكن لبرنامج الإعداد إزالة التعريف"
 
-#: ../usr/lib/ddm/ddm.py:658
+#: ../usr/lib/ddm/ddm.py:655
 msgid "This card is not supported."
-msgstr ""
+msgstr "هذه البطاقة غير مدعومة."
 
-#: ../usr/lib/ddm/ddm.py:660
+#: ../usr/lib/ddm/ddm.py:657
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
 "حدث خطأ أثناء التثبيت.\n"
-"من فضلك، شغّل 'sudo apt-get -f install' في الطرفية.\n"
+"من فضلك، شغّل 'sudo apt-get -f install' على الطرفية.\n"
 "يمكنك زيارة منتدانا للحصول على الدعم: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:665
+#: ../usr/lib/ddm/ddm.py:662
 msgid "The software has been successfully installed."
 msgstr "تم تثبيت البرنامج بنجاح."
 
-#: ../usr/lib/ddm/ddm.py:666
+#: ../usr/lib/ddm/ddm.py:663
 msgid "You will need to restart your system."
 msgstr "ستحتاج لإعادة تشغيل نظامك."
 
@@ -166,6 +177,9 @@ msgid ""
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
 msgstr ""
+"يساعدك مدير تعريفات الأجهزة على تثبيت التعريف الخاص بالمصنع لعتادك.\n"
+"ثبّت التعريف الخاص بالمصنع فقط إذا كنت متأكد من حاجتك له.\n"
+"غالبا ما يكون التعريف المفتوح كافيا."
 
 #: ../usr/lib/ddm/main.py:55
 msgid ""
@@ -175,25 +189,25 @@ msgstr ""
 "لا يمكن تشغيل مدير تعريف الأجهزة في بيئة حية\n"
 "يمكنك استخدام المعامل --force لبدء DDM في بيئة حية"
 
-#: ../usr/lib/ddm/main.py:82
+#: ../usr/lib/ddm/main.py:83
 msgid "Unexpected error"
 msgstr "خطأ غير متوقع"
 
-#: ../usr/lib/ddm/main.py:83
+#: ../usr/lib/ddm/main.py:84
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
 msgstr ""
+"فشل مدير تعريف الأجهزة مع الخطأ غير المتوقع التالي. يرجى تقديم تقرير عن وجود "
+"علّة!"
 
 #: en/help.html+html.body.h1:8
-#, fuzzy
-#| msgid "Device Driver Manager"
 msgid "Device Driver Manager Help"
-msgstr "مدير تعريف الأجهزة"
+msgstr "مساعدة مدير تعريف الأجهزة"
 
 #: en/help.html+html.body.div.h2:10
 msgid "Description"
-msgstr ""
+msgstr "الوصف"
 
 #: en/help.html+html.body.div.p:11
 msgid ""
@@ -206,7 +220,7 @@ msgstr ""
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
-msgstr ""
+msgstr "هام"
 
 #: en/help.html+html.body.div.p:14
 msgid ""
@@ -214,20 +228,23 @@ msgid ""
 "the repositories. Make sure you have an internet connection if you want to "
 "install the drivers."
 msgstr ""
+"يمكن لمدير تعريف الأجهزة أن يثبت التعريفات المتوفرة بالمستودعات فقط. تأكد أن "
+"لديك اتصالا بالإنترنت إذا كنت تريد تثبيت التعريفات."
 
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
-msgstr ""
+msgstr "تعليمات"
 
 #: en/help.html+html.body.div.p:17
 msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
 msgstr ""
+"إذا كنت تفضل تثبيت التعريفات عبر الطرفية يمكنك استخدام التعليمات التالية:"
 
 #: en/help.html+html.body.div.h3:21
 msgid "# ddm -i ati"
-msgstr ""
+msgstr "# ddm -i ati"
 
 #: en/help.html+html.body.div.p:22
 msgid ""
@@ -236,10 +253,13 @@ msgid ""
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
 msgstr ""
+"هذا سيثبت تعريفات fglrx لبطاقة ATI الخاصة بك. بطاقات ATI من الإصدار HD 5000 "
+"فما فوق مدعومة من طرف تعريف fglrx. الإصدارات من 1000 إلى 5000 ستستخدم "
+"تعريفات Radeon. استخدم \"ddm -p ati\" لإزالة التعريف من نظامك."
 
 #: en/help.html+html.body.div.h3:24
 msgid "# ddm -i nvidia"
-msgstr ""
+msgstr "# ddm -i nvidia"
 
 #: en/help.html+html.body.div.p:25
 msgid ""
@@ -247,30 +267,37 @@ msgid ""
 "select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
 "Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
 msgstr ""
+"سيؤدي هذا إلى تحديد التعريف الصحيح لبطاقة الرسوميات أنفيديا الخاصة بك. "
+"وسيقوم بتحديد تعريف Bumblebee في حال ما إذا كانت لديك بطاقة رسومية هجينة "
+"(أنفيديا و إنتل معا). استخدم \"ddm -p nvidia\" لإزالة التعريف من نظامك."
 
 #: en/help.html+html.body.div.h3:27
 msgid "# ddm -i open"
-msgstr ""
+msgstr "# ddm -i open"
 
 #: en/help.html+html.body.div.p:28
 msgid ""
 "You can use this command if you want to revert back to the open Nouveau "
 "drivers. It will remove any proprietary drivers from your system."
 msgstr ""
+"يمكنك إستخدام هذه التعليمة إذا أردت العودة إلى التعريف المفتوح (Nouveau). "
+"هذا سيزيل أي تعريف خاص بالمصنع من نظامك."
 
 #: en/help.html+html.body.div.h3:30
 msgid "# ddm -i broadcom"
-msgstr ""
+msgstr "# ddm -i broadcom"
 
 #: en/help.html+html.body.div.p:31
 msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
 msgstr ""
+"هذا الأمر سيقوم بتثبيت التعريف المناسب لبطاقة الشبكة اللاسلكية Broadcom "
+"الخاصة بك. استخدم \"ddm -p broadcom\" لإزالة التعريف من نظامك."
 
 #: en/help.html+html.body.div.h3:33
 msgid "# ddm -i pae"
-msgstr ""
+msgstr "# ddm -i pae"
 
 #: en/help.html+html.body.div.p:34
 msgid ""
@@ -278,28 +305,30 @@ msgid ""
 "OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
 "you cannot remove the kernel when you are currently booted into that kernel."
 msgstr ""
+"سيقوم هذا بتثبيت نواة PAE للأنظمة متعددة الأنوية على معمارية 32 بتاستخدم "
+"\"ddm -p pae\" لإزالة نواة PAE من نظامك. لاحظ أنه لا يمكن حذف هذه النواة إذا "
+"كنت حاليا قد أقلعت باستخدامها."
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
-msgstr ""
+msgstr "# ddm -i fixbumblebee"
 
 #: en/help.html+html.body.div.p:37
 msgid "This will try to fix a Bumblebee install."
-msgstr ""
+msgstr "هذا سيحاول إصلاح تثبيت Bumblebee"
 
 #: en/help.html+html.body.div.h2:39
 msgid "Log"
-msgstr ""
+msgstr "السّجل"
 
 #: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"
-msgstr ""
+msgstr "الملف: /var/log/ddm.log"
 
 #: en/help.html+html.body.div.p:41
 msgid ""
 "Please, attach your log file when you post an issue on our forum: <a href="
 "\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
 msgstr ""
-
-#~ msgid "Saved"
-#~ msgstr "حُفِظ"
+"يرجى إرفاق ملف السجل الخاص بك عند إضافة مشكلة على منتدانا: <a href=\"http://"
+"forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"

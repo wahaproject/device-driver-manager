@@ -192,7 +192,7 @@ class InputDialog(Gtk.MessageDialog):
                                    Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
                                    Gtk.MessageType.QUESTION, Gtk.ButtonsType.OK, text)
 
-        self.set_position(Gtk.WIN_POS_CENTER)
+        self.set_position(Gtk.WindowPosition.CENTER)
         if parent is not None:
             self.set_icon(parent.get_icon())
         self.set_title(title)

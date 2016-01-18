@@ -115,7 +115,8 @@ class TreeViewHandler(GObject.GObject):
                     for j in range(len(contentList[i])):
                         val = str(contentList[i][j]).strip()
                         if str(columnTypesList[j]) == 'str':
-                            val = '"' + val + '"'
+                            # Make sure it's a single line
+                            val = '"' + val.replace('\n', ' ').replace('\r', '') + '"'
                         if str(columnTypesList[j]) == 'GdkPixbuf.Pixbuf':
                             if os.path.isfile(val):
                                 if fixedImgHeight:
