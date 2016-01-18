@@ -111,8 +111,12 @@ msgid ""
 "\n"
 "Proceed at your own risk."
 msgstr ""
+<<<<<<< HEAD
 "تثبيت التعريف المغلق الخاص ببطاقة ATI FirePro/Gl قد يجعل نظامك غير قابل "
 "للإقلاع.\n"
+=======
+"تثبيت التعريف المغلق الخاص ببطاقة ATI FirePro/Gl قد يجعل نظامك غير قابل للإقلاع.\n"
+>>>>>>> fdae6cfec68a754a343c5d7067de01887b269338
 "\n"
 "المتابعة على مسؤوليتك."
 
@@ -136,7 +140,11 @@ msgstr ".لا يوجد أي تعريف متاح"
 msgid "The driver cannot be found in repository."
 msgstr "تعذّر العثور على تعريف في المستودع"
 
+<<<<<<< HEAD
 #: ../usr/lib/ddm/ddm.py:651
+=======
+#: ../usr/lib/ddm/ddm.py:654
+>>>>>>> fdae6cfec68a754a343c5d7067de01887b269338
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -177,7 +185,12 @@ msgid ""
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
 msgstr ""
+<<<<<<< HEAD
 "يساعدك مدير تعريفات الأجهزة على تثبيت التعريف الخاص بالمصنع لعتادك.\n"
+=======
+"يساعدك مدير تعريفات الأجهزة على تثبيت التعريف الخاص بالمصنع "
+"لعتادك.\n"
+>>>>>>> fdae6cfec68a754a343c5d7067de01887b269338
 "ثبّت التعريف الخاص بالمصنع فقط إذا كنت متأكد من حاجتك له.\n"
 "غالبا ما يكون التعريف المفتوح كافيا."
 
@@ -198,8 +211,12 @@ msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
 msgstr ""
+<<<<<<< HEAD
 "فشل مدير تعريف الأجهزة مع الخطأ غير المتوقع التالي. يرجى تقديم تقرير عن وجود "
 "علّة!"
+=======
+"فشل مدير تعريف الأجهزة مع الخطأ غير المتوقع التالي. يرجى تقديم تقرير عن وجود علّة!"
+>>>>>>> fdae6cfec68a754a343c5d7067de01887b269338
 
 #: en/help.html+html.body.h1:8
 msgid "Device Driver Manager Help"
@@ -215,8 +232,12 @@ msgid ""
 "hardware drivers. Currently Nvidia, ATI and Broadcom drivers can be "
 "installed and allows to install the PAE kernel for multi-core 32-bit "
 "systems. The Device Driver Manager will only list those devices that are "
-"supported. It will not list any other devices then mentioned above."
+"supported. It will not list any other devices than mentioned above."
 msgstr ""
+"مدير تعريف الأجهزة هو أداة تساعد المستخدمين على تثبيت تعريفات العتاد من جهات أخرى. "
+"حاليا يمكنك من تثبيت تعريفات Nvidia، ATI وBroadcom ويسمح بتثبيت نواة PAE "
+"للأنظمة متعددة الأنوية على معمارية 32 بت. سيقوم مدير تعريف الأجهزة بعرض الأجهزة المدعومة فقط."
+"لذا لن يدرج أية أجهزة أخرى غير المذكورة أعلاه."
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
@@ -231,6 +252,8 @@ msgstr ""
 "يمكن لمدير تعريف الأجهزة أن يثبت التعريفات المتوفرة بالمستودعات فقط. تأكد أن "
 "لديك اتصالا بالإنترنت إذا كنت تريد تثبيت التعريفات."
 
+"يمكن لمدير تعريف الأجهزة أن يثبت التعريفات المتوفرة بالمستودعات فقط. "
+"تأكد أن لديك اتصالا بالإنترنت إذا كنت تريد تثبيت التعريفات."
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
 msgstr "تعليمات"
@@ -253,9 +276,16 @@ msgid ""
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
 msgstr ""
+<<<<<<< HEAD
 "هذا سيثبت تعريفات fglrx لبطاقة ATI الخاصة بك. بطاقات ATI من الإصدار HD 5000 "
 "فما فوق مدعومة من طرف تعريف fglrx. الإصدارات من 1000 إلى 5000 ستستخدم "
 "تعريفات Radeon. استخدم \"ddm -p ati\" لإزالة التعريف من نظامك."
+=======
+"هذا سيثبت تعريفات fglrx لبطاقة ATI الخاصة بك. بطاقات ATI "
+"من الإصدار HD 5000 فما فوق مدعومة من طرف تعريف fglrx. الإصدارات "
+"من 1000 إلى 5000 ستستخدم تعريفات Radeon. استخدم \"ddm -p ati\" لإزالة "
+"التعريف من نظامك."
+>>>>>>> fdae6cfec68a754a343c5d7067de01887b269338
 
 #: en/help.html+html.body.div.h3:24
 msgid "# ddm -i nvidia"
@@ -305,9 +335,15 @@ msgid ""
 "OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
 "you cannot remove the kernel when you are currently booted into that kernel."
 msgstr ""
+<<<<<<< HEAD
 "سيقوم هذا بتثبيت نواة PAE للأنظمة متعددة الأنوية على معمارية 32 بتاستخدم "
 "\"ddm -p pae\" لإزالة نواة PAE من نظامك. لاحظ أنه لا يمكن حذف هذه النواة إذا "
 "كنت حاليا قد أقلعت باستخدامها."
+=======
+"سيقوم هذا بتثبيت نواة PAE للأنظمة متعددة الأنوية على معمارية 32 بت"
+"استخدم \"ddm -p pae\" لإزالة نواة PAE من نظامك. لاحظ أنه "
+"لا يمكن حذف هذه النواة إذا كنت حاليا قد أقلعت باستخدامها."
+>>>>>>> fdae6cfec68a754a343c5d7067de01887b269338
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
@@ -330,5 +366,10 @@ msgid ""
 "Please, attach your log file when you post an issue on our forum: <a href="
 "\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
 msgstr ""
+<<<<<<< HEAD
 "يرجى إرفاق ملف السجل الخاص بك عند إضافة مشكلة على منتدانا: <a href=\"http://"
 "forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
+=======
+"يرجى إرفاق ملف السجل الخاص بك عند إضافة مشكلة على منتدانا: <a href="
+"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
+>>>>>>> fdae6cfec68a754a343c5d7067de01887b269338
