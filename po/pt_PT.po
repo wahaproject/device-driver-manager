@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-18 17:37+0100\n"
+"POT-Creation-Date: 2016-01-26 09:23+0100\n"
 "PO-Revision-Date: 2015-12-23 21:53+0000\n"
 "Last-Translator: Luis Filipe Teixeira <lufilte@gmail.com>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/solydxk/"
@@ -122,23 +122,23 @@ msgstr ""
 msgid "PAE capable system"
 msgstr "Sistema capaz PAE"
 
-#: ../usr/lib/ddm/ddm.py:643
+#: ../usr/lib/ddm/ddm.py:644
 msgid "Run as root."
 msgstr "Execute como root."
 
-#: ../usr/lib/ddm/ddm.py:645
+#: ../usr/lib/ddm/ddm.py:646
 msgid "Wrong arguments passed to ddm."
 msgstr "Argumentos errados foram passados para o gdd."
 
-#: ../usr/lib/ddm/ddm.py:647
+#: ../usr/lib/ddm/ddm.py:648
 msgid "There are no driver available."
 msgstr "Não há nenhum driver disponível."
 
-#: ../usr/lib/ddm/ddm.py:649
+#: ../usr/lib/ddm/ddm.py:650
 msgid "The driver cannot be found in repository."
 msgstr "O driver não pode ser encontrado no repositório."
 
-#: ../usr/lib/ddm/ddm.py:651
+#: ../usr/lib/ddm/ddm.py:652
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -146,15 +146,15 @@ msgstr ""
 "Erro ao baixar.\n"
 "Verifique a sua ligação à internet."
 
-#: ../usr/lib/ddm/ddm.py:653
+#: ../usr/lib/ddm/ddm.py:654
 msgid "DDM cannot purge the driver."
 msgstr "O GDD não pode limpar o driver."
 
-#: ../usr/lib/ddm/ddm.py:655
+#: ../usr/lib/ddm/ddm.py:656
 msgid "This card is not supported."
 msgstr "Esta placa não é suportada."
 
-#: ../usr/lib/ddm/ddm.py:657
+#: ../usr/lib/ddm/ddm.py:658
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -164,11 +164,11 @@ msgstr ""
 "Por favor, execute 'sudo apt-get -f install' no terminal.\n"
 "Visite nosso fórum de suporte: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:662
+#: ../usr/lib/ddm/ddm.py:663
 msgid "The software has been successfully installed."
 msgstr "O software foi instalado com êxito."
 
-#: ../usr/lib/ddm/ddm.py:663
+#: ../usr/lib/ddm/ddm.py:664
 msgid "You will need to restart your system."
 msgstr "Você precisará reiniciar o sistema."
 

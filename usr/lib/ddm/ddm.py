@@ -612,8 +612,9 @@ class DDM(object):
             if driver == '' and not 'gz' in logPath:
                 # Open the log file
                 lines = []
-                with open(logPath) as f:
-                    lines = list(f.read().splitlines())
+                with open(logPath, 'rb') as f:
+                    log = f.read().decode(encoding='utf-8', errors='replace')
+                    lines = list(log.splitlines())
 
                 for line in reversed(lines):
                     # First check for Network Manager entry

@@ -1,17 +1,12 @@
 #! /usr/bin/env python3
 
-# Make sure the right Gtk version is loaded
-import gi
-gi.require_version('Gtk', '3.0')
-
 import os
 import pwd
 import logging
 import re
 import sys
 from shutil import move
-from gi.repository import Gtk
-from dialogs import MessageDialog
+from dialogs import ErrorDialog
 from treeview import TreeViewHandler
 
 
@@ -77,17 +72,17 @@ class Logger():
                 myLogger.error(message)
                 self.rtobjectWrite(message)
                 if showErrorDialog:
-                    MessageDialog('Error', message, Gtk.MessageType.ERROR, self.parent).show()
+                    ErrorDialog('Error', message)
             elif logLevel == 'critical':
                 myLogger.critical(message)
                 self.rtobjectWrite(message)
                 if showErrorDialog:
-                    MessageDialog('Critical', message, Gtk.MessageType.ERROR, self.parent).show()
+                    ErrorDialog('Critical', message)
             elif logLevel == 'exception':
                 myLogger.exception(message)
                 self.rtobjectWrite(message)
                 if showErrorDialog:
-                    MessageDialog('Exception', message, Gtk.MessageType.ERROR, self.parent).show()
+                    ErrorDialog('Exception', message)
             # Flush now
             sys.stdout.flush()
 

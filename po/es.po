@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-18 17:37+0100\n"
+"POT-Creation-Date: 2016-01-26 09:23+0100\n"
 "PO-Revision-Date: 2015-10-31 16:37+0000\n"
 "Last-Translator: Arjen Balfoort <schoelje@solydxk.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/solydxk/device-driver-"
@@ -109,37 +109,37 @@ msgstr ""
 msgid "PAE capable system"
 msgstr "Sistema capaz PAE "
 
-#: ../usr/lib/ddm/ddm.py:643
+#: ../usr/lib/ddm/ddm.py:644
 msgid "Run as root."
 msgstr "Ejecutar como root."
 
-#: ../usr/lib/ddm/ddm.py:645
+#: ../usr/lib/ddm/ddm.py:646
 msgid "Wrong arguments passed to ddm."
 msgstr "Se han pasado argumentos incorrectos a ddm."
 
-#: ../usr/lib/ddm/ddm.py:647
+#: ../usr/lib/ddm/ddm.py:648
 msgid "There are no driver available."
 msgstr "No existe un driver disponible."
 
-#: ../usr/lib/ddm/ddm.py:649
+#: ../usr/lib/ddm/ddm.py:650
 msgid "The driver cannot be found in repository."
 msgstr "No se encuentra el driver en el repositorio."
 
-#: ../usr/lib/ddm/ddm.py:651
+#: ../usr/lib/ddm/ddm.py:652
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr "Error de descarga. Verifique su conexión a internet."
 
-#: ../usr/lib/ddm/ddm.py:653
+#: ../usr/lib/ddm/ddm.py:654
 msgid "DDM cannot purge the driver."
 msgstr "DDM no puede purgar el driver."
 
-#: ../usr/lib/ddm/ddm.py:655
+#: ../usr/lib/ddm/ddm.py:656
 msgid "This card is not supported."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:657
+#: ../usr/lib/ddm/ddm.py:658
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -149,11 +149,11 @@ msgstr ""
 "Ejecute 'sudo apt-get -f install' en la terminal.\n"
 "Visite nuestro foro para soporte: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:662
+#: ../usr/lib/ddm/ddm.py:663
 msgid "The software has been successfully installed."
 msgstr "El software fue instalado con éxito."
 
-#: ../usr/lib/ddm/ddm.py:663
+#: ../usr/lib/ddm/ddm.py:664
 msgid "You will need to restart your system."
 msgstr "Será necesario reiniciar su sistema."
 

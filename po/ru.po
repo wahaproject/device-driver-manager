@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-18 17:37+0100\n"
+"POT-Creation-Date: 2016-01-26 09:23+0100\n"
 "PO-Revision-Date: 2015-11-20 21:12+0000\n"
 "Last-Translator: Анатолий Валерианович <ffox909@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/solydxk/device-driver-"
@@ -125,23 +125,23 @@ msgstr ""
 msgid "PAE capable system"
 msgstr "Система с поддержкой PAE"
 
-#: ../usr/lib/ddm/ddm.py:643
+#: ../usr/lib/ddm/ddm.py:644
 msgid "Run as root."
 msgstr "Запустите с правами администратора."
 
-#: ../usr/lib/ddm/ddm.py:645
+#: ../usr/lib/ddm/ddm.py:646
 msgid "Wrong arguments passed to ddm."
 msgstr "Неправильные аргументы, передаваемые Менеджеру драйверов."
 
-#: ../usr/lib/ddm/ddm.py:647
+#: ../usr/lib/ddm/ddm.py:648
 msgid "There are no driver available."
 msgstr "Нет доступных драйверов."
 
-#: ../usr/lib/ddm/ddm.py:649
+#: ../usr/lib/ddm/ddm.py:650
 msgid "The driver cannot be found in repository."
 msgstr "Драйвер не найден в репозитории."
 
-#: ../usr/lib/ddm/ddm.py:651
+#: ../usr/lib/ddm/ddm.py:652
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -149,15 +149,15 @@ msgstr ""
 "Ошибка загрузки.\n"
 "Проверьте ваше интернет-соединение."
 
-#: ../usr/lib/ddm/ddm.py:653
+#: ../usr/lib/ddm/ddm.py:654
 msgid "DDM cannot purge the driver."
 msgstr "Не удается удалить драйвер."
 
-#: ../usr/lib/ddm/ddm.py:655
+#: ../usr/lib/ddm/ddm.py:656
 msgid "This card is not supported."
 msgstr "Эта карта не поддерживается."
 
-#: ../usr/lib/ddm/ddm.py:657
+#: ../usr/lib/ddm/ddm.py:658
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -167,11 +167,11 @@ msgstr ""
 "Пожалуйста, запустите 'sudo apt-get -f install' в терминале.\n"
 "Посетите наш форум поддержки: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:662
+#: ../usr/lib/ddm/ddm.py:663
 msgid "The software has been successfully installed."
 msgstr "Программное обеспечение было успешно установлено."
 
-#: ../usr/lib/ddm/ddm.py:663
+#: ../usr/lib/ddm/ddm.py:664
 msgid "You will need to restart your system."
 msgstr "Вам нужно будет перезагрузить систему."
 

@@ -1,172 +1,206 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 10:57+0100\n"
+"POT-Creation-Date: 2016-01-26 09:23+0100\n"
 "PO-Revision-Date: 2016-01-18 17:15+0000\n"
 "Last-Translator: Anders Dalen <anders@andersdalen.no>\n"
-"Language-Team: Norwegian Bokmål (http://www.transifex.com/solydxk/device-driver-manager/language/nb/)\n"
+"Language-Team: Norwegian Bokmål (http://www.transifex.com/solydxk/device-"
+"driver-manager/language/nb/)\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../usr/lib/ddm/ddm.py:55 ../usr/lib/ddm/main.py:32
+#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/main.py:32
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
 msgstr "Device Driver Manager"
 
-#: ../usr/lib/ddm/ddm.py:56 ../usr/lib/ddm/ddm.py:215
+#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:212
 msgid "Install"
 msgstr "Installer"
 
-#: ../usr/lib/ddm/ddm.py:57
+#: ../usr/lib/ddm/ddm.py:54
 msgid "Help"
 msgstr "Hjelp"
 
-#: ../usr/lib/ddm/ddm.py:58
+#: ../usr/lib/ddm/ddm.py:55
 msgid "Quit"
 msgstr "Avslutt"
 
-#: ../usr/lib/ddm/ddm.py:59
+#: ../usr/lib/ddm/ddm.py:56
 msgid "Use Backports"
 msgstr "Bruk tilbakeporteringer"
 
-#: ../usr/lib/ddm/ddm.py:172
+#: ../usr/lib/ddm/ddm.py:169
 msgid "No internet connection"
 msgstr "Ingen internettforbindelse"
 
-#: ../usr/lib/ddm/ddm.py:173
+#: ../usr/lib/ddm/ddm.py:170
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
-msgstr "Du trenger en internettforbindelse for å installere tilleggsprogramvaren.\nVennligst koble til internett og prøv igjen."
+msgstr ""
+"Du trenger en internettforbindelse for å installere tilleggsprogramvaren.\n"
+"Vennligst koble til internett og prøv igjen."
 
-#: ../usr/lib/ddm/ddm.py:180
+#: ../usr/lib/ddm/ddm.py:177
 msgid ""
-"You have selected to install drivers from the backports repository whenever they are available.\n"
+"You have selected to install drivers from the backports repository whenever "
+"they are available.\n"
 "\n"
-"Although you can run more up to date software using the backports repository,\n"
+"Although you can run more up to date software using the backports "
+"repository,\n"
 "you introduce a greater risk of breakage doing so.\n"
 "\n"
 "Are you sure you want to continue?"
-msgstr "Du har valgt å installere drivere fra arkivet for tilbakeporteringer når disse er tilgjengelig.\n\nSelv om du kan kjøre mer oppdatert programvare ved å bruke arkivet for tilbakeporteringer\nøker du risikoen for at noe kan slutte å virke.\n\nEr du sikker på at du vil fortsette?"
+msgstr ""
+"Du har valgt å installere drivere fra arkivet for tilbakeporteringer når "
+"disse er tilgjengelig.\n"
+"\n"
+"Selv om du kan kjøre mer oppdatert programvare ved å bruke arkivet for "
+"tilbakeporteringer\n"
+"øker du risikoen for at noe kan slutte å virke.\n"
+"\n"
+"Er du sikker på at du vil fortsette?"
 
-#: ../usr/lib/ddm/ddm.py:215
+#: ../usr/lib/ddm/ddm.py:212
 msgid "Device"
 msgstr "Enhet"
 
-#: ../usr/lib/ddm/ddm.py:231
+#: ../usr/lib/ddm/ddm.py:228
 msgid "Remove kernel"
 msgstr "Fjern kjerne"
 
-#: ../usr/lib/ddm/ddm.py:232
+#: ../usr/lib/ddm/ddm.py:229
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
-msgstr "Du kan ikke fjerne en kjerne som kjører.\nVennligst start en annen kjerne og prøv igjen."
+msgstr ""
+"Du kan ikke fjerne en kjerne som kjører.\n"
+"Vennligst start en annen kjerne og prøv igjen."
 
-#: ../usr/lib/ddm/ddm.py:253
+#: ../usr/lib/ddm/ddm.py:250
 msgid "Hardware scan"
 msgstr "Skanning av maskinvaren"
 
-#: ../usr/lib/ddm/ddm.py:257
+#: ../usr/lib/ddm/ddm.py:254
 msgid "There are no available drivers for your hardware:"
 msgstr "Det er ingen drivere tilgjengelig for din maskinvare:"
 
-#: ../usr/lib/ddm/ddm.py:263
+#: ../usr/lib/ddm/ddm.py:260
 msgid "DDM did not find any supported hardware."
 msgstr "DDM kunne ikke finne noe støttet maskinvare."
 
-#: ../usr/lib/ddm/ddm.py:362
+#: ../usr/lib/ddm/ddm.py:359
 msgid "ATI FirePro/Gl card found"
 msgstr "ATI FirePro/Gl kort funnet"
 
-#: ../usr/lib/ddm/ddm.py:363
+#: ../usr/lib/ddm/ddm.py:360
 msgid ""
-"Installing the proprietary driver for an ATI FirePro/Gl card may render your system unbootable.\n"
+"Installing the proprietary driver for an ATI FirePro/Gl card may render your "
+"system unbootable.\n"
 "\n"
 "Proceed at your own risk."
-msgstr "Å installere en proprietær driver for et ATI FirePro/Gl-kort kan gjøre at du ikke får startet systemet.\n\nFortsett på din egen risiko."
+msgstr ""
+"Å installere en proprietær driver for et ATI FirePro/Gl-kort kan gjøre at du "
+"ikke får startet systemet.\n"
+"\n"
+"Fortsett på din egen risiko."
 
-#: ../usr/lib/ddm/ddm.py:533
+#: ../usr/lib/ddm/ddm.py:530
 msgid "PAE capable system"
 msgstr "PAE-kapabelt system"
 
-#: ../usr/lib/ddm/ddm.py:646
+#: ../usr/lib/ddm/ddm.py:644
 msgid "Run as root."
 msgstr "Kjør som rot."
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:646
 msgid "Wrong arguments passed to ddm."
 msgstr "Feil argumeneter sendt til ddm."
 
-#: ../usr/lib/ddm/ddm.py:650
+#: ../usr/lib/ddm/ddm.py:648
 msgid "There are no driver available."
 msgstr "Det er ingen tilgjengelige drivere."
 
-#: ../usr/lib/ddm/ddm.py:652
+#: ../usr/lib/ddm/ddm.py:650
 msgid "The driver cannot be found in repository."
 msgstr "Driveren kan ikke bli funnet i arkivet."
 
-#: ../usr/lib/ddm/ddm.py:654
+#: ../usr/lib/ddm/ddm.py:652
 msgid ""
 "Download error.\n"
 "Check your internet connection."
-msgstr "Nedlasting feilet.\nSjekk internettforbindelsen."
+msgstr ""
+"Nedlasting feilet.\n"
+"Sjekk internettforbindelsen."
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:654
 msgid "DDM cannot purge the driver."
 msgstr "DDM kan ikke rense bort driveren."
 
-#: ../usr/lib/ddm/ddm.py:658
+#: ../usr/lib/ddm/ddm.py:656
 msgid "This card is not supported."
 msgstr "Dette kortet er ikke støttet."
 
-#: ../usr/lib/ddm/ddm.py:660
+#: ../usr/lib/ddm/ddm.py:658
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
-msgstr "Det oppsto en feil under installasjonen.\nVennligst kjør 'sudo  apt-get -f install' i et terminalvindu.\nBesøk forumet vårt for brukerstøtte: http://forums.solydxk.com"
+msgstr ""
+"Det oppsto en feil under installasjonen.\n"
+"Vennligst kjør 'sudo  apt-get -f install' i et terminalvindu.\n"
+"Besøk forumet vårt for brukerstøtte: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:665
+#: ../usr/lib/ddm/ddm.py:663
 msgid "The software has been successfully installed."
 msgstr "Installasjonen av programvaren var vellykket."
 
-#: ../usr/lib/ddm/ddm.py:666
+#: ../usr/lib/ddm/ddm.py:664
 msgid "You will need to restart your system."
 msgstr "Du må restarte systemet."
 
 #: ../usr/lib/ddm/main.py:33
 msgid ""
-"Device Driver Manager helps to install proprietary drivers for your hardware.\n"
+"Device Driver Manager helps to install proprietary drivers for your "
+"hardware.\n"
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
-msgstr "Device Driver Manager hjelper deg å installere proprietære drivere for maskinvaren din.\nBare installer proprietære drivere hvis du virkelig trenger dem.\nSom regel er åpne drivere tilstrekkelig."
+msgstr ""
+"Device Driver Manager hjelper deg å installere proprietære drivere for "
+"maskinvaren din.\n"
+"Bare installer proprietære drivere hvis du virkelig trenger dem.\n"
+"Som regel er åpne drivere tilstrekkelig."
 
 #: ../usr/lib/ddm/main.py:55
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
-msgstr "Device Driver Manager kan ikke startes i et live-miljø\nDu kan bruke bryteren --force for å starte DDM i et live-miljø"
+msgstr ""
+"Device Driver Manager kan ikke startes i et live-miljø\n"
+"Du kan bruke bryteren --force for å starte DDM i et live-miljø"
 
-#: ../usr/lib/ddm/main.py:82
+#: ../usr/lib/ddm/main.py:83
 msgid "Unexpected error"
 msgstr "Uventet feil"
 
-#: ../usr/lib/ddm/main.py:83
+#: ../usr/lib/ddm/main.py:84
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
-msgstr "DDM har feilet med følgende uventede feilmelding. Vær snill å sende en feilrapport!"
+msgstr ""
+"DDM har feilet med følgende uventede feilmelding. Vær snill å sende en "
+"feilrapport!"
 
 #: en/help.html+html.body.h1:8
 msgid "Device Driver Manager Help"
@@ -183,7 +217,12 @@ msgid ""
 "installed and allows to install the PAE kernel for multi-core 32-bit "
 "systems. The Device Driver Manager will only list those devices that are "
 "supported. It will not list any other devices then mentioned above."
-msgstr "Device Driver Manager er et verktøy til å hjelpe brukere å installere tredjeparts maskinvaredrivere.  For øyeblikket kan Nvidia, ATI og Broadcom-drivere bli installert. PAE-kjernen kan også installeres på 32-bit multi-kjernesystemer. Device Driver Manager vil kun liste disse støttede driverne. Det vil ikke liste andre enheter enn det som er nevnt ovenfor."
+msgstr ""
+"Device Driver Manager er et verktøy til å hjelpe brukere å installere "
+"tredjeparts maskinvaredrivere.  For øyeblikket kan Nvidia, ATI og Broadcom-"
+"drivere bli installert. PAE-kjernen kan også installeres på 32-bit multi-"
+"kjernesystemer. Device Driver Manager vil kun liste disse støttede driverne. "
+"Det vil ikke liste andre enheter enn det som er nevnt ovenfor."
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
@@ -194,7 +233,10 @@ msgid ""
 "The Device Driver Manager can only install drivers which are available in "
 "the repositories. Make sure you have an internet connection if you want to "
 "install the drivers."
-msgstr "Device Driver Manager kan kun installere drivere som er tilgjengelig i arkivet. Pass på at du har internettforbindelse hvis du vil  installere driverne."
+msgstr ""
+"Device Driver Manager kan kun installere drivere som er tilgjengelig i "
+"arkivet. Pass på at du har internettforbindelse hvis du vil  installere "
+"driverne."
 
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
@@ -204,7 +246,9 @@ msgstr "Kommandoer"
 msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
-msgstr "Hvis du foretrekker å installere driverne via en terminal, kan du bruke følgende kommandoer:"
+msgstr ""
+"Hvis du foretrekker å installere driverne via en terminal, kan du bruke "
+"følgende kommandoer:"
 
 #: en/help.html+html.body.div.h3:21
 msgid "# ddm -i ati"
@@ -216,7 +260,11 @@ msgid ""
 "from version HD 5000 and up are supported by the fglrx drivers. Versions "
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
-msgstr "Dette vi installere fglrx driveren for ATI grafikkkortet ditt. ATI kort fra versjon HD 5000 og oppover er støttet av fglrx driverne. Versjoner mellom 1000 og 5000 vil bruke Radeon drivere. Bruk \"ddm -p ati\" for å fjerne drivere fra systemet ditt."
+msgstr ""
+"Dette vi installere fglrx driveren for ATI grafikkkortet ditt. ATI kort fra "
+"versjon HD 5000 og oppover er støttet av fglrx driverne. Versjoner mellom "
+"1000 og 5000 vil bruke Radeon drivere. Bruk \"ddm -p ati\" for å fjerne "
+"drivere fra systemet ditt."
 
 #: en/help.html+html.body.div.h3:24
 msgid "# ddm -i nvidia"
@@ -225,9 +273,12 @@ msgstr "# ddm -i nvidia"
 #: en/help.html+html.body.div.p:25
 msgid ""
 "This will select the right drivers for your Nvidia graphical card. It will "
-"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and"
-" Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
-msgstr "Dette vil velge de riktige driverne for ditt Nvidia-kort. Det vil velge Bumblebee-drivere dersom du har et hybrid-kort (både Nvidia og Intel). Bruk \"ddm -p nvidia\" for å fjerne driverne fra systemet."
+"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
+"Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
+msgstr ""
+"Dette vil velge de riktige driverne for ditt Nvidia-kort. Det vil velge "
+"Bumblebee-drivere dersom du har et hybrid-kort (både Nvidia og Intel). Bruk "
+"\"ddm -p nvidia\" for å fjerne driverne fra systemet."
 
 #: en/help.html+html.body.div.h3:27
 msgid "# ddm -i open"
@@ -237,7 +288,10 @@ msgstr "# ddm -i open"
 msgid ""
 "You can use this command if you want to revert back to the open Nouveau "
 "drivers. It will remove any proprietary drivers from your system."
-msgstr "Du kan bruke denne kommandoen hvis du ønsker å tilbakestille systemet til de åpne Nouveau-driverne. Det vil fjerne alle proprietære driver fra systemet ditt."
+msgstr ""
+"Du kan bruke denne kommandoen hvis du ønsker å tilbakestille systemet til de "
+"åpne Nouveau-driverne. Det vil fjerne alle proprietære driver fra systemet "
+"ditt."
 
 #: en/help.html+html.body.div.h3:30
 msgid "# ddm -i broadcom"
@@ -247,7 +301,10 @@ msgstr "# ddm -i broadcom"
 msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
-msgstr "Denne kommandoen vil installere den riktige driveren for ditt trådløse Broadcom-adapter. Bruk \"ddm -p broadcom\" for å fjerne driverne fra systemet ditt."
+msgstr ""
+"Denne kommandoen vil installere den riktige driveren for ditt trådløse "
+"Broadcom-adapter. Bruk \"ddm -p broadcom\" for å fjerne driverne fra "
+"systemet ditt."
 
 #: en/help.html+html.body.div.h3:33
 msgid "# ddm -i pae"
@@ -255,11 +312,13 @@ msgstr "# ddm -i pae"
 
 #: en/help.html+html.body.div.p:34
 msgid ""
-"This will install the PAE kernel on multi-processor systems running a 32-bit"
-" OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that"
-" you cannot remove the kernel when you are currently booted into that "
-"kernel."
-msgstr "Dette vil installere PAE-kjernen på multi-prosessor systemer som kjører et 32-bits OS. Bruk \"ddm -p pae\" for å fjerne PAE-kjernen fra systemet. Merk at du ikke kan fjerne kjernen når du har startet opp med denne."
+"This will install the PAE kernel on multi-processor systems running a 32-bit "
+"OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
+"you cannot remove the kernel when you are currently booted into that kernel."
+msgstr ""
+"Dette vil installere PAE-kjernen på multi-prosessor systemer som kjører et "
+"32-bits OS. Bruk \"ddm -p pae\" for å fjerne PAE-kjernen fra systemet. Merk "
+"at du ikke kan fjerne kjernen når du har startet opp med denne."
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
@@ -279,7 +338,9 @@ msgstr "Fil: /var/log/ddm.log"
 
 #: en/help.html+html.body.div.p:41
 msgid ""
-"Please, attach your log file when you post an issue on our forum: <a "
-"href=\"http://forums.solydxk.com\" "
-"target=\"_blank\">http://forums.solydxk.com</a>"
-msgstr "Vær snill å legge ved logg-filen når du poster om et problem i forumet vårt: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
+"Please, attach your log file when you post an issue on our forum: <a href="
+"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
+msgstr ""
+"Vær snill å legge ved logg-filen når du poster om et problem i forumet vårt: "
+"<a href=\"http://forums.solydxk.com\" target=\"_blank\">http://forums."
+"solydxk.com</a>"

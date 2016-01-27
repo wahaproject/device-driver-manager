@@ -1,3 +1,9 @@
+ddm (2.2.5) debian; urgency=low
+
+  * Flat logo in background information pages
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Fri, 21 Jan 2016 08:00:00 +0100
+
 ddm (2.2.3) debian; urgency=low
 
   * Updated translations

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-18 17:37+0100\n"
+"POT-Creation-Date: 2016-01-26 09:23+0100\n"
 "PO-Revision-Date: 2016-01-18 10:26+0000\n"
 "Last-Translator: BALLOON a.k.a. Fu-sen.\n"
 "Language-Team: Japanese (http://www.transifex.com/solydxk/device-driver-"
@@ -121,23 +121,23 @@ msgstr ""
 msgid "PAE capable system"
 msgstr "PAE が使用できるシステム"
 
-#: ../usr/lib/ddm/ddm.py:643
+#: ../usr/lib/ddm/ddm.py:644
 msgid "Run as root."
 msgstr "root で実行"
 
-#: ../usr/lib/ddm/ddm.py:645
+#: ../usr/lib/ddm/ddm.py:646
 msgid "Wrong arguments passed to ddm."
 msgstr "誤った引用を受け取りました。"
 
-#: ../usr/lib/ddm/ddm.py:647
+#: ../usr/lib/ddm/ddm.py:648
 msgid "There are no driver available."
 msgstr "使用可能なドライバが存在しません。"
 
-#: ../usr/lib/ddm/ddm.py:649
+#: ../usr/lib/ddm/ddm.py:650
 msgid "The driver cannot be found in repository."
 msgstr "リボジトリからドライバーを見つけることができませんでした。"
 
-#: ../usr/lib/ddm/ddm.py:651
+#: ../usr/lib/ddm/ddm.py:652
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -145,15 +145,15 @@ msgstr ""
 "ダウンロードエラー。\n"
 "インターネット接続を確認して下さい。"
 
-#: ../usr/lib/ddm/ddm.py:653
+#: ../usr/lib/ddm/ddm.py:654
 msgid "DDM cannot purge the driver."
 msgstr "ドライバーを削除する事ができません。"
 
-#: ../usr/lib/ddm/ddm.py:655
+#: ../usr/lib/ddm/ddm.py:656
 msgid "This card is not supported."
 msgstr "このカードは対応していません。"
 
-#: ../usr/lib/ddm/ddm.py:657
+#: ../usr/lib/ddm/ddm.py:658
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -163,11 +163,11 @@ msgstr ""
 "ターミナルより 'sudo apt-get -f install' を実行して下さい。\n"
 "サポートのため、フォーラムをご覧下さい: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:662
+#: ../usr/lib/ddm/ddm.py:663
 msgid "The software has been successfully installed."
 msgstr "ソフトウェアのインストールを行いました。"
 
-#: ../usr/lib/ddm/ddm.py:663
+#: ../usr/lib/ddm/ddm.py:664
 msgid "You will need to restart your system."
 msgstr "再起動を行う必要があります。"
 
