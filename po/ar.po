@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-26 09:23+0100\n"
+"POT-Creation-Date: 2016-06-09 11:28+0200\n"
 "PO-Revision-Date: 2016-01-19 19:24+0000\n"
 "Last-Translator: kraim <biskraim@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/solydxk/device-driver-"
@@ -27,7 +27,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr "مدير تعريف الأجهزة"
 
-#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:212
+#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:206
 msgid "Install"
 msgstr "التثبيت"
 
@@ -73,15 +73,15 @@ msgstr ""
 "\n"
 "هل أنت متأكد أنك تريد المتابعة؟"
 
-#: ../usr/lib/ddm/ddm.py:212
+#: ../usr/lib/ddm/ddm.py:206
 msgid "Device"
 msgstr "الجهاز"
 
-#: ../usr/lib/ddm/ddm.py:228
+#: ../usr/lib/ddm/ddm.py:222
 msgid "Remove kernel"
 msgstr "إزالة النواة"
 
-#: ../usr/lib/ddm/ddm.py:229
+#: ../usr/lib/ddm/ddm.py:223
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -89,23 +89,23 @@ msgstr ""
 "لا يمكنك إزالة النواة المستخدمة حاليا.\n"
 "من فضلك، حاول بعد إعادة التشغيل بنواة أخرى."
 
-#: ../usr/lib/ddm/ddm.py:250
+#: ../usr/lib/ddm/ddm.py:244
 msgid "Hardware scan"
 msgstr "تفحص الأجهزة"
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:248
 msgid "There are no available drivers for your hardware:"
 msgstr "لا توجد تعريفات متوفرة لعتادك:"
 
-#: ../usr/lib/ddm/ddm.py:260
+#: ../usr/lib/ddm/ddm.py:254
 msgid "DDM did not find any supported hardware."
 msgstr "لم يعثر مدير التعريف على أي عتاد مدعوم."
 
-#: ../usr/lib/ddm/ddm.py:359
+#: ../usr/lib/ddm/ddm.py:353
 msgid "ATI FirePro/Gl card found"
 msgstr "وجِدت بطاقة ATI FirePro/Gl"
 
-#: ../usr/lib/ddm/ddm.py:360
+#: ../usr/lib/ddm/ddm.py:354
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
@@ -117,27 +117,27 @@ msgstr ""
 "\n"
 "المتابعة على مسؤوليتك."
 
-#: ../usr/lib/ddm/ddm.py:530
+#: ../usr/lib/ddm/ddm.py:524
 msgid "PAE capable system"
 msgstr "النظام يدعم PAE"
 
-#: ../usr/lib/ddm/ddm.py:644
+#: ../usr/lib/ddm/ddm.py:638
 msgid "Run as root."
 msgstr "شغِّل كجذر."
 
-#: ../usr/lib/ddm/ddm.py:646
+#: ../usr/lib/ddm/ddm.py:640
 msgid "Wrong arguments passed to ddm."
 msgstr "معاملات خاطئة مرِّرت لـ ddm."
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:642
 msgid "There are no driver available."
 msgstr ".لا يوجد أي تعريف متاح"
 
-#: ../usr/lib/ddm/ddm.py:650
+#: ../usr/lib/ddm/ddm.py:644
 msgid "The driver cannot be found in repository."
 msgstr "تعذّر العثور على تعريف في المستودع"
 
-#: ../usr/lib/ddm/ddm.py:652
+#: ../usr/lib/ddm/ddm.py:646
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -145,15 +145,15 @@ msgstr ""
 "خطأ في التنزيل.\n"
 "تحقق من اتصال الإنترنت الخاص بك."
 
-#: ../usr/lib/ddm/ddm.py:654
+#: ../usr/lib/ddm/ddm.py:648
 msgid "DDM cannot purge the driver."
 msgstr ".لا يمكن لبرنامج الإعداد إزالة التعريف"
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:650
 msgid "This card is not supported."
 msgstr "هذه البطاقة غير مدعومة."
 
-#: ../usr/lib/ddm/ddm.py:658
+#: ../usr/lib/ddm/ddm.py:652
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -163,11 +163,11 @@ msgstr ""
 "من فضلك، شغّل 'sudo apt-get -f install' على الطرفية.\n"
 "يمكنك زيارة منتدانا للحصول على الدعم: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:663
+#: ../usr/lib/ddm/ddm.py:657
 msgid "The software has been successfully installed."
 msgstr "تم تثبيت البرنامج بنجاح."
 
-#: ../usr/lib/ddm/ddm.py:664
+#: ../usr/lib/ddm/ddm.py:658
 msgid "You will need to restart your system."
 msgstr "ستحتاج لإعادة تشغيل نظامك."
 

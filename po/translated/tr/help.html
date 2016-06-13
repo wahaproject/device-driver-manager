@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link href="../link/general.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="background"></div>
+	<h1>Aygıt Sürücüsü Yöneticisi Yardımı</h1>
+	<div class="main">
+		<h2>Açıklama</h2>
+		<p>Aygıt Sürücüsü Yöneticisi üçüncü parti donanım sürücülerini yüklemeye yardım
+eden bir kullanıcı aracıdır. Nvidia, ATI ve Broadcom sürücüleri
+yüklenebildiği gibi, 32 bit sistemlerde çoklu-çekirdek desteği için PAE
+çekirdeği de yükleyebilir. Aygıt Sürücüsü Yöneticisi sadece bu listelenen
+donanımları destekler. Yukarıdaki listedeki harici cihazları desteklemez.</p>
+
+		<h2>Önemli</h2>
+		<p>Aygıt Sürücüsü Yöneticisi sadece depolarda mevcut sürücüleri kurabilir. Eğer
+bu sürücüleri kurmak istiyorsanız internet bağlantınız olduğundan emin
+olunuz.</p>
+
+		<h2>Komutlar</h2>
+		<p>Eğer sürücüleri uçbirim yardımıyla kurmak isterseniz, aşağıdaki komutları
+kullanabilirsiniz:</p>
+
+		<p>&nbsp;</p>
+
+		<h3># ddm -i ati</h3>
+		<p>Bu ATI grafik kartınız için fglrx sürücüsü kurar. HD 5000 ve üstü ATI
+kartlar fglrx sürücüsü tarafından desteklenir. 1000 ve 5000 arasındaki
+kartlar için -açık kaynak kodlu- Radeon sürücüleri kullanılır. Sürücüyü
+sistemden silmek için "ddm -p ati" komutunu kullanınız.</p>
+
+		<h3># ddm -i nvidia</h3>
+		<p>Bu Nvidia grafik kartı için doğru sürücüyü seçecektir. (Nvidia + Intel)
+hibrit kartlar olması durumunda Bumblebee seçilecektir. Sürücüyü sistemden
+silmek için "ddm -p nvidia" komutunu kullanınız.</p>
+
+		<h3># ddm -i open</h3>
+		<p>Açık kaynak Nouveau sürücüsüne dönmek isterseniz bu komutu
+kullanabilirsiniz. Bu tüm sahipli sürücüyü sisteminizden siler.</p>
+
+		<h3># ddm -i broadcom</h3>
+		<p>Bu komut Broadcom kablosuz ağ sürücüsü için doğru sürücüyü
+seçecektir. Sürücüyü sistemden silmek için "ddm -p broadcom" komutunu
+kullanınız.</p>
+
+		<h3># ddm -i pae</h3>
+		<p>Bu çoklu-çekirdek üstünde çalışan 32 bit işletim sistemi için PAE çekirdeği
+kurar. PAE çekirdeği sistemden silmek için "ddm -p pae" komutunu
+kullanınız. Eğer şu an sisteminizi PAE çekirdek ile açtı iseniz
+silemezsiniz.</p>
+
+		<h3># ddm -i fixbumblebee</h3>
+		<p>Bu Bumblebee kurulumunu onarmayı deneyecektir.</p>
+
+		<h2>Günlük</h2>
+		<h3>Dosya: /var/log/ddm.log</h3>
+		<p>Lütfen, bir sorun nedeniyle foruma mesaj gönderdiğinizde log dosyasını da
+ekleyiniz: <a href="http://forums.solydxk.com"
+target="_blank">http://forums.solydxk.com</a></p>
+    </div>
+  </body>
+</html>

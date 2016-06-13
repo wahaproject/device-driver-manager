@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-26 09:23+0100\n"
+"POT-Creation-Date: 2016-06-09 11:28+0200\n"
 "PO-Revision-Date: 2016-01-18 10:26+0000\n"
 "Last-Translator: BALLOON a.k.a. Fu-sen.\n"
 "Language-Team: Japanese (http://www.transifex.com/solydxk/device-driver-"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr "デバイスドライバーマネージャー"
 
-#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:212
+#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:206
 msgid "Install"
 msgstr "インストール"
 
@@ -73,15 +73,15 @@ msgstr ""
 "\n"
 "本当に進めてもよろしいですか？"
 
-#: ../usr/lib/ddm/ddm.py:212
+#: ../usr/lib/ddm/ddm.py:206
 msgid "Device"
 msgstr "デバイス"
 
-#: ../usr/lib/ddm/ddm.py:228
+#: ../usr/lib/ddm/ddm.py:222
 msgid "Remove kernel"
 msgstr "カーネルの削除"
 
-#: ../usr/lib/ddm/ddm.py:229
+#: ../usr/lib/ddm/ddm.py:223
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -89,23 +89,23 @@ msgstr ""
 "起動しているカーネルは削除する事ができません。\n"
 "他のカーネルで起動し、再度行って下さい。"
 
-#: ../usr/lib/ddm/ddm.py:250
+#: ../usr/lib/ddm/ddm.py:244
 msgid "Hardware scan"
 msgstr "ハードウェアの検索"
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:248
 msgid "There are no available drivers for your hardware:"
 msgstr "使用のハードウェアにあう使用可能なドライバが存在しません:"
 
-#: ../usr/lib/ddm/ddm.py:260
+#: ../usr/lib/ddm/ddm.py:254
 msgid "DDM did not find any supported hardware."
 msgstr "対応する任意のハードウェアを見つける事ができませんでした。"
 
-#: ../usr/lib/ddm/ddm.py:359
+#: ../usr/lib/ddm/ddm.py:353
 msgid "ATI FirePro/Gl card found"
 msgstr "ATI FirePro/Gl カードが見つかりました"
 
-#: ../usr/lib/ddm/ddm.py:360
+#: ../usr/lib/ddm/ddm.py:354
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
@@ -117,27 +117,27 @@ msgstr ""
 "\n"
 "ご自身の責任で行ってください。"
 
-#: ../usr/lib/ddm/ddm.py:530
+#: ../usr/lib/ddm/ddm.py:524
 msgid "PAE capable system"
 msgstr "PAE が使用できるシステム"
 
-#: ../usr/lib/ddm/ddm.py:644
+#: ../usr/lib/ddm/ddm.py:638
 msgid "Run as root."
 msgstr "root で実行"
 
-#: ../usr/lib/ddm/ddm.py:646
+#: ../usr/lib/ddm/ddm.py:640
 msgid "Wrong arguments passed to ddm."
 msgstr "誤った引用を受け取りました。"
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:642
 msgid "There are no driver available."
 msgstr "使用可能なドライバが存在しません。"
 
-#: ../usr/lib/ddm/ddm.py:650
+#: ../usr/lib/ddm/ddm.py:644
 msgid "The driver cannot be found in repository."
 msgstr "リボジトリからドライバーを見つけることができませんでした。"
 
-#: ../usr/lib/ddm/ddm.py:652
+#: ../usr/lib/ddm/ddm.py:646
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -145,15 +145,15 @@ msgstr ""
 "ダウンロードエラー。\n"
 "インターネット接続を確認して下さい。"
 
-#: ../usr/lib/ddm/ddm.py:654
+#: ../usr/lib/ddm/ddm.py:648
 msgid "DDM cannot purge the driver."
 msgstr "ドライバーを削除する事ができません。"
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:650
 msgid "This card is not supported."
 msgstr "このカードは対応していません。"
 
-#: ../usr/lib/ddm/ddm.py:658
+#: ../usr/lib/ddm/ddm.py:652
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -163,11 +163,11 @@ msgstr ""
 "ターミナルより 'sudo apt-get -f install' を実行して下さい。\n"
 "サポートのため、フォーラムをご覧下さい: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:663
+#: ../usr/lib/ddm/ddm.py:657
 msgid "The software has been successfully installed."
 msgstr "ソフトウェアのインストールを行いました。"
 
-#: ../usr/lib/ddm/ddm.py:664
+#: ../usr/lib/ddm/ddm.py:658
 msgid "You will need to restart your system."
 msgstr "再起動を行う必要があります。"
 

@@ -21,6 +21,14 @@ UNKNOWN='|4360|43b1|'
 
 # -------------------------------------------------------------------------
 
+# --force-yes is deprecated in stretch
+FORCE='--force-yes'
+VER=$(head -c 1 /etc/debian_version | sed 's/[a-zA-Z]/0/' 2>/dev/null || echo 0)
+if [ "$VER" -eq 0 ] || [ "$VER" -gt 8 ]; then
+  FORCE='--allow-downgrades --allow-remove-essential --allow-change-held-packages'
+fi
+
+
 function usage() {
   echo "======================================================================"
   echo "Device Driver Manager Help:"
@@ -34,6 +42,8 @@ function usage() {
   echo
   echo "-p driver    Purge given driver."
   echo "             driver: ati, nvidia, broadcom, pae"
+  echo
+  echo "-f           Force DDM to start, even in a Live environment."
   echo
   echo "-t           For development testing only!"
   echo "             This will install drivers for pre-defined hardware."
@@ -202,9 +212,9 @@ function install_fglrx {
   # Install the packages
   apt-get update
   echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-  echo "Driver command = apt-get install --reinstall $BP -y --force-yes $DRIVER" | tee -a $LOG
-  apt-get install --reinstall -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree amd-opencl-icd 2>&1 | tee -a $LOG
-  apt-get install --reinstall $BP -y --force-yes $DRIVER 2>&1 | tee -a $LOG
+  echo "Driver command = apt-get install --reinstall $BP -y $FORCE $DRIVER" | tee -a $LOG
+  apt-get install --reinstall -y $FORCE linux-headers-$(uname -r) build-essential firmware-linux-nonfree amd-opencl-icd 2>&1 | tee -a $LOG
+  apt-get install --reinstall $BP -y $FORCE $DRIVER 2>&1 | tee -a $LOG
   
   # Configure
   if ! $RADEON; then
@@ -405,9 +415,9 @@ function install_nvidia {
   # Install the packages
   apt-get update
   echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-  echo "Nvidia command = apt-get install --reinstall $BP -y --force-yes $DRIVER" | tee -a $LOG
-  apt-get install --reinstall -y --force-yes linux-headers-$(uname -r) build-essential firmware-linux-nonfree 2>&1 | tee -a $LOG
-  apt-get install --reinstall $BP -y --force-yes $DRIVER 2>&1 | tee -a $LOG
+  echo "Nvidia command = apt-get install --reinstall $BP -y $FORCE $DRIVER" | tee -a $LOG
+  apt-get install --reinstall -y $FORCE linux-headers-$(uname -r) build-essential firmware-linux-nonfree 2>&1 | tee -a $LOG
+  apt-get install --reinstall $BP -y $FORCE $DRIVER 2>&1 | tee -a $LOG
   
   # Configure
   if [[ "$DRIVER" =~ "bumblebee-nvidia" ]]; then
@@ -424,7 +434,7 @@ function install_nvidia {
         sed -i 's/Exec=nvidia-settings/Exec=optirun -b none nvidia-settings -c :8/' /usr/lib/nvidia/current/nvidia-settings.desktop
       fi
       # purge nvidia-xconfig and move xorg.conf away
-      apt-get purge -y --force-yes nvidia-xconfig 2>&1 | tee -a $LOG
+      apt-get purge -y $FORCE nvidia-xconfig 2>&1 | tee -a $LOG
       mv -f /etc/X11/xorg.conf /etc/X11/xorg.conf.ddm 2>&1 | tee -a $LOG
     else
       echo "ERROR: Could not configure Bumblebee for user: $USER" | tee -a $LOG
@@ -443,9 +453,9 @@ function purge_proprietary_drivers {
   rm /etc/modprobe.d/nvidia* 2>/dev/null
   rm /etc/modprobe.d/blacklist-nouveau.conf 2>/dev/null
   # Leave nvidia-detect and nvidia-installer-cleanup
-  apt-get purge -y --force-yes $(apt-show-versions | grep nvidia | grep -v detect | grep -v cleanup | cut -d':' -f1) 2>&1 | tee -a $LOG
-  apt-get purge -y --force-yes $(apt-show-versions | grep fglrx | cut -d':' -f1) 2>&1 | tee -a $LOG
-  apt-get purge -y --force-yes bumblebee* primus* primus*:i386 2>&1 | tee -a $LOG
+  apt-get purge -y $FORCE $(apt-show-versions | grep nvidia | grep -v detect | grep -v cleanup | cut -d':' -f1) 2>&1 | tee -a $LOG
+  apt-get purge -y $FORCE $(apt-show-versions | grep fglrx | cut -d':' -f1) 2>&1 | tee -a $LOG
+  apt-get purge -y $FORCE bumblebee* primus* primus*:i386 2>&1 | tee -a $LOG
   
   echo "Propietary drivers removed" | tee -a $LOG
 }
@@ -458,8 +468,8 @@ function install_open {
   # Install the packages
   apt-get update
   echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-  echo "Open command = apt-get install --reinstall -y --force-yes $DRIVER" | tee -a $LOG
-  apt-get install --reinstall -y --force-yes $DRIVER 2>&1 | tee -a $LOG
+  echo "Open command = apt-get install --reinstall -y $FORCE $DRIVER" | tee -a $LOG
+  apt-get install --reinstall -y $FORCE $DRIVER 2>&1 | tee -a $LOG
   
   echo "Open drivers installed" | tee -a $LOG
   
@@ -489,9 +499,9 @@ for DRV in $PURGE; do
     broadcom)
       # If 'purge' is passed as an argument, purge Broadcom
       echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-      #apt-get purge -y --force-yes firmware-b43* 2>&1 | tee -a $LOG
-      apt-get purge -y --force-yes broadcom-sta-dkms 2>&1 | tee -a $LOG
-      #apt-get purge -y --force-yes firmware-brcm80211 2>&1 | tee -a $LOG
+      #apt-get purge -y $FORCE firmware-b43* 2>&1 | tee -a $LOG
+      apt-get purge -y $FORCE broadcom-sta-dkms 2>&1 | tee -a $LOG
+      #apt-get purge -y $FORCE firmware-brcm80211 2>&1 | tee -a $LOG
       rm '/etc/modprobe.d/blacklist-broadcom.conf' 2>/dev/null
       ;;
     open)
@@ -503,7 +513,7 @@ for DRV in $PURGE; do
 	exit 6
       else
 	echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-	apt-get purge -y --force-yes $(dpkg-query -W -f='${Package}\n' *-pae) 2>&1 | tee -a $LOG
+	apt-get purge -y $FORCE $(dpkg-query -W -f='${Package}\n' *-pae) 2>&1 | tee -a $LOG
 	echo "PAE kernel successfully removed" | tee -a $LOG
       fi
       ;;
@@ -651,7 +661,7 @@ for DRV in $INSTALL; do
       if [ $MACHINE == "i686" ]; then
 	apt-get update
 	echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-	apt-get install --reinstall -y --force-yes linux-headers-686-pae linux-image-686-pae 2>&1 | tee -a $LOG
+	apt-get install --reinstall -y $FORCE linux-headers-686-pae linux-image-686-pae 2>&1 | tee -a $LOG
 	echo "PAE kernel successfully installed" | tee -a $LOG
       else
 	echo "amd64 machine: not installing"
@@ -659,7 +669,7 @@ for DRV in $INSTALL; do
       ;;
     fixbumblebee)
       # purge nvidia-xconfig and move xorg.conf away
-      apt-get purge -y --force-yes nvidia-xconfig 2>&1 | tee -a $LOG
+      apt-get purge -y $FORCE nvidia-xconfig 2>&1 | tee -a $LOG
       mv -f /etc/X11/xorg.conf /etc/X11/xorg.conf.ddm 2>&1 | tee -a $LOG
       ;;
     *)

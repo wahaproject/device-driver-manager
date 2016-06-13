@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-26 09:23+0100\n"
+"POT-Creation-Date: 2016-06-09 11:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:212
+#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:206
 msgid "Install"
 msgstr ""
 
@@ -61,37 +61,37 @@ msgid ""
 "Are you sure you want to continue?"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:212
+#: ../usr/lib/ddm/ddm.py:206
 msgid "Device"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:228
+#: ../usr/lib/ddm/ddm.py:222
 msgid "Remove kernel"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:229
+#: ../usr/lib/ddm/ddm.py:223
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:250
+#: ../usr/lib/ddm/ddm.py:244
 msgid "Hardware scan"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:248
 msgid "There are no available drivers for your hardware:"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:260
+#: ../usr/lib/ddm/ddm.py:254
 msgid "DDM did not find any supported hardware."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:359
+#: ../usr/lib/ddm/ddm.py:353
 msgid "ATI FirePro/Gl card found"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:360
+#: ../usr/lib/ddm/ddm.py:354
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
@@ -99,52 +99,52 @@ msgid ""
 "Proceed at your own risk."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:530
+#: ../usr/lib/ddm/ddm.py:524
 msgid "PAE capable system"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:644
+#: ../usr/lib/ddm/ddm.py:638
 msgid "Run as root."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:646
+#: ../usr/lib/ddm/ddm.py:640
 msgid "Wrong arguments passed to ddm."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:642
 msgid "There are no driver available."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:650
+#: ../usr/lib/ddm/ddm.py:644
 msgid "The driver cannot be found in repository."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:652
+#: ../usr/lib/ddm/ddm.py:646
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:654
+#: ../usr/lib/ddm/ddm.py:648
 msgid "DDM cannot purge the driver."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:650
 msgid "This card is not supported."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:658
+#: ../usr/lib/ddm/ddm.py:652
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:663
+#: ../usr/lib/ddm/ddm.py:657
 msgid "The software has been successfully installed."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:664
+#: ../usr/lib/ddm/ddm.py:658
 msgid "You will need to restart your system."
 msgstr ""
 

@@ -1,0 +1,11 @@
+#!/bin/bash
+FLE=$1
+USR=$2
+if [ "$USR" == '' ]; then
+  USR=$(logname)
+fi
+CMD=$(which kde-open)
+if [ "$CMD" == "" ]; then
+  CMD="xdg-open"
+fi
+sudo -H -u $USR bash -c "$CMD \"$FLE\""

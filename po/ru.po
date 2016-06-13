@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Ilinsky Mikhail <mail@milinsky.com>, 2015
+# Михаил Ильинский <mail@milinsky.com>, 2015
+# Lek Lek <vlt380@yandex.ru>, 2016
 # Анатолий Валерианович <ffox909@mail.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-26 09:23+0100\n"
-"PO-Revision-Date: 2015-11-20 21:12+0000\n"
-"Last-Translator: Анатолий Валерианович <ffox909@mail.ru>\n"
+"POT-Creation-Date: 2016-06-09 11:28+0200\n"
+"PO-Revision-Date: 2016-04-15 18:48+0000\n"
+"Last-Translator: Lek Lek <vlt380@yandex.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/solydxk/device-driver-"
 "manager/language/ru/)\n"
 "Language: ru\n"
@@ -28,7 +29,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr "Менеджер драйверов устройств"
 
-#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:212
+#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:206
 msgid "Install"
 msgstr "Установить"
 
@@ -68,24 +69,23 @@ msgid ""
 "\n"
 "Are you sure you want to continue?"
 msgstr ""
-"Вами выбраны для установки драйвера из хранилища бэкспот, каждый раз года "
-"они доступны.\n"
+"Вами выбрана установка драйверов из репозитория бэкпортов, если они "
+"доступны.\n"
 "\n"
-"Хотя используя бэкспот хранилища Вы можете работать с более современным "
-"программным обеспечением,\n"
-"Вам нужно представлять себе риск поломки от этого.\n"
+"Хотя используя бэкпорт-репозитории Вы можете работать со свежими версиями "
+"программного обеспечения, Вы делаете это на свой страх и риск.\n"
 "\n"
 "Уверены, что хотите продолжить?"
 
-#: ../usr/lib/ddm/ddm.py:212
+#: ../usr/lib/ddm/ddm.py:206
 msgid "Device"
 msgstr "Устройство"
 
-#: ../usr/lib/ddm/ddm.py:228
+#: ../usr/lib/ddm/ddm.py:222
 msgid "Remove kernel"
 msgstr "Удалить ядра"
 
-#: ../usr/lib/ddm/ddm.py:229
+#: ../usr/lib/ddm/ddm.py:223
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -93,23 +93,23 @@ msgstr ""
 "Вы не можете удалить запущенные ядра.\n"
 "Пожалуйста, загрузитесь с другого ядра и попробуйте снова."
 
-#: ../usr/lib/ddm/ddm.py:250
+#: ../usr/lib/ddm/ddm.py:244
 msgid "Hardware scan"
-msgstr "Сканирования оборудования"
+msgstr "Сканирование оборудования"
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:248
 msgid "There are no available drivers for your hardware:"
 msgstr "Нет подходящих драйверов для Вашего оборудования."
 
-#: ../usr/lib/ddm/ddm.py:260
+#: ../usr/lib/ddm/ddm.py:254
 msgid "DDM did not find any supported hardware."
 msgstr "Менеджер драйверов не нашел поддерживаемого оборудования."
 
-#: ../usr/lib/ddm/ddm.py:359
+#: ../usr/lib/ddm/ddm.py:353
 msgid "ATI FirePro/Gl card found"
 msgstr "Обнаружена карта ATI FirePro/Gl"
 
-#: ../usr/lib/ddm/ddm.py:360
+#: ../usr/lib/ddm/ddm.py:354
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
@@ -121,27 +121,27 @@ msgstr ""
 "\n"
 "Действуйте на свой страх и риск."
 
-#: ../usr/lib/ddm/ddm.py:530
+#: ../usr/lib/ddm/ddm.py:524
 msgid "PAE capable system"
 msgstr "Система с поддержкой PAE"
 
-#: ../usr/lib/ddm/ddm.py:644
+#: ../usr/lib/ddm/ddm.py:638
 msgid "Run as root."
 msgstr "Запустите с правами администратора."
 
-#: ../usr/lib/ddm/ddm.py:646
+#: ../usr/lib/ddm/ddm.py:640
 msgid "Wrong arguments passed to ddm."
-msgstr "Неправильные аргументы, передаваемые Менеджеру драйверов."
+msgstr "Менеджеру драйверов заданы неправильные аргументы"
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:642
 msgid "There are no driver available."
 msgstr "Нет доступных драйверов."
 
-#: ../usr/lib/ddm/ddm.py:650
+#: ../usr/lib/ddm/ddm.py:644
 msgid "The driver cannot be found in repository."
 msgstr "Драйвер не найден в репозитории."
 
-#: ../usr/lib/ddm/ddm.py:652
+#: ../usr/lib/ddm/ddm.py:646
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -149,15 +149,15 @@ msgstr ""
 "Ошибка загрузки.\n"
 "Проверьте ваше интернет-соединение."
 
-#: ../usr/lib/ddm/ddm.py:654
+#: ../usr/lib/ddm/ddm.py:648
 msgid "DDM cannot purge the driver."
 msgstr "Не удается удалить драйвер."
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:650
 msgid "This card is not supported."
 msgstr "Эта карта не поддерживается."
 
-#: ../usr/lib/ddm/ddm.py:658
+#: ../usr/lib/ddm/ddm.py:652
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -167,11 +167,11 @@ msgstr ""
 "Пожалуйста, запустите 'sudo apt-get -f install' в терминале.\n"
 "Посетите наш форум поддержки: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:663
+#: ../usr/lib/ddm/ddm.py:657
 msgid "The software has been successfully installed."
 msgstr "Программное обеспечение было успешно установлено."
 
-#: ../usr/lib/ddm/ddm.py:664
+#: ../usr/lib/ddm/ddm.py:658
 msgid "You will need to restart your system."
 msgstr "Вам нужно будет перезагрузить систему."
 
@@ -209,7 +209,7 @@ msgstr ""
 
 #: en/help.html+html.body.h1:8
 msgid "Device Driver Manager Help"
-msgstr "Менеджер Драйверов Устройств Помощь"
+msgstr "Помощь по менеджеру драйверов"
 
 #: en/help.html+html.body.div.h2:10
 msgid "Description"
@@ -223,11 +223,11 @@ msgid ""
 "systems. The Device Driver Manager will only list those devices that are "
 "supported. It will not list any other devices then mentioned above."
 msgstr ""
-"Менеджер Драйверов Устройств является инструментом, помогающий пользователям "
-"устанавливать сторонние драйверы оборудования. На данный момент возможна "
-"установка NVIDIA,  ATI и Broadcom драйверов, а так же установить pae-ядро "
-"для многоядерных 32-разрядных систем. В Менеджере Драйверов будет только "
-"список тех устройств, которые поддерживаются Вашим оборудованием. "
+"Менеджер Драйверов Устройств является инструментом, помогающим пользователям "
+"устанавливать сторонние драйвера оборудования. На данный момент возможна "
+"установка NVIDIA,  ATI и Broadcom драйверов, а так же установка pae-ядра для "
+"многоядерных 32-разрядных систем. В Менеджере Драйверов будет только список "
+"тех устройств, которые поддерживаются Вашим оборудованием. "
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"

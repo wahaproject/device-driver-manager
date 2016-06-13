@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-26 09:23+0100\n"
+"POT-Creation-Date: 2016-06-09 11:28+0200\n"
 "PO-Revision-Date: 2015-12-16 09:30+0000\n"
 "Last-Translator: Jocelyn <anechampenois@solydxk.com>\n"
 "Language-Team: French (http://www.transifex.com/solydxk/device-driver-"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Device Driver Manager"
 msgstr "Device Driver Manager"
 
-#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:212
+#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:206
 msgid "Install"
 msgstr "Installation "
 
@@ -73,15 +73,15 @@ msgstr ""
 "système.\n"
 "Etes-vous sûr de vouloir continuer?"
 
-#: ../usr/lib/ddm/ddm.py:212
+#: ../usr/lib/ddm/ddm.py:206
 msgid "Device"
 msgstr "Périphérique"
 
-#: ../usr/lib/ddm/ddm.py:228
+#: ../usr/lib/ddm/ddm.py:222
 msgid "Remove kernel"
 msgstr "Désinstaller le noyau"
 
-#: ../usr/lib/ddm/ddm.py:229
+#: ../usr/lib/ddm/ddm.py:223
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -89,23 +89,23 @@ msgstr ""
 "Impossible de supprimer le noyau utilisé actuellement.\n"
 "Merci de réessayer après redémarrage avec un autre noyau."
 
-#: ../usr/lib/ddm/ddm.py:250
+#: ../usr/lib/ddm/ddm.py:244
 msgid "Hardware scan"
 msgstr "Analyse du matériel"
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:248
 msgid "There are no available drivers for your hardware:"
 msgstr "Il n'y a pas de pilote disponible pour votre matériel:"
 
-#: ../usr/lib/ddm/ddm.py:260
+#: ../usr/lib/ddm/ddm.py:254
 msgid "DDM did not find any supported hardware."
 msgstr "DDM n'a trouvé aucun matériel supporté."
 
-#: ../usr/lib/ddm/ddm.py:359
+#: ../usr/lib/ddm/ddm.py:353
 msgid "ATI FirePro/Gl card found"
 msgstr "Carte ATIPro/GI trouvée"
 
-#: ../usr/lib/ddm/ddm.py:360
+#: ../usr/lib/ddm/ddm.py:354
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
@@ -117,27 +117,27 @@ msgstr ""
 "\n"
 "Faites-le à vos risques et périls."
 
-#: ../usr/lib/ddm/ddm.py:530
+#: ../usr/lib/ddm/ddm.py:524
 msgid "PAE capable system"
 msgstr "Système compatible PAE"
 
-#: ../usr/lib/ddm/ddm.py:644
+#: ../usr/lib/ddm/ddm.py:638
 msgid "Run as root."
 msgstr "Exécuter en tant qu'administrateur."
 
-#: ../usr/lib/ddm/ddm.py:646
+#: ../usr/lib/ddm/ddm.py:640
 msgid "Wrong arguments passed to ddm."
 msgstr "Des paramètres erronés ont été fournis à DDM."
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:642
 msgid "There are no driver available."
 msgstr "Il n'y a aucun pilote disponible."
 
-#: ../usr/lib/ddm/ddm.py:650
+#: ../usr/lib/ddm/ddm.py:644
 msgid "The driver cannot be found in repository."
 msgstr "Le pilote ne peut être trouvé dans les dépôts."
 
-#: ../usr/lib/ddm/ddm.py:652
+#: ../usr/lib/ddm/ddm.py:646
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -145,15 +145,15 @@ msgstr ""
 "Erreur de téléchargement.\n"
 "Vérifiez votre connexion internet."
 
-#: ../usr/lib/ddm/ddm.py:654
+#: ../usr/lib/ddm/ddm.py:648
 msgid "DDM cannot purge the driver."
 msgstr "DDM n'a pas réussi à désinstaller le pilote."
 
-#: ../usr/lib/ddm/ddm.py:656
+#: ../usr/lib/ddm/ddm.py:650
 msgid "This card is not supported."
 msgstr "Cette carte n'est pas supportée."
 
-#: ../usr/lib/ddm/ddm.py:658
+#: ../usr/lib/ddm/ddm.py:652
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -163,11 +163,11 @@ msgstr ""
 "Ouvrez un terminal et exécutez 'sudo apt-get -f install'.\n"
 "Visitez notre forum pour toute aide: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:663
+#: ../usr/lib/ddm/ddm.py:657
 msgid "The software has been successfully installed."
 msgstr "Le programme a été installé avec succès."
 
-#: ../usr/lib/ddm/ddm.py:664
+#: ../usr/lib/ddm/ddm.py:658
 msgid "You will need to restart your system."
 msgstr "Vous devez redémarrer votre système."
 

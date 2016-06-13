@@ -8,7 +8,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GObject
 from os.path import join, abspath, dirname, basename, isdir
 from utils import ExecuteThreadedCommands, hasInternetConnection, \
-                  getoutput, getPackageVersion, has_backports
+                  getoutput, getPackageVersion, has_backports, shell_exec
 import os
 import re
 from glob import glob
@@ -196,13 +196,7 @@ class DDM(object):
 
     def on_btnHelp_clicked(self, widget):
         # Open the help file as the real user (not root)
-        logname = getoutput('logname')[0]
-        try:
-            ff = getoutput('which firefox')[0]
-            os.system("su {} -c \"{} {}\" &".format(logname, ff, self.helpFile))
-        except:
-            # If Firefox was removed, this might work
-            os.system("su {} -c \"xdg-open {}\" &".format(logname, self.helpFile))
+        shell_exec("%s/open-as-user \"%s\"" % (self.scriptDir, self.helpFile))
 
     def get_supported_hardware(self):
         # Fill self.hardware
