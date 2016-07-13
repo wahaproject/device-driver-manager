@@ -3,56 +3,57 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Luis Filipe Teixeira <lufilte@gmail.com>, 2015
-# Nuno Duarte <inactive+nuno.passiano@transifex.com>, 2015
+# Moo, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-13 07:11+0200\n"
-"PO-Revision-Date: 2015-12-23 21:53+0000\n"
-"Last-Translator: Luis Filipe Teixeira <lufilte@gmail.com>\n"
-"Language-Team: Portuguese (Portugal) (http://www.transifex.com/solydxk/"
-"device-driver-manager/language/pt_PT/)\n"
-"Language: pt_PT\n"
+"PO-Revision-Date: 2016-07-06 07:32+0000\n"
+"Last-Translator: Moo\n"
+"Language-Team: Lithuanian (http://www.transifex.com/solydxk/device-driver-"
+"manager/language/lt/)\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/main.py:32
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
-msgstr "Gestor de Driver de Dispositivo"
+msgstr "Įrenginių tvarkyklių tvarkytuvė"
 
 #: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:206
 msgid "Install"
-msgstr "Instalar"
+msgstr "Įdiegti"
 
 #: ../usr/lib/ddm/ddm.py:54
 msgid "Help"
-msgstr "Ajuda"
+msgstr "Pagalba"
 
 #: ../usr/lib/ddm/ddm.py:55
 msgid "Quit"
-msgstr "Sair"
+msgstr "Baigti"
 
 #: ../usr/lib/ddm/ddm.py:56
 msgid "Use Backports"
-msgstr "Usar Backports"
+msgstr "Naudoti naujų versijų paketus"
 
 #: ../usr/lib/ddm/ddm.py:169
 msgid "No internet connection"
-msgstr "Não há ligação à Internet"
+msgstr "Nėra interneto ryšio"
 
 #: ../usr/lib/ddm/ddm.py:170
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
-"Você precisa de uma ligação à Internet para instalar o software adicional.\n"
-"Por favor, ligue à Internet e tente novamente."
+"Norėdami įdiegti papildomą programinę įrangą, turite prisijungti prie "
+"interneto.\n"
+"Prašome prisijungti prie interneto ir bandyti vėl."
 
 #: ../usr/lib/ddm/ddm.py:177
 msgid ""
@@ -65,46 +66,46 @@ msgid ""
 "\n"
 "Are you sure you want to continue?"
 msgstr ""
-"Você selecionou em instalar drivers a partir do repositório backports, "
-"sempre que estiver disponível.\n"
+"Jūs pasirinkote įdiegti tvarkykles iš naujų versijų paketų saugyklos, kai "
+"tik jos bus prieinamos.\n"
 "\n"
-"Embora seja possível, executar mais software atualizado usando o repositório "
-"backports,\n"
-"você introduz um maior risco de quebra ao fazê-lo.\n"
+"Nors naudodamiesi naujų versijų paketų saugykla, jūs galite naudotis "
+"naujesne programine įranga,\n"
+"tačiau taip darydami sukeliate gedimo riziką.\n"
 "\n"
-"Você tem certeza que quer continuar?"
+"Ar tikrai norite tęsti?"
 
 #: ../usr/lib/ddm/ddm.py:206
 msgid "Device"
-msgstr "Dispositivo"
+msgstr "Įrenginys"
 
 #: ../usr/lib/ddm/ddm.py:222
 msgid "Remove kernel"
-msgstr "Remover o kernel"
+msgstr "Šalinti branduolį"
 
 #: ../usr/lib/ddm/ddm.py:223
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
-"Você não pode remover um kernel iniciado.\n"
-"Por favor, iniciar outro kernel e tente novamente."
+"Jūs negalite pašalinti paleisto branduolio.\n"
+"Prašome, paleisti kitą branduolį ir bandyti vėl."
 
 #: ../usr/lib/ddm/ddm.py:244
 msgid "Hardware scan"
-msgstr "Verificação de hardware"
+msgstr ""
 
 #: ../usr/lib/ddm/ddm.py:248
 msgid "There are no available drivers for your hardware:"
-msgstr "Não há drivers disponíveis para o seu hardware:"
+msgstr "Jūsų aparatinei įrangai nėra prieinama jokių tvarkyklių:"
 
 #: ../usr/lib/ddm/ddm.py:254
 msgid "DDM did not find any supported hardware."
-msgstr "GDD não encontrou qualquer hardware suportado."
+msgstr "ĮTT nerado jokios palaikomos aparatinės įrangos."
 
 #: ../usr/lib/ddm/ddm.py:353
 msgid "ATI FirePro/Gl card found"
-msgstr "Placa ATI FirePro/Gl foi encontrado"
+msgstr "Rasta ATI FirePro/Gl plokštė"
 
 #: ../usr/lib/ddm/ddm.py:354
 msgid ""
@@ -113,46 +114,46 @@ msgid ""
 "\n"
 "Proceed at your own risk."
 msgstr ""
-"Ao Instalar o driver proprietário para a placa ATI FirePro/Gl pode fazer com "
-"que o seu sistema não arranque.\n"
+"ATI FirePro/Gl plokštei skirtų nuosavybinių tvarkyklių įdiegimas gali "
+"padaryti jūsų sistemą nepaleidžiamą.\n"
 "\n"
-"Prossiga por sua conta e risco."
+"Tęskite savo pačių rizika."
 
 #: ../usr/lib/ddm/ddm.py:524
 msgid "PAE capable system"
-msgstr "Sistema capaz PAE"
+msgstr ""
 
 #: ../usr/lib/ddm/ddm.py:638
 msgid "Run as root."
-msgstr "Execute como root."
+msgstr ""
 
 #: ../usr/lib/ddm/ddm.py:640
 msgid "Wrong arguments passed to ddm."
-msgstr "Argumentos errados foram passados para o gdd."
+msgstr "Į ĮTT perduoti neteisingi argumentai."
 
 #: ../usr/lib/ddm/ddm.py:642
 msgid "There are no driver available."
-msgstr "Não há nenhum driver disponível."
+msgstr "Nėra prieinamos tvarkyklės."
 
 #: ../usr/lib/ddm/ddm.py:644
 msgid "The driver cannot be found in repository."
-msgstr "O driver não pode ser encontrado no repositório."
+msgstr "Nepavyksta saugykloje rasti tvarkyklės."
 
 #: ../usr/lib/ddm/ddm.py:646
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr ""
-"Erro ao baixar.\n"
-"Verifique a sua ligação à internet."
+"Atsiuntimo klaida.\n"
+"Patikrinkite savo interneto ryšį."
 
 #: ../usr/lib/ddm/ddm.py:648
 msgid "DDM cannot purge the driver."
-msgstr "O GDD não pode limpar o driver."
+msgstr "ĮTT nepavyksta panaikinti tvarkyklės."
 
 #: ../usr/lib/ddm/ddm.py:650
 msgid "This card is not supported."
-msgstr "Esta placa não é suportada."
+msgstr "Ši plokštė yra nepalaikoma."
 
 #: ../usr/lib/ddm/ddm.py:652
 msgid ""
@@ -160,17 +161,18 @@ msgid ""
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
-"Houve um erro durante a instalação.\n"
-"Por favor, execute 'sudo apt-get -f install' no terminal.\n"
-"Visite nosso fórum de suporte: http://forums.solydxk.com"
+"Įdiegimo metu įvyko klaida.\n"
+"Prašome terminale įvykdyti \"sudo apt-get -f install\".\n"
+"Norėdami gauti palaikymą, apsilankykite mūsų forume: http://forums.solydxk."
+"com"
 
 #: ../usr/lib/ddm/ddm.py:657
 msgid "The software has been successfully installed."
-msgstr "O software foi instalado com êxito."
+msgstr "Programinė įranga buvo sėkmingai įdiegta."
 
 #: ../usr/lib/ddm/ddm.py:658
 msgid "You will need to restart your system."
-msgstr "Você precisará reiniciar o sistema."
+msgstr "Jums reikės iš naujo paleisti kompiuterį."
 
 #: ../usr/lib/ddm/main.py:33
 msgid ""
@@ -179,39 +181,36 @@ msgid ""
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
 msgstr ""
-"O Gestor de Driver de Dispositivo ajuda a instalar drivers proprietários "
-"para o seu hardware.\n"
-"Só instale drivers proprietários se tiver certeza de que você realmente "
-"precisa deles.\n"
-"Geralmente as drivers abertos são suficientes."
+"Įrenginių tvarkyklių tvarkytuvė padeda įdiegti jūsų aparatinei įrangai "
+"skirtas nuosavybines tvarkykles.\n"
+"Įdiekite nuosavybines tvarkykles tik tuo atveju, jeigu esate tikri, kad jums "
+"jų tikrai reikia.\n"
+"Dažniausiai, pakanka atvirų tvarkyklių."
 
 #: ../usr/lib/ddm/main.py:55
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
 msgstr ""
-"O Gestor de Driver de Dispositivo não pode ser iniciado num ambiente live\n"
-"Você pode usar o argumento --force para começar o GDD num ambiente live"
 
 #: ../usr/lib/ddm/main.py:83
 msgid "Unexpected error"
-msgstr "Erro inesperado"
+msgstr "Netikėta klaida"
 
 #: ../usr/lib/ddm/main.py:84
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
 msgstr ""
-"O GDD falhou com o seguinte erro inesperado. Por favor envie um relatório de "
-"erro!"
+"ĮTT patyrė nesėkmę su šia netikėta klaida. Prašome pranešti apie klaidą!"
 
 #: en/help.html+html.body.h1:8
 msgid "Device Driver Manager Help"
-msgstr "Ajuda do Gestor de Driver de Dispositivo"
+msgstr "Įrenginių tvarkyklių tvarkytuvės pagalba"
 
 #: en/help.html+html.body.div.h2:10
 msgid "Description"
-msgstr "Descrição"
+msgstr "Aprašas"
 
 #: en/help.html+html.body.div.p:11
 msgid ""
@@ -221,16 +220,16 @@ msgid ""
 "systems. The Device Driver Manager will only list those devices that are "
 "supported. It will not list any other devices then mentioned above."
 msgstr ""
-"O Gestor de Driver de Dispositivo é uma ferramenta para ajudar os "
-"utilizadores na instalação de drivers de hardware de terceiros. Atualmente, "
-"as drivers da Nvidia, ATI e Broadcom podem ser instaladas e permite instalar "
-"o kernel PAE para sistemas de 32 bits multi-core. O Gestor de Driver de "
-"Dispositivo só irá listar os dispositivos que são suportados. Ele não irá "
-"listar quaisquer outros dispositivos mencionados acima."
+"Įrenginių tvarkyklių tvarkytuvė yra įrankis, skirtas padėti naudotojams "
+"įdiegti trečiųjų šalių aparatinės įrangos tvarkykles. Šiuo metu gali būti "
+"įdiegtos Nvidia, ATI ir Broadcom tvarkytuvės bei yra leidžiama įdiegti PAE "
+"branduolį, skirtą kelių branduolių 32-bitų sistemoms. Įrenginių tvarkyklių "
+"tvarkytuvė išvardys tik tuos įrenginius, kurie yra palaikomi. Išskyrus juos, "
+"tvarkytuvė daugiau jokių įrenginių nevardys."
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
-msgstr "Importante"
+msgstr "Svarbu"
 
 #: en/help.html+html.body.div.p:14
 msgid ""
@@ -238,21 +237,21 @@ msgid ""
 "the repositories. Make sure you have an internet connection if you want to "
 "install the drivers."
 msgstr ""
-"O Gestor de Driver de Dispositivo só pode instalar drivers que estão "
-"disponíveis nos repositórios. Verifique se você tem uma ligação com a "
-"internet, se você quiser instalar os drivers."
+"Įrenginių tvarkyklių tvarkytuvė gali įdiegti tik tas tvarkykles, kurios yra "
+"prieinamos saugyklose. Norėdami įdiegti tvarkykles, įsitikinkite, kad esate "
+"prisijungę prie interneto."
 
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
-msgstr "Comandos"
+msgstr "Komandos"
 
 #: en/help.html+html.body.div.p:17
 msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
 msgstr ""
-"Se você preferir instalar os drivers pelo terminal, você pode usar os "
-"seguintes comandos:"
+"Jeigu teikiate pirmenybę įdiegti tvarkytuves per terminalą, galite naudoti "
+"šias komandas:"
 
 #: en/help.html+html.body.div.h3:21
 msgid "# ddm -i ati"
@@ -265,10 +264,10 @@ msgid ""
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
 msgstr ""
-"Isto irá instalar os drivers fglrx para a sua placa gráfica ATI. Placas ATI "
-"da versão HD 5000 ou superior são suportados pelos drivers fglrx. Versões "
-"entre 1000 e 5000 vai usar os drivers Radeon. Use \"ddm -p ati\" para "
-"remover os drivers do seu sistema."
+"Tai, jūsų ATI grafikos plokštei įdiegs fglrx tvarkykles. Fglrx tvarkyklės "
+"palaiko ATI plokštes, pradedant nuo HD 5000 versijos ir naujesnes. Versijos "
+"tarp 1000 ir 5000 naudos Radeon tvarkykles. Naudokite \"ddm -p ati\", kad "
+"pašalintumėte tvarkykles iš savo sistemos."
 
 #: en/help.html+html.body.div.h3:24
 msgid "# ddm -i nvidia"
@@ -280,10 +279,10 @@ msgid ""
 "select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
 "Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
 msgstr ""
-"Isto irá selecionar os drivers corretos para a sua placa gráfica Nvidia. Ele "
-"irá selecionar os drivers Bumblebee no caso de você ter um gráfica híbrida "
-"(ambos Nvidia e Intel). Use \"ddm -p nvidia\" para remover os drivers do seu "
-"sistema."
+"Tai, jūsų Nvidia grafikos plokštei parinks tinkamas tvarkykles. Tuo atveju, "
+"jeigu turite hibridinę plokštę (Nvidia ir Intel), tai parinks Bumblebee "
+"tvarkykles. Naudokite \"ddm -p nvidia\", kad pašalintumėte tvarkykles iš "
+"savo sistemos."
 
 #: en/help.html+html.body.div.h3:27
 msgid "# ddm -i open"
@@ -294,8 +293,8 @@ msgid ""
 "You can use this command if you want to revert back to the open Nouveau "
 "drivers. It will remove any proprietary drivers from your system."
 msgstr ""
-"Você pode usar este comando se você quiser reverter para os drivers Nouveau "
-"abertos. Ela irá remover qualquer drivers proprietários de seu sistema."
+"Jūs galite naudoti šią komandą, jeigu norite sugrįžti prie atvirų Nouveau "
+"tvarkyklių. Tai pašalins bet kokias nuosavybines tvarkykles iš jūsų sistemos."
 
 #: en/help.html+html.body.div.h3:30
 msgid "# ddm -i broadcom"
@@ -306,8 +305,8 @@ msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
 msgstr ""
-"Este comando irá instalar o driver correto para seu adaptador wireless "
-"Broadcom. Use \"ddm -p broadcom\" para remover os drivers do seu sistema."
+"Ši komanda, jūsų belaidžiam Broadcom adapteriui įdiegs tinkamas tvarkykles. "
+"Naudokite \"ddm -p broadcom\", kad pašalintumėte tvarkykles iš savo sistemos."
 
 #: en/help.html+html.body.div.h3:33
 msgid "# ddm -i pae"
@@ -319,10 +318,10 @@ msgid ""
 "OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
 "you cannot remove the kernel when you are currently booted into that kernel."
 msgstr ""
-"Isto irá instalar o kernel PAE em sistemas com múltiplos processadores que "
-"executam um sistema operativo de 32-bit. Use \"ddm -p pae\" para remover o "
-"kernel PAE do seu sistema. Observe que você não pode remover o kernel, "
-"estando ele atualmente iniciado."
+"Tai, kelių procesorių sistemose, kuriose vykdoma 32-bitų operacinė sistema, "
+"įdiegs PAE branduolį. Naudokite \"ddm -p pae\", kad pašalintumėte PAE "
+"branduolį iš savo sistemos. Turėkite omenyje, kad jūs negalite pašalinti "
+"branduolio, kuomet jūsų yra paleista į tą branduolį."
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
@@ -330,21 +329,21 @@ msgstr "# ddm -i fixbumblebee"
 
 #: en/help.html+html.body.div.p:37
 msgid "This will try to fix a Bumblebee install."
-msgstr "Isso irá tentar corrigir a instalação Bumblebee."
+msgstr "Tai pabandys pataisyti Bumblebee įdiegimą."
 
 #: en/help.html+html.body.div.h2:39
 msgid "Log"
-msgstr "Registo"
+msgstr "Žurnalas"
 
 #: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"
-msgstr "Ficheiro: /var/log/ddm.log"
+msgstr "Failas: /var/log/ddm.log"
 
 #: en/help.html+html.body.div.p:41
 msgid ""
 "Please, attach your log file when you post an issue on our forum: <a href="
 "\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
 msgstr ""
-"Por favor, anexar o ficheiro de registo quando você postar um problema no "
-"nosso fórum: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://"
+"Prašome, pridėkite savo žurnalo failą, kuomet apie problemą skelbiate mūsų "
+"forume: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://"
 "forums.solydxk.com</a>"

@@ -1,6 +1,0 @@
-#!/bin/bash
-if [ "$1" != "" ]; then
-  tx pull -l $1
-else
-  tx pull -a
-fi
