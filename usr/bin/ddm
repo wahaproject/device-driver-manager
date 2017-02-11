@@ -23,7 +23,7 @@ UNKNOWN='|4360|43b1|'
 
 # --force-yes is deprecated in stretch
 FORCE='--force-yes'
-source /etc/lsb-release
+. /etc/lsb-release
 if [[ -z "$DISTRIB_RELEASE" ]] || [ "$DISTRIB_RELEASE" -gt 8 ]; then
   FORCE='--allow-downgrades --allow-remove-essential --allow-change-held-packages'
 fi

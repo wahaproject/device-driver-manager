@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-13 07:11+0200\n"
-"PO-Revision-Date: 2016-07-06 07:32+0000\n"
+"POT-Creation-Date: 2017-01-03 16:02+0100\n"
+"PO-Revision-Date: 2016-08-25 14:01+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/solydxk/device-driver-"
 "manager/language/lt/)\n"
@@ -93,7 +93,7 @@ msgstr ""
 
 #: ../usr/lib/ddm/ddm.py:244
 msgid "Hardware scan"
-msgstr ""
+msgstr "Aparatinės įrangos peržiūra"
 
 #: ../usr/lib/ddm/ddm.py:248
 msgid "There are no available drivers for your hardware:"
@@ -121,11 +121,11 @@ msgstr ""
 
 #: ../usr/lib/ddm/ddm.py:524
 msgid "PAE capable system"
-msgstr ""
+msgstr "PAE įgalinta sistema"
 
 #: ../usr/lib/ddm/ddm.py:638
 msgid "Run as root."
-msgstr ""
+msgstr "Vykdykite kaip pagrindinis naudotojas (root)."
 
 #: ../usr/lib/ddm/ddm.py:640
 msgid "Wrong arguments passed to ddm."
@@ -192,6 +192,8 @@ msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
 msgstr ""
+"Įrenginių tvarkyklių tvarkytuvė negali būti paleista pristatymo aplinkoje\n"
+"Galite naudoti --force argumentą, kad paleistumėte ĮTT pristatymo aplinkoje"
 
 #: ../usr/lib/ddm/main.py:83
 msgid "Unexpected error"
@@ -250,7 +252,7 @@ msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
 msgstr ""
-"Jeigu teikiate pirmenybę įdiegti tvarkytuves per terminalą, galite naudoti "
+"Jeigu teikiate pirmenybę įdiegti tvarkykles per terminalą, galite naudoti "
 "šias komandas:"
 
 #: en/help.html+html.body.div.h3:21
@@ -305,7 +307,7 @@ msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
 msgstr ""
-"Ši komanda, jūsų belaidžiam Broadcom adapteriui įdiegs tinkamas tvarkykles. "
+"Ši komanda jūsų belaidžiam Broadcom adapteriui įdiegs tinkamas tvarkykles. "
 "Naudokite \"ddm -p broadcom\", kad pašalintumėte tvarkykles iš savo sistemos."
 
 #: en/help.html+html.body.div.h3:33
@@ -321,7 +323,7 @@ msgstr ""
 "Tai, kelių procesorių sistemose, kuriose vykdoma 32-bitų operacinė sistema, "
 "įdiegs PAE branduolį. Naudokite \"ddm -p pae\", kad pašalintumėte PAE "
 "branduolį iš savo sistemos. Turėkite omenyje, kad jūs negalite pašalinti "
-"branduolio, kuomet jūsų yra paleista į tą branduolį."
+"branduolio, kuomet jūsų sistema yra paleista į tą branduolį."
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
@@ -344,6 +346,6 @@ msgid ""
 "Please, attach your log file when you post an issue on our forum: <a href="
 "\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
 msgstr ""
-"Prašome, pridėkite savo žurnalo failą, kuomet apie problemą skelbiate mūsų "
+"Prašome, pridėti savo žurnalo failą, kai skelbiate apie problemą mūsų "
 "forume: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://"
 "forums.solydxk.com</a>"

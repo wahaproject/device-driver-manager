@@ -6,13 +6,14 @@
 # Михаил Ильинский <mail@milinsky.com>, 2015
 # Lek Lek <vlt380@yandex.ru>, 2016
 # Анатолий Валерианович <ffox909@mail.ru>, 2015
+# Михаил Ильинский <mail@milinsky.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-13 07:11+0200\n"
-"PO-Revision-Date: 2016-04-15 18:48+0000\n"
-"Last-Translator: Lek Lek <vlt380@yandex.ru>\n"
+"POT-Creation-Date: 2017-01-03 16:02+0100\n"
+"PO-Revision-Date: 2016-12-18 08:02+0000\n"
+"Last-Translator: Михаил Ильинский <mail@milinsky.com>\n"
 "Language-Team: Russian (http://www.transifex.com/solydxk/device-driver-"
 "manager/language/ru/)\n"
 "Language: ru\n"
@@ -182,9 +183,9 @@ msgid ""
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
 msgstr ""
-"Device Driver Manager, поможет установить несвободные драйвера для вашего "
-"оборудования.\n"
-"Устанавливайте несвободные драйвера, только если это необходимо.\n"
+"Менеджер драйверов устройств поможет установить несвободные драйверы для "
+"вашего оборудования.\n"
+"Устанавливайте несвободные драйверы, только если это необходимо.\n"
 "Обычно, свободных драйверов достаточно."
 
 #: ../usr/lib/ddm/main.py:55
@@ -266,7 +267,7 @@ msgid ""
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
 msgstr ""
-"Это установит fglrx драйвера для вашей графической карты ATI. ATI карты от "
+"Это установит fglrx драйверы для вашей графической карты ATI. ATI карты от "
 "версии HD 5000 и выше поддерживаются драйверами fglrx. Версии между 1000 и "
 "5000 будут использовать открытые драйверы Radeon. Используйте \"DDM -p ATI\" "
 "для удаления драйверов из системы."
@@ -283,7 +284,7 @@ msgid ""
 msgstr ""
 "Это позволит выбрать правильные драйверы для видеокарты NVIDIA. Он подберет "
 "Bumblebee  в случае, если у вас гибридная карта (как NVIDIA и Intel). "
-"Используйте \"ddm -p nvidia\" чтобы удалить драйвера из системы."
+"Используйте \"ddm -p nvidia\" чтобы удалить драйверы из системы."
 
 #: en/help.html+html.body.div.h3:27
 msgid "# ddm -i open"
@@ -295,7 +296,7 @@ msgid ""
 "drivers. It will remove any proprietary drivers from your system."
 msgstr ""
 "Вы можете использовать эту команду, если вы хотите вернуться к открытым "
-"драйверам. Это удалит любые проприетарные драйвера из вашей системы"
+"драйверам. Это удалит любые проприетарные драйверы из вашей системы"
 
 #: en/help.html+html.body.div.h3:30
 msgid "# ddm -i broadcom"
@@ -322,7 +323,7 @@ msgstr ""
 "Это позволит установить pae-ядро для многопроцессорных систем под "
 "управлением 32-разрядной ОС. Использовать \"ddm -p pae\", чтобы удалить ядро "
 "pae из вашей системы. Обратите внимание, что нельзя удалить ядро, когда вы "
-"находитесь в сессии в настоящий момент запущенной в нем."
+"находитесь в сессии запущенной в нем в текущий момент."
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
