@@ -1,3 +1,21 @@
+ddm (2.3.4) debian; urgency=low
+
+  * Make use of xksudo when available
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Mon, 06 Mar 2017 21:06:58 +0100
+
+ddm (2.3.3) debian; urgency=low
+
+  * Preserve environment variables
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Thu, 02 Mar 2017 11:45:24 +0100
+
+ddm (2.3.2) debian; urgency=low
+
+  * Add shortcut to System catagory
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Fri, 17 Feb 2017 19:38:32 +0100
+
 ddm (2.3.1) debian; urgency=low
 
   * updated translations
