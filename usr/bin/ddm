@@ -369,12 +369,21 @@ function install_nvidia {
   INSTALLED=`env LANG=C apt-cache policy $DRIVER | grep Installed | awk '{print $2}' | tr -d ' '`
 
   # Check for Optimus
-  OPTIMUS=$(lspci -vnn | grep '\[030[02]\]' | wc -l)
-  if [ $OPTIMUS -eq 2 ]; then
-    DRIVER='bumblebee-nvidia'
-    CANDIDATE=`env LANG=C apt-cache policy $DRIVER | grep Candidate | awk '{print $2}' | tr -d ' '`
-    INSTALLED=`env LANG=C apt-cache policy $DRIVER | grep Installed | awk '{print $2}' | tr -d ' '`
-  fi
+  # try to avoid detected dual video cards where nvidia is still primary.
+  # old method would try to install bumblebee on desktops with nvidia cards and intel integrated on the motherboard
+    OPTIMUS=1
+    if lspci -vnn | grep Intel |grep -q 0300 ; then
+	if lspci -vnn | grep NVIDIA | grep -q 0302 ; then
+	    echo $"nvidia-optimus detected"
+ 	    OPTIMUS=2
+	fi
+    fi
+
+    if [ $OPTIMUS = 2 ]; then
+        DRIVER='bumblebee-nvidia'    
+        CANDIDATE=`env LANG=C apt-cache policy $DRIVER | grep Candidate | awk '{print $2}' | tr -d ' '`
+        INSTALLED=`env LANG=C apt-cache policy $DRIVER | grep Installed | awk '{print $2}' | tr -d ' '`
+    fi
 
 
   if [ "$DRIVER" == "" ] || [ "$CANDIDATE" == "" ]; then
