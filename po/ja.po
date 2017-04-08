@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-06 21:07+0100\n"
+"POT-Creation-Date: 2017-04-01 18:43+0200\n"
 "PO-Revision-Date: 2016-01-18 10:26+0000\n"
 "Last-Translator: BALLOON a.k.a. Fu-sen.\n"
 "Language-Team: Japanese (http://www.transifex.com/solydxk/device-driver-"
@@ -19,33 +19,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/main.py:32
+#: ../usr/lib/ddm/ddm.py:54 ../usr/lib/ddm/main.py:32
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
 msgstr "デバイスドライバーマネージャー"
 
-#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:55 ../usr/lib/ddm/ddm.py:221
 msgid "Install"
 msgstr "インストール"
 
-#: ../usr/lib/ddm/ddm.py:54
+#: ../usr/lib/ddm/ddm.py:56
 msgid "Help"
 msgstr "ヘルプ"
 
-#: ../usr/lib/ddm/ddm.py:55
+#: ../usr/lib/ddm/ddm.py:57
+msgid "Log"
+msgstr "ログ"
+
+#: ../usr/lib/ddm/ddm.py:58
 msgid "Quit"
 msgstr "終了"
 
-#: ../usr/lib/ddm/ddm.py:56
+#: ../usr/lib/ddm/ddm.py:59
 msgid "Use Backports"
 msgstr "Backports 使用"
 
-#: ../usr/lib/ddm/ddm.py:169
+#: ../usr/lib/ddm/ddm.py:179
 msgid "No internet connection"
 msgstr "インターネットに接続できません"
 
-#: ../usr/lib/ddm/ddm.py:170
+#: ../usr/lib/ddm/ddm.py:180
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
@@ -53,7 +57,7 @@ msgstr ""
 "追加のソフトウェアをインストールするにはインターネット接続が必要です。\n"
 "インターネットの接続を行い、再度行って下さい。"
 
-#: ../usr/lib/ddm/ddm.py:177
+#: ../usr/lib/ddm/ddm.py:187
 msgid ""
 "You have selected to install drivers from the backports repository whenever "
 "they are available.\n"
@@ -73,15 +77,15 @@ msgstr ""
 "\n"
 "本当に進めてもよろしいですか？"
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:221
 msgid "Device"
 msgstr "デバイス"
 
-#: ../usr/lib/ddm/ddm.py:222
+#: ../usr/lib/ddm/ddm.py:237
 msgid "Remove kernel"
 msgstr "カーネルの削除"
 
-#: ../usr/lib/ddm/ddm.py:223
+#: ../usr/lib/ddm/ddm.py:238
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
@@ -89,23 +93,23 @@ msgstr ""
 "起動しているカーネルは削除する事ができません。\n"
 "他のカーネルで起動し、再度行って下さい。"
 
-#: ../usr/lib/ddm/ddm.py:244
+#: ../usr/lib/ddm/ddm.py:259
 msgid "Hardware scan"
 msgstr "ハードウェアの検索"
 
-#: ../usr/lib/ddm/ddm.py:248
+#: ../usr/lib/ddm/ddm.py:263
 msgid "There are no available drivers for your hardware:"
 msgstr "使用のハードウェアにあう使用可能なドライバが存在しません:"
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:269
 msgid "DDM did not find any supported hardware."
 msgstr "対応する任意のハードウェアを見つける事ができませんでした。"
 
-#: ../usr/lib/ddm/ddm.py:353
+#: ../usr/lib/ddm/ddm.py:363
 msgid "ATI FirePro/Gl card found"
 msgstr "ATI FirePro/Gl カードが見つかりました"
 
-#: ../usr/lib/ddm/ddm.py:354
+#: ../usr/lib/ddm/ddm.py:364
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
@@ -117,27 +121,27 @@ msgstr ""
 "\n"
 "ご自身の責任で行ってください。"
 
-#: ../usr/lib/ddm/ddm.py:524
+#: ../usr/lib/ddm/ddm.py:562
 msgid "PAE capable system"
 msgstr "PAE が使用できるシステム"
 
-#: ../usr/lib/ddm/ddm.py:638
+#: ../usr/lib/ddm/ddm.py:676
 msgid "Run as root."
 msgstr "root で実行"
 
-#: ../usr/lib/ddm/ddm.py:640
+#: ../usr/lib/ddm/ddm.py:678
 msgid "Wrong arguments passed to ddm."
 msgstr "誤った引用を受け取りました。"
 
-#: ../usr/lib/ddm/ddm.py:642
+#: ../usr/lib/ddm/ddm.py:680
 msgid "There are no driver available."
 msgstr "使用可能なドライバが存在しません。"
 
-#: ../usr/lib/ddm/ddm.py:644
+#: ../usr/lib/ddm/ddm.py:682
 msgid "The driver cannot be found in repository."
 msgstr "リボジトリからドライバーを見つけることができませんでした。"
 
-#: ../usr/lib/ddm/ddm.py:646
+#: ../usr/lib/ddm/ddm.py:684
 msgid ""
 "Download error.\n"
 "Check your internet connection."
@@ -145,15 +149,25 @@ msgstr ""
 "ダウンロードエラー。\n"
 "インターネット接続を確認して下さい。"
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:686
 msgid "DDM cannot purge the driver."
 msgstr "ドライバーを削除する事ができません。"
 
-#: ../usr/lib/ddm/ddm.py:650
+#: ../usr/lib/ddm/ddm.py:688
 msgid "This card is not supported."
 msgstr "このカードは対応していません。"
 
-#: ../usr/lib/ddm/ddm.py:652
+#: ../usr/lib/ddm/ddm.py:690
+msgid ""
+"Cannot get the Debian version from /etc/debian_version.\n"
+"Please install the base-files package."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:692
+msgid "Could not configure Nvidia Bumblebee."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:694
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
@@ -163,11 +177,11 @@ msgstr ""
 "ターミナルより 'sudo apt-get -f install' を実行して下さい。\n"
 "サポートのため、フォーラムをご覧下さい: http://forums.solydxk.com"
 
-#: ../usr/lib/ddm/ddm.py:657
+#: ../usr/lib/ddm/ddm.py:699
 msgid "The software has been successfully installed."
 msgstr "ソフトウェアのインストールを行いました。"
 
-#: ../usr/lib/ddm/ddm.py:658
+#: ../usr/lib/ddm/ddm.py:700
 msgid "You will need to restart your system."
 msgstr "再起動を行う必要があります。"
 
@@ -329,8 +343,8 @@ msgid "This will try to fix a Bumblebee install."
 msgstr "Bumblebee インストールの修正を試みます。"
 
 #: en/help.html+html.body.div.h2:39
-msgid "Log"
-msgstr "ログ"
+msgid "Logging"
+msgstr ""
 
 #: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"

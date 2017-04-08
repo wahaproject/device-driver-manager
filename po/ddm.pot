@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-06 21:07+0100\n"
+"POT-Creation-Date: 2017-04-01 18:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,39 +17,43 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../usr/lib/ddm/ddm.py:52 ../usr/lib/ddm/main.py:32
+#: ../usr/lib/ddm/ddm.py:54 ../usr/lib/ddm/main.py:32
 #: ../usr/share/kde4/services/kcm_device_driver_manager.desktop.in.h:1
 #: ../usr/share/applications/ddm.desktop.in.h:1
 msgid "Device Driver Manager"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:53 ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:55 ../usr/lib/ddm/ddm.py:221
 msgid "Install"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:54
+#: ../usr/lib/ddm/ddm.py:56
 msgid "Help"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:55
+#: ../usr/lib/ddm/ddm.py:57
+msgid "Log"
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:58
 msgid "Quit"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:56
+#: ../usr/lib/ddm/ddm.py:59
 msgid "Use Backports"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:169
+#: ../usr/lib/ddm/ddm.py:179
 msgid "No internet connection"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:170
+#: ../usr/lib/ddm/ddm.py:180
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:177
+#: ../usr/lib/ddm/ddm.py:187
 msgid ""
 "You have selected to install drivers from the backports repository whenever "
 "they are available.\n"
@@ -61,37 +65,37 @@ msgid ""
 "Are you sure you want to continue?"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:206
+#: ../usr/lib/ddm/ddm.py:221
 msgid "Device"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:222
+#: ../usr/lib/ddm/ddm.py:237
 msgid "Remove kernel"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:223
+#: ../usr/lib/ddm/ddm.py:238
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:244
+#: ../usr/lib/ddm/ddm.py:259
 msgid "Hardware scan"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:248
+#: ../usr/lib/ddm/ddm.py:263
 msgid "There are no available drivers for your hardware:"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:254
+#: ../usr/lib/ddm/ddm.py:269
 msgid "DDM did not find any supported hardware."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:353
+#: ../usr/lib/ddm/ddm.py:363
 msgid "ATI FirePro/Gl card found"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:354
+#: ../usr/lib/ddm/ddm.py:364
 msgid ""
 "Installing the proprietary driver for an ATI FirePro/Gl card may render your "
 "system unbootable.\n"
@@ -99,52 +103,62 @@ msgid ""
 "Proceed at your own risk."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:524
+#: ../usr/lib/ddm/ddm.py:562
 msgid "PAE capable system"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:638
+#: ../usr/lib/ddm/ddm.py:676
 msgid "Run as root."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:640
+#: ../usr/lib/ddm/ddm.py:678
 msgid "Wrong arguments passed to ddm."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:642
+#: ../usr/lib/ddm/ddm.py:680
 msgid "There are no driver available."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:644
+#: ../usr/lib/ddm/ddm.py:682
 msgid "The driver cannot be found in repository."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:646
+#: ../usr/lib/ddm/ddm.py:684
 msgid ""
 "Download error.\n"
 "Check your internet connection."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:648
+#: ../usr/lib/ddm/ddm.py:686
 msgid "DDM cannot purge the driver."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:650
+#: ../usr/lib/ddm/ddm.py:688
 msgid "This card is not supported."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:652
+#: ../usr/lib/ddm/ddm.py:690
+msgid ""
+"Cannot get the Debian version from /etc/debian_version.\n"
+"Please install the base-files package."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:692
+msgid "Could not configure Nvidia Bumblebee."
+msgstr ""
+
+#: ../usr/lib/ddm/ddm.py:694
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:657
+#: ../usr/lib/ddm/ddm.py:699
 msgid "The software has been successfully installed."
 msgstr ""
 
-#: ../usr/lib/ddm/ddm.py:658
+#: ../usr/lib/ddm/ddm.py:700
 msgid "You will need to restart your system."
 msgstr ""
 
@@ -273,7 +287,7 @@ msgid "This will try to fix a Bumblebee install."
 msgstr ""
 
 #: en/help.html+html.body.div.h2:39
-msgid "Log"
+msgid "Logging"
 msgstr ""
 
 #: en/help.html+html.body.div.h3:40
