@@ -102,19 +102,59 @@ def isAmd64():
 
 
 # Check for backports
-def has_backports():
+def get_backports():
     try:
-        bp = getoutput("grep backports /etc/apt/sources.list | grep -v ^#")[0]
+        bp = getoutput("grep backports /etc/apt/sources.list | grep debian | grep -v ^#")[0]
     except:
         bp = ''
     if bp.strip() == "":
         try:
-            bp = getoutput("grep backports /etc/apt/sources.list.d/*.list | grep -v ^#")[0]
+            bp = getoutput("grep backports /etc/apt/sources.list.d/*.list | grep debian | grep -v ^#")[0]
         except:
             bp = ''
-    if bp.strip() != "":
-        return True
+    bp = bp.strip()
+    return bp
+
+
+def has_newer_in_backports(package_name):
+    bp = get_backports()
+    if bp != '':
+        try:
+            out = getoutput("apt-cache madison %s | grep %s" % (package_name, bp))[0]
+            print((">> has_newer_in_backports =  %s" % out))
+            if out != '':
+                return True
+        except:
+            return False
     return False
+
+
+# Convert string to number
+def str_to_nr(stringnr, toInt=False):
+    nr = 0
+    stringnr = stringnr.strip()
+    try:
+        if toInt:
+            nr = int(stringnr)
+        else:
+            nr = float(stringnr)
+    except ValueError:
+        nr = 0
+    return nr
+
+
+# Get Debian's version number (float)
+def get_debian_version():
+    return str_to_nr(getoutput("head -n 1 /etc/debian_version | sed 's/[a-zA-Z]/0/' 2>/dev/null || echo 0")[0])
+
+
+def get_apt_options():
+    apt_options_8 = '--force-yes --assume-yes --quiet -o Dpkg::Options::=--force-confmiss -o Dpkg::Options::=--force-confnew '
+    apt_options_9 = '--assume-yes --quiet --allow-downgrades --allow-remove-essential --allow-change-held-packages -o Dpkg::Options::=--force-confmiss -o Dpkg::Options::=--force-confnew'
+    deb_version = get_debian_version()
+    if deb_version < 9:
+        return apt_options_8
+    return apt_options_9
 
 
 def getPackageVersion(package, candidate=False):

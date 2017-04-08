@@ -15,12 +15,13 @@ Vcs-Browser: https://github.com/SolydXK/device-driver-manager
 
 Package: ddm
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, ${python3:Depends}
   , python3
   , python3-gi
   , gir1.2-webkit-3.0
   , gir1.2-gtk-3.0
   , nvidia-detect
+  , nvidia-installer-cleanup
   , apt-show-versions
   , xserver-xorg-video-intel
   , xserver-xorg-video-fbdev
@@ -28,6 +29,21 @@ Depends: ${misc:Depends}
   , xserver-xorg-video-ati
   , xserver-xorg-video-nouveau
   , xserver-xorg-video-vesa
+  , aptitude
+  , apt
+  , bash
+  , base-files
+  , kdesudo | gksu
+  , grep
+  , gawk
+  , coreutils
+  , dpkg
+  , debconf
+  , kmod
+  , passwd
+  , sed
+  , pciutils
+  , sysvinit-utils
 Conflicts: solydxk-locale
 Replaces: solydxk-locale
 Description: Device driver manager

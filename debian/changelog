@@ -1,3 +1,47 @@
+ddm (2.4.1) debian; urgency=low
+
+  * Add -s (show only, do not install) to /usr/bin/ddm
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Sat, 01 Apr 2017 18:39:21 +0200
+
+ddm (2.4.0) debian; urgency=low
+
+  * More verbose logging
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 29 Mar 2017 17:24:28 +0200
+
+ddm (2.3.9) debian; urgency=low
+
+  * aticonfig only for Jessie
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 29 Mar 2017 13:58:12 +0200
+
+ddm (2.3.8) debian; urgency=low
+
+  * Debugging
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 29 Mar 2017 09:46:10 +0200
+
+ddm (2.3.7) debian; urgency=low
+
+  * Added missing dependencies
+  * Improved detection of Debian version
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Tue, 28 Mar 2017 20:15:11 +0200
+
+ddm (2.3.6) debian; urgency=low
+
+  * Fix bug not installing from backports
+  * Improve ATI detection in Stretch
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Mon, 27 Mar 2017 17:06:59 +0200
+
+ddm (2.3.5) debian; urgency=low
+
+  * Change to optimus detection (by dolphinoracle)
+
+ -- Arjen Balfoort <arjenbalfoort@solydxk.com>  Wed, 22 Mar 2017 14:23:37 +0100
+
 ddm (2.3.4) debian; urgency=low
 
   * Make use of xksudo when available

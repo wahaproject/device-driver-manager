@@ -9,6 +9,8 @@
 # 5 - Download error
 # 6 - Cannot purge driver
 # 7 - Card not supported
+# 8 - Missing files
+# 9 - Error configuring Bumblebee
 
 # Broadcom hardware list (device ids)
 # Update URL: http://linuxwireless.org/en/users/Drivers/b43
@@ -19,20 +21,32 @@ WLDEBIAN='|0576|4313|4328|4329|432a|432b|432d|4358|4359|4365|43a0|435a|4727|a99d
 BRCMDEBIAN=''
 UNKNOWN='|4360|43b1|'
 
+
+# AMD dropped these in Stretch:
+AMD9='Cedar Redwood Juniper Cypress Hemlock Aruba Trinity Richland Barts Cayman Caicos Turks'
+
 # -------------------------------------------------------------------------
 
 # --force-yes is deprecated in stretch
+if [ -f /etc/debian_version ]; then
+  DISTRIB_RELEASE=$(head -n 1 /etc/debian_version | sed 's/[a-zA-Z]/0/' | cut -d'.' -f 1 2>/dev/null || echo 0)
+fi
+if [[ -z "$DISTRIB_RELEASE" ]]; then
+  echo "Cannot get the Debian version from /etc/debian_version."
+  echo "Please install the base-files package."
+  exit 8
+fi
 FORCE='--force-yes'
-. /etc/lsb-release
-if [[ -z "$DISTRIB_RELEASE" ]] || [ "$DISTRIB_RELEASE" -gt 8 ]; then
+if [ "$DISTRIB_RELEASE" -ge 9 ]; then
   FORCE='--allow-downgrades --allow-remove-essential --allow-change-held-packages'
 fi
 
+SEP="======================================================================"
 
 function usage() {
-  echo "======================================================================"
+  echo $SEP
   echo "Device Driver Manager Help:"
-  echo "======================================================================"
+  echo $SEP
   echo "The following options are allowed:"
   echo
   echo "-b           Use backported packages when available."
@@ -45,6 +59,9 @@ function usage() {
   echo
   echo "-f           Force DDM to start, even in a Live environment."
   echo
+  echo "-s           Simulation mode: show the drivers but do not install."
+  echo "             Use with -i."
+  echo
   echo "-t           For development testing only!"
   echo "             This will install drivers for pre-defined hardware."
   echo "             Use with -i."
@@ -53,7 +70,7 @@ function usage() {
   echo "sudo ddm -i nvidia -i pae -p broadcom"
   echo "sudo ddm -i \"nvidia pae\" -p broadcom"
   echo "Both commands install nvidia and pae but purges broadcom."
-  echo "======================================================================"
+  echo $SEP
 }
 
 function launch_gui() {
@@ -82,11 +99,17 @@ BACKPORTS=false
 PURGE=''
 INSTALL=''
 TEST=false
-while getopts ":bi:p:ht" opt; do
+GUI=false
+SHOW=false
+while getopts ":bghi:p:st" opt; do
   case $opt in
     b)
       # Backports
       BACKPORTS=true
+      ;;
+    g)
+      # Started from GUI
+      GUI=true
       ;;
     h)
       usage
@@ -100,6 +123,10 @@ while getopts ":bi:p:ht" opt; do
       # Purge
       PURGE="$PURGE $OPTARG"
       ;;
+    s)
+      # Show drivers
+      SHOW=true
+      ;;
     t)
       # Testing
       TEST=true
@@ -109,7 +136,7 @@ while getopts ":bi:p:ht" opt; do
       launch_gui $@
       ;;
     :)
-      echo "Option -$OPTARG requires an argument." | tee -a $LOG
+      echo "Option -$OPTARG requires an argument."
       exit 2
       ;;
     *)
@@ -135,7 +162,8 @@ if [ $UID -ne 0 ]; then
 fi
 
 # If not running in terminal, use GUI frontend
-if [ ! -t 1 ]; then
+export DEBIAN_FRONTEND=noninteractive
+if $GUI || [ ! -t 1 ]; then
   export DEBIAN_FRONTEND=gnome
 fi
 
@@ -149,8 +177,17 @@ if [ -f $LOG ]; then
   if [ $LOG_SIZE_KB -gt $MAX_SIZE_KB ]; then
     mv -f $LOG $LOG2
   fi
-fi 
+fi
 
+# Initial logging
+echo $SEP | tee -a $LOG
+echo "Device Driver Manager" | tee -a $LOG
+echo $SEP | tee -a $LOG
+echo "Command: ddm $@" | tee -a $LOG
+echo "Debian version: $DISTRIB_RELEASE" | tee -a $LOG
+echo "Frontend: $DEBIAN_FRONTEND" | tee -a $LOG
+echo "Log file: $LOG" | tee -a $LOG
+echo $SEP | tee -a $LOG
 
 # =========================================================================
 # =============================== Functions ===============================
@@ -160,11 +197,12 @@ fi
 function get_backports_string() {
   PCK=$1
   local BPSTR=''
-  BP=$(grep backports /etc/apt/sources.list | grep -v ^# | awk '{print $3}')
+  BP=$(grep backports /etc/apt/sources.list | grep debian | grep -v ^# | awk '{print $3}')
   if [ "$BP" == "" ]; then
-    BP=$(grep backports /etc/apt/sources.list.d/*.list | grep -v ^# | awk '{print $3}')
+    BP=$(grep backports /etc/apt/sources.list.d/*.list | grep debian | grep -v ^# | awk '{print $3}')
   fi
   if [ "$BP" != "" ]; then
+    BP=$(echo $BP | cut -d' ' -f 1)
     PCKCHK=$(apt-cache madison $PCK | grep "$BP")
     if [ "$PCKCHK" != "" ]; then
       BPSTR="-t $BP"
@@ -194,7 +232,7 @@ function install_fglrx {
     exit 4
   fi
 
-  echo "Need driver: $DRIVER ($CANDIDATE)" | tee -a $LOG
+  echo "[install_fglrx] Need driver: $DRIVER ($CANDIDATE)" | tee -a $LOG
   
   # Backport?
   BP=''
@@ -204,31 +242,45 @@ function install_fglrx {
   
   # Add additional packages
   if ! $RADEON; then
-    DRIVER="$DRIVER fglrx-atieventsd fglrx-control fglrx-modules-dkms libgl1-fglrx-glx"
-    if [ "$ARCHITECTURE" == "x86_64" ]; then
-      DRIVER="$DRIVER libgl1-fglrx-glx-i386";
+    if [ "$DISTRIB_RELEASE" -lt 9 ]; then
+      # Preseed debconf answers
+      preseed_fglrx
+      # Extra packages
+      ICD='amd-opencl-icd'
+      DRIVER="$DRIVER fglrx-atieventsd fglrx-control fglrx-modules-dkms libgl1-fglrx-glx"
+      if [ "$ARCHITECTURE" == "x86_64" ]; then
+        DRIVER="$DRIVER libgl1-fglrx-glx-i386"
+      fi
     fi
   fi
   
   # In case this is a bybrid (by default installed on SolydXK)
   DRIVER="$DRIVER xserver-xorg-video-intel"
-  
-  # Preseed debconf answers
-  preseed_fglrx
 
-  # Install the packages
-  apt-get update
-  echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-  echo "Driver command = apt-get install --reinstall $BP -y $FORCE $DRIVER" | tee -a $LOG
-  apt-get install --reinstall -y $FORCE linux-headers-$(uname -r) build-essential firmware-linux-nonfree amd-opencl-icd 2>&1 | tee -a $LOG
-  apt-get install --reinstall $BP -y $FORCE $DRIVER 2>&1 | tee -a $LOG
-  
-  # Configure
-  if ! $RADEON; then
-    aticonfig --initial -f 2>&1 | tee -a $LOG
+  if $SHOW; then
+    echo "[simulation] Install ATI drivers: $DRIVER" | tee -a $LOG
+  else
+    # Install the packages
+    apt-get update
+    echo "[install_fglrx] Install headers and other essential packages" | tee -a $LOG
+    apt-get install --reinstall $BP -y $FORCE linux-headers-$(uname -r) 2>&1 | tee -a $LOG
+    apt-get install --reinstall $BP -y $FORCE build-essential 2>&1 | tee -a $LOG
+    apt-get install --reinstall $BP -y $FORCE firmware-linux-nonfree 2>&1 | tee -a $LOG
+    apt-get install --reinstall $BP -y $FORCE $ICD 2>&1 | tee -a $LOG
+    for DRV in $DRIVER; do
+      echo "[install_fglrx] Install $DRV" | tee -a $LOG
+      apt-get install --reinstall $BP -y $FORCE $DRV 2>&1 | tee -a $LOG
+    done
+    
+    # Configure
+    if [ "$DISTRIB_RELEASE" -lt 9 ]; then
+      if ! $RADEON && [ "$(which aticonfig)" != '' ]; then
+	aticonfig --initial -f 2>&1 | tee -a $LOG
+      fi
+    fi
+
+    echo "[install_fglrx] ATI/AMD driver successfully installed" | tee -a $LOG
   fi
-
-  echo "Fglrx driver successfully installed" | tee -a $LOG
 }
 
 # broadcom -------------------------------------------------------------------------
@@ -270,74 +322,76 @@ function install_broadcom {
       DRIVER='firmware-brcm80211'
       MODPROBE='brcmsmac'
     elif [[ "$UNKNOWN" =~ "|$DID|" ]] ; then
-      echo "This Broadcom device is not supported: $DID"
+      echo "[install_broadcom] This Broadcom device is not supported: $DID" | tee -a $LOG
     fi
   done
   
   if [ "$DRIVER" != "" ]; then
-    # Add the dependencies 
-    add_broadcom_dependencies $DRIVER
-    
-    # Preseed debconf answers
-    preseed_broadcom
+    if $SHOW; then
+      echo "[simulation] Install Broadcom drivers: $DRIVER" | tee -a $LOG
+    else
+      # Add the dependencies 
+      add_broadcom_dependencies $DRIVER
       
-    # Create download directory
-    CURDIR=$PWD
-    DLDIR='/tmp/dl'
-    mkdir -p $DLDIR 2>/dev/null
-    cd $DLDIR
-    rm -f *.deb 2>/dev/null
-    
-    # Download the packages
-    LIVEDEBS=$(ls /lib/live/mount/medium/offline/broadcom*.deb 2>/dev/null)
-    if [ "$LIVEDEBS" != "" ] && [ "$DRIVER" == "broadcom-sta-dkms" ]; then
-      cp -v $LIVEDEBS ./ | tee -a $LOG
-    else
-      # Backport?
-      BP=''
-      if $BACKPORTS; then
-	BP=$(get_backports_string $DRIVER)
+      # Preseed debconf answers
+      preseed_broadcom
+	
+      # Create download directory
+      CURDIR=$PWD
+      DLDIR='/tmp/dl'
+      mkdir -p $DLDIR 2>/dev/null
+      cd $DLDIR
+      rm -f *.deb 2>/dev/null
+      
+      # Download the packages
+      LIVEDEBS=$(ls /lib/live/mount/medium/offline/broadcom*.deb 2>/dev/null)
+      if [ "$LIVEDEBS" != "" ] && [ "$DRIVER" == "broadcom-sta-dkms" ]; then
+	cp -v $LIVEDEBS ./ | tee -a $LOG
+      else
+	# Backport?
+	BP=''
+	if $BACKPORTS; then
+	  BP=$(get_backports_string $DRIVER)
+	fi
+	apt-get update
+	echo "[install_broadcom] Broadcom command = apt-get download $BP $DRIVER" | tee -a $LOG
+	apt-get download $BP $DRIVER 2>&1 | tee -a $LOG
       fi
-      apt-get update
-      echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-      echo "Broadcom command = apt-get download $BP $DRIVER" | tee -a $LOG
-      apt-get download $BP $DRIVER 2>&1 | tee -a $LOG
-    fi
-    
-    # Check if packages were downloaded
-    CNT=`ls -1 *.deb 2>/dev/null | wc -l`
-    if [ $CNT -eq 0 ]; then
-      echo "No packages were downloaded - exiting" | tee -a $LOG
-      exit 5
-    fi
-    
-    # Remove modules
-    modprobe -rf b44
-    modprobe -rf b43
-    modprobe -rf b43legacy
-    modprobe -rf ssb
-    modprobe -rf brcmsmac
-    
-    # Install the downloaded packages
-    dpkg -i *.deb 2>&1 | tee -a $LOG
-    
-    # Remove download directory
-    cd $CURDIR
-    rm -r $DLDIR
-    
-    # Blacklist if needed
-    CONF='/etc/modprobe.d/blacklist-broadcom.conf'
-    if [ "$BLACKLIST" != "" ]; then
-      echo $BLACKLIST > $CONF
-    else
-      rm -f $CONF 2>/dev/null
-    fi
-    
-    # Start the new driver
-    modprobe $MODPROBE
+      
+      # Check if packages were downloaded
+      CNT=`ls -1 *.deb 2>/dev/null | wc -l`
+      if [ $CNT -eq 0 ]; then
+	echo "[install_broadcom] No packages were downloaded - exiting" | tee -a $LOG
+	exit 5
+      fi
+      
+      # Remove modules
+      modprobe -rf b44
+      modprobe -rf b43
+      modprobe -rf b43legacy
+      modprobe -rf ssb
+      modprobe -rf brcmsmac
+      
+      # Install the downloaded packages
+      dpkg -i *.deb 2>&1 | tee -a $LOG
+      
+      # Remove download directory
+      cd $CURDIR
+      rm -r $DLDIR
+      
+      # Blacklist if needed
+      CONF='/etc/modprobe.d/blacklist-broadcom.conf'
+      if [ "$BLACKLIST" != "" ]; then
+	echo $BLACKLIST > $CONF
+      else
+	rm -f $CONF 2>/dev/null
+      fi
+      
+      # Start the new driver
+      modprobe $MODPROBE
 
-    echo "Broadcomm driver successfully installed" | tee -a $LOG
-    
+      echo "[install_broadcom] Broadcomm driver successfully installed" | tee -a $LOG  
+    fi
   fi
 }
 
@@ -358,7 +412,18 @@ function preseed_nvidia {
 function install_nvidia {
   USER=$(logname)
   ARCHITECTURE=$(uname -m)
-  DRIVER=$(nvidia-detect | grep nvidia- | tr -d ' ')
+  
+  # Backport?
+  BP=''
+  if $BACKPORTS; then
+    BP=$(get_backports_string nvidia-detect)
+    if [ "$BP" != "" ]; then
+      apt-get install $BP -y $FORCE nvidia-detect 2>&1 | tee -a $LOG
+      apt-get install $BP -y $FORCE nvidia-installer-cleanup 2>&1 | tee -a $LOG
+    fi
+  fi
+  
+  DRIVER=$(nvidia-detect | grep nvidia- | tr -d ' ' | cut -d'/' -f 1)
   
   # Testing
   if $TEST; then
@@ -374,7 +439,7 @@ function install_nvidia {
     OPTIMUS=1
     if lspci -vnn | grep Intel |grep -q 0300 ; then
 	if lspci -vnn | grep NVIDIA | grep -q 0302 ; then
-	    echo $"nvidia-optimus detected"
+	    echo "[install_nvidia] Nvidia Optimus detected" | tee -a $LOG
  	    OPTIMUS=2
 	fi
     fi
@@ -390,13 +455,7 @@ function install_nvidia {
     exit 3
   fi
 
-  echo "Need driver: $DRIVER ($CANDIDATE)" | tee -a $LOG
-  
-  # Backport?
-  BP=''
-  if $BACKPORTS; then
-    BP=$(get_backports_string $DRIVER)
-  fi
+  echo "[install_nvidia] Need driver: $DRIVER ($CANDIDATE)" | tee -a $LOG
   
   # Add additional packages
   if [[ "$DRIVER" =~ "legacy" ]]; then
@@ -409,57 +468,71 @@ function install_nvidia {
     if [ "$DRIVER" == "bumblebee-nvidia" ]; then
       # Bumblebee drivers
       DRIVER="$DRIVER primus-libs-ia32:i386"
-    else
-      if [ "$ARCHITECTURE" == "x86_64" ]; then
-	# Additional 32-bit drivers for 64-bit systems
-	DRIVER="$DRIVER libgl1-nvidia-glx-i386"
-      fi
+    #else
+    #  if [ "$ARCHITECTURE" == "x86_64" ]; then
+    #     # Additional 32-bit drivers for 64-bit systems
+    #    if [ "$DISTRIB_RELEASE" -lt 9 ]; then
+    #      DRIVER="$DRIVER libgl1-nvidia-glx-i386"
+    #    fi
+    #  fi
     fi
-    DRIVER="$DRIVER nvidia-settings"
+    #DRIVER="$DRIVER nvidia-settings"
   fi
   
   # In case this is a bybrid (by default installed on SolydXK)
   DRIVER="$DRIVER xserver-xorg-video-intel"
   
   # Configuration package
-  DRIVER="$DRIVER nvidia-xconfig"
-  
- 
-  # Preseed debconf answers
-  preseed_nvidia $CANDIDATE
-  
-  # Install the packages
-  apt-get update
-  echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-  echo "Nvidia command = apt-get install --reinstall $BP -y $FORCE $DRIVER" | tee -a $LOG
-  apt-get install --reinstall -y $FORCE linux-headers-$(uname -r) build-essential firmware-linux-nonfree 2>&1 | tee -a $LOG
-  apt-get install --reinstall $BP -y $FORCE $DRIVER 2>&1 | tee -a $LOG
-  
-  # Configure
-  if [[ "$DRIVER" =~ "bumblebee-nvidia" ]]; then
-    if [ "$USER" != "" ] && [ "$USER" != "root" ]; then
-      groupadd bumblebee
-      groupadd video
-      usermod -a -G bumblebee,video $USER
-      #if [ -f /etc/bumblebee/bumblebee.conf ]; then
-	#sed -i -e 's/KernelDriver=nvidia\s*$/KernelDriver=nvidia-current/' /etc/bumblebee/bumblebee.conf
-      #fi
-      service bumblebeed restart
-      # Adapt nvidia settings
-      if [ -f /usr/lib/nvidia/current/nvidia-settings.desktop ]; then
-        sed -i 's/Exec=nvidia-settings/Exec=optirun -b none nvidia-settings -c :8/' /usr/lib/nvidia/current/nvidia-settings.desktop
-      fi
-      # purge nvidia-xconfig and move xorg.conf away
-      apt-get purge -y $FORCE nvidia-xconfig 2>&1 | tee -a $LOG
-      mv -f /etc/X11/xorg.conf /etc/X11/xorg.conf.ddm 2>&1 | tee -a $LOG
-    else
-      echo "ERROR: Could not configure Bumblebee for user: $USER" | tee -a $LOG
-    fi
-  else
-    nvidia-xconfig 2>&1 | tee -a $LOG
+  if [ "$DISTRIB_RELEASE" -lt 9 ]; then
+    DRIVER="$DRIVER nvidia-xconfig"
   fi
   
-  echo "Nvidia driver successfully installed" | tee -a $LOG
+  if $SHOW; then
+    echo "[simulation] Install Nvidia drivers: $DRIVER" | tee -a $LOG
+  else
+    # Preseed debconf answers
+    preseed_nvidia $CANDIDATE
+    
+    # Install the packages
+    apt-get update
+    echo "[install_nvidia] Install headers and other essential packages" | tee -a $LOG
+    apt-get install --reinstall $BP -y $FORCE linux-headers-$(uname -r) 2>&1 | tee -a $LOG
+    apt-get install --reinstall $BP -y $FORCE build-essential 2>&1 | tee -a $LOG
+    apt-get install --reinstall $BP -y $FORCE firmware-linux-nonfree 2>&1 | tee -a $LOG
+    for DRV in $DRIVER; do
+      echo "[install_nvidia] Install $DRV" | tee -a $LOG
+      apt-get install --reinstall $BP -y $FORCE $DRV 2>&1 | tee -a $LOG
+    done
+    
+    # Configure
+    if [[ "$DRIVER" =~ "bumblebee-nvidia" ]]; then
+      if [ "$USER" != "" ] && [ "$USER" != "root" ]; then
+	groupadd bumblebee
+	groupadd video
+	usermod -a -G bumblebee,video $USER
+	#if [ -f /etc/bumblebee/bumblebee.conf ]; then
+	  #sed -i -e 's/KernelDriver=nvidia\s*$/KernelDriver=nvidia-current/' /etc/bumblebee/bumblebee.conf
+	#fi
+	service bumblebeed restart
+	# Adapt nvidia settings
+	if [ -f /usr/lib/nvidia/current/nvidia-settings.desktop ]; then
+	  sed -i 's/Exec=nvidia-settings/Exec=optirun -b none nvidia-settings -c :8/' /usr/lib/nvidia/current/nvidia-settings.desktop
+	fi
+	# purge nvidia-xconfig and move xorg.conf away
+	if [ "$DISTRIB_RELEASE" -lt 9 ]; then
+	  apt-get purge -y $FORCE nvidia-xconfig 2>&1 | tee -a $LOG
+	  mv -f /etc/X11/xorg.conf /etc/X11/xorg.conf.ddm 2>&1 | tee -a $LOG
+	fi
+      else
+	echo "[install_nvidia] <<ERROR>> Could not configure Bumblebee for user: $USER" | tee -a $LOG
+	exit 9
+      fi
+    elif [ "$DISTRIB_RELEASE" -lt 9 ] && [ "$(which nvidia-xconfig)" != '' ]; then
+      nvidia-xconfig 2>&1 | tee -a $LOG
+    fi
+    
+    echo "[install_nvidia] Nvidia driver successfully installed" | tee -a $LOG
+  fi
 }
 
 # open -------------------------------------------------------------------------
@@ -473,7 +546,7 @@ function purge_proprietary_drivers {
   apt-get purge -y $FORCE $(apt-show-versions | grep fglrx | cut -d':' -f1) 2>&1 | tee -a $LOG
   apt-get purge -y $FORCE bumblebee* primus* primus*:i386 2>&1 | tee -a $LOG
   
-  echo "Propietary drivers removed" | tee -a $LOG
+  echo "[purge_proprietary_drivers] Propietary drivers removed" | tee -a $LOG
 }
 
 function install_open {
@@ -481,16 +554,21 @@ function install_open {
   # These are installed by default on SolydXK
   DRIVER="xserver-xorg-video-nouveau xserver-xorg-video-vesa xserver-xorg-video-intel xserver-xorg-video-fbdev xserver-xorg-video-radeon xserver-xorg-video-ati xserver-xorg-video-nouveau"
   
-  # Install the packages
-  apt-get update
-  echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-  echo "Open command = apt-get install --reinstall -y $FORCE $DRIVER" | tee -a $LOG
-  apt-get install --reinstall -y $FORCE $DRIVER 2>&1 | tee -a $LOG
-  
-  echo "Open drivers installed" | tee -a $LOG
-  
-  # Now cleanup
-  purge_proprietary_drivers
+  if $SHOW; then
+    echo "[simulation] Install open drivers: $DRIVER" | tee -a $LOG
+  else
+    # Install the packages
+    apt-get update
+    for DRV in $DRIVER; do
+      echo "[install_open]  Install $DRV" | tee -a $LOG
+      apt-get install --reinstall -y $FORCE $DRV 2>&1 | tee -a $LOG
+    done
+    
+    echo "[install_open]  Open drivers installed" | tee -a $LOG
+    
+    # Now cleanup
+    purge_proprietary_drivers
+  fi
 }
 
 # =========================================================================
@@ -500,10 +578,10 @@ function install_open {
 # Loop through drivers to purge
 for DRV in $PURGE; do
   # Start the log
-  echo "===================================" | tee -a $LOG
+  echo $SEP | tee -a $LOG
   echo "Purge drivers for: $DRV" | tee -a $LOG
   echo "Start at (m/d/y):" $(date +"%m/%d/%Y %H:%M:%S") | tee -a $LOG
-  echo "===================================" | tee -a $LOG
+  echo $SEP | tee -a $LOG
   
   case $DRV in
     ati)
@@ -514,7 +592,6 @@ for DRV in $PURGE; do
       ;;
     broadcom)
       # If 'purge' is passed as an argument, purge Broadcom
-      echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
       #apt-get purge -y $FORCE firmware-b43* 2>&1 | tee -a $LOG
       apt-get purge -y $FORCE broadcom-sta-dkms 2>&1 | tee -a $LOG
       #apt-get purge -y $FORCE firmware-brcm80211 2>&1 | tee -a $LOG
@@ -525,18 +602,17 @@ for DRV in $PURGE; do
     pae)
       RELEASE=`uname -r`
       if [[ "$RELEASE" =~ "pae" ]]; then
-	echo "ERROR: Cannot remove PAE kernel when PAE is booted" | tee -a $LOG
+	echo "[purge_pae] <<ERROR>> Cannot remove PAE kernel when PAE is booted. Please boot into another kernel." | tee -a $LOG
 	exit 6
       else
-	echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
 	apt-get purge -y $FORCE $(dpkg-query -W -f='${Package}\n' *-pae) 2>&1 | tee -a $LOG
-	echo "PAE kernel successfully removed" | tee -a $LOG
+	echo "[purge_pae] PAE kernel successfully removed" | tee -a $LOG
       fi
       ;;
     fixbumblebee)
       ;;
     *)
-      echo "ERROR: Unknown argument: $DRV"
+      echo "[purge] <<ERROR>> Unknown argument: $DRV"
       echo
       usage
       exit 2
@@ -547,10 +623,10 @@ done
 # Loop through drivers to install
 for DRV in $INSTALL; do
   # Start the log
-  echo "===================================" | tee -a $LOG
+  echo $SEP | tee -a $LOG
   echo "Install drivers for: $DRV" | tee -a $LOG
   echo "Start at (m/d/y):" $(date +"%m/%d/%Y %H:%M:%S") | tee -a $LOG
-  echo "===================================" | tee -a $LOG
+  echo $SEP | tee -a $LOG
   
   case $DRV in
     ati)
@@ -564,66 +640,93 @@ for DRV in $INSTALL; do
       fi
 
       if [ "$DEVICEIDS" == "" ]; then
-	echo "No ATI card found - exiting" | tee -a $LOG
+	echo "[install] No ATI card found" | tee -a $LOG
 	exit 0
       fi
 
-      HWCARD=`lspci | grep VGA`
-      HWCARD=${HWCARD#*: }
       STARTSERIE=5000
       DRIVER=''
       RADEON=false
-      
-      # Testing
-      if $TEST; then
-        HWCARD='00:02.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Bonaire [FirePro W5100]'
-      fi
-      
-      CARD=$(echo "$HWCARD" | egrep -i "radeon\s+[0-9a-z ]+|fire[a-z]+\s+[0-9a-z -]+")
-      if [ "$CARD" == "" ]; then
-	echo "$HWCARD is not supported" | tee -a $LOG
-	exit 7
-      fi
-      
-      if [ "$CARD" != "" ]; then
-        DRIVER='fglrx-driver'
-        if [[ "$CARD" =~ "HD" ]]; then
+
+      # Loop through all the VGA cards
+      lspci | grep VGA | while read -r HWCARD; do
+        HWCARD=${HWCARD#*: }
+        ATIFOUND=false
+        
+        # Testing
+	if $TEST; then
+	  #HWCARD='Advanced Micro Devices, Inc. [AMD/ATI] Bonaire [FirePro W5100]'
+	  #HWCARD='Advanced Micro Devices, Inc. [AMD/ATI] RS780L [Radeon 3000]'
+	  HWCARD='Advanced Micro Devices, Inc. [AMD/ATI] Tonga PRO [Radeon R9 285]'
+	  #HWCARD='Advanced Micro Devices, Inc. [AMD/ATI] RV710 [Radeon HD 4350/4550'
+	fi
+        
+	CARD=$(echo "$HWCARD" | egrep -i "radeon\s+[0-9a-z ]+|fire[a-z]+\s+[0-9a-z -]+")
+	if [ "$CARD" == "" ]; then
+	  echo "[install_ati] $HWCARD is not supported" | tee -a $LOG
+	  exit 7
+	fi
+	
+	# Set the driver
+	DRIVER='xserver-xorg-video-amdgpu'
+	if [ "$DISTRIB_RELEASE" -lt 9 ]; then
+	  DRIVER='fglrx-driver'
+	fi
+	
+	# Now check which driver is most appropriate
+	if [[ "${CARD,,}" =~ 'fire' ]]; then
+	  echo "[install_ati] FirePro/Gl found: use $DRIVER" | tee -a $LOG
+	  ATIFOUND=true
+	else
 	  # Split the card string into separate words and check for the Radeon series
-	  OLDIFS=$IFS
-	  IFS=" "
-	  set $CARD
-	  i=0
-	  for ITEM
-	  do
-	    # Is it a number?
-	    ITEM=${ITEM:0:4}
-	    if [[ "$ITEM" == ?(+|-)+([0-9]) ]]; then
-	      echo "$ITEM is number" | tee -a $LOG
-	      if [ $ITEM -ge $STARTSERIE ]; then
-		echo "Radeon HD $ITEM needs driver $DRIVER" | tee -a $LOG
-		break
-	      elif [ $ITEM -ge 1000 ] && [ $ITEM -lt $STARTSERIE ]; then
-		DRIVER='xserver-xorg-video-radeon'
-		RADEON=true
-		echo "Radeon HD $ITEM needs driver $DRIVER" | tee -a $LOG
-		break
-	      fi
+	  SERIE=$(echo "$CARD" | egrep -o '[0-9]{4}')
+	  if [ "$SERIE" != '' ]; then
+	    if [ $SERIE -ge $STARTSERIE ]; then
+	      echo "[install_ati] Supported ATI card found: use $DRIVER" | tee -a $LOG
+	      ATIFOUND=true
+	    elif [ $SERIE -ge 1000 ] && [ $SERIE -lt $STARTSERIE ]; then
+	      echo "[install_ati] ATI card not supported: use radeon driver" | tee -a $LOG
+	      DRIVER='xserver-xorg-video-radeon'
+	      RADEON=true
+	      ATIFOUND=true
 	    fi
-	    ((i++))
+	  fi
+	  
+	  if ! $ATIFOUND; then
+	    # Check for supported R-series
+	    RSERIE=$(echo "$CARD" | egrep -o ' R[3-9]{1} ')
+	    if [ "$RSERIE" == '' ]; then
+	      echo "[install_ati] ATI card not supported: use radeon driver" | tee -a $LOG
+	      DRIVER='xserver-xorg-video-radeon'
+	      RADEON=true
+	      ATIFOUND=true
+	    fi
+	  fi
+	fi
+	
+	
+	# Additional check for Stretch
+	if $ATIFOUND && [ "$DISTRIB_RELEASE" -ge 9 ]; then
+	  for NM in $AMD9; do
+	    #echo "[install_ati] Check for $NM in $CARD" | tee -a $LOG
+	    if [[ "$CARD" =~ "$NM" ]]; then
+	      echo "[install_ati] $NM found: use radeon driver" | tee -a $LOG
+	      DRIVER='xserver-xorg-video-radeon'
+	      RADEON=true
+	      break
+	    fi
 	  done
-	  IFS=$OLDIFS
-        else
-	  echo "$CARD needs driver $DRIVER" | tee -a $LOG
-        fi
-      fi
+	fi
 
-      if [ "$DRIVER" == "" ]; then
-	echo "No driver for this card: $CARD" | tee -a $LOG
-	exit 3
-      fi
+	if [ "$DRIVER" == "" ]; then
+	  echo "[install_ati] No driver for this card: $CARD" | tee -a $LOG
+	  exit 3
+	fi
 
-      # Install the AMD/Ati drivers
-      install_fglrx $RADEON $DRIVER
+	# Install the AMD/Ati drivers
+	echo "[install_ati] Card found: $CARD" | tee -a $LOG
+        install_fglrx $RADEON $DRIVER
+      done
       ;;
     nvidia)
       # Bumblebee: https://wiki.debian.org/Bumblebee
@@ -637,7 +740,7 @@ for DRV in $INSTALL; do
       fi
 
       if [ "$DEVICEIDS" == "" ]; then
-	echo "No Nvidia card found - exiting" | tee -a $LOG
+	echo "[install_nvidia] No Nvidia card found - exiting" | tee -a $LOG
 	exit 0
       fi
 
@@ -655,7 +758,7 @@ for DRV in $INSTALL; do
       fi
       
       if [ "$DEVICEIDS" == "" ]; then
-	echo "No Broadcom device found - exiting" | tee -a $LOG
+	echo "[install_broadcom] No Broadcom device found - exiting" | tee -a $LOG
 	exit 0
       fi
 
@@ -675,12 +778,15 @@ for DRV in $INSTALL; do
       
       # Install PAE when more than one CPU and not running on 64-bit system
       if [ $MACHINE == "i686" ]; then
-	apt-get update
-	echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
-	apt-get install --reinstall -y $FORCE linux-headers-686-pae linux-image-686-pae 2>&1 | tee -a $LOG
-	echo "PAE kernel successfully installed" | tee -a $LOG
+        if $SHOW; then
+          echo "[simulation] Install PAE kernel: linux-image-686-pae" | tee -a $LOG
+        else
+	  apt-get update
+	  apt-get install --reinstall -y $FORCE linux-headers-686-pae linux-image-686-pae 2>&1 | tee -a $LOG
+	  echo "[install_pae] PAE kernel successfully installed" | tee -a $LOG
+	fi
       else
-	echo "amd64 machine: not installing"
+	echo "[install_ati] Amd64 machine: not installing"
       fi
       ;;
     fixbumblebee)
@@ -689,7 +795,7 @@ for DRV in $INSTALL; do
       mv -f /etc/X11/xorg.conf /etc/X11/xorg.conf.ddm 2>&1 | tee -a $LOG
       ;;
     *)
-      echo "ERROR: Unknown argument: $DRV"
+      echo "[install] <<ERROR>> Unknown argument: $DRV"
       echo
       usage
       exit 2

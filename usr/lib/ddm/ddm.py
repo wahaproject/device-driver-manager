@@ -6,9 +6,10 @@ gi.require_version('Gtk', '3.0')
 
 # from gi.repository import Gtk, GdkPixbuf, GObject, Pango, Gdk, GLib
 from gi.repository import Gtk, GObject
-from os.path import join, abspath, dirname, basename, isdir
+from os.path import join, abspath, dirname, basename, isdir, exists
 from utils import ExecuteThreadedCommands, hasInternetConnection, \
-                  getoutput, getPackageVersion, has_backports, shell_exec
+                  getoutput, getPackageVersion, get_backports, shell_exec, \
+                  has_newer_in_backports, get_apt_options, get_debian_version
 import os
 import re
 from glob import glob
@@ -45,6 +46,7 @@ class DDM(object):
         self.tvDDM = go("tvDDM")
         self.btnSave = go("btnSave")
         self.btnHelp = go("btnHelp")
+        self.btnLog = go("btnLog")
         self.btnQuit = go("btnQuit")
         self.pbDDM = go("pbDDM")
         self.chkBackports = go("chkBackports")
@@ -52,6 +54,7 @@ class DDM(object):
         self.window.set_title(_("Device Driver Manager"))
         self.btnSave.set_label(_("Install"))
         self.btnHelp.set_label(_("Help"))
+        self.btnLog.set_label(_("Log"))
         self.btnQuit.set_label(_("Quit"))
         self.chkBackports.set_label(_("Use Backports"))
 
@@ -69,6 +72,7 @@ class DDM(object):
         self.log = Logger(self.logFile, addLogTime=False, maxSizeKB=5120)
         self.tvDDMHandler = TreeViewHandler(self.tvDDM)
         self.tvDDMHandler.connect('checkbox-toggled', self.tv_checkbox_toggled)
+        self.backports = get_backports()
 
         # Connect builder signals and show window
         self.builder.connect_signals(self)
@@ -78,7 +82,7 @@ class DDM(object):
         self.fill_treeview_ddm()
 
         # Check backports
-        if len(self.hardware) < 2 or not has_backports():
+        if len(self.hardware) < 2 or self.backports == '':
             self.chkBackports.hide()
 
         self.get_loaded_graphical_driver()
@@ -130,6 +134,7 @@ class DDM(object):
             for hw in self.hardware:
                 self.log.write("Device = {} in {}".format(device, hw[2]), 'on_btnSave_clicked')
                 if device in hw[2]:
+                    hw_driver = hw[3]
                     manufacturerId = hw[4]
                     if hw[0] and not selected:
                         action = 'purge'
@@ -153,6 +158,11 @@ class DDM(object):
                     driver = 'ati'
                 elif manufacturerId == '10de':
                     driver = 'nvidia '
+                    # If nvidia-detect needs a drivers from the backports repository
+                    # and the user didn't select the backports check box,
+                    # force the use of backports to install the appropriate drivers
+                    if 'backports' in hw_driver and not self.chkBackports.get_active():
+                        option = "-b %s" % option
                 elif manufacturerId == '14e4':
                     driver = 'broadcom '
                 elif 'pae' in manufacturerId:
@@ -189,7 +199,7 @@ class DDM(object):
 
                 command = "ddm {}".format(" ".join(arguments))
                 self.log.write("Command to execute: {}".format(command), 'on_btnSave_clicked')
-                self.exec_command(command)
+                self.exec_command("%s -g" % command)
 
     def on_btnQuit_clicked(self, widget):
         self.on_ddmWindow_destroy(widget)
@@ -197,6 +207,11 @@ class DDM(object):
     def on_btnHelp_clicked(self, widget):
         # Open the help file as the real user (not root)
         shell_exec("%s/open-as-user \"%s\"" % (self.scriptDir, self.helpFile))
+
+    def on_btnLog_clicked(self, widget):
+        # Open the log file as the real user (not root)
+        if exists('/var/log/ddm.log'):
+            shell_exec("%s/open-as-user /var/log/ddm.log" % self.scriptDir)
 
     def get_supported_hardware(self):
         # Fill self.hardware
@@ -296,7 +311,6 @@ class DDM(object):
             self.queue.task_done()
             self.show_message(ret)
         del self.threads[name]
-
         self.set_buttons_state(True)
 
         return False
@@ -318,12 +332,15 @@ class DDM(object):
         startSeries = 5000
         deviceArray = self.get_lspci_info(manufacturerId, 'VGA')
 
+        amd9 = 'Cedar Redwood Juniper Cypress Hemlock Aruba Trinity Richland Barts Cayman Caicos Turks'
+
         if self.test:
             #deviceArray = [['Advanced Micro Devices [AMD] nee ATI Manhattan [Mobility Radeon HD 5400 Series]', manufacturerId, '68e0']]
             #deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] RV710 [Radeon HD 4350/4550]', manufacturerId, '68e0']]
             #deviceArray = [['Advanced Micro Devices [AMD/ATI] RS880 [Radeon HD 4290]', manufacturerId, '68e0']]
-            #deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] Tonga PRO [Radeon R9 285]', manufacturerId, '6939']]
-            deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] Bonaire [FirePro W5100]', manufacturerId, '6649']]
+            deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] Tonga PRO [Radeon R9 285]', manufacturerId, '6939']]
+            #deviceArray =[['Advanced Micro Devices, Inc. [AMD/ATI] RS780L [Radeon 3000]', manufacturerId, '9616']]
+            #deviceArray = [['Advanced Micro Devices, Inc. [AMD/ATI] Bonaire [FirePro W5100]', manufacturerId, '6649']]
 
         if deviceArray:
             self.log.write("Device(s): {}".format(deviceArray), 'get_ati')
@@ -339,43 +356,59 @@ class DDM(object):
             for device in deviceArray:
                 self.log.write("ATI device found: {}".format(device[0]), 'get_ati')
                 # Check for supported cards
+                ati_found = False
                 matchObj = re.search('radeon\s+[0-9a-z ]+|fire[a-z]+\s+[0-9a-z -]+', device[0], flags=re.IGNORECASE)
                 if matchObj:
-                    if " hd " in matchObj.group(0).lower():
-                        # Check if ATI series is above 5000
-                        matchObjSeries = re.search('[0-9]{4}', matchObj.group(0))
-                        if matchObjSeries:
-                            series = int(matchObjSeries.group(0))
-                            # Don't show older ATI Radeon HD cards
-                            if series < startSeries:
-                                break
-                    elif 'fire' in matchObj.group(0).lower():
+                    if 'fire' in matchObj.group(0).lower():
                         title = _("ATI FirePro/Gl card found")
                         msg = _("Installing the proprietary driver for an ATI FirePro/Gl card may render your system unbootable.\n\n"
                                 "Proceed at your own risk.")
                         self.log.write(msg, 'get_ati')
                         WarningDialog(title, msg)
+                        ati_found = True
+                    else:
+                        # Check if ATI series is above 5000
+                        matchObjSeries = re.search('[0-9]{4}', matchObj.group(0))
+                        if matchObjSeries:
+                            ati_found = True
+                            series = int(matchObjSeries.group(0))
+                            # Don't show older ATI Radeon HD cards
+                            if series < startSeries:
+                                self.notSupported.append(device[0])
+                                continue
+                        # Check for supported R-series
+                        matchObjRSeries = re.search(' R[3-9]{1} ', matchObj.group(0))
+                        if not matchObjRSeries:
+                            ati_found = True
+                            self.notSupported.append(device[0])
+                            continue
 
-                    self.log.write("ATI series: {}".format(matchObj.group(0)), 'get_ati')
+                    # Additional check for Stretch
+                    if not ati_found and get_debian_version() >= 9:
+                        for nm in amd9.split(' '):
+                            if nm in device:
+                                self.notSupported.append(device[0])
+                                continue
 
-                    # Check if the available driver is already loaded
-                    selected = False
-                    driver = 'fglrx'
-                    if loadedDrv == driver:
-                        selected = True
+                self.log.write("ATI series: {}".format(matchObj.group(0)), 'get_ati')
 
-                    # Fill self.hardware
-                    #shortDevice = self.shorten_long_string(device[0], 100)
-                    self.hardware.append([selected, logo, device[0], driver, device[1], device[2]])
-                else:
-                    self.notSupported.append(device[0])
+                # Check if the available driver is already loaded
+                selected = False
+                driver = 'fglrx'
+                if loadedDrv == driver:
+                    selected = True
+
+                # Fill self.hardware
+                #shortDevice = self.shorten_long_string(device[0], 100)
+                self.hardware.append([selected, logo, device[0], driver, device[1], device[2]])
 
     def get_nvidia(self):
         manufacturerId = '10de'
         deviceArray = self.get_lspci_info(manufacturerId, 'VGA')
 
         if self.test:
-            deviceArray = [['NVIDIA Corporation GT218 [GeForce G210M]', manufacturerId, '0a74']]
+            #deviceArray = [['NVIDIA Corporation GT218 [GeForce G210M]', manufacturerId, '0a74']]
+            deviceArray = [['NVIDIA Corporation Device', manufacturerId, '1401']]
             if self.test_optimus:
                 deviceArray = [['Intel Corporation Haswell-ULT Integrated Graphics Controller', '8086', '0a16'], \
                                 ['NVIDIA Corporation GK107M [GeForce GT 750M]', manufacturerId, '0fe4']]
@@ -425,9 +458,14 @@ class DDM(object):
                     if self.test:
                         driver = 'nvidia-driver'
                     else:
-                        nvidiaDetect = getoutput("nvidia-detect | grep nvidia- | tr -d ' '")
-                        if nvidiaDetect:
-                            driver = nvidiaDetect[0]
+                        # Install nvidia-detect from backports when available
+                        # This version will support newer models
+                        if has_newer_in_backports('nvidia-detect'):
+                            shell_exec("apt-get install -t %s %s nvidia-detect" % (self.backports, get_apt_options()))
+
+                        nv = getoutput("nvidia-detect | grep nvidia- | tr -d ' '")
+                        if nv:
+                            driver = nv[0]
 
                 self.log.write("Nvidia driver to use: {}".format(driver), 'get_nvidia')
 
@@ -648,6 +686,10 @@ class DDM(object):
                     ErrorDialog(self.btnSave.get_label(), _("DDM cannot purge the driver."))
                 elif ret == 7:
                     ErrorDialog(self.btnSave.get_label(), _("This card is not supported."))
+                elif ret == 8:
+                    ErrorDialog(self.btnSave.get_label(), _("Cannot get the Debian version from /etc/debian_version.\nPlease install the base-files package."))
+                elif ret == 9:
+                    ErrorDialog(self.btnSave.get_label(), _("Could not configure Nvidia Bumblebee."))
                 else:
                     msg = _("There was an error during the installation.\n"
                     "Please, run 'sudo apt-get -f install' in a terminal.\n"
