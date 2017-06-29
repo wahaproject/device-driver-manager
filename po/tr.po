@@ -1,23 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
-# Butterfly <gokhanlnx@gmail.com>, 2016
+# Butterfly <gokhanlnx@gmail.com>, 2016-2017
 # ortanca_samuray <ortanca_samuray@hotmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-01 18:43+0200\n"
-"PO-Revision-Date: 2016-03-23 13:32+0000\n"
+"PO-Revision-Date: 2017-05-28 21:02+0000\n"
 "Last-Translator: Butterfly <gokhanlnx@gmail.com>\n"
-"Language-Team: Turkish (http://www.transifex.com/solydxk/device-driver-"
-"manager/language/tr/)\n"
-"Language: tr\n"
+"Language-Team: Turkish (http://www.transifex.com/solydxk/device-driver-manager/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../usr/lib/ddm/ddm.py:54 ../usr/lib/ddm/main.py:32
@@ -54,30 +53,17 @@ msgstr "İnternet bağlantısı yok"
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
-msgstr ""
-"Ek yazılımları kurmak için bir internet bağlantısına ihtiyacınız var.\n"
-"Lütfen, internet bağlantısı kurun ve yeniden deneyin."
+msgstr "Ek yazılımları kurmak için bir internet bağlantısına ihtiyacınız var.\nLütfen, internet bağlantısı kurun ve yeniden deneyin."
 
 #: ../usr/lib/ddm/ddm.py:187
 msgid ""
-"You have selected to install drivers from the backports repository whenever "
-"they are available.\n"
+"You have selected to install drivers from the backports repository whenever they are available.\n"
 "\n"
-"Although you can run more up to date software using the backports "
-"repository,\n"
+"Although you can run more up to date software using the backports repository,\n"
 "you introduce a greater risk of breakage doing so.\n"
 "\n"
 "Are you sure you want to continue?"
-msgstr ""
-"Backport deposundan seçtiğiniz sürücüler kullanılabilir olduğunda "
-"yüklenecektir.\n"
-"\n"
-"Bununla birlikte güncel yazılımları, backports depolarını kullanarak "
-"çalıştırabilirsiniz.\n"
-"\n"
-"Bunu yaparken bozulma riski yüksektir.\n"
-"\n"
-"Devam etmek istediğinizden eminmisiniz?"
+msgstr "Backport deposundan seçtiğiniz sürücüler kullanılabilir olduğunda yüklenecektir.\n\nBununla birlikte güncel yazılımları, backports depolarını kullanarak çalıştırabilirsiniz.\n\nBunu yaparken bozulma riski yüksektir.\n\nDevam etmek istediğinizden eminmisiniz?"
 
 #: ../usr/lib/ddm/ddm.py:221
 msgid "Device"
@@ -91,9 +77,7 @@ msgstr "Çekirdeği sil"
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
-msgstr ""
-"Açılış yapılan bir çekirdeği silemezsiniz.\n"
-"Lütfen, başka bir çekirdekle açılış yapın ve yeniden deneyin."
+msgstr "Açılış yapılan bir çekirdeği silemezsiniz.\nLütfen, başka bir çekirdekle açılış yapın ve yeniden deneyin."
 
 #: ../usr/lib/ddm/ddm.py:259
 msgid "Hardware scan"
@@ -113,15 +97,10 @@ msgstr "ATI FirePro/Gl kart bulundu"
 
 #: ../usr/lib/ddm/ddm.py:364
 msgid ""
-"Installing the proprietary driver for an ATI FirePro/Gl card may render your "
-"system unbootable.\n"
+"Installing the proprietary driver for an ATI FirePro/Gl card may render your system unbootable.\n"
 "\n"
 "Proceed at your own risk."
-msgstr ""
-"ATI FirePro/GI kartı için özel sürücüyü yüklemeniz sisteminizi açılmaz hale "
-"getirebilir.\n"
-"\n"
-"Risk alıyorsanız devam edin."
+msgstr "ATI FirePro/GI kartı için özel sürücüyü yüklemeniz sisteminizi açılmaz hale getirebilir.\n\nRisk alıyorsanız devam edin."
 
 #: ../usr/lib/ddm/ddm.py:562
 msgid "PAE capable system"
@@ -147,9 +126,7 @@ msgstr "Sürücü depoda bulunamadı."
 msgid ""
 "Download error.\n"
 "Check your internet connection."
-msgstr ""
-"İndirme hatası.\n"
-"İnternet bağlantınızı kontrol ediniz."
+msgstr "İndirme hatası.\nİnternet bağlantınızı kontrol ediniz."
 
 #: ../usr/lib/ddm/ddm.py:686
 msgid "DDM cannot purge the driver."
@@ -163,21 +140,18 @@ msgstr "Bu kartın desteği yok."
 msgid ""
 "Cannot get the Debian version from /etc/debian_version.\n"
 "Please install the base-files package."
-msgstr ""
+msgstr "Debian sürümü /etc/debian_version dosyasından alınamadı.\nLütfen base-files paketini yükleyiniz."
 
 #: ../usr/lib/ddm/ddm.py:692
 msgid "Could not configure Nvidia Bumblebee."
-msgstr ""
+msgstr "Nvidia Bumblebee yapılandırılamadı."
 
 #: ../usr/lib/ddm/ddm.py:694
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
-msgstr ""
-"Kurulum sırasında bir hata oluştu.\n"
-"Lütfen, 'sudo apt-get -f install' komutunu uçbirimde çalıştırın.\n"
-"Destek için forumu ziyaret edebilirsiniz: http://forums.solydxk.com"
+msgstr "Kurulum sırasında bir hata oluştu.\nLütfen, 'sudo apt-get -f install' komutunu uçbirimde çalıştırın.\nDestek için forumu ziyaret edebilirsiniz: http://forums.solydxk.com"
 
 #: ../usr/lib/ddm/ddm.py:699
 msgid "The software has been successfully installed."
@@ -189,25 +163,16 @@ msgstr "Sisteminizi yeniden başlatmaya ihtiyacınız var."
 
 #: ../usr/lib/ddm/main.py:33
 msgid ""
-"Device Driver Manager helps to install proprietary drivers for your "
-"hardware.\n"
+"Device Driver Manager helps to install proprietary drivers for your hardware.\n"
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
-msgstr ""
-"Aygıt Sürücüsü Yöneticisi donanımınız için sahipli sürücü yüklenmesine "
-"yardım eder.\n"
-"Sahipli sürücüleri sadece gerçekten ihtiyacınız olduğuna eminseniz "
-"yükleyin.\n"
-"Genellikle açık sürücüler yeterli olur."
+msgstr "Aygıt Sürücüsü Yöneticisi donanımınız için sahipli sürücü yüklenmesine yardım eder.\nSahipli sürücüleri sadece gerçekten ihtiyacınız olduğuna eminseniz yükleyin.\nGenellikle açık sürücüler yeterli olur."
 
 #: ../usr/lib/ddm/main.py:55
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
-msgstr ""
-"Aygıt Sürücüsü Yöneticisi çalışan-canlı ortamda başlamaz\n"
-"Çalışan-canlı ortamda başlatmak için, DDM'yi --force değişkeni ile "
-"başlatabilirsiniz"
+msgstr "Aygıt Sürücüsü Yöneticisi çalışan-canlı ortamda başlamaz\nÇalışan-canlı ortamda başlatmak için, DDM'yi --force değişkeni ile başlatabilirsiniz"
 
 #: ../usr/lib/ddm/main.py:83
 msgid "Unexpected error"
@@ -217,9 +182,7 @@ msgstr "Beklenmedik hata"
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
-msgstr ""
-"DDM aşağıdaki beklenmeyen hata ile başarısız oldu. Lütfen bir hata raporu "
-"gönderin!"
+msgstr "DDM aşağıdaki beklenmeyen hata ile başarısız oldu. Lütfen bir hata raporu gönderin!"
 
 #: en/help.html+html.body.h1:8
 msgid "Device Driver Manager Help"
@@ -236,12 +199,7 @@ msgid ""
 "installed and allows to install the PAE kernel for multi-core 32-bit "
 "systems. The Device Driver Manager will only list those devices that are "
 "supported. It will not list any other devices then mentioned above."
-msgstr ""
-"Aygıt Sürücüsü Yöneticisi üçüncü parti donanım sürücülerini yüklemeye yardım "
-"eden bir kullanıcı aracıdır. Nvidia, ATI ve Broadcom sürücüleri "
-"yüklenebildiği gibi, 32 bit sistemlerde çoklu-çekirdek desteği için PAE "
-"çekirdeği de yükleyebilir. Aygıt Sürücüsü Yöneticisi sadece bu listelenen "
-"donanımları destekler. Yukarıdaki listedeki harici cihazları desteklemez."
+msgstr "Aygıt Sürücüsü Yöneticisi üçüncü parti donanım sürücülerini yüklemeye yardım eden bir kullanıcı aracıdır. Nvidia, ATI ve Broadcom sürücüleri yüklenebildiği gibi, 32 bit sistemlerde çoklu-çekirdek desteği için PAE çekirdeği de yükleyebilir. Aygıt Sürücüsü Yöneticisi sadece bu listelenen donanımları destekler. Yukarıdaki listedeki harici cihazları desteklemez."
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
@@ -252,10 +210,7 @@ msgid ""
 "The Device Driver Manager can only install drivers which are available in "
 "the repositories. Make sure you have an internet connection if you want to "
 "install the drivers."
-msgstr ""
-"Aygıt Sürücüsü Yöneticisi sadece depolarda mevcut sürücüleri kurabilir. Eğer "
-"bu sürücüleri kurmak istiyorsanız internet bağlantınız olduğundan emin "
-"olunuz."
+msgstr "Aygıt Sürücüsü Yöneticisi sadece depolarda mevcut sürücüleri kurabilir. Eğer bu sürücüleri kurmak istiyorsanız internet bağlantınız olduğundan emin olunuz."
 
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
@@ -265,9 +220,7 @@ msgstr "Komutlar"
 msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
-msgstr ""
-"Eğer sürücüleri uçbirim yardımıyla kurmak isterseniz, aşağıdaki komutları "
-"kullanabilirsiniz:"
+msgstr "Eğer sürücüleri uçbirim yardımıyla kurmak isterseniz, aşağıdaki komutları kullanabilirsiniz:"
 
 #: en/help.html+html.body.div.h3:21
 msgid "# ddm -i ati"
@@ -279,11 +232,7 @@ msgid ""
 "from version HD 5000 and up are supported by the fglrx drivers. Versions "
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
-msgstr ""
-"Bu ATI grafik kartınız için fglrx sürücüsü kurar. HD 5000 ve üstü ATI "
-"kartlar fglrx sürücüsü tarafından desteklenir. 1000 ve 5000 arasındaki "
-"kartlar için -açık kaynak kodlu- Radeon sürücüleri kullanılır. Sürücüyü "
-"sistemden silmek için \"ddm -p ati\" komutunu kullanınız."
+msgstr "Bu ATI grafik kartınız için fglrx sürücüsü kurar. HD 5000 ve üstü ATI kartlar fglrx sürücüsü tarafından desteklenir. 1000 ve 5000 arasındaki kartlar için -açık kaynak kodlu- Radeon sürücüleri kullanılır. Sürücüyü sistemden silmek için \"ddm -p ati\" komutunu kullanınız."
 
 #: en/help.html+html.body.div.h3:24
 msgid "# ddm -i nvidia"
@@ -292,12 +241,9 @@ msgstr "# ddm -i nvidia"
 #: en/help.html+html.body.div.p:25
 msgid ""
 "This will select the right drivers for your Nvidia graphical card. It will "
-"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
-"Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
-msgstr ""
-"Bu Nvidia grafik kartı için doğru sürücüyü seçecektir. (Nvidia + Intel) "
-"hibrit kartlar olması durumunda Bumblebee seçilecektir. Sürücüyü sistemden "
-"silmek için \"ddm -p nvidia\" komutunu kullanınız."
+"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and"
+" Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
+msgstr "Bu Nvidia grafik kartı için doğru sürücüyü seçecektir. (Nvidia + Intel) hibrit kartlar olması durumunda Bumblebee seçilecektir. Sürücüyü sistemden silmek için \"ddm -p nvidia\" komutunu kullanınız."
 
 #: en/help.html+html.body.div.h3:27
 msgid "# ddm -i open"
@@ -307,9 +253,7 @@ msgstr "# ddm -i open"
 msgid ""
 "You can use this command if you want to revert back to the open Nouveau "
 "drivers. It will remove any proprietary drivers from your system."
-msgstr ""
-"Açık kaynak Nouveau sürücüsüne dönmek isterseniz bu komutu "
-"kullanabilirsiniz. Bu tüm sahipli sürücüyü sisteminizden siler."
+msgstr "Açık kaynak Nouveau sürücüsüne dönmek isterseniz bu komutu kullanabilirsiniz. Bu tüm sahipli sürücüyü sisteminizden siler."
 
 #: en/help.html+html.body.div.h3:30
 msgid "# ddm -i broadcom"
@@ -319,9 +263,7 @@ msgstr "# ddm -i broadcom"
 msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
-msgstr ""
-"Bu komut Broadcom kablosuz ağ sürücüsü için doğru sürücüyü seçecektir. "
-"Sürücüyü sistemden silmek için \"ddm -p broadcom\" komutunu kullanınız."
+msgstr "Bu komut Broadcom kablosuz ağ sürücüsü için doğru sürücüyü seçecektir. Sürücüyü sistemden silmek için \"ddm -p broadcom\" komutunu kullanınız."
 
 #: en/help.html+html.body.div.h3:33
 msgid "# ddm -i pae"
@@ -329,13 +271,11 @@ msgstr "# ddm -i pae"
 
 #: en/help.html+html.body.div.p:34
 msgid ""
-"This will install the PAE kernel on multi-processor systems running a 32-bit "
-"OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
-"you cannot remove the kernel when you are currently booted into that kernel."
-msgstr ""
-"Bu çoklu-çekirdek üstünde çalışan 32 bit işletim sistemi için PAE çekirdeği "
-"kurar. PAE çekirdeği sistemden silmek için \"ddm -p pae\" komutunu "
-"kullanınız. Eğer şu an sisteminizi PAE çekirdek ile açtı iseniz silemezsiniz."
+"This will install the PAE kernel on multi-processor systems running a 32-bit"
+" OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that"
+" you cannot remove the kernel when you are currently booted into that "
+"kernel."
+msgstr "Bu çoklu-çekirdek üstünde çalışan 32 bit işletim sistemi için PAE çekirdeği kurar. PAE çekirdeği sistemden silmek için \"ddm -p pae\" komutunu kullanınız. Eğer şu an sisteminizi PAE çekirdek ile açtı iseniz silemezsiniz."
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
@@ -347,7 +287,7 @@ msgstr "Bu Bumblebee kurulumunu onarmayı deneyecektir."
 
 #: en/help.html+html.body.div.h2:39
 msgid "Logging"
-msgstr ""
+msgstr "Günlükleme"
 
 #: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"
@@ -355,9 +295,7 @@ msgstr "Dosya: /var/log/ddm.log"
 
 #: en/help.html+html.body.div.p:41
 msgid ""
-"Please, attach your log file when you post an issue on our forum: <a href="
-"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
-msgstr ""
-"Lütfen, bir sorun nedeniyle foruma mesaj gönderdiğinizde log dosyasını da "
-"ekleyiniz: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://"
-"forums.solydxk.com</a>"
+"Please, attach your log file when you post an issue on our forum: <a "
+"href=\"http://forums.solydxk.com\" "
+"target=\"_blank\">http://forums.solydxk.com</a>"
+msgstr "Lütfen, bir sorun nedeniyle foruma mesaj gönderdiğinizde log dosyasını da ekleyiniz: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"

@@ -1,23 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
-# Luis Filipe Teixeira <lufilte@gmail.com>, 2015
+# Luis Filipe Teixeira <lufilte@gmail.com>, 2015,2017
 # Nuno Duarte <inactive+nuno.passiano@transifex.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-01 18:43+0200\n"
-"PO-Revision-Date: 2015-12-23 21:53+0000\n"
+"PO-Revision-Date: 2017-04-14 22:46+0000\n"
 "Last-Translator: Luis Filipe Teixeira <lufilte@gmail.com>\n"
-"Language-Team: Portuguese (Portugal) (http://www.transifex.com/solydxk/"
-"device-driver-manager/language/pt_PT/)\n"
-"Language: pt_PT\n"
+"Language-Team: Portuguese (Portugal) (http://www.transifex.com/solydxk/device-driver-manager/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt_PT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../usr/lib/ddm/ddm.py:54 ../usr/lib/ddm/main.py:32
@@ -54,29 +53,17 @@ msgstr "Não há ligação à Internet"
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
-msgstr ""
-"Você precisa de uma ligação à Internet para instalar o software adicional.\n"
-"Por favor, ligue à Internet e tente novamente."
+msgstr "Você precisa de uma ligação à Internet para instalar o software adicional.\nPor favor, ligue à Internet e tente novamente."
 
 #: ../usr/lib/ddm/ddm.py:187
 msgid ""
-"You have selected to install drivers from the backports repository whenever "
-"they are available.\n"
+"You have selected to install drivers from the backports repository whenever they are available.\n"
 "\n"
-"Although you can run more up to date software using the backports "
-"repository,\n"
+"Although you can run more up to date software using the backports repository,\n"
 "you introduce a greater risk of breakage doing so.\n"
 "\n"
 "Are you sure you want to continue?"
-msgstr ""
-"Você selecionou em instalar drivers a partir do repositório backports, "
-"sempre que estiver disponível.\n"
-"\n"
-"Embora seja possível, executar mais software atualizado usando o repositório "
-"backports,\n"
-"você introduz um maior risco de quebra ao fazê-lo.\n"
-"\n"
-"Você tem certeza que quer continuar?"
+msgstr "Você selecionou em instalar drivers a partir do repositório backports, sempre que estiver disponível.\n\nEmbora seja possível, executar mais software atualizado usando o repositório backports,\nvocê introduz um maior risco de quebra ao fazê-lo.\n\nVocê tem certeza que quer continuar?"
 
 #: ../usr/lib/ddm/ddm.py:221
 msgid "Device"
@@ -90,9 +77,7 @@ msgstr "Remover o kernel"
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
-msgstr ""
-"Você não pode remover um kernel iniciado.\n"
-"Por favor, iniciar outro kernel e tente novamente."
+msgstr "Você não pode remover um kernel iniciado.\nPor favor, iniciar outro kernel e tente novamente."
 
 #: ../usr/lib/ddm/ddm.py:259
 msgid "Hardware scan"
@@ -112,15 +97,10 @@ msgstr "Placa ATI FirePro/Gl foi encontrado"
 
 #: ../usr/lib/ddm/ddm.py:364
 msgid ""
-"Installing the proprietary driver for an ATI FirePro/Gl card may render your "
-"system unbootable.\n"
+"Installing the proprietary driver for an ATI FirePro/Gl card may render your system unbootable.\n"
 "\n"
 "Proceed at your own risk."
-msgstr ""
-"Ao Instalar o driver proprietário para a placa ATI FirePro/Gl pode fazer com "
-"que o seu sistema não arranque.\n"
-"\n"
-"Prossiga por sua conta e risco."
+msgstr "Ao Instalar o driver proprietário para a placa ATI FirePro/Gl pode fazer com que o seu sistema não arranque.\n\nProssiga por sua conta e risco."
 
 #: ../usr/lib/ddm/ddm.py:562
 msgid "PAE capable system"
@@ -146,9 +126,7 @@ msgstr "O driver não pode ser encontrado no repositório."
 msgid ""
 "Download error.\n"
 "Check your internet connection."
-msgstr ""
-"Erro ao baixar.\n"
-"Verifique a sua ligação à internet."
+msgstr "Erro ao baixar.\nVerifique a sua ligação à internet."
 
 #: ../usr/lib/ddm/ddm.py:686
 msgid "DDM cannot purge the driver."
@@ -162,21 +140,18 @@ msgstr "Esta placa não é suportada."
 msgid ""
 "Cannot get the Debian version from /etc/debian_version.\n"
 "Please install the base-files package."
-msgstr ""
+msgstr "Não é possível obter a versão Debian de /etc/debian_version.\nPor favor instale o pacote dos ficheiros-base."
 
 #: ../usr/lib/ddm/ddm.py:692
 msgid "Could not configure Nvidia Bumblebee."
-msgstr ""
+msgstr "Não foi possível configurar a Nvidia Bumblebee."
 
 #: ../usr/lib/ddm/ddm.py:694
 msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
-msgstr ""
-"Houve um erro durante a instalação.\n"
-"Por favor, execute 'sudo apt-get -f install' no terminal.\n"
-"Visite nosso fórum de suporte: http://forums.solydxk.com"
+msgstr "Houve um erro durante a instalação.\nPor favor, execute 'sudo apt-get -f install' no terminal.\nVisite nosso fórum de suporte: http://forums.solydxk.com"
 
 #: ../usr/lib/ddm/ddm.py:699
 msgid "The software has been successfully installed."
@@ -188,24 +163,16 @@ msgstr "Você precisará reiniciar o sistema."
 
 #: ../usr/lib/ddm/main.py:33
 msgid ""
-"Device Driver Manager helps to install proprietary drivers for your "
-"hardware.\n"
+"Device Driver Manager helps to install proprietary drivers for your hardware.\n"
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
-msgstr ""
-"O Gestor de Driver de Dispositivo ajuda a instalar drivers proprietários "
-"para o seu hardware.\n"
-"Só instale drivers proprietários se tiver certeza de que você realmente "
-"precisa deles.\n"
-"Geralmente as drivers abertos são suficientes."
+msgstr "O Gestor de Driver de Dispositivo ajuda a instalar drivers proprietários para o seu hardware.\nSó instale drivers proprietários se tiver certeza de que você realmente precisa deles.\nGeralmente as drivers abertos são suficientes."
 
 #: ../usr/lib/ddm/main.py:55
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
-msgstr ""
-"O Gestor de Driver de Dispositivo não pode ser iniciado num ambiente live\n"
-"Você pode usar o argumento --force para começar o GDD num ambiente live"
+msgstr "O Gestor de Driver de Dispositivo não pode ser iniciado num ambiente live\nVocê pode usar o argumento --force para começar o GDD num ambiente live"
 
 #: ../usr/lib/ddm/main.py:83
 msgid "Unexpected error"
@@ -215,9 +182,7 @@ msgstr "Erro inesperado"
 msgid ""
 "DDM has failed with the following unexpected error. Please submit a bug "
 "report!"
-msgstr ""
-"O GDD falhou com o seguinte erro inesperado. Por favor envie um relatório de "
-"erro!"
+msgstr "O GDD falhou com o seguinte erro inesperado. Por favor envie um relatório de erro!"
 
 #: en/help.html+html.body.h1:8
 msgid "Device Driver Manager Help"
@@ -234,13 +199,7 @@ msgid ""
 "installed and allows to install the PAE kernel for multi-core 32-bit "
 "systems. The Device Driver Manager will only list those devices that are "
 "supported. It will not list any other devices then mentioned above."
-msgstr ""
-"O Gestor de Driver de Dispositivo é uma ferramenta para ajudar os "
-"utilizadores na instalação de drivers de hardware de terceiros. Atualmente, "
-"as drivers da Nvidia, ATI e Broadcom podem ser instaladas e permite instalar "
-"o kernel PAE para sistemas de 32 bits multi-core. O Gestor de Driver de "
-"Dispositivo só irá listar os dispositivos que são suportados. Ele não irá "
-"listar quaisquer outros dispositivos mencionados acima."
+msgstr "O Gestor de Driver de Dispositivo é uma ferramenta para ajudar os utilizadores na instalação de drivers de hardware de terceiros. Atualmente, as drivers da Nvidia, ATI e Broadcom podem ser instaladas e permite instalar o kernel PAE para sistemas de 32 bits multi-core. O Gestor de Driver de Dispositivo só irá listar os dispositivos que são suportados. Ele não irá listar quaisquer outros dispositivos mencionados acima."
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
@@ -251,10 +210,7 @@ msgid ""
 "The Device Driver Manager can only install drivers which are available in "
 "the repositories. Make sure you have an internet connection if you want to "
 "install the drivers."
-msgstr ""
-"O Gestor de Driver de Dispositivo só pode instalar drivers que estão "
-"disponíveis nos repositórios. Verifique se você tem uma ligação com a "
-"internet, se você quiser instalar os drivers."
+msgstr "O Gestor de Driver de Dispositivo só pode instalar drivers que estão disponíveis nos repositórios. Verifique se você tem uma ligação com a internet, se você quiser instalar os drivers."
 
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
@@ -264,9 +220,7 @@ msgstr "Comandos"
 msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
-msgstr ""
-"Se você preferir instalar os drivers pelo terminal, você pode usar os "
-"seguintes comandos:"
+msgstr "Se você preferir instalar os drivers pelo terminal, você pode usar os seguintes comandos:"
 
 #: en/help.html+html.body.div.h3:21
 msgid "# ddm -i ati"
@@ -278,11 +232,7 @@ msgid ""
 "from version HD 5000 and up are supported by the fglrx drivers. Versions "
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
-msgstr ""
-"Isto irá instalar os drivers fglrx para a sua placa gráfica ATI. Placas ATI "
-"da versão HD 5000 ou superior são suportados pelos drivers fglrx. Versões "
-"entre 1000 e 5000 vai usar os drivers Radeon. Use \"ddm -p ati\" para "
-"remover os drivers do seu sistema."
+msgstr "Isto irá instalar os drivers fglrx para a sua placa gráfica ATI. Placas ATI da versão HD 5000 ou superior são suportados pelos drivers fglrx. Versões entre 1000 e 5000 vai usar os drivers Radeon. Use \"ddm -p ati\" para remover os drivers do seu sistema."
 
 #: en/help.html+html.body.div.h3:24
 msgid "# ddm -i nvidia"
@@ -291,13 +241,9 @@ msgstr "# ddm -i nvidia"
 #: en/help.html+html.body.div.p:25
 msgid ""
 "This will select the right drivers for your Nvidia graphical card. It will "
-"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
-"Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
-msgstr ""
-"Isto irá selecionar os drivers corretos para a sua placa gráfica Nvidia. Ele "
-"irá selecionar os drivers Bumblebee no caso de você ter um gráfica híbrida "
-"(ambos Nvidia e Intel). Use \"ddm -p nvidia\" para remover os drivers do seu "
-"sistema."
+"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and"
+" Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
+msgstr "Isto irá selecionar os drivers corretos para a sua placa gráfica Nvidia. Ele irá selecionar os drivers Bumblebee no caso de você ter um gráfica híbrida (ambos Nvidia e Intel). Use \"ddm -p nvidia\" para remover os drivers do seu sistema."
 
 #: en/help.html+html.body.div.h3:27
 msgid "# ddm -i open"
@@ -307,9 +253,7 @@ msgstr "# ddm -i open"
 msgid ""
 "You can use this command if you want to revert back to the open Nouveau "
 "drivers. It will remove any proprietary drivers from your system."
-msgstr ""
-"Você pode usar este comando se você quiser reverter para os drivers Nouveau "
-"abertos. Ela irá remover qualquer drivers proprietários de seu sistema."
+msgstr "Você pode usar este comando se você quiser reverter para os drivers Nouveau abertos. Ela irá remover qualquer drivers proprietários de seu sistema."
 
 #: en/help.html+html.body.div.h3:30
 msgid "# ddm -i broadcom"
@@ -319,9 +263,7 @@ msgstr "# ddm -i broadcom"
 msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
-msgstr ""
-"Este comando irá instalar o driver correto para seu adaptador wireless "
-"Broadcom. Use \"ddm -p broadcom\" para remover os drivers do seu sistema."
+msgstr "Este comando irá instalar o driver correto para seu adaptador wireless Broadcom. Use \"ddm -p broadcom\" para remover os drivers do seu sistema."
 
 #: en/help.html+html.body.div.h3:33
 msgid "# ddm -i pae"
@@ -329,14 +271,11 @@ msgstr "# ddm -i pae"
 
 #: en/help.html+html.body.div.p:34
 msgid ""
-"This will install the PAE kernel on multi-processor systems running a 32-bit "
-"OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
-"you cannot remove the kernel when you are currently booted into that kernel."
-msgstr ""
-"Isto irá instalar o kernel PAE em sistemas com múltiplos processadores que "
-"executam um sistema operativo de 32-bit. Use \"ddm -p pae\" para remover o "
-"kernel PAE do seu sistema. Observe que você não pode remover o kernel, "
-"estando ele atualmente iniciado."
+"This will install the PAE kernel on multi-processor systems running a 32-bit"
+" OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that"
+" you cannot remove the kernel when you are currently booted into that "
+"kernel."
+msgstr "Isto irá instalar o kernel PAE em sistemas com múltiplos processadores que executam um sistema operativo de 32-bit. Use \"ddm -p pae\" para remover o kernel PAE do seu sistema. Observe que você não pode remover o kernel, estando ele atualmente iniciado."
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
@@ -348,7 +287,7 @@ msgstr "Isso irá tentar corrigir a instalação Bumblebee."
 
 #: en/help.html+html.body.div.h2:39
 msgid "Logging"
-msgstr ""
+msgstr "A entrar"
 
 #: en/help.html+html.body.div.h3:40
 msgid "File: /var/log/ddm.log"
@@ -356,9 +295,7 @@ msgstr "Ficheiro: /var/log/ddm.log"
 
 #: en/help.html+html.body.div.p:41
 msgid ""
-"Please, attach your log file when you post an issue on our forum: <a href="
-"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
-msgstr ""
-"Por favor, anexar o ficheiro de registo quando você postar um problema no "
-"nosso fórum: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://"
-"forums.solydxk.com</a>"
+"Please, attach your log file when you post an issue on our forum: <a "
+"href=\"http://forums.solydxk.com\" "
+"target=\"_blank\">http://forums.solydxk.com</a>"
+msgstr "Por favor, anexar o ficheiro de registo quando você postar um problema no nosso fórum: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"

@@ -1,5 +1,7 @@
-Device Driver Manager
-===================
+# Device Driver Manager
+
+[DISCONTINUED]
+
 
 Please, help translating: https://www.transifex.com/solydxk/device-driver-manager/dashboard/
 

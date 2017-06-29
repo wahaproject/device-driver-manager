@@ -1,22 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
-# BALLOON a.k.a. Fu-sen., 2015
+# ふうせん Fu-sen. | BALLOON a.k.a. Fu-sen., 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: device-driver-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-01 18:43+0200\n"
-"PO-Revision-Date: 2016-01-18 10:26+0000\n"
-"Last-Translator: BALLOON a.k.a. Fu-sen.\n"
-"Language-Team: Japanese (http://www.transifex.com/solydxk/device-driver-"
-"manager/language/ja/)\n"
-"Language: ja\n"
+"PO-Revision-Date: 2017-04-09 09:18+0000\n"
+"Last-Translator: Arjen Balfoort <arjenbalfoort@solydxk.com>\n"
+"Language-Team: Japanese (http://www.transifex.com/solydxk/device-driver-manager/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../usr/lib/ddm/ddm.py:54 ../usr/lib/ddm/main.py:32
@@ -53,29 +52,17 @@ msgstr "インターネットに接続できません"
 msgid ""
 "You need an internet connection to install the additional software.\n"
 "Please, connect to the internet and try again."
-msgstr ""
-"追加のソフトウェアをインストールするにはインターネット接続が必要です。\n"
-"インターネットの接続を行い、再度行って下さい。"
+msgstr "追加のソフトウェアをインストールするにはインターネット接続が必要です。\nインターネットの接続を行い、再度行って下さい。"
 
 #: ../usr/lib/ddm/ddm.py:187
 msgid ""
-"You have selected to install drivers from the backports repository whenever "
-"they are available.\n"
+"You have selected to install drivers from the backports repository whenever they are available.\n"
 "\n"
-"Although you can run more up to date software using the backports "
-"repository,\n"
+"Although you can run more up to date software using the backports repository,\n"
 "you introduce a greater risk of breakage doing so.\n"
 "\n"
 "Are you sure you want to continue?"
-msgstr ""
-"backports リボジトリから利用可能なドライバをインストールすることを選択しまし"
-"た。\n"
-"\n"
-"backports リポジトリを使用して、多くのソフトウェアを実行することができます"
-"が\n"
-"それは破損を含む大きなリスクがあります。\n"
-"\n"
-"本当に進めてもよろしいですか？"
+msgstr "backports リボジトリから利用可能なドライバをインストールすることを選択しました。\n\nbackports リポジトリを使用して、多くのソフトウェアを実行することができますが\nそれは破損を含む大きなリスクがあります。\n\n本当に進めてもよろしいですか？"
 
 #: ../usr/lib/ddm/ddm.py:221
 msgid "Device"
@@ -89,9 +76,7 @@ msgstr "カーネルの削除"
 msgid ""
 "You cannot remove a booted kernel.\n"
 "Please, boot another kernel and try again."
-msgstr ""
-"起動しているカーネルは削除する事ができません。\n"
-"他のカーネルで起動し、再度行って下さい。"
+msgstr "起動しているカーネルは削除する事ができません。\n他のカーネルで起動し、再度行って下さい。"
 
 #: ../usr/lib/ddm/ddm.py:259
 msgid "Hardware scan"
@@ -111,15 +96,10 @@ msgstr "ATI FirePro/Gl カードが見つかりました"
 
 #: ../usr/lib/ddm/ddm.py:364
 msgid ""
-"Installing the proprietary driver for an ATI FirePro/Gl card may render your "
-"system unbootable.\n"
+"Installing the proprietary driver for an ATI FirePro/Gl card may render your system unbootable.\n"
 "\n"
 "Proceed at your own risk."
-msgstr ""
-"ATI FirePro/GL カードのプロプライエタリドライバをインストールすると、システム"
-"が起動できなくなる可能性があります。\n"
-"\n"
-"ご自身の責任で行ってください。"
+msgstr "ATI FirePro/GL カードのプロプライエタリドライバをインストールすると、システムが起動できなくなる可能性があります。\n\nご自身の責任で行ってください。"
 
 #: ../usr/lib/ddm/ddm.py:562
 msgid "PAE capable system"
@@ -145,9 +125,7 @@ msgstr "リボジトリからドライバーを見つけることができませ
 msgid ""
 "Download error.\n"
 "Check your internet connection."
-msgstr ""
-"ダウンロードエラー。\n"
-"インターネット接続を確認して下さい。"
+msgstr "ダウンロードエラー。\nインターネット接続を確認して下さい。"
 
 #: ../usr/lib/ddm/ddm.py:686
 msgid "DDM cannot purge the driver."
@@ -172,10 +150,7 @@ msgid ""
 "There was an error during the installation.\n"
 "Please, run 'sudo apt-get -f install' in a terminal.\n"
 "Visit our forum for support: http://forums.solydxk.com"
-msgstr ""
-"インストール中にエラーが発生しました。\n"
-"ターミナルより 'sudo apt-get -f install' を実行して下さい。\n"
-"サポートのため、フォーラムをご覧下さい: http://forums.solydxk.com"
+msgstr "インストール中にエラーが発生しました。\nターミナルより 'sudo apt-get -f install' を実行して下さい。\nサポートのため、フォーラムをご覧下さい: http://forums.solydxk.com"
 
 #: ../usr/lib/ddm/ddm.py:699
 msgid "The software has been successfully installed."
@@ -187,24 +162,16 @@ msgstr "再起動を行う必要があります。"
 
 #: ../usr/lib/ddm/main.py:33
 msgid ""
-"Device Driver Manager helps to install proprietary drivers for your "
-"hardware.\n"
+"Device Driver Manager helps to install proprietary drivers for your hardware.\n"
 "Only install proprietary drivers if you are sure you really need them.\n"
 "Usually open drivers are enough."
-msgstr ""
-"デバイスドライバマネージャーは、ハードウェアに独自のドライバをインストールす"
-"るのに役立ちます。\n"
-"実際にそれらを必要と確信している場合にのみ、独自のドライバをインストールして"
-"下さい。\n"
-"通常はオープンなドライバで十分使用可能です。"
+msgstr "デバイスドライバマネージャーは、ハードウェアに独自のドライバをインストールするのに役立ちます。\n実際にそれらを必要と確信している場合にのみ、独自のドライバをインストールして下さい。\n通常はオープンなドライバで十分使用可能です。"
 
 #: ../usr/lib/ddm/main.py:55
 msgid ""
 "Device Driver Manager cannot be started in a live environment\n"
 "You can use the --force argument to start DDM in a live environment"
-msgstr ""
-"デバイスドライバマネージャーは、ライブ環境で起動することはできません\n"
-"ライブ環境で起動したい場合は --force 引数で使用することができます"
+msgstr "デバイスドライバマネージャーは、ライブ環境で起動することはできません\nライブ環境で起動したい場合は --force 引数で使用することができます"
 
 #: ../usr/lib/ddm/main.py:83
 msgid "Unexpected error"
@@ -231,12 +198,7 @@ msgid ""
 "installed and allows to install the PAE kernel for multi-core 32-bit "
 "systems. The Device Driver Manager will only list those devices that are "
 "supported. It will not list any other devices then mentioned above."
-msgstr ""
-"デバイスドライバマネージャは、サードパーティ製のハードウェアドライバをインス"
-"トールするユーザーを支援するツールです。現在 Nvidia・ATI・Broadcom のドライバ"
-"がインストールされ、マルチコア32ビットシステム用のPAEカーネルをインストールす"
-"る事が可能です。デバイスドライバマネージャのみがサポートされているデバイスが"
-"一覧表示されます。前述する以外のデバイスは一覧に表示しません。"
+msgstr "デバイスドライバマネージャは、サードパーティ製のハードウェアドライバをインストールするユーザーを支援するツールです。現在 Nvidia・ATI・Broadcom のドライバがインストールされ、マルチコア32ビットシステム用のPAEカーネルをインストールする事が可能です。デバイスドライバマネージャのみがサポートされているデバイスが一覧表示されます。前述する以外のデバイスは一覧に表示しません。"
 
 #: en/help.html+html.body.div.h2:13
 msgid "Important"
@@ -247,10 +209,7 @@ msgid ""
 "The Device Driver Manager can only install drivers which are available in "
 "the repositories. Make sure you have an internet connection if you want to "
 "install the drivers."
-msgstr ""
-"デバイスドライバマネージャーは、リポジトリから利用可能なドライバをインストー"
-"ルします。ドライバをインストールする場合は、インターネットに接続していること"
-"をご確認下さい。"
+msgstr "デバイスドライバマネージャーは、リポジトリから利用可能なドライバをインストールします。ドライバをインストールする場合は、インターネットに接続していることをご確認下さい。"
 
 #: en/help.html+html.body.div.h2:16
 msgid "Commands"
@@ -260,9 +219,7 @@ msgstr "コマンド"
 msgid ""
 "If you prefer to install the drivers by terminal, you can use the following "
 "commands:"
-msgstr ""
-"ターミナルからドライバをインストールしたい場合は、次のコマンドで行う事ができ"
-"ます:"
+msgstr "ターミナルからドライバをインストールしたい場合は、次のコマンドで行う事ができます:"
 
 #: en/help.html+html.body.div.h3:21
 msgid "# ddm -i ati"
@@ -274,11 +231,7 @@ msgid ""
 "from version HD 5000 and up are supported by the fglrx drivers. Versions "
 "between 1000 and 5000 will use the Radeon drivers. Use \"ddm -p ati\" to "
 "remove the drivers from your system."
-msgstr ""
-"これは ATI グラフィックカードの fglrx ドライバをインストールします。バージョ"
-"ン HD5000 以上の ATI カードは fglrx ドライバーによってサポートされています。 "
-"1000〜5000 のバージョンでは、Radeon ドライバを使用します。システムからドライ"
-"バを削除するには、\"ddm -p ati\" を使用して下さい。"
+msgstr "これは ATI グラフィックカードの fglrx ドライバをインストールします。バージョン HD5000 以上の ATI カードは fglrx ドライバーによってサポートされています。 1000〜5000 のバージョンでは、Radeon ドライバを使用します。システムからドライバを削除するには、\"ddm -p ati\" を使用して下さい。"
 
 #: en/help.html+html.body.div.h3:24
 msgid "# ddm -i nvidia"
@@ -287,12 +240,9 @@ msgstr "# ddm -i nvidia"
 #: en/help.html+html.body.div.p:25
 msgid ""
 "This will select the right drivers for your Nvidia graphical card. It will "
-"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and "
-"Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
-msgstr ""
-"Nvidia グラフィックカードのドライバを選択します。それはハイブリッドカード"
-"（Nvidia・intel 両方）を持っている場合にはBumblebee ドライバを選択します。シ"
-"ステムからドライバを削除するには。\"ddm -p nvidia\" を使用して下さい。"
+"select the Bumblebee drivers in case you have a hybrid card (both Nvidia and"
+" Intel). Use \"ddm -p nvidia\" to remove the drivers from your system."
+msgstr "Nvidia グラフィックカードのドライバを選択します。それはハイブリッドカード（Nvidia・intel 両方）を持っている場合にはBumblebee ドライバを選択します。システムからドライバを削除するには。\"ddm -p nvidia\" を使用して下さい。"
 
 #: en/help.html+html.body.div.h3:27
 msgid "# ddm -i open"
@@ -302,9 +252,7 @@ msgstr "# ddm -i open"
 msgid ""
 "You can use this command if you want to revert back to the open Nouveau "
 "drivers. It will remove any proprietary drivers from your system."
-msgstr ""
-"Nouveau ドライバに戻したい場合は、次のコマンドを使用して下さい。システムから"
-"任意のプロプライエタリドライバを削除する事ができます。"
+msgstr "Nouveau ドライバに戻したい場合は、次のコマンドを使用して下さい。システムから任意のプロプライエタリドライバを削除する事ができます。"
 
 #: en/help.html+html.body.div.h3:30
 msgid "# ddm -i broadcom"
@@ -314,10 +262,7 @@ msgstr "# ddm -i broadcom"
 msgid ""
 "This command will install the right driver for your wireless Broadcom "
 "adapter. Use \"ddm -p broadcom\" to remove the drivers from your system."
-msgstr ""
-"このコマンドは、ワイヤレス Broadcom アダプタ用のドライバをインストールしま"
-"す。システムからドライバを削除するには、\"ddm -p broadcom\" を使用してくださ"
-"い。"
+msgstr "このコマンドは、ワイヤレス Broadcom アダプタ用のドライバをインストールします。システムからドライバを削除するには、\"ddm -p broadcom\" を使用してください。"
 
 #: en/help.html+html.body.div.h3:33
 msgid "# ddm -i pae"
@@ -325,14 +270,11 @@ msgstr "# ddm -i pae"
 
 #: en/help.html+html.body.div.p:34
 msgid ""
-"This will install the PAE kernel on multi-processor systems running a 32-bit "
-"OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that "
-"you cannot remove the kernel when you are currently booted into that kernel."
-msgstr ""
-"32 ビット OS を実行しているマルチプロセッサシステム上で PAE カーネルをインス"
-"トールします。お使いのシステムから PAE カーネルを削除するには、\"ddm -p pae"
-"\" を使用して下さい。起動で使用しているカーネルは削除できないことにご注意下さ"
-"い。"
+"This will install the PAE kernel on multi-processor systems running a 32-bit"
+" OS. Use \"ddm -p pae\" to remove the PAE kernel from your system. Note that"
+" you cannot remove the kernel when you are currently booted into that "
+"kernel."
+msgstr "32 ビット OS を実行しているマルチプロセッサシステム上で PAE カーネルをインストールします。お使いのシステムから PAE カーネルを削除するには、\"ddm -p pae\" を使用して下さい。起動で使用しているカーネルは削除できないことにご注意下さい。"
 
 #: en/help.html+html.body.div.h3:36
 msgid "# ddm -i fixbumblebee"
@@ -352,8 +294,7 @@ msgstr "ファイル: /var/log/ddm.log"
 
 #: en/help.html+html.body.div.p:41
 msgid ""
-"Please, attach your log file when you post an issue on our forum: <a href="
-"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
-msgstr ""
-"フォーラムに問題を投稿する場合は、ログファイルを添付して下さい: <a href="
-"\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
+"Please, attach your log file when you post an issue on our forum: <a "
+"href=\"http://forums.solydxk.com\" "
+"target=\"_blank\">http://forums.solydxk.com</a>"
+msgstr "フォーラムに問題を投稿する場合は、ログファイルを添付して下さい: <a href=\"http://forums.solydxk.com\" target=\"_blank\">http://forums.solydxk.com</a>"
